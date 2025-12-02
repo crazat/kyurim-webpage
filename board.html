@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치료 사례 | 규림한의원 청주점</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Nanum Barun Gothic Font -->
+    <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .board-section {
+            padding-top: 150px;
+            /* Space for fixed navbar */
+            min-height: 80vh;
+        }
+
+        .board-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: #fff;
+        }
+
+        .board-table th,
+        .board-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .board-table th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .board-table td.title {
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .board-table td.title a {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .board-table td.title a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .pagination a {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #666;
+        }
+
+        .pagination a.active {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border-color: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="규림한의원 로고">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">원장님 소개</a></li>
+                <li><a href="index.html#specialties">진료과목</a></li>
+                <li><a href="board.html">치료사례</a></li>
+                <li><a href="index.html#blog">공식블로그</a></li>
+                <li><a href="index.html#contact">오시는 길</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Board Section -->
+    <section class="section board-section">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real-time Cases</h3>
+                <h2>치료 사례 게시판</h2>
+                <div class="line"></div>
+            </div>
+
+            <table class="board-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">번호</th>
+                        <th style="width: 15%;">카테고리</th>
+                        <th style="width: 50%;">제목</th>
+                        <th style="width: 15%;">작성일</th>
+                        <th style="width: 10%;">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>다이어트</td>
+                        <td class="title"><a href="#">3개월 15kg 감량 성공 사례 (전후 사진 포함)</a></td>
+                        <td>2025-11-20</td>
+                        <td>128</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>체형교정</td>
+                        <td class="title"><a href="#">거북목 및 굽은 등 교정 8주 프로그램 후기</a></td>
+                        <td>2025-11-15</td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>피부</td>
+                        <td class="title"><a href="#">성인 여드름 한방 치료 12주 경과 보고</a></td>
+                        <td>2025-11-01</td>
+                        <td>210</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 규림한의원 청주점. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
