@@ -1,12 +1,14 @@
 /* Variables */
 :root {
-    --primary-color: #4A3B32;
-    /* Dark Brown */
-    --secondary-color: #C5A065;
+    --primary-color: #D42426;
+    /* Christmas Red */
+    --secondary-color: #165B33;
+    /* Forest Green */
+    --accent-color: #F8B229;
     /* Gold */
     --text-color: #333333;
-    --bg-color: #F9F8F6;
-    /* Cream/White */
+    --bg-color: #FDFBF7;
+    /* Warm White */
     --white: #FFFFFF;
     --gray: #F0F0F0;
     --transition: all 0.3s ease;
@@ -25,10 +27,11 @@ html {
 
 body {
     font-family: 'NanumBarunGothic', sans-serif;
-    /* Nanum Barun Gothic */
     color: var(--text-color);
     background-color: var(--bg-color);
     line-height: 1.6;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from snow */
 }
 
 h1,
@@ -38,8 +41,8 @@ h4,
 h5,
 h6 {
     font-family: 'NanumBarunGothic', sans-serif;
-    /* Consistent font */
-    color: var(--primary-color);
+    color: var(--secondary-color);
+    /* Headers in Green */
     font-weight: 700;
 }
 
@@ -61,33 +64,36 @@ ul {
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    border-radius: 2px;
+    border-radius: 25px;
+    /* More rounded for festive feel */
     font-weight: 600;
     transition: var(--transition);
     cursor: pointer;
     text-align: center;
-    /* Ensure text is centered */
 }
 
 .btn-primary {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--white);
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 4px 6px rgba(212, 36, 38, 0.2);
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: var(--secondary-color);
+    background-color: #b91c1e;
+    border-color: #b91c1e;
+    transform: translateY(-2px);
 }
 
 .btn-outline {
     background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 25px;
 }
 
 .btn-outline:hover {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
 }
 
@@ -97,11 +103,13 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     z-index: 1000;
     padding: 15px 0;
     transition: var(--transition);
+    border-bottom: 3px solid var(--primary-color);
+    /* Festive border */
 }
 
 .navbar .container {
@@ -112,7 +120,6 @@ ul {
 
 .logo img {
     height: 50px;
-    /* Adjust based on actual logo aspect ratio */
 }
 
 .nav-links {
@@ -123,12 +130,12 @@ ul {
 .nav-links a {
     font-weight: 500;
     font-size: 1rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     transition: var(--transition);
 }
 
 .nav-links a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .hamburger {
@@ -141,14 +148,15 @@ ul {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     transition: var(--transition);
 }
 
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: url('assets/hero_bg.png?v=1') no-repeat center center/cover;
+    /* Fallback or overlay */
+    background: linear-gradient(rgba(22, 91, 51, 0.7), rgba(212, 36, 38, 0.3)), url('../assets/hero_bg.png?v=1') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;
@@ -156,7 +164,6 @@ ul {
     text-align: center;
     color: var(--white);
     margin-top: 0;
-    /* Reset for fixed nav */
 }
 
 .hero-overlay {
@@ -165,8 +172,8 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(74, 59, 50, 0.6);
-    /* Dark brown overlay */
+    /* Gradient overlay already in background property, but keeping this for structure if needed */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .hero-content {
@@ -175,22 +182,76 @@ ul {
 }
 
 .hero h2 {
-    font-size: 1.5rem;
-    color: var(--secondary-color);
+    font-size: 2rem;
+    color: var(--accent-color);
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: 700;
+    font-family: 'Georgia', serif;
+    /* More festive font */
 }
 
 .hero h1 {
     font-size: 3.5rem;
     color: var(--white);
     margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 40px;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+/* Snowfall Effect */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #FFF;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px #000;
+    user-select: none;
+    z-index: 10000;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    animation-play-state: running, running;
+}
+
+@keyframes snowflakes-fall {
+    0% {
+        top: -10%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+@keyframes snowflakes-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(80px);
+    }
 }
 
 /* Animations */
@@ -231,7 +292,7 @@ ul {
 
 .section-header h3 {
     font-size: 1rem;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 10px;
@@ -240,12 +301,13 @@ ul {
 .section-header h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: var(--secondary-color);
 }
 
 .line {
     width: 60px;
     height: 3px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     margin: 0 auto;
 }
 
@@ -266,21 +328,11 @@ ul {
     flex: 1;
     height: 500px;
     background-color: #ddd;
-    /* Placeholder bg */
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     position: relative;
-}
-
-.img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    color: #aaa;
-    background-color: #f0f0f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 5px solid var(--white);
 }
 
 .director-info {
@@ -290,6 +342,7 @@ ul {
 .director-info h3 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: var(--secondary-color);
 }
 
 .career-list {
@@ -304,7 +357,7 @@ ul {
 
 .career-list li::before {
     content: "•";
-    color: var(--secondary-color);
+    color: var(--primary-color);
     position: absolute;
     left: 0;
     top: 0;
@@ -313,8 +366,8 @@ ul {
 .philosophy {
     font-size: 1.2rem;
     font-style: italic;
-    color: var(--primary-color);
-    border-left: 3px solid var(--secondary-color);
+    color: var(--text-color);
+    border-left: 3px solid var(--primary-color);
     padding-left: 20px;
 }
 
@@ -333,15 +386,15 @@ ul {
     background-color: var(--bg-color);
     padding: 40px 20px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: var(--transition);
     border: 1px solid transparent;
 }
 
 .card:hover {
     transform: translateY(-10px);
-    border-color: var(--secondary-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(212, 36, 38, 0.1);
 }
 
 .icon-box {
@@ -353,6 +406,7 @@ ul {
 .card h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
 .card p {
@@ -377,14 +431,12 @@ ul {
     gap: 20px;
     padding-bottom: 20px;
     scrollbar-width: none;
-    /* Firefox */
     scroll-behavior: smooth;
     width: 100%;
 }
 
 .ba-gallery-grid::-webkit-scrollbar {
     display: none;
-    /* Chrome/Safari */
 }
 
 .ba-card {
@@ -395,11 +447,13 @@ ul {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
     transition: var(--transition);
+    border: 3px solid var(--white);
 }
 
 .ba-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
 }
 
 .ba-card img {
@@ -422,13 +476,13 @@ ul {
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .scroll-btn:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--white);
-    border-color: var(--secondary-color);
+    border-color: var(--primary-color);
 }
 
 .scroll-btn.prev {
@@ -459,6 +513,7 @@ ul {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
     position: relative;
     overflow: hidden;
+    border: 1px solid #eee;
 }
 
 .blog-text {
@@ -467,7 +522,7 @@ ul {
 }
 
 .blog-text h3 {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -477,6 +532,7 @@ ul {
 .blog-text h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: var(--secondary-color);
 }
 
 .blog-text p {
@@ -495,8 +551,8 @@ ul {
 
 .quote-icon {
     font-size: 10rem;
-    color: rgba(197, 160, 101, 0.1);
-    /* Low opacity gold */
+    color: rgba(212, 36, 38, 0.1);
+    /* Red tint */
     position: absolute;
     right: 20px;
     bottom: -20px;
@@ -505,7 +561,8 @@ ul {
 .circle-deco {
     width: 300px;
     height: 300px;
-    background-color: rgba(74, 59, 50, 0.03);
+    background-color: rgba(22, 91, 51, 0.05);
+    /* Green tint */
     border-radius: 50%;
     position: absolute;
     right: -50px;
@@ -564,7 +621,7 @@ ul {
 
 .info-item i {
     font-size: 1.5rem;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     margin-right: 20px;
     margin-top: 5px;
 }
@@ -573,21 +630,17 @@ ul {
 .contact-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 2 columns */
     gap: 10px;
     margin-top: 30px;
 }
 
 .contact-buttons .btn {
     width: 100%;
-    /* Fill the grid cell */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    /* Space between icon and text */
     padding: 15px 10px;
-    /* More padding */
     font-size: 0.95rem;
 }
 
@@ -599,23 +652,15 @@ ul {
     overflow: hidden;
 }
 
-.map-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 1.5rem;
-}
-
 /* Footer */
 footer {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
+    /* Green Footer */
     color: var(--white);
     padding: 50px 0;
     text-align: center;
     font-size: 0.9rem;
+    border-top: 5px solid var(--primary-color);
 }
 
 .footer-info p {
@@ -674,7 +719,6 @@ footer {
 .top-btn {
     position: fixed;
     bottom: 190px;
-    /* Increased to avoid overlap with Quick Menu (approx 165px height) */
     right: 30px;
     width: 40px;
     height: 40px;
@@ -683,7 +727,6 @@ footer {
     border: 1px solid #ddd;
     border-radius: 50%;
     display: none;
-    /* Hidden by default */
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -731,7 +774,6 @@ footer {
 @media (max-width: 768px) {
     .navbar .nav-links {
         display: none;
-        /* Mobile menu needed */
     }
 
     .navbar .nav-links.active {
@@ -762,7 +804,6 @@ footer {
 
     .scroll-btn {
         display: none;
-        /* Hide buttons on mobile where touch works */
     }
 
     .ba-gallery-grid {
@@ -774,43 +815,21 @@ footer {
 
     .ba-card {
         min-width: auto;
-        /* Let content define width */
         width: auto;
         height: auto;
         background-color: var(--white);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         flex: 0 0 auto;
-        /* Don't stretch */
     }
 
     .ba-card img {
         height: 400px;
-        /* Fixed height */
         width: auto;
-        /* Auto width to match aspect ratio */
         max-width: 90vw;
-        /* Prevent it from being wider than screen */
         padding: 5px;
     }
 
     .interior-grid {
         grid-template-columns: 1fr;
-    }
-
-    .quick-menu {
-        bottom: 20px;
-        right: 20px;
-    }
-
-    .quick-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-
-    .top-btn {
-        bottom: 160px;
-        /* Increased for mobile overlap prevention */
-        right: 25px;
     }
 }
