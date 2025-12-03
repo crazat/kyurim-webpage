@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Snowfall Effect ---
     const snowContainer = document.getElementById('snow-container');
-    const snowflakeCount = 50;
+    const isMobile = window.innerWidth <= 768;
+    const snowflakeCount = isMobile ? 30 : 50; // Reduce count on mobile
 
     if (snowContainer) {
         for (let i = 0; i < snowflakeCount; i++) {
@@ -14,9 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
         snowflake.classList.add('snowflake');
         snowflake.innerHTML = '&#10052;'; // Snowflake character
         snowflake.style.left = Math.random() * 100 + 'vw';
-        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5s fall duration
+
+        // Adjust duration and size for mobile
+        const duration = isMobile ? Math.random() * 3 + 3 : Math.random() * 3 + 2; // Slightly slower on mobile
+        snowflake.style.animationDuration = duration + 's';
+
         snowflake.style.opacity = Math.random();
-        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+
+        const size = isMobile ? Math.random() * 5 + 8 : Math.random() * 10 + 10; // Smaller on mobile (8-13px vs 10-20px)
+        snowflake.style.fontSize = size + 'px';
 
         snowContainer.appendChild(snowflake);
 
