@@ -173,6 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) closeModal();
     });
 
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
     // 2. Real Reviews Carousel Injection
     // Focus: Diet, Facial Asymmetry, Skin, Pain
     // 40 Unique Reviews

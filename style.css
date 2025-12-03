@@ -923,6 +923,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    padding: 0;
 }
 
 .modal-footer {
@@ -1287,6 +1289,9 @@ footer {
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .lightbox-close:hover {
