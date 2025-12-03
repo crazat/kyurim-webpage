@@ -29,6 +29,20 @@
     <!-- Snow Container -->
     <div id="snow-container"></div>
 
+    <!-- Event Modal (New) -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="assets/event_1_luckybox.png" alt="이벤트 팝업">
+            <div class="modal-footer">
+                <label>
+                    <input type="checkbox" id="dontShowToday"> 오늘 하루 보지 않기
+                </label>
+                <button id="closeModalBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -62,6 +76,48 @@
             <a href="#contact" class="btn btn-primary fade-in delay-3">상담 예약하기</a>
         </div>
     </header>
+
+    <!-- Event Section (New) -->
+    <section id="events" class="section events">
+        <div class="container">
+            <div class="section-header">
+                <h3>Special Events</h3>
+                <h2>진행 중인 이벤트</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원 청주점만의 특별한 혜택을 놓치지 마세요.</p>
+            </div>
+            <div class="event-grid">
+                <div class="event-item fade-in">
+                    <img src="assets/event_1_luckybox.png" alt="럭키박스 이벤트">
+                    <div class="event-overlay">
+                        <h4>꽝 없는 설렘! 럭키박스</h4>
+                        <p>단돈 9만 9천원으로 누리는 최대 40만원의 행복</p>
+                    </div>
+                </div>
+                <div class="event-item fade-in delay-1">
+                    <img src="assets/event_2_diet.png" alt="다이어트 챌린지">
+                    <div class="event-overlay">
+                        <h4>다이어트 챌린지</h4>
+                        <p>살 뺀 만큼 돈으로 받으세요! 페이백 이벤트</p>
+                    </div>
+                </div>
+                <div class="event-item fade-in delay-2">
+                    <img src="assets/event_3_lifting.jpg" alt="신데렐라 타임 리프팅">
+                    <div class="event-overlay">
+                        <h4>신데렐라 타임 리프팅</h4>
+                        <p>붓기 없이 바로 예뻐지는 다운타임 제로 패키지</p>
+                    </div>
+                </div>
+                <div class="event-item fade-in delay-3">
+                    <img src="assets/event_4_parents.jpg" alt="효도 & 힐링">
+                    <div class="event-overlay">
+                        <h4>효도 & 힐링 패키지</h4>
+                        <p>사랑을 전하는 가장 따뜻한 방법</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Director Section -->
     <section id="about" class="section about">
@@ -137,6 +193,49 @@
         </div>
     </section>
 
+    <!-- Treatment Process Section (New) -->
+    <section id="process" class="section process">
+        <div class="container">
+            <div class="section-header">
+                <h3>Process</h3>
+                <h2>진료 프로세스</h2>
+                <div class="line"></div>
+                <p class="subtitle">체계적인 1:1 맞춤 진료 시스템을 경험해보세요.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item fade-in">
+                    <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h4>01. 접수 및 설문</h4>
+                    <p>내원 후 접수 및<br>기초 설문지 작성</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-1">
+                    <div class="step-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4>02. 검사</h4>
+                    <p>인바디, 체형 분석 등<br>정밀 검사 진행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-2">
+                    <div class="step-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h4>03. 원장님 상담</h4>
+                    <p>검사 결과 기반<br>1:1 심층 상담</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-3">
+                    <div class="step-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+                    <h4>04. 맞춤 치료</h4>
+                    <p>체질과 증상에 맞는<br>최적의 치료 시행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-4">
+                    <div class="step-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                    <h4>05. 사후 관리</h4>
+                    <p>치료 후 경과 확인<br>및 생활 습관 코칭</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Before & After Section (Updated) -->
     <section id="before-after" class="section before-after">
         <div class="container">
@@ -193,6 +292,23 @@
         </div>
     </section>
 
+    <!-- Real Reviews Section (New) -->
+    <section id="reviews" class="section reviews">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real Reviews</h3>
+                <h2>생생 치료 후기</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원과 함께 건강한 아름다움을 찾은 분들의 이야기입니다.</p>
+            </div>
+            <div class="review-carousel-container">
+                <div class="review-carousel">
+                    <!-- Reviews will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Interior Section (New) -->
     <section id="interior" class="section interior">
         <div class="container">
@@ -239,6 +355,20 @@
                     <div class="circle-deco"></div>
                     <i class="fa-solid fa-quote-left quote-icon"></i>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (New) -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-header">
+                <h3>Q&A</h3>
+                <h2>자주 묻는 질문</h2>
+                <div class="line"></div>
+            </div>
+            <div class="faq-container">
+                <!-- FAQ Items will be injected via JS -->
             </div>
         </div>
     </section>
@@ -327,6 +457,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Enlarged Image">
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
