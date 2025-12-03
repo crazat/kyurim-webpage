@@ -103,7 +103,7 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #FFFFFF;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     z-index: 1000;
     padding: 15px 0;
@@ -156,7 +156,7 @@ ul {
 .hero {
     height: 100vh;
     /* Fallback or overlay */
-    background: linear-gradient(rgba(22, 91, 51, 0.7), rgba(212, 36, 38, 0.3)), url('../assets/hero_bg.png?v=1') no-repeat center center/cover;
+    background: linear-gradient(rgba(22, 91, 51, 0.7), rgba(212, 36, 38, 0.3)), url('assets/hero_bg.png?v=1') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;

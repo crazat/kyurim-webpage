@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navbar) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.backgroundColor = '#FFFFFF';
                 navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             } else {
-                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backgroundColor = '#FFFFFF';
                 navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
             }
         });
