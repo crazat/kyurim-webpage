@@ -74,6 +74,8 @@
         <li></li>
         <li></li>
         <li></li>
+        <li></li>
+        <li></li>
     </ul>
 
     <!-- Event Modal (New) -->
@@ -82,17 +84,38 @@
             <button class="close-modal" aria-label="이벤트 팝업 닫기">&times;</button>
             <div class="lucky-box-game">
                 <h3>🎄 크리스마스 럭키박스 🎄</h3>
-                <p>상자를 클릭하여 선물을 확인하세요!</p>
-                <div class="box-grid">
-                    <div class="box" data-id="1">🎁</div>
-                    <div class="box" data-id="2">🎁</div>
-                    <div class="box" data-id="3">🎁</div>
-                    <div class="box" data-id="4">🎁</div>
-                    <div class="box" data-id="5">🎁</div>
-                    <div class="box" data-id="6">🎁</div>
-                    <div class="box" data-id="7">🎁</div>
-                    <div class="box" data-id="8">🎁</div>
-                    <div class="box" data-id="9">🎁</div>
+                <p>슬롯머신을 돌려 행운의 선물을 확인하세요!</p>
+                <div class="slot-machine-container">
+                    <div class="slot-machine-header">
+                        <div class="lights-row">
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                        </div>
+                    </div>
+                    <div class="slot-machine-body">
+                        <div class="reels-container">
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel1">�</div>
+                            </div>
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel2">�</div>
+                            </div>
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel3">🎁</div>
+                            </div>
+                        </div>
+                        <div class="lever-container">
+                            <button id="spinBtn" class="spin-btn">
+                                <span class="spin-text">SPIN</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slot-machine-footer">
+                        <div class="lights-row">
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                        </div>
+                    </div>
                 </div>
                 <div id="prizeResult" class="prize-result"></div>
             </div>

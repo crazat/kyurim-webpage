@@ -379,27 +379,26 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCountdown(); // Initial call
     }
 
-    // 6. Interactive Lucky Box Logic (Advanced)
-    const boxes = document.querySelectorAll('.box');
+    // 6. Slot Machine Logic (New)
+    const spinBtn = document.getElementById('spinBtn');
     const prizeResult = document.getElementById('prizeResult');
+    const reels = [
+        document.getElementById('reel1'),
+        document.getElementById('reel2'),
+        document.getElementById('reel3')
+    ];
 
-    if (boxes.length > 0 && prizeResult) {
+    if (spinBtn && prizeResult && reels.every(r => r)) {
         // Probability Configuration
-        // Total weight: 10000 (for 0.01% precision)
-        // 30% Discount: 0.01% -> 1
-        // 10% Discount: 10% -> 1000
-        // 5% Discount: 15% -> 1500
-        // Free Consultation: 20% -> 2000
-        // Next Time (Loss): 54.99% -> 5499
-
         const prizesConfig = [
-            { name: "30% 할인권", weight: 1, type: "win" },
-            { name: "10% 할인권", weight: 1000, type: "win" },
-            { name: "5% 할인권", weight: 1500, type: "win" },
-            { name: "무료 상담권", weight: 2000, type: "win" },
-            { name: "다음 기회에...", weight: 5499, type: "lose" }
+            { name: "30% 할인권", weight: 1, type: "win", symbol: "🌟" },
+            { name: "10% 할인권", weight: 1000, type: "win", symbol: "🎅" },
+            { name: "5% 할인권", weight: 1500, type: "win", symbol: "🦌" },
+            { name: "무료 상담권", weight: 2000, type: "win", symbol: "🎁" },
+            { name: "다음 기회에...", weight: 5499, type: "lose", symbol: "☃️" }
         ];
 
+        const symbols = ['🎅', '🎄', '🎁', '🦌', '☃️', '🌟'];
         const totalWeight = prizesConfig.reduce((acc, p) => acc + p.weight, 0);
 
         function getWeightedPrize() {
@@ -415,48 +414,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let hasPlayed = false;
 
-        boxes.forEach((box) => {
-            box.addEventListener('click', () => {
-                if (hasPlayed) {
-                    if (!box.classList.contains('opened')) {
-                        alert("이미 참여하셨습니다! 내일 다시 도전해주세요.");
+        // Check if already played today
+        const lastPlayed = localStorage.getItem('kyurim_luckybox_played');
+        if (lastPlayed === new Date().toDateString()) {
+            prizeResult.innerText = "오늘의 운세를 이미 확인하셨습니다.";
+            spinBtn.disabled = true;
+            spinBtn.querySelector('.spin-text').innerText = "DONE";
+            hasPlayed = true;
+        }
+
+        spinBtn.addEventListener('click', () => {
+            if (hasPlayed) return;
+
+            hasPlayed = true;
+            localStorage.setItem('kyurim_luckybox_played', new Date().toDateString());
+            spinBtn.disabled = true;
+
+            const finalPrize = getWeightedPrize();
+            const targetSymbol = finalPrize.symbol;
+
+            // Start Spinning
+            reels.forEach((reel, index) => {
+                reel.classList.add('spinning');
+
+                // Spin animation
+                const intervalId = setInterval(() => {
+                    reel.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                }, 100);
+
+                // Stop reels one by one
+                setTimeout(() => {
+                    clearInterval(intervalId);
+                    reel.innerText = targetSymbol;
+                    reel.classList.remove('spinning');
+
+                    // If last reel, show result
+                    if (index === 2) {
+                        showResult(finalPrize);
                     }
-                    return;
-                }
-
-                hasPlayed = true; // Mark as played immediately to prevent double clicks
-                localStorage.setItem('kyurim_luckybox_played', new Date().toDateString());
-
-                // Slot Machine Animation
-                let iteration = 0;
-                const maxIterations = 20; // Spin 20 times
-                const interval = 100; // 100ms per spin
-
-                const spinInterval = setInterval(() => {
-                    // Show random prize during spin
-                    const randomTemp = prizesConfig[Math.floor(Math.random() * prizesConfig.length)];
-                    box.innerText = randomTemp.name === "다음 기회에..." ? "..." : randomTemp.name;
-                    box.classList.add('spinning');
-
-                    iteration++;
-                    if (iteration >= maxIterations) {
-                        clearInterval(spinInterval);
-                        finishSpin(box);
-                    }
-                }, interval);
+                }, 1000 + (index * 500)); // 1s, 1.5s, 2s
             });
         });
 
-        function finishSpin(box) {
-            const finalPrize = getWeightedPrize();
-
-            box.classList.remove('spinning');
-            box.classList.add('opened');
-            box.innerText = finalPrize.name === "다음 기회에..." ? "꽝" : "당첨";
-
+        function showResult(finalPrize) {
             if (finalPrize.type === "win") {
                 prizeResult.innerHTML = `
-                    <div id="couponCard" class="coupon-card">
+                    <div id="couponCard" class="coupon-card fade-in" style="animation-play-state: running;">
                         <div class="coupon-header">Kyurim Christmas Event</div>
                         <div class="coupon-body">
                             <div class="coupon-prize">${finalPrize.name}</div>
@@ -480,15 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
             } else {
-                prizeResult.innerHTML = `<span style="color: #666;">아쉽지만 다음 기회에...🎄</span>`;
+                prizeResult.innerHTML = `<span style="color: #666; font-size: 1.5rem;">아쉽지만 다음 기회에...🎄</span>`;
             }
-        }
-
-        // Check if already played today
-        const lastPlayed = localStorage.getItem('kyurim_luckybox_played');
-        if (lastPlayed === new Date().toDateString()) {
-            prizeResult.innerText = "오늘의 운세를 이미 확인하셨습니다.";
-            hasPlayed = true;
         }
     }
 

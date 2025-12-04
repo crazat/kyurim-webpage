@@ -161,7 +161,7 @@
     color: var(--white);
 }
 
-/* Lucky Box Game */
+/* Slot Machine Game */
 .lucky-box-game {
     text-align: center;
     padding: 20px;
@@ -180,37 +180,137 @@
     color: #666;
 }
 
-.box-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    max-width: 300px;
+.slot-machine-container {
+    background: #D42426;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 350px;
     margin: 0 auto;
+    border: 4px solid #F8B229;
+    position: relative;
 }
 
-.box {
-    background-color: #165B33;
-    color: white;
-    font-size: 2rem;
-    height: 80px;
+.slot-machine-header,
+.slot-machine-footer {
+    height: 20px;
+    margin-bottom: 10px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+}
+
+.slot-machine-footer {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.lights-row {
+    display: flex;
+    gap: 10px;
+}
+
+.light {
+    width: 10px;
+    height: 10px;
+    background: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #FFF;
+    animation: blink 1s infinite alternate;
+}
+
+.light:nth-child(odd) {
+    animation-delay: 0s;
+}
+
+.light:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+@keyframes blink {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slot-machine-body {
+    background: #222;
+    padding: 15px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.reels-container {
+    display: flex;
+    gap: 10px;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #999;
+}
+
+.reel-wrapper {
+    width: 60px;
+    height: 80px;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.reel {
+    font-size: 3rem;
+    line-height: 80px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: top 0.1s linear;
+}
+
+.reel.spinning {
+    filter: blur(2px);
+}
+
+.lever-container {
+    width: 100%;
+}
+
+.spin-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to bottom, #F8B229, #E69500);
+    border: none;
+    border-radius: 50px;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 0 #B37400, 0 10px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
 }
 
-.box:hover {
-    transform: scale(1.05);
-    background-color: #1e7e45;
+.spin-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #B37400, 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.box.opened {
-    background-color: #D42426;
-    cursor: default;
-    transform: none;
+.spin-btn:disabled {
+    background: #ccc;
+    color: #666;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: translateY(5px);
 }
 
 .prize-result {
@@ -222,13 +322,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Slot Machine Animation */
-.box.spinning {
-    background-color: #F8B229;
-    color: #333;
-    transform: scale(1.1);
 }
 
 /* Coupon Card Style */
