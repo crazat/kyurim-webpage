@@ -326,6 +326,91 @@
         </div>
     </section>
 
+    <!-- Diet Prediction Section (New) -->
+    <section id="diet-prediction" class="section diet-prediction">
+        <div class="container">
+            <div class="section-header">
+                <h3>Diet Simulation</h3>
+                <h2>다이어트 성공 예측</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원의 맞춤 프로그램으로 변화될 나의 모습을 미리 확인하세요.</p>
+            </div>
+
+            <div class="prediction-container">
+                <!-- Input Area -->
+                <div class="prediction-input-box">
+                    <h4>나의 정보 입력</h4>
+
+                    <div class="gender-group">
+                        <input type="radio" name="gender" id="gender-female" value="female" checked>
+                        <label for="gender-female" class="gender-btn">여성</label>
+
+                        <input type="radio" name="gender" id="gender-male" value="male">
+                        <label for="gender-male" class="gender-btn">남성</label>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="userHeight">키 (cm)</label>
+                            <input type="number" id="userHeight" placeholder="160">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="currentWeight">현재 체중 (kg)</label>
+                            <input type="number" id="currentWeight" placeholder="60">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="userAge">나이 (세)</label>
+                            <input type="number" id="userAge" placeholder="30">
+                        </div>
+                    </div>
+                    <button id="calculateDietBtn" class="btn btn-primary full-width">
+                        <i class="fa-solid fa-chart-line"></i> 감량 결과 확인하기
+                    </button>
+                </div>
+
+                <!-- Result Area (Hidden initially) -->
+                <div id="dietResult" class="prediction-result">
+                    <div class="chart-container">
+                        <canvas id="dietChart"></canvas>
+                    </div>
+
+                    <div class="result-summary-grid">
+                        <div class="summary-card rapid">
+                            <div class="badge">BEST</div>
+                            <h5>급속 감량 프로그램</h5>
+                            <p class="desc">중요한 일정을 앞두고<br>빠른 변화가 필요할 때</p>
+                            <div class="stat">
+                                <span class="label">3개월 예상 감량</span>
+                                <span class="value" id="rapidTotalLoss">-00kg</span>
+                            </div>
+                            <div class="final-weight">
+                                예상 체중 <span id="rapidFinalWeight">00kg</span>
+                            </div>
+                        </div>
+                        <div class="summary-card slow">
+                            <h5>완속 감량 프로그램</h5>
+                            <p class="desc">일상 생활에 무리 없이<br>건강하게 빼고 싶을 때</p>
+                            <div class="stat">
+                                <span class="label">3개월 예상 감량</span>
+                                <span class="value" id="slowTotalLoss">-00kg</span>
+                            </div>
+                            <div class="final-weight">
+                                예상 체중 <span id="slowFinalWeight">00kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-box">
+                        <p>혼자서는 힘든 다이어트, 규림과 함께라면 성공할 수 있습니다.</p>
+                        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+                            target="_blank" class="btn btn-primary">
+                            <i class="fa-solid fa-calendar-check"></i> 맞춤 상담 예약하기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Treatment Process Section (New) -->
     <section id="process" class="section process">
         <div class="container">
@@ -606,6 +691,8 @@
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="diet_prediction.js"></script>
     <script src="diagnosis.js"></script>
     <script src="script.js"></script>
 </body>
