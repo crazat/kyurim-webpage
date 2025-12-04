@@ -12,13 +12,14 @@
     <meta property="og:title" content="규림한의원 청주점 | Christmas Edition">
     <meta property="og:description" content="다이어트, 안면비대칭, 피부, 통증 치료. 한정우 원장의 1:1 맞춤 진료. 메리 크리스마스!">
     <meta property="og:image" content="assets/interior_1.jpg">
-    <meta property="og:url" content="https://kyurim-cheongju.com"> <!-- Placeholder URL -->
+    <meta property="og:url" content="https://kyurim-webpage.vercel.app/"> <!-- Placeholder URL -->
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/logo.png">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="christmas.css">
     <!-- Nanum Barun Gothic Font -->
     <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
     <!-- Font Awesome for Icons -->
@@ -29,11 +30,72 @@
     <!-- Snow Container -->
     <div id="snow-container"></div>
 
+    <!-- Twinkling Lights -->
+    <ul class="lightrope">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
     <!-- Event Modal (New) -->
     <div id="eventModal" class="modal">
         <div class="modal-content">
             <button class="close-modal" aria-label="이벤트 팝업 닫기">&times;</button>
-            <img src="assets/event_1_luckybox.png" alt="이벤트 팝업">
+            <div class="lucky-box-game">
+                <h3>🎄 크리스마스 럭키박스 🎄</h3>
+                <p>상자를 클릭하여 선물을 확인하세요!</p>
+                <div class="box-grid">
+                    <div class="box" data-id="1">🎁</div>
+                    <div class="box" data-id="2">🎁</div>
+                    <div class="box" data-id="3">🎁</div>
+                    <div class="box" data-id="4">🎁</div>
+                    <div class="box" data-id="5">🎁</div>
+                    <div class="box" data-id="6">🎁</div>
+                    <div class="box" data-id="7">🎁</div>
+                    <div class="box" data-id="8">🎁</div>
+                    <div class="box" data-id="9">🎁</div>
+                </div>
+                <div id="prizeResult" class="prize-result"></div>
+            </div>
             <div class="modal-footer">
                 <label>
                     <input type="checkbox" id="dontShowToday"> 오늘 하루 보지 않기
@@ -72,6 +134,29 @@
             <h2 class="fade-in" style="color: var(--accent-color); text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Merry
                 Christmas & Happy New Year</h2>
             <h1 class="fade-in delay-1">규림한의원 청주점</h1>
+            <!-- Countdown Timer -->
+            <div id="countdown" class="fade-in delay-2">
+                <div class="time-segment">
+                    <span id="days">00</span>
+                    <span class="label">Days</span>
+                </div>
+                <span class="separator">:</span>
+                <div class="time-segment">
+                    <span id="hours">00</span>
+                    <span class="label">Hours</span>
+                </div>
+                <span class="separator">:</span>
+                <div class="time-segment">
+                    <span id="minutes">00</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <span class="separator">:</span>
+                <div class="time-segment">
+                    <span id="seconds">00</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+
             <p class="fade-in delay-2">건강한 아름다움을 위한 당신의 첫 걸음, 따뜻한 연말 보내세요.</p>
             <a href="#contact" class="btn btn-primary fade-in delay-3">상담 예약하기</a>
         </div>
@@ -469,6 +554,7 @@
         </div>
     </div>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -350,4 +350,146 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 5. Christmas Countdown Logic
+    const countdownContainer = document.getElementById('countdown');
+    if (countdownContainer) {
+        const targetDate = new Date('December 25, 2025 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                countdownContainer.innerHTML = "<h3>Merry Christmas!</h3>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+    }
+
+    // 6. Interactive Lucky Box Logic (Advanced)
+    const boxes = document.querySelectorAll('.box');
+    const prizeResult = document.getElementById('prizeResult');
+
+    if (boxes.length > 0 && prizeResult) {
+        // Probability Configuration
+        // Total weight: 10000 (for 0.01% precision)
+        // 30% Discount: 0.01% -> 1
+        // 10% Discount: 10% -> 1000
+        // 5% Discount: 15% -> 1500
+        // Free Consultation: 20% -> 2000
+        // Next Time (Loss): 54.99% -> 5499
+
+        const prizesConfig = [
+            { name: "30% 할인권", weight: 1, type: "win" },
+            { name: "10% 할인권", weight: 1000, type: "win" },
+            { name: "5% 할인권", weight: 1500, type: "win" },
+            { name: "무료 상담권", weight: 2000, type: "win" },
+            { name: "다음 기회에...", weight: 5499, type: "lose" }
+        ];
+
+        const totalWeight = prizesConfig.reduce((acc, p) => acc + p.weight, 0);
+
+        function getWeightedPrize() {
+            let random = Math.random() * totalWeight;
+            for (const prize of prizesConfig) {
+                if (random < prize.weight) {
+                    return prize;
+                }
+                random -= prize.weight;
+            }
+            return prizesConfig[prizesConfig.length - 1]; // Fallback
+        }
+
+        let hasPlayed = false;
+
+        boxes.forEach((box) => {
+            box.addEventListener('click', () => {
+                if (hasPlayed) {
+                    if (!box.classList.contains('opened')) {
+                        alert("이미 참여하셨습니다! 내일 다시 도전해주세요.");
+                    }
+                    return;
+                }
+
+                hasPlayed = true; // Mark as played immediately to prevent double clicks
+                localStorage.setItem('kyurim_luckybox_played', new Date().toDateString());
+
+                // Slot Machine Animation
+                let iteration = 0;
+                const maxIterations = 20; // Spin 20 times
+                const interval = 100; // 100ms per spin
+
+                const spinInterval = setInterval(() => {
+                    // Show random prize during spin
+                    const randomTemp = prizesConfig[Math.floor(Math.random() * prizesConfig.length)];
+                    box.innerText = randomTemp.name === "다음 기회에..." ? "..." : randomTemp.name;
+                    box.classList.add('spinning');
+
+                    iteration++;
+                    if (iteration >= maxIterations) {
+                        clearInterval(spinInterval);
+                        finishSpin(box);
+                    }
+                }, interval);
+            });
+        });
+
+        function finishSpin(box) {
+            const finalPrize = getWeightedPrize();
+
+            box.classList.remove('spinning');
+            box.classList.add('opened');
+            box.innerText = finalPrize.name === "다음 기회에..." ? "꽝" : "당첨";
+
+            if (finalPrize.type === "win") {
+                prizeResult.innerHTML = `
+                    <div id="couponCard" class="coupon-card">
+                        <div class="coupon-header">Kyurim Christmas Event</div>
+                        <div class="coupon-body">
+                            <div class="coupon-prize">${finalPrize.name}</div>
+                            <div class="coupon-validity">유효기간: 2025년 12월 31일까지</div>
+                        </div>
+                        <div class="coupon-footer">규림한의원 청주점</div>
+                    </div>
+                    <button id="downloadCouponBtn" class="btn btn-primary btn-sm" style="margin-top:10px;">
+                        <i class="fa-solid fa-download"></i> 쿠폰 저장하기
+                    </button>
+                `;
+
+                // Add download functionality
+                document.getElementById('downloadCouponBtn').addEventListener('click', () => {
+                    const couponCard = document.getElementById('couponCard');
+                    html2canvas(couponCard).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `규림한의원_${finalPrize.name}.png`;
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    });
+                });
+            } else {
+                prizeResult.innerHTML = `<span style="color: #666;">아쉽지만 다음 기회에...🎄</span>`;
+            }
+        }
+
+        // Check if already played today
+        const lastPlayed = localStorage.getItem('kyurim_luckybox_played');
+        if (lastPlayed === new Date().toDateString()) {
+            prizeResult.innerText = "오늘의 운세를 이미 확인하셨습니다.";
+            hasPlayed = true;
+        }
+    }
+
 });
