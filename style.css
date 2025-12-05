@@ -377,7 +377,7 @@ ul {
 
 .career-list li::before {
     content: "";
- color: var(--primary-color);
+    color: var(--primary-color);
     position: absolute;
     left: 0;
     top: 0;
@@ -2118,14 +2118,15 @@ footer {
 @media (max-width: 1366px) {
     .ba-card {
         height: auto !important;
-        /* Allow card to adjust to image height */
-        min-height: 300px;
+        min-height: 200px;
+        min-width: 220px;
+        /* Reduced width to fit ~4 items */
+        width: 220px;
     }
 
     .ba-card img {
         width: 100%;
         height: auto !important;
-        /* Maintain aspect ratio */
         object-fit: contain;
         background-color: #f8f9fa;
     }
