@@ -2117,17 +2117,17 @@ footer {
 /* iPad/Tablet Optimization for Treatment Cases */
 @media (max-width: 1366px) {
     .ba-card {
-        height: auto !important;
-        min-height: 200px;
+        height: 320px !important; /* Fixed height for uniformity */
+        min-height: 320px;
         min-width: 220px;
-        /* Reduced width to fit ~4 items */
         width: 220px;
+        background-color: #fff;
     }
 
     .ba-card img {
         width: 100%;
-        height: auto !important;
-        object-fit: contain;
+        height: 100% !important; /* Fill the card height */
+        object-fit: contain; /* Show full image without cropping */
         background-color: #f8f9fa;
     }
 }
