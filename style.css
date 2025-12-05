@@ -2113,3 +2113,47 @@ footer {
     border-color: var(--primary-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/* iPad/Tablet Optimization for Treatment Cases */
+@media (max-width: 1024px) {
+    .ba-card img {
+        object-fit: contain;
+        background-color: #f8f9fa;
+    }
+}
+
+/* Mobile Review Improvements */
+@media (max-width: 768px) {
+    .review-carousel-container {
+        padding: 10px 0;
+    }
+    .review-card {
+        width: 260px;
+        padding: 15px;
+    }
+    .review-body {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+    .review-header {
+        margin-bottom: 10px;
+    }
+    .naver-cert {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+    .reviewer-thumb {
+        width: 30px;
+        height: 30px;
+    }
+    .reviewer-meta h5 {
+        font-size: 0.8rem;
+    }
+    .reviewer-meta span {
+        font-size: 0.7rem;
+    }
+    .keyword-badge {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+}
