@@ -2181,3 +2181,32 @@ footer {
     background-color: #3b82f6;
     color: white;
 }
+
+/* Mobile Icon Adjustments (Added) */
+@media (max-width: 768px) {
+    .quick-menu {
+        right: 15px;
+        bottom: 20px;
+        gap: 10px;
+    }
+
+    .quick-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    .top-btn {
+        width: 35px;
+        height: 35px;
+        right: 20px;
+        bottom: 260px; /* Adjusted to be above the smaller stack */
+    }
+}
+
+
+/* Desktop Top Button Fix (Added) */
+.top-btn {
+    bottom: 360px !important; /* Override previous value */
+}
+
