@@ -1,0 +1,387 @@
+/* Christmas Lights */
+.lightrope {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    top: 95px;
+    z-index: 999;
+    margin: -15px 0 0 0;
+    padding: 0;
+    pointer-events: none;
+    width: 100%;
+}
+
+.lightrope li {
+    position: relative;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 12px;
+    height: 28px;
+    border-radius: 50%;
+    margin: 20px;
+    background: #00f7a5;
+    box-shadow: 0px 4.66667px 24px 3px #00f7a5;
+    animation-name: flash-1;
+    animation-duration: 2s;
+    display: inline-block;
+}
+
+.lightrope li:nth-child(2n+1) {
+    background: #00FFFF;
+    box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.5);
+    animation-name: flash-2;
+    animation-duration: 0.4s;
+}
+
+.lightrope li:nth-child(4n+2) {
+    background: #F70094;
+    box-shadow: 0px 4.66667px 24px 3px #F70094;
+    animation-name: flash-3;
+    animation-duration: 1.1s;
+}
+
+.lightrope li:nth-child(odd) {
+    animation-duration: 1.8s;
+}
+
+.lightrope li:nth-child(3n+1) {
+    animation-duration: 1.4s;
+}
+
+.lightrope li:before {
+    content: "";
+    position: absolute;
+    background: #222;
+    width: 10px;
+    height: 9.33333px;
+    border-radius: 3px;
+    top: -4.66667px;
+    left: 1px;
+}
+
+.lightrope li:after {
+    content: "";
+    top: -14px;
+    left: 9px;
+    position: absolute;
+    width: 52px;
+    height: 18.66667px;
+    border-bottom: solid #222 2px;
+    border-radius: 50%;
+}
+
+.lightrope li:last-child:after {
+    content: none;
+}
+
+.lightrope li:first-child {
+    margin-left: -40px;
+}
+
+@keyframes flash-1 {
+
+    0%,
+    100% {
+        background: #00f7a5;
+        box-shadow: 0px 4.66667px 24px 3px #00f7a5;
+    }
+
+    50% {
+        background: rgba(0, 247, 165, 0.4);
+        box-shadow: 0px 4.66667px 24px 3px rgba(0, 247, 165, 0.2);
+    }
+}
+
+@keyframes flash-2 {
+
+    0%,
+    100% {
+        background: #00FFFF;
+        box-shadow: 0px 4.66667px 24px 3px #00FFFF;
+    }
+
+    50% {
+        background: rgba(0, 255, 255, 0.4);
+        box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.2);
+    }
+}
+
+@keyframes flash-3 {
+
+    0%,
+    100% {
+        background: #F70094;
+        box-shadow: 0px 4.66667px 24px 3px #F70094;
+    }
+
+    50% {
+        background: rgba(247, 0, 148, 0.4);
+        box-shadow: 0px 4.66667px 24px 3px rgba(247, 0, 148, 0.2);
+    }
+}
+
+/* Countdown Timer */
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 40px;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.time-segment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-segment span:first-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-color);
+}
+
+.time-segment .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.separator {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: -5px;
+    color: var(--white);
+}
+
+/* Slot Machine Game */
+.lucky-box-game {
+    text-align: center;
+    padding: 20px;
+    background-color: #fdfbf7;
+    border-radius: 10px;
+}
+
+.lucky-box-game h3 {
+    color: #D42426;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.lucky-box-game p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.slot-machine-container {
+    background: #D42426;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 350px;
+    margin: 0 auto;
+    border: 4px solid #F8B229;
+    position: relative;
+}
+
+.slot-machine-header,
+.slot-machine-footer {
+    height: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slot-machine-footer {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.lights-row {
+    display: flex;
+    gap: 10px;
+}
+
+.light {
+    width: 10px;
+    height: 10px;
+    background: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #FFF;
+    animation: blink 1s infinite alternate;
+}
+
+.light:nth-child(odd) {
+    animation-delay: 0s;
+}
+
+.light:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+@keyframes blink {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slot-machine-body {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.reels-container {
+    display: flex;
+    gap: 10px;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #999;
+}
+
+.reel-wrapper {
+    width: 60px;
+    height: 80px;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.reel {
+    font-size: 3rem;
+    line-height: 80px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: top 0.1s linear;
+}
+
+.reel.spinning {
+    filter: blur(2px);
+}
+
+.lever-container {
+    width: 100%;
+}
+
+.spin-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to bottom, #F8B229, #E69500);
+    border: none;
+    border-radius: 50px;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #B37400, 0 10px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+}
+
+.spin-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #B37400, 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.spin-btn:disabled {
+    background: #ccc;
+    color: #666;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: translateY(5px);
+}
+
+.prize-result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #D42426;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Coupon Card Style */
+.coupon-card {
+    background: linear-gradient(135deg, #D42426, #165B33);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #F8B229;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.coupon-card::before {
+    content: "❄";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 4rem;
+    opacity: 0.1;
+}
+
+.coupon-card::after {
+    content: "🎄";
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 4rem;
+    opacity: 0.1;
+}
+
+.coupon-header {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.coupon-prize {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #F8B229;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.coupon-validity {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.coupon-footer {
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 10px;
+}
