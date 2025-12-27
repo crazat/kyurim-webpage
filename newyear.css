@@ -960,6 +960,17 @@ input[type="radio"]:checked+.gender-btn {
 /* 15. Mobile Optimization for Wish Widget */
 @media (max-width: 768px) {
 
+    /* CRITICAL: Prevent all horizontal overflow */
+    * {
+        max-width: 100vw !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
     /* Hide kite and norigae on mobile to prevent overflow */
     .kite-container,
     .norigae-widget {
@@ -988,6 +999,18 @@ input[type="radio"]:checked+.gender-btn {
         font-size: 0.8rem;
     }
 
+    /* Constrain countdown timer */
+    #countdown {
+        gap: 8px !important;
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+
+    .time-segment {
+        padding: 8px 10px !important;
+        min-width: 60px;
+    }
+
     /* Adjust Kite Position for Mobile */
     /* Adjust Kite Position for Mobile */
     .kite-container {
@@ -1005,33 +1028,30 @@ input[type="radio"]:checked+.gender-btn {
         margin-top: 20px;
     }
 
-    /* Reduce Fortune Box size on mobile - MORE AGGRESSIVE */
+    /* Fortune Box - Balanced for mobile readability */
     .modal-content {
-        width: 95%;
-        margin: 2% auto !important;
-        /* Much smaller top/bottom margin */
-        padding: 10px !important;
-        max-height: 95vh;
-        /* Ensure it fits on screen */
+        width: 92%;
+        margin: 3% auto !important;
+        padding: 12px !important;
+        max-height: 92vh;
         overflow-y: auto;
     }
 
     .lucky-box-game h3 {
-        font-size: 1.1rem;
-        margin-bottom: 5px;
+        font-size: 1.4rem;
+        margin-bottom: 8px;
     }
 
     .lucky-box-game p {
-        font-size: 0.75rem;
-        margin-bottom: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
     }
 
     .slot-machine-container {
-        max-width: 280px;
-        padding: 8px;
-        border-width: 2px;
-        margin: 10px auto;
-        /* Reduce margin */
+        max-width: 320px;
+        padding: 10px;
+        border-width: 3px;
+        margin: 15px auto;
     }
 
     .slot-machine-header,
@@ -1041,33 +1061,33 @@ input[type="radio"]:checked+.gender-btn {
     }
 
     .slot-machine-body {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .reels-container {
         padding: 10px;
         gap: 10px;
     }
 
-    .reels-container {
-        padding: 8px;
-        gap: 8px;
-    }
-
     .reel-wrapper {
-        width: 45px;
-        height: 60px;
+        width: 55px;
+        height: 70px;
     }
 
     .reel {
-        font-size: 2rem;
-        line-height: 60px;
+        font-size: 2.5rem;
+        line-height: 70px;
     }
 
     .spin-btn {
-        padding: 10px;
-        font-size: 0.9rem;
+        padding: 12px;
+        font-size: 1.05rem;
     }
 
     .prize-result {
-        font-size: 0.9rem;
-        margin-top: 10px;
+        font-size: 1rem;
+        margin-top: 15px;
     }
 
     .coupon-card {
@@ -1111,10 +1131,16 @@ input[type="radio"]:checked+.gender-btn {
 }
 
 /* 17. Custom Cursor */
+html,
+body {
+    overflow-x: hidden !important;
+    /* Prevent horizontal scroll */
+    max-width: 100vw !important;
+    position: relative;
+}
+
 body {
     background-color: var(--cream-bg) !important;
-    overflow-x: hidden;
-    /* Prevent horizontal scroll */
     /* Sharp Gold Arrow */
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L28 14 L2 2' fill='%23D4AF37' stroke='%23E63946' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
 }
