@@ -959,6 +959,13 @@ input[type="radio"]:checked+.gender-btn {
 
 /* 15. Mobile Optimization for Wish Widget */
 @media (max-width: 768px) {
+
+    /* Hide kite and norigae on mobile to prevent overflow */
+    .kite-container,
+    .norigae-widget {
+        display: none !important;
+    }
+
     .wish-widget {
         width: 180px;
         padding: 10px;
@@ -998,6 +1005,86 @@ input[type="radio"]:checked+.gender-btn {
         margin-top: 20px;
     }
 
+    /* Reduce Fortune Box size on mobile - MORE AGGRESSIVE */
+    .modal-content {
+        width: 95%;
+        margin: 2% auto !important;
+        /* Much smaller top/bottom margin */
+        padding: 10px !important;
+        max-height: 95vh;
+        /* Ensure it fits on screen */
+        overflow-y: auto;
+    }
+
+    .lucky-box-game h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .lucky-box-game p {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+    }
+
+    .slot-machine-container {
+        max-width: 280px;
+        padding: 8px;
+        border-width: 2px;
+        margin: 10px auto;
+        /* Reduce margin */
+    }
+
+    .slot-machine-header,
+    .slot-machine-footer {
+        display: none;
+        /* Hide decorative lights on mobile */
+    }
+
+    .slot-machine-body {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .reels-container {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .reel-wrapper {
+        width: 45px;
+        height: 60px;
+    }
+
+    .reel {
+        font-size: 2rem;
+        line-height: 60px;
+    }
+
+    .spin-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .prize-result {
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .coupon-card {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    .modal-footer {
+        padding: 8px 0;
+    }
+
+    #closeModalBtn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
     .hero-content h1 {
         font-size: 2.5rem !important;
         /* Reduce from 5rem */
@@ -1023,8 +1110,11 @@ input[type="radio"]:checked+.gender-btn {
     color: var(--white) !important;
 }
 
-/* 17. Custom Cursor (Gold Arrow - Sharp & Clean) */
+/* 17. Custom Cursor */
 body {
+    background-color: var(--cream-bg) !important;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
     /* Sharp Gold Arrow */
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L28 14 L2 2' fill='%23D4AF37' stroke='%23E63946' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
 }
