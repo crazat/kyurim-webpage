@@ -1,0 +1,197 @@
+/* 
+   Apple Style Overlay CSS (Premium Version)
+   - Solid White Navbar (Fixes Logo)
+   - Deep Shadows & Clean Layout
+   - Refined Typography
+*/
+
+:root {
+    --apple-bg: #FBFBFD;
+    /* Ultra light grey, almost white */
+    --apple-text: #1D1D1F;
+    --apple-grey: #86868B;
+    --apple-blue: #2997FF;
+    --card-bg: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+    /* Deep, premium shadow */
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "NanumBarunGothic", sans-serif;
+}
+
+/* 1. Global Reset & Typography */
+body {
+    background-color: var(--apple-bg) !important;
+    color: var(--apple-text) !important;
+    font-family: var(--font-stack) !important;
+    letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: -0.03em !important;
+    /* Tight, modern tracking */
+    color: #1D1D1F !important;
+}
+
+/* 2. Navbar Fix (Solid White) */
+.navbar {
+    background-color: #FFFFFF !important;
+    /* Solid white to match logo */
+    backdrop-filter: none !important;
+    /* Remove blur to ensure solid color */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+    height: 64px !important;
+    /* Slightly taller */
+}
+
+.logo img {
+    mix-blend-mode: normal !important;
+    /* Reset blend mode */
+    height: 32px !important;
+    /* Adjust size */
+}
+
+.nav-links a {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    transition: color 0.2s ease !important;
+}
+
+.nav-links a:hover {
+    color: var(--apple-blue) !important;
+}
+
+/* 3. Hero Section (Immersive) */
+.hero {
+    height: 100vh !important;
+    background-attachment: fixed !important;
+    /* Parallax base */
+}
+
+.hero h1 {
+    font-size: 5rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.05em !important;
+    line-height: 1.05 !important;
+    margin-bottom: 24px !important;
+    text-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.hero p {
+    font-size: 1.5rem !important;
+    font-weight: 400 !important;
+    max-width: 600px;
+    margin: 0 auto 40px !important;
+    line-height: 1.4 !important;
+}
+
+/* 4. Cards & Sections (Clean & Deep) */
+.section {
+    padding: 180px 0 !important;
+    /* Massive whitespace */
+}
+
+.section-header h2 {
+    font-size: 3.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important;
+}
+
+.section-header p.subtitle {
+    font-size: 1.5rem !important;
+    color: var(--apple-grey) !important;
+    font-weight: 400 !important;
+}
+
+.card,
+.event-item,
+.ba-card,
+.interior-item,
+.step-item {
+    background-color: var(--card-bg) !important;
+    border-radius: 28px !important;
+    border: none !important;
+    box-shadow: var(--shadow-md) !important;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    overflow: hidden !important;
+}
+
+.card:hover,
+.event-item:hover,
+.ba-card:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    z-index: 10;
+}
+
+/* 5. Buttons (Refined) */
+.btn {
+    border-radius: 980px !important;
+    padding: 14px 32px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary {
+    background-color: #000000 !important;
+    /* Modern Black Button */
+    color: #FFF !important;
+}
+
+.btn-primary:hover {
+    background-color: #333 !important;
+    transform: scale(1.02) !important;
+}
+
+/* 6. Inputs */
+input {
+    background-color: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid transparent !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    font-size: 16px !important;
+}
+
+input:focus {
+    background-color: #FFF !important;
+    border-color: var(--apple-blue) !important;
+    box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.1) !important;
+}
+
+/* 7. Animations (Classes) */
+.premium-fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.premium-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 8. Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem !important;
+    }
+
+    .section {
+        padding: 100px 0 !important;
+    }
+
+    .card,
+    .event-item {
+        border-radius: 20px !important;
+    }
+}

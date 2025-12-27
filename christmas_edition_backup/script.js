@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Snowfall Effect ---
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
-    const snowflakeCount = isMobile ? 15 : 25; // Reduce count on mobile
+    const snowflakeCount = isMobile ? 30 : 50; // Reduce count on mobile
 
     if (snowContainer) {
         for (let i = 0; i < snowflakeCount; i++) {
@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createSnowflake() {
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
-        const sparkles = ['✨', '🎉', '💫', '⭐️'];
-        snowflake.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+        snowflake.innerHTML = '&#10052;'; // Snowflake character
         snowflake.style.left = Math.random() * 100 + 'vw';
 
         // Adjust duration and size for mobile
@@ -31,127 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add random delay to start
         snowflake.style.animationDelay = Math.random() * 5 + 's';
     }
-
-    // --- New Year Floating Decor (Likely just 2026) ---
-    function createFloatingDecor() {
-        const decorContainer = document.getElementById('snow-container'); // Reuse container
-        if (!decorContainer) return;
-
-        // User Request: Only 2026, very few
-        const items = ['2026'];
-        const item = document.createElement('div');
-        item.classList.add('floating-item');
-
-        const content = items[Math.floor(Math.random() * items.length)];
-        item.innerText = content;
-
-        // Special styling for 2026
-        item.style.fontFamily = "'Great Vibes', cursive";
-        item.style.fontWeight = 'bold';
-        item.style.color = '#D4AF37'; // Gold
-        item.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
-
-        // Random Position
-        item.style.left = Math.random() * 90 + 5 + 'vw'; // 5% to 95%
-
-        // Random Size
-        const size = Math.random() * 20 + 30; // 30px to 50px
-        item.style.fontSize = size + 'px';
-
-        // Random Duration
-        const duration = Math.random() * 10 + 20; // 20-30s (Very Slow)
-        item.style.animationDuration = duration + 's';
-
-        // Random Delay
-        item.style.animationDelay = Math.random() * 15 + 's';
-
-        decorContainer.appendChild(item);
-    }
-
-    // Create a few floating items (Reduced count)
-    // for (let i = 0; i < 3; i++) {
-    //    createFloatingDecor();
-    // }
-
-    // --- 1. Wish Lantern Logic ---
-    // (Wish Lantern Logic Removed)
-
-    function createCustomLantern(text) {
-        const decorContainer = document.getElementById('snow-container');
-        if (!decorContainer) return;
-
-        const item = document.createElement('div');
-        item.classList.add('floating-item');
-        item.innerText = '🏮 ' + text;
-        item.style.fontFamily = "'NanumBarunGothic', sans-serif";
-        item.style.fontSize = '20px'; // Smaller text for wish
-        item.style.color = '#FFF';
-        item.style.textShadow = '0 0 5px #D4AF37';
-        item.style.whiteSpace = 'nowrap';
-
-        // Start from bottom center-ish or random
-        item.style.left = Math.random() * 80 + 10 + 'vw';
-        item.style.animationDuration = '20s'; // Slow rise
-        item.style.animationDelay = '0s'; // Immediate
-
-        decorContainer.appendChild(item);
-    }
-
-    // --- 4. Talisman Modal Logic (Prioritized) ---
-    const talismanBtn = document.getElementById('open-talisman-btn');
-    const talismanModal = document.getElementById('talisman-modal');
-    const closeTalisman = document.getElementById('close-talisman');
-
-    if (talismanBtn && talismanModal) {
-        talismanBtn.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent default link behavior if any
-            talismanModal.style.display = 'block';
-        });
-
-        if (closeTalisman) {
-            closeTalisman.addEventListener('click', function () {
-                talismanModal.style.display = 'none';
-            });
-        }
-
-        window.addEventListener('click', function (e) {
-            if (e.target == talismanModal) {
-                talismanModal.style.display = 'none';
-            }
-        });
-    } else {
-        console.error("Talisman elements not found", { talismanBtn, talismanModal });
-    }
-
-
-
-
-    // Initialize
-    window.onload = function () {
-        // startCountdown(); // Assuming this function exists elsewhere
-        // renderCalendar(); // If calendar exists
-        // Initial floating decor is already created above, so no need to call createFloatingDecor() here.
-    };
-
-    // --- 2. Gold Dust Mouse Trail ---
-    document.addEventListener('mousemove', function (e) {
-        if (Math.random() > 0.5) return; // Throttle creation (50% chance)
-
-        const dust = document.createElement('div');
-        dust.classList.add('gold-dust');
-        dust.style.left = e.clientX + 'px';
-        dust.style.top = e.clientY + 'px';
-
-        // Random color variation (Gold to nice yellow)
-        const colors = ['#D4AF37', '#F8B229', '#FFD700', '#FFF'];
-        dust.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-        document.body.appendChild(dust);
-
-        setTimeout(() => {
-            dust.remove();
-        }, 1000); // Remove after animation
-    });
 
 
     // --- Original Functionality ---
@@ -515,40 +393,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (storyModal && storyImage) {
-        // 4. Click Sparkle (Firecracker)
-        document.addEventListener('click', (e) => {
-            const color = ['#FFD700', '#E63946', '#FFFFFF', '#FFA500']; // Gold, Red, White, Orange
-            const particleCount = 12;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('click-sparkle');
-
-                // Random color
-                particle.style.backgroundColor = color[Math.floor(Math.random() * color.length)];
-
-                // Initial position (Mouse coordinates)
-                particle.style.left = e.clientX + 'px';
-                particle.style.top = e.clientY + 'px';
-
-                // Random direction for explosion
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = Math.random() * 50 + 30; // 30-80px distance
-                const tx = Math.cos(angle) * velocity + 'px';
-                const ty = Math.sin(angle) * velocity + 'px';
-
-                particle.style.setProperty('--tx', tx);
-                particle.style.setProperty('--ty', ty);
-
-                document.body.appendChild(particle);
-
-                // Cleanup
-                setTimeout(() => {
-                    particle.remove();
-                }, 800);
-            }
-        });
-
         // Select images from Events and Treatment Cases
         const eventImages = document.querySelectorAll('.event-item img');
         const baImages = document.querySelectorAll('.ba-card img');
@@ -590,13 +434,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Close logic
-        // Close logic
         function closeStoryModal() {
-            storyModal.classList.add('closing');
-            setTimeout(() => {
-                storyModal.classList.remove('show');
-                storyModal.classList.remove('closing');
-            }, 250); // 0.25s to match ultra fast animation
+            storyModal.classList.remove('show');
         }
 
         if (storyClose) storyClose.addEventListener('click', closeStoryModal);
@@ -615,17 +454,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. New Year Countdown Logic
+    // 5. Christmas Countdown Logic
     const countdownContainer = document.getElementById('countdown');
     if (countdownContainer) {
-        const targetDate = new Date('February 17, 2026 00:00:00').getTime(); // Seollal (Lunar New Year)
+        const targetDate = new Date('December 25, 2025 00:00:00').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
             if (distance < 0) {
-                countdownContainer.innerHTML = "<h3>새해 복 많이 받으세요!</h3>";
+                countdownContainer.innerHTML = "<h3>Merry Christmas!</h3>";
                 return;
             }
 
@@ -656,14 +495,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (spinBtn && prizeResult && reels.every(r => r)) {
         // Probability Configuration
         const prizesConfig = [
-            { name: "30% 할인권", weight: 1, type: "win", symbol: "👑" },
-            { name: "10% 할인권", weight: 1000, type: "win", symbol: "☀️" },
-            { name: "5% 할인권", weight: 1500, type: "win", symbol: "💰" },
-            { name: "무료 상담권", weight: 2000, type: "win", symbol: "🧧" },
-            { name: "다음 기회에...", weight: 5499, type: "lose", symbol: "💨" }
+            { name: "30% 할인권", weight: 1, type: "win", symbol: "🌟" },
+            { name: "10% 할인권", weight: 1000, type: "win", symbol: "🎅" },
+            { name: "5% 할인권", weight: 1500, type: "win", symbol: "🦌" },
+            { name: "무료 상담권", weight: 2000, type: "win", symbol: "🎁" },
+            { name: "다음 기회에...", weight: 5499, type: "lose", symbol: "☃️" }
         ];
 
-        const symbols = ['☀️', '💰', '🧧', '🪁', '💨', '👑'];
+        const symbols = ['🎅', '🎄', '🎁', '🦌', '☃️', '🌟'];
         const totalWeight = prizesConfig.reduce((acc, p) => acc + p.weight, 0);
 
         function getWeightedPrize() {
@@ -725,10 +564,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (finalPrize.type === "win") {
                 prizeResult.innerHTML = `
                     <div id="couponCard" class="coupon-card fade-in" style="animation-play-state: running;">
-                        <div class="coupon-header">Kyurim New Year 2026</div>
+                        <div class="coupon-header">Kyurim Christmas Event</div>
                         <div class="coupon-body">
                             <div class="coupon-prize">${finalPrize.name}</div>
-                            <div class="coupon-validity">유효기간: 2026년 1월 31일까지</div>
+                            <div class="coupon-validity">유효기간: 2025년 12월 31일까지</div>
                         </div>
                         <div class="coupon-footer">규림한의원 청주점</div>
                     </div>
@@ -748,264 +587,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
             } else {
-                prizeResult.innerHTML = `<span style="color: #666; font-size: 1.5rem;">아쉽지만 다음 기회에...🐍</span>`;
+                prizeResult.innerHTML = `<span style="color: #666; font-size: 1.5rem;">아쉽지만 다음 기회에...🎄</span>`;
             }
         }
     }
 
-});
-
-// Global Talisman Function (Outside DOMContentLoaded)
-window.openTalismanModal = function () {
-    console.log("Opening Talisman Modal...");
-    const modal = document.getElementById('talisman-modal');
-    if (modal) {
-        modal.style.display = 'block';
-        modal.style.zIndex = '20000';
-    } else {
-        alert('팝업을 불러올 수 없습니다. 페이지를 새로고침 해주세요.');
-    }
-}
-
-// --- New Year Special Features JS ---
-
-// 1. Sunrise Visual Cleanup (Ultra Fast Version)
-setTimeout(() => {
-    const sunrise = document.getElementById('sunrise-overlay');
-    if (sunrise) sunrise.style.display = 'none';
-}, 1000); // 0.5s animation + buffer
-
-// 2. Flower Path (Scroll Effect) - "Walk on Flowers" & Kite Parallax
-let lastScrollY = window.scrollY;
-let scrollTimeout;
-const kiteContainer = document.getElementById('kite-container');
-
-window.addEventListener('scroll', () => {
-    // Parallax for Kite (Disabled for Mouse Interaction)
-    // if (kiteContainer) {
-    //     const speed = 0.2;
-    //     kiteContainer.style.transform = `translateY(${window.scrollY * -speed}px)`;
-    // }
-
-    if (scrollTimeout) return;
-
-    scrollTimeout = setTimeout(() => {
-        const currentScrollY = window.scrollY;
-        const diff = Math.abs(currentScrollY - lastScrollY);
-
-        if (diff > 50) { // Only if scrolled significantly
-            createFlowerPath();
-            lastScrollY = currentScrollY;
-        }
-        scrollTimeout = null;
-    }, 100); // Throttle
-});
-
-function createFlowerPath() {
-    const flowers = ['🌸', '🌺', '🏵️', '💐', '🌼'];
-    const side = Math.random() > 0.5 ? 'left' : 'right'; // Random side
-    const flower = document.createElement('div');
-    flower.className = 'flower-path-item';
-    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-
-    // Position
-    flower.style[side] = Math.random() * 50 + 'px'; // Within 50px of edge
-    flower.style.top = Math.random() * (window.innerHeight - 100) + 'px'; // Random height
-
-    // Add to body
-    document.body.appendChild(flower);
-
-    // Cleanup after animation
-    setTimeout(() => {
-        flower.remove();
-    }, 2000);
-}
-
-// 3. Fortune Cookie Logic
-const fortuneWidget = document.getElementById('fortune-cookie-widget');
-const fortuneMessage = document.getElementById('fortune-message');
-const fortuneText = document.getElementById('fortune-text');
-const fortuneIcon = document.getElementById('fortune-icon');
-const fortuneClose = document.getElementById('fortune-close');
-
-if (fortuneWidget && fortuneMessage && fortuneText && fortuneIcon) {
-    const fortunes = [
-        "2026년, 당신의 모든 꿈이 이루어질 것입니다.",
-        "생각지도 못한 행운이 찾아올 예정입니다!",
-        "건강과 재물, 두 마리 토끼를 잡는 한 해가 됩니다.",
-        "오랫동안 바라던 소식이 곧 들려옵니다.",
-        "주변 사람들에게 사랑받는 행복한 한 해가 될 거예요.",
-        "조금만 더 노력하면 큰 결실을 맺습니다.",
-        "귀인을 만나 새로운 기회가 열립니다.",
-        "걱정하지 마세요, 모든 것이 잘 풀릴 것입니다.",
-        "올해는 당신이 주인공입니다. 자신감을 가지세요!",
-        "작은 기쁨들이 모여 큰 행복을 만드는 해입니다."
-    ];
-
-    let isCracked = false;
-
-    // Close Button Handling
-    if (fortuneClose) {
-        fortuneClose.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent widget click
-            fortuneMessage.classList.remove('show');
-
-            // Reset to closed cookie state
-            setTimeout(() => {
-                fortuneIcon.innerText = "🥠";
-                isCracked = false;
-            }, 300); // Wait for bubble transition
-        });
-    }
-
-    fortuneWidget.addEventListener('click', () => {
-        // If message is pending close or already shown, restart
-
-        if (isCracked) {
-            // New fortune
-            fortuneMessage.classList.remove('show');
-            setTimeout(() => {
-                const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-                fortuneText.innerText = randomFortune; // Update text span only
-                fortuneMessage.classList.add('show');
-            }, 200);
-            return;
-        }
-
-        // Crack Effect
-        fortuneIcon.style.transform = "scale(1.2) rotate(10deg)";
-        setTimeout(() => {
-            fortuneIcon.innerText = "🍪"; // Change to open cookie
-            fortuneIcon.style.transform = "scale(1) rotate(0deg)";
-
-            // Show Message
-            const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-            fortuneText.innerText = randomFortune; // Update text span only
-            fortuneMessage.classList.add('show');
-
-            isCracked = true;
-        }, 100);
-    });
-}
-
-// 5. Hidden Bok (Luck) Hunt
-const hiddenBoks = document.querySelectorAll('.hidden-bok');
-let foundCount = 0;
-const totalBoks = hiddenBoks.length;
-
-hiddenBoks.forEach(bok => {
-    bok.addEventListener('click', (e) => {
-        e.stopPropagation(); // prevent default click sparkle
-        if (bok.classList.contains('found')) return;
-
-        bok.classList.add('found');
-        foundCount++;
-
-        // Add specific sparkle effect for Bok
-        createSparkle(e.clientX, e.clientY, ['#FFD700', '#FF0000']);
-
-        if (foundCount === totalBoks) {
-            setTimeout(() => {
-                // Show Success Message Overlay
-                const successMsg = document.createElement('div');
-                successMsg.style.position = 'fixed';
-                successMsg.style.top = '50%';
-                successMsg.style.left = '50%';
-                successMsg.style.transform = 'translate(-50%, -50%)';
-                successMsg.style.background = 'rgba(255, 255, 255, 0.95)';
-                successMsg.style.padding = '30px 50px';
-                successMsg.style.borderRadius = '20px';
-                successMsg.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                successMsg.style.zIndex = '100000';
-                successMsg.style.textAlign = 'center';
-                successMsg.style.border = '4px solid #D4AF37';
-                successMsg.innerHTML = `
-                    <h2 style="color:#D42426; margin-bottom:10px; font-size:2rem;">🎉 축하합니다! 🎉</h2>
-                    <p style="font-size:1.2rem; color:#333;">숨겨진 복을 모두 찾으셨군요!</p>
-                    <p style="font-size:1.5rem; font-weight:bold; margin-top:10px; color:#D4AF37;">2026년 대박 나세요!</p>
-                    <button id="closeSuccess" style="margin-top:20px; padding:10px 20px; background:#D4AF37; color:white; border:none; border-radius:5px; cursor:pointer; font-size:1rem;">감사합니다</button>
-                `;
-                document.body.appendChild(successMsg);
-
-                document.getElementById('closeSuccess').addEventListener('click', () => {
-                    successMsg.remove();
-                });
-
-                triggerBigFireworks();
-            }, 500);
-        }
-    });
-});
-
-function createSparkle(x, y, colors, scaleMultiplier = 1) {
-    for (let i = 0; i < 12; i++) { // Increased particle count
-        const p = document.createElement('div');
-        p.classList.add('click-sparkle');
-        p.style.left = x + 'px';
-        p.style.top = y + 'px';
-        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        p.style.zIndex = '100001'; // Ensure on top of success message
-        p.style.width = (Math.random() * 6 + 4) * scaleMultiplier + 'px'; // Varied size
-        p.style.height = p.style.width;
-
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = (Math.random() * 60 + 40) * scaleMultiplier;
-        p.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
-        p.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 800);
-    }
-}
-
-function triggerBigFireworks() {
-    // Intense burst
-    const interval = setInterval(() => {
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * (window.innerHeight * 0.8); // Top 80%
-        createSparkle(x, y, ['#FFD700', '#E63946', '#FFFFFF', '#00FF00', '#FFA500'], 2.0); // Bigger scale
-    }, 50); // Faster interval (50ms)
-
-    setTimeout(() => clearInterval(interval), 4000); // 4 seconds duration
-}
-
-// 6. Interactive Kite (Mouse Follow)
-const interactiveKiteRef = document.querySelector('.kite-container');
-if (interactiveKiteRef) {
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-
-        // Move with mouse (Range +/- 80px)
-        const moveX = (x - 0.5) * 80;
-        const moveY = (y - 0.5) * 40;
-
-        interactiveKiteRef.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-}
-
-// 7. Norigae Scroll Physics
-const norigaeTassel = document.querySelector('.norigae-tassel');
-let lastScrollY_Norigae = window.scrollY;
-let norigaeTimeout;
-
-window.addEventListener('scroll', () => {
-    if (!norigaeTassel) return;
-
-    const currentScrollY = window.scrollY;
-    const diff = currentScrollY - lastScrollY_Norigae;
-    lastScrollY_Norigae = currentScrollY;
-
-    // Swing based on scroll direction/speed
-    // Cap at 45 degrees
-    let angle = -diff * 1.5; // Negative to lagging effect? Or positive?
-    if (angle > 45) angle = 45;
-    if (angle < -45) angle = -45;
-
-    norigaeTassel.style.transform = `rotate(${angle}deg)`;
-
-    // Reset when stopped
-    clearTimeout(norigaeTimeout);
-    norigaeTimeout = setTimeout(() => {
-        norigaeTassel.style.transform = 'rotate(0deg)';
-    }, 150);
 });
