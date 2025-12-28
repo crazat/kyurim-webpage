@@ -683,12 +683,12 @@ ul {
 @keyframes fadeInUpSmooth {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: scale(0.95);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 
@@ -697,7 +697,8 @@ footer {
     background-color: var(--secondary-color);
     /* Green Footer */
     color: var(--white);
-    padding: 50px 0;
+    padding: 60px 0 30px;
+    margin-top: 50px;
     text-align: center;
     font-size: 0.9rem;
     border-top: 5px solid var(--primary-color);
@@ -1265,28 +1266,34 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    /* Enable horizontal scrolling for reviews on mobile */
-    .review-carousel {
-        display: flex;
+    /* Review Carousel Mobile Fix: Auto-move + Manual Scroll */
+    .review-carousel-container {
         overflow-x: auto;
-        scroll-behavior: smooth;
+        /* Allow manual scrolling of the viewport */
         -webkit-overflow-scrolling: touch;
-        gap: 15px;
-        padding-bottom: 15px;
-        /* Space for scrollbar or touch area */
-        scrollbar-width: none;
-        /* Firefox */
+        width: 100%;
     }
 
-    .review-carousel::-webkit-scrollbar {
-        display: none;
-        /* Chrome/Safari */
+    .review-carousel {
+        display: flex;
+        gap: 15px;
+        width: max-content;
+        /* Critical for animation */
+        animation: scroll 60s linear infinite;
+        /* Enable marquee */
+        overflow-x: visible;
+        padding-bottom: 5px;
+    }
+
+    .review-carousel:hover,
+    .review-carousel:active {
+        /* Pause on interaction */
+        animation-play-state: paused;
     }
 
     .review-card {
-        flex: 0 0 300px !important;
-        /* Fixed width, don't shrink */
-        width: 300px !important;
+        flex: 0 0 280px !important;
+        width: 280px !important;
     }
 }
 
@@ -1525,12 +1532,13 @@ footer {
 @media (max-width: 768px) {
     .story-content {
         flex-direction: column;
-        max-height: 85vh;
+        max-height: 95vh;
         overflow-y: auto !important;
         /* Enable scroll for container */
         -webkit-overflow-scrolling: touch;
         display: block;
         /* Stack naturally */
+        padding: 0;
     }
 
     .story-image-wrapper {
@@ -1538,9 +1546,17 @@ footer {
         width: 100%;
         height: auto;
         /* Allow natural height */
-        max-height: 50vh;
-        /* Cap height if image is too tall */
-        min-height: 200px;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+    }
+
+    .story-image-wrapper img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
     }
 
     .story-text-wrapper {
