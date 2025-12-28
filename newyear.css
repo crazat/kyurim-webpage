@@ -1401,7 +1401,6 @@ button,
     bottom: 0;
     width: 50%;
     background-color: #FDFBF7;
-    /* Rice Paper */
     z-index: 20;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     background-image:
@@ -1409,7 +1408,6 @@ button,
         linear-gradient(0deg, rgba(212, 175, 55, 0.2) 1px, transparent 1px);
     background-size: 40px 40px;
     border: 4px solid var(--navy-deep);
-    /* Consistent Navy Frame */
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -1423,6 +1421,16 @@ button,
     right: 0;
     border-left: 2px solid var(--navy-deep);
     transform-origin: right;
+}
+
+/* Fix for Mobile: Ensure doors cover screen even when scrolled */
+@media (max-width: 768px) {
+    .changhoji-door {
+        position: fixed;
+        /* Relative to viewport */
+        height: 100vh;
+        top: 0;
+    }
 }
 
 /* Open State (Targeting parent .modal.show or .story-modal.show) */

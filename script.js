@@ -586,6 +586,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 storyModal.classList.add('show');
+
+                // Reset scroll position to top
+                const storyContent = document.querySelector('.story-content');
+                if (storyContent) {
+                    storyContent.scrollTop = 0;
+                }
+                const storyTextWrapper = document.querySelector('.story-text-wrapper');
+                if (storyTextWrapper) {
+                    storyTextWrapper.scrollTop = 0;
+                }
             });
         });
 
