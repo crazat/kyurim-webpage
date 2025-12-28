@@ -672,6 +672,26 @@ ul {
     overflow: hidden;
 }
 
+/* Specific fix for Talisman Button Jump */
+#open-talisman-btn.fade-in {
+    opacity: 0;
+    animation: fadeInUpSmooth 0.8s ease-out forwards;
+    animation-play-state: paused;
+    /* Controlled by observer */
+}
+
+@keyframes fadeInUpSmooth {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Footer */
 footer {
     background-color: var(--secondary-color);
@@ -1244,6 +1264,30 @@ footer {
     .event-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Enable horizontal scrolling for reviews on mobile */
+    .review-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px;
+        padding-bottom: 15px;
+        /* Space for scrollbar or touch area */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .review-carousel::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
+
+    .review-card {
+        flex: 0 0 300px !important;
+        /* Fixed width, don't shrink */
+        width: 300px !important;
+    }
 }
 
 /* --- Naver Style Reviews --- */
@@ -1481,25 +1525,30 @@ footer {
 @media (max-width: 768px) {
     .story-content {
         flex-direction: column;
-        max-height: 90vh;
+        max-height: 85vh;
         overflow-y: auto !important;
-        /* Force scroll on mobile */
+        /* Enable scroll for container */
         -webkit-overflow-scrolling: touch;
-        /* Smooth scroll on iOS */
+        display: block;
+        /* Stack naturally */
     }
 
     .story-image-wrapper {
         flex: none;
-        height: 250px;
-        /* Reduced height for mobile */
-        min-height: 250px;
+        width: 100%;
+        height: auto;
+        /* Allow natural height */
+        max-height: 50vh;
+        /* Cap height if image is too tall */
+        min-height: 200px;
     }
 
     .story-text-wrapper {
         padding: 20px;
         flex: none;
-        overflow-y: auto;
-        /* Allow text to scroll */
+        overflow-y: visible;
+        /* Let parent scroll */
+        height: auto;
     }
 
     .story-close {
