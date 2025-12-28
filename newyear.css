@@ -521,6 +521,20 @@ footer {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    animation: centerZoomIn 0.5s ease forwards !important;
+    /* Override generic animation */
+}
+
+@keyframes centerZoomIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
 }
 
 .talisman-card {

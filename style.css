@@ -1285,9 +1285,9 @@ footer {
         padding-bottom: 5px;
     }
 
-    .review-carousel:hover,
+
     .review-carousel:active {
-        /* Pause on interaction */
+        /* Pause ONLY on touch down, not hover (which sticks on mobile) */
         animation-play-state: paused;
     }
 
