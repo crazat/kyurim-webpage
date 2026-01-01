@@ -1,4 +1,4 @@
-/* Variables */
+﻿/* Variables */
 :root {
     --primary-color: #D42426;
     /* Christmas Red */
@@ -969,15 +969,40 @@ footer {
     color: var(--text-color);
 }
 
-/* Event Section */
+/* Event Section - Horizontal Scroll */
 .events {
     background-color: var(--bg-color);
 }
 
-.event-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.event-scroll-container {
+    display: flex;
     gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding: 20px 0 40px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-color);
+    max-width: 100%;
+}
+
+.event-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.event-scroll-container::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+.event-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.event-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
 
 .event-item {
@@ -986,23 +1011,27 @@ footer {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform 0.3s ease;
-    aspect-ratio: 3 / 4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    width: 300px;
+    height: 400px;
 }
 
 .event-item:hover {
     transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .event-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #fff;
     transition: transform 0.5s ease;
 }
 
 .event-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .event-overlay {
@@ -1010,11 +1039,6 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    padding: 20px;
-    color: white;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 .event-item:hover .event-overlay {
@@ -1246,12 +1270,7 @@ footer {
 }
 
 /* Responsive for New Features */
-@media (max-width: 992px) {
-    .event-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .process-steps {
+@media (max-width: 992px) {`r`n.process-steps {
         flex-direction: column;
     }
 
@@ -1261,12 +1280,7 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    .event-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Review Carousel Mobile Fix: Auto-move + Manual Scroll */
+@media (max-width: 768px) {`r`n    /* Event scroll container mobile adjustments */`r`n    .event-scroll-container {`r`n        padding: 15px 0;`r`n        gap: 15px;`r`n    }`r`n`r`n    .event-item {`r`n        width: 280px;`r`n        height: 370px;`r`n    }`r`n`r`n    /* Review Carousel Mobile Fix: Auto-move + Manual Scroll */
     .review-carousel-container {
         overflow-x: auto;
         /* Allow manual scrolling of the viewport */
