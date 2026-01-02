@@ -1282,46 +1282,31 @@ footer {
 }
 
 @media (max-width: 768px) {
-    `r`n
-
     /* Event scroll container mobile adjustments */
-    `r`n .event-scroll-container {
-        `r`n padding: 15px 0;
-        `r`n gap: 15px;
-        `r`n
+    .event-scroll-container {
+        padding: 15px 0;
+        gap: 15px;
     }
 
-    `r`n`r`n .event-item {
-        `r`n width: 280px;
-        `r`n height: 370px;
-        `r`n
+    .event-item {
+        width: 280px;
+        height: 370px;
     }
-
-    `r`n`r`n
 
     /* Review Carousel Mobile Fix: Auto-move + Manual Scroll */
     .review-carousel-container {
         overflow-x: auto;
-        /* Allow manual scrolling of the viewport */
         -webkit-overflow-scrolling: touch;
         width: 100%;
+        overflow-y: hidden;
     }
 
     .review-carousel {
         display: flex;
         gap: 15px;
         width: max-content;
-        /* Critical for animation */
         animation: none;
-        /* Enable marquee */
-        overflow-x: visible;
         padding-bottom: 5px;
-    }
-
-
-    .review-carousel:active {
-        /* Pause ONLY on touch down, not hover (which sticks on mobile) */
-        animation-play-state: paused;
     }
 
     .review-card {
