@@ -763,6 +763,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+
+    // 7. Mobile Review Carousel Auto-Scroll (JS based)
+    const reviewContainer = document.querySelector('.review-carousel-container');
+    if (reviewContainer && window.innerWidth <= 768) {
+        let scrollSpeed = 0.8; // Adjust speed as needed
+        let isPaused = false;
+        let currentScroll = 0;
+
+        function autoScroll() {
+            if (!isPaused) {
+                currentScroll += scrollSpeed;
+                // Infinite loop logic: When we reach the halfway point (end of first set), jump back to 0
+                // We use a small buffer to ensure we don't jump too early
+                if (currentScroll >= reviewContainer.scrollWidth / 2) {
+                    currentScroll = 0;
+                }
+                reviewContainer.scrollLeft = currentScroll;
+            } else {
+                // Sync currentScroll with actual scroll position in case user scrolled manually
+                currentScroll = reviewContainer.scrollLeft;
+            }
+            requestAnimationFrame(autoScroll);
+        }
+
+        // Start auto-scroll
+        autoScroll();
+
+        // Pause on interaction
+        reviewContainer.addEventListener('touchstart', () => { isPaused = true; });
+        reviewContainer.addEventListener('touchend', () => {
+            setTimeout(() => { isPaused = false; }, 2000); // Resume after 2s
+        });
+
+        // Also pause on mouse for testing
+        reviewContainer.addEventListener('mouseenter', () => { isPaused = true; });
+        reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
+    }
+
 });
 
 // Global Talisman Function (Outside DOMContentLoaded)
