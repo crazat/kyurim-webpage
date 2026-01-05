@@ -1,0 +1,628 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no, address=no, email=no"> <!-- Prevent auto-linking -->
+    <title>규림한의원 청주점 | 안면비대칭 & 체형교정</title>
+    <meta name="description" content="청주 규림한의원 안면비대칭 및 체형교정 클리닉. 수술 없이 되찾는 균형 잡힌 얼굴과 몸. 척추, 골반 교정.">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="규림한의원 청주점 | 안면비대칭 & 체형교정">
+    <meta property="og:description" content="수술 없이 되찾는 균형 잡힌 얼굴과 몸. 척추, 골반 교정.">
+    <meta property="og:image" content="../../assets/interior_1.jpg">
+    <meta property="og:url" content="https://kyurim-webpage.vercel.app/events/body">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/logo_icon.png">
+
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../newyear.css">
+    <!-- Nanum Barun Gothic Font -->
+    <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
+    <!-- New Year Fonts: Great Vibes (English), Nanum Myeongjo (Korean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body data-page-type="body">
+    <!-- 1. Sunrise Opening Animation REMOVED -->
+
+    <!-- 2. Kite (Parallax) -->
+    <div id="kite-container" class="kite-container">
+        <svg class="kite-svg" viewBox="0 0 100 150" width="100" height="150">
+            <!-- Bangpae-yeon (Shield Kite) -->
+            <rect x="10" y="10" width="80" height="100" fill="#f5f5f5" stroke="#333" stroke-width="2" />
+            <circle cx="50" cy="50" r="15" fill="none" stroke="#333" stroke-width="2" />
+            <!-- Traditional Colors -->
+            <!-- Body -->
+            <path d="M10 10 L50 50 L90 10" fill="#D4AF37" opacity="0.9" /> <!-- Gold Top -->
+            <path d="M10 110 L50 50 L90 110" fill="#0A192F" opacity="0.9" /> <!-- Navy Bottom -->
+            <!-- Ribbons (Tails) -->
+            <path d="M20 110 Q 10 140 20 150" stroke="#D4AF37" fill="none" class="kite-tail" />
+            <path d="M80 110 Q 90 140 80 150" stroke="#D4AF37" fill="none" class="kite-tail" />
+            <!-- String -->
+            <line x1="50" y1="50" x2="50" y2="150" stroke="#aaa" stroke-width="1" stroke-dasharray="5,5"
+                class="kite-string" />
+        </svg>
+    </div>
+
+    <!-- Snow/Sparkle Container -->
+    <div id="snow-container"></div>
+
+    <!-- Event Modal (New Year) -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="이벤트 팝업 닫기">&times;</button>
+            <div class="lucky-box-game">
+                <h3>🧧 2026 신년 운세 포춘박스 🧧</h3>
+                <p>슬롯머신을 돌려 새해 행운의 선물을 확인하세요!</p>
+                <div class="slot-machine-container">
+                    <div class="slot-machine-header">
+                        <div class="lights-row">
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                        </div>
+                    </div>
+                    <div class="slot-machine-body">
+                        <div class="reels-container">
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel1"></div>
+                            </div>
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel2"></div>
+                            </div>
+                            <div class="reel-wrapper">
+                                <div class="reel" id="reel3">🧧</div>
+                            </div>
+                        </div>
+                        <div class="lever-container">
+                            <button id="spinBtn" class="spin-btn">
+                                <span class="spin-text">SPIN</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slot-machine-footer">
+                        <div class="lights-row">
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                            <span class="light"></span><span class="light"></span><span class="light"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="prizeResult" class="prize-result"></div>
+            </div>
+            <div class="modal-footer">
+                <label>
+                    <input type="checkbox" id="dontShowToday"> 오늘 하루 보지 않기
+                </label>
+                <button id="closeModalBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Talisman Modal -->
+    <div id="talisman-modal" class="modal">
+        <div class="modal-content talisman-content" style="position: relative; overflow: hidden;">
+            <div class="changhoji-door left"></div>
+            <div class="changhoji-door right"></div>
+            <span class="close-btn" id="close-talisman" style="z-index: 30;">&times;</span>
+            <div class="talisman-card">
+                <div class="talisman-body">
+                    <div class="talisman-text">
+                        <h3>무병장수</h3>
+                        <p>2026년 한 해, 귀하의 건강과 행복을 기원합니다.</p>
+                    </div>
+                    <div class="seal">규림</div>
+                </div>
+            </div>
+            <div class="talisman-desc">
+                <p>2026년, 몸과 마음이 모두 건강한 한 해 되시길 바랍니다.</p>
+                <p>- 규림한의원 청주점 -</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/logo.png" alt="규림한의원 로고">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">원장님 소개</a></li>
+                <li><a href="#specialties">진료과목</a></li>
+                <li><a href="#before-after">치료사례</a></li>
+                <li><a href="#interior">병원 둘러보기</a></li>
+                <li><a href="#blog">공식블로그</a></li>
+                <li><a href="#contact">오시는 길</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <span class="hidden-bok" style="top: 100px; left: 20px; z-index: 10000;" title="이곳에 복이 숨어있네요!">🧧</span>
+            <h2 class="fade-in" style="color: var(--accent-color); text-shadow: 0 2px 4px rgba(0,0,0,0.5);">수술 없이 되찾는 균형
+                잡힌 얼굴과 몸</h2>
+            <h1 class="fade-in delay-1">Kyurim Body Balance</h1>
+
+            <p class="fade-in delay-2" style="font-size: 1.2rem; margin-bottom: 20px;">안면비대칭, 척추교정, 골반교정.<br>바른 얼굴과 아름다운
+                라인 회복.</p>
+
+            <!-- Health Talisman Button -->
+            <button id="open-talisman-btn" class="btn btn-outline fade-in delay-2" onclick="openTalismanModal()"
+                style="margin-top: 10px; border-color: var(--gold-primary); color: var(--gold-primary); z-index: 5; position: relative;">🧧
+                2026 건강부적
+                받기</button>
+
+            <p class="fade-in delay-2">건강한 아름다움을 위한 당신의 첫 걸음.</p>
+            <a href="#contact" class="btn btn-primary fade-in delay-3">상담 예약하기</a>
+        </div>
+    </header>
+
+    <!-- Video Section (Body) -->
+    <section class="section video-section" style="padding: 40px 0 0 0;">
+        <div class="container" style="text-align: center;">
+            <video autoplay muted loop playsinline
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../26년%201월%20안면비대칭%20이벤트%20영상.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section class="section video-section" style="padding: 40px 0 0 0;">
+        <div class="container" style="text-align: center;">
+            <video autoplay muted loop playsinline
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../1월%20윤곽각술%20이벤트%20최종.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Event Section (Body Only) -->
+    <section id="events" class="section events">
+        <div class="container">
+            <div class="section-header">
+                <h3>Special Events</h3>
+                <h2>진행 중인 교정 이벤트</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원 청주점만의 특별한 교정 혜택.</p>
+            </div>
+            <div class="event-scroll-container">
+                <div class="event-item">
+                    <img src="../../26 jan event/2 26년 1월 윤곽조각술 이벤트.png" alt="윤곽조각술 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../26 jan event/10 26년 1월 브라이덜 이벤트.png" alt="브라이덜 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../26 jan event/12 26년 1월 안면비대칭 체형교정 이벤트.png" alt="안면비대칭 체형교정 이벤트" loading="lazy">
+                </div>
+                <!-- Removed Premium Gift Event -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Director Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <h3>Director</h3>
+                <h2>원장님 소개</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-content">
+                <div class="director-image">
+                    <img src="../../assets/profile.gif" alt="한정우 대표원장"
+                        style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="director-info">
+                    <h3>한정우 대표원장</h3>
+                    <ul class="career-list">
+                        <li>경희대학교 한의과대학 한의학석사</li>
+                        <li>한방비만학회 정회원</li>
+                        <li>대한한의임상피부과학회 정회원</li>
+                        <li>대한스포츠한의학회 정회원</li>
+                        <li>응용근신경학회 정회원</li>
+                        <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
+                        <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
+                        <li>AI 경진대회 우승자 (2025)</li>
+                    </ul>
+                    <p class="philosophy">
+                        "단순한 증상 완화가 아닌, 몸의 근본적인 균형을 되찾아<br>
+                        스스로 빛나는 건강한 아름다움을 선사합니다."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section (Focused on Body) -->
+    <section id="specialties" class="section specialties">
+        <div class="container">
+            <div class="section-header">
+                <h3>Specialties</h3>
+                <h2>진료 과목</h2>
+                <div class="line"></div>
+            </div>
+            <div class="grid-4">
+                <div class="card" style="grid-column: span 4; max-width: 400px; margin: 0 auto;">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-person-walking"></i>
+                    </div>
+                    <h3>안면비대칭 체형교정</h3>
+                    <p>틀어진 턱,골반과 척추를 바로잡아<br>바른 얼굴과 아름다운 라인 회복</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self-Diagnosis Section (Asymmetry Default) -->
+    <section id="diagnosis" class="section diagnosis">
+        <div class="container">
+            <div class="section-header">
+                <h3>Self-Check</h3>
+                <h2>나의 체형 균형 찾기</h2>
+                <div class="line"></div>
+                <p class="subtitle">간단한 테스트로 내 몸의 균형을 확인해보세요.</p>
+            </div>
+            <div class="diagnosis-container">
+                <div class="diagnosis-tabs">
+                    <!-- Removed Diet, Skin -->
+                    <button class="tab-btn active" data-type="asymmetry">안면비대칭</button> <!-- Active -->
+                    <button class="tab-btn" data-type="body">체형교정</button>
+                </div>
+                <div class="diagnosis-content">
+                    <!-- Dynamic Content: Start Screen -> Questions -> Result -->
+                    <div id="diagnosis-screen"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatment Process Section -->
+    <section id="process" class="section process">
+        <div class="container">
+            <div class="section-header">
+                <h3>Process</h3>
+                <h2>진료 프로세스</h2>
+                <div class="line"></div>
+                <p class="subtitle">체계적인 1:1 맞춤 진료 시스템을 경험해보세요.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item fade-in">
+                    <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h4>01. 접수 및 설문</h4>
+                    <p>내원 후 접수 및<br>기초 설문지 작성</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-1">
+                    <div class="step-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4>02. 검사</h4>
+                    <p>안면 3D 촬영 및 분석,<br>체형 분석기 등<br>정밀 검사 진행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-2">
+                    <div class="step-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h4>03. 원장님 상담</h4>
+                    <p>검사 결과 기반<br>1:1 심층 상담</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-3">
+                    <div class="step-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+                    <h4>04. 맞춤 치료</h4>
+                    <p>추나요법 등<br>최적의 교정 치료</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-4">
+                    <div class="step-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                    <h4>05. 사후 관리</h4>
+                    <p>치료 후 경과 확인<br>및 바른 자세 코칭</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before & After Section -->
+    <section id="before-after" class="section before-after">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real-time Cases</h3>
+                <h2>치료 사례</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원의 놀라운 변화를 확인하세요.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="gallery-wrapper">
+                <button class="scroll-btn prev" aria-label="이전 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <div class="ba-gallery-grid">
+                    <div class="ba-card">
+                        <img src="../../assets/ba_4.jpg" alt="치료 사례 4" loading="lazy">
+                    </div>
+                    <div class="ba-card">
+                        <img src="../../assets/ba_5.png" alt="치료 사례 5" loading="lazy">
+                    </div>
+                </div>
+                <button class="scroll-btn next" aria-label="다음 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="ba-action">
+                <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-outline">
+                    더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Reviews Section -->
+    <section id="reviews" class="section reviews">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real Reviews</h3>
+                <h2>생생 치료 후기</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원과 함께 건강한 아름다움을 찾은 분들의 이야기입니다.</p>
+            </div>
+            <div class="review-carousel-container">
+                <div class="review-carousel">
+                    <!-- Reviews will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior Section -->
+    <section id="interior" class="section interior">
+        <div class="container">
+            <div class="section-header">
+                <h3>Interior</h3>
+                <h2>병원 둘러보기</h2>
+                <div class="line"></div>
+                <p class="subtitle">편안하고 아늑한 규림한의원 청주점의 내부입니다.</p>
+            </div>
+            <div class="interior-grid">
+                <div class="interior-item">
+                    <img src="../../assets/interior_1.jpg" alt="병원 내부 1" loading="lazy">
+                </div>
+                <div class="interior-item">
+                    <img src="../../assets/interior_2.jpg" alt="병원 내부 2" loading="lazy">
+                </div>
+                <div class="interior-item" style="position: relative; overflow: visible !important;">
+                    <img src="../../assets/interior_3.jpg" alt="병원 내부 3" loading="lazy">
+                    <span class="hidden-bok" style="bottom: 15%; right: 15%; z-index: 10000; font-size: 3rem;"
+                        title="여기에도 복이?!">🧧</span>
+                </div>
+                <div class="interior-item">
+                    <img src="../../assets/interior_4.jpg" alt="병원 내부 4" loading="lazy">
+                </div>
+                <div class="interior-item">
+                    <img src="../../assets/interior_5.jpg" alt="병원 내부 5" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider -->
+    <div class="ink-divider"></div>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <div class="blog-wrapper">
+                <div class="blog-text">
+                    <h3>Kyurim's Story</h3>
+                    <h2>규림한의원 공식 블로그</h2>
+                    <p>한정우 원장의 진료 일기, 건강 정보, 그리고 병원 소식을<br>블로그에서 가장 먼저 만나보세요.</p>
+                    <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-n"></i> 블로그 방문하기
+                    </a>
+                </div>
+                <div class="blog-visual">
+                    <!-- Decorative visual -->
+                    <div class="circle-deco"></div>
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider (Reverse) -->
+    <div class="ink-divider reverse"></div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-header">
+                <h3>Q&A</h3>
+                <h2>자주 묻는 질문</h2>
+                <div class="line"></div>
+            </div>
+            <div class="faq-container">
+                <!-- FAQ Items will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Fortune Cookie Widget -->
+    <div id="fortune-cookie-widget" class="fortune-cookie-widget">
+        <div class="fortune-message-bubble" id="fortune-message">
+            <span class="fortune-close" id="fortune-close">&times;</span>
+            <span id="fortune-text">🥠 포춘쿠키를 클릭해보세요!</span>
+        </div>
+        <div class="fortune-cookie-icon" id="fortune-icon">🥠</div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>오시는 길 & 진료안내</h2>
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>충청북도 청주시 상당구 상당로 81번길 36, 5층</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <p><a href="tel:043-224-1075">043-224-1075</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <p>평일: 10:30 - 20:30</p>
+                            <p>토요일: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary"
+                            style="background-color: #FEE500; border-color: #FEE500; color: #3C1E1E;">
+                            <i class="fa-solid fa-comment"></i> 카카오톡 문의하기
+                        </a>
+                        <a href="https://talk.naver.com/ct/w4y1te?frm=mnmb#nafullscreen" target="_blank"
+                            class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white;">
+                            <i class="fa-solid fa-comments"></i> 네이버 톡톡 문의
+                        </a>
+                        <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-primary"
+                            style="background-color: #E1306C; border-color: #E1306C; color: white;">
+                            <i class="fa-brands fa-instagram"></i> 인스타그램
+                        </a>
+                        <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-primary"
+                            style="background-color: #2DB400; border-color: #2DB400; color: white;">
+                            <i class="fa-solid fa-blog"></i> 블로그 바로가기
+                        </a>
+                        <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                            target="_blank" class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white; grid-column: span 2;">
+                            <i class="fa-solid fa-map-location-dot"></i> 네이버 지도 보기
+                        </a>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- Naver Map Image Link -->
+                    <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                        target="_blank" title="네이버 지도로 보기">
+                        <img src="../../assets/naver_map.png" alt="규림한의원 청주점 위치 (네이버 지도)"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Menu (Floating) -->
+    <div class="quick-menu">
+        <a href="tel:043-224-1075" class="quick-btn tel" aria-label="전화 상담">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="quick-btn kakao" aria-label="카카오톡 상담">
+            <i class="fa-solid fa-comment"></i>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="quick-btn naver" aria-label="네이버 예약">
+            <i class="fa-solid fa-calendar-check"></i>
+        </a>
+    </div>
+
+    <!-- Top Button -->
+    <button id="topBtn" class="top-btn" aria-label="맨 위로 이동"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-info">
+                <p>상호명: 규림한의원 청주점 | 대표자: 한정우</p>
+                <p>사업자등록번호: 538-66-00350 <span class="hidden-bok"
+                        style="position: relative; top: 0; left: 5px; font-size: 1rem;" title="마지막 복을 찾으셨군요!">🧧</span>
+                </p>
+                <p>주소: 충청북도 청주시 상당구 상당로 81번길 36, 5층</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 규림한의원 청주점. All Rights Reserved. <span class="footer-seal">규림</span></p>
+                <p><a href="#" style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">개인정보처리방침</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Story Modal -->
+    <div id="storyModal" class="story-modal">
+        <button class="story-close" aria-label="닫기" style="z-index: 30;">&times;</button>
+        <div class="story-content" style="position: relative;">
+            <div class="changhoji-door left"></div>
+            <div class="changhoji-door right"></div>
+            <div class="story-image-wrapper">
+                <img id="storyImage" src="" alt="치료 사례">
+            </div>
+            <div class="story-text-wrapper">
+                <span id="storyTag" class="story-tag">TAG</span>
+                <div class="story-header">
+                    <h3 id="storyTitle">TITLE</h3>
+                </div>
+                <div id="storyProfile" class="story-profile">
+                    PROFILE
+                </div>
+                <div id="storyDesc" class="story-desc">
+                    DESCRIPTION
+                </div>
+                <div id="storyResult" class="story-result">
+                    RESULT
+                </div>
+                <div class="story-footer">
+                    <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-comment"></i> 내 증상 상담하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Removed diet_prediction.js -->
+    <script src="../../diagnosis.js"></script>
+    <script src="../../script.js"></script>
+
+    <!-- Failsafe Script for Talisman -->
+    <script>
+        window.openTalismanModal = function () {
+            console.log("Failsafe Open Talisman Triggered");
+            var modal = document.getElementById('talisman-modal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.style.opacity = '1'; /* Force Visibility */
+                modal.classList.add('show'); /* Add show class just in case */
+                modal.style.zIndex = '2147483647'; // Max Z-Index
+            } else {
+                alert('Talisman Modal Not Found in DOM');
+            }
+        };
+
+        // Also re-attach event listener just in case
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('open-talisman-btn');
+            if (btn) {
+                btn.onclick = window.openTalismanModal;
+                btn.setAttribute('data-tooltip', '🧧 새해 복 많이 받으세요!'); // Add Tooltip dynamically
+            }
+        });
+    </script>
+</body>
+
+</html>
