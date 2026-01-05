@@ -161,6 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.tab-btn');
     const screen = document.getElementById('diagnosis-screen');
     let currentType = 'diet';
+    const activeTab = document.querySelector('.tab-btn.active');
+    if (activeTab) {
+        currentType = activeTab.dataset.type;
+    }
     let currentStep = 0;
     let scores = {}; // Store counts for A, B, C, D
 
