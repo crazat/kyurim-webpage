@@ -274,23 +274,18 @@
     </section>
 
     <!-- Self-Diagnosis Section (Skin Default) -->
-    <section id="diagnosis" class="section diagnosis">
+    
+    <!-- Skin MBTI Section -->
+    <section id="skin-mbti" class="section skin-mbti" style="background-color: #fdfbf7;">
         <div class="container">
             <div class="section-header">
-                <h3>Self-Check</h3>
-                <h2>나의 피부 타입 찾기</h2>
+                <h3>Skin MBTI</h3>
+                <h2>피부 MBTI 자가진단</h2>
                 <div class="line"></div>
-                <p class="subtitle">간단한 테스트로 내 피부 상태를 확인해보세요.</p>
+                <p class="subtitle">내 피부 성격은? 1분 만에 확인해보세요.</p>
             </div>
-            <div class="diagnosis-container">
-                <div class="diagnosis-tabs">
-                    <button class="tab-btn active" data-type="skin">피부</button>
-                    <!-- Removed other tabs -->
-                </div>
-                <div class="diagnosis-content">
-                    <!-- Dynamic Content: Start Screen -> Questions -> Result -->
-                    <div id="diagnosis-screen"></div>
-                </div>
+            <div id="skin-mbti-container">
+                <!-- Content injected by skin_mbti.js -->
             </div>
         </div>
     </section>
@@ -628,9 +623,10 @@
             }
         });
     </script>
-</body>
+<script src="../../skin_mbti.js"></script>`n</body>
 
 </html>
+
 
 
 
