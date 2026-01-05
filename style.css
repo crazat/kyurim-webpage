@@ -2304,3 +2304,125 @@ footer {
     bottom: 360px !important;
     /* Override previous value */
 }
+
+/* Comparison Table Section */
+.comparison-section {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+}
+
+.comparison-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0 20px;
+}
+
+.comparison-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.comparison-card.competitor {
+    border: 1px solid #eee;
+    background: #f5f5f5;
+    opacity: 0.9;
+}
+
+.comparison-card.kyurim {
+    border: 2px solid var(--primary-color);
+    background: #fff;
+    transform: scale(1.05);
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(212, 36, 38, 0.15);
+}
+
+.comparison-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.comparison-card.kyurim h3 {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.comparison-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.comparison-list li {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 35px;
+    line-height: 1.5;
+}
+
+.comparison-list li:last-child {
+    border-bottom: none;
+}
+
+.comparison-list li strong {
+    display: block;
+    font-size: 1.15rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.comparison-card.competitor .comparison-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.comparison-card.kyurim .comparison-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.comparison-card.kyurim .badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: #fff;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(212, 36, 38, 0.3);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .comparison-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .comparison-card.kyurim {
+        transform: scale(1);
+        order: -1; /* Show Kyurim first on mobile */
+    }
+}
+
