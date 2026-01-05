@@ -2426,3 +2426,120 @@ footer {
     }
 }
 
+
+/* Skin MBTI Styles */
+#skin-mbti-container {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mbti-intro h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.mbti-intro p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.mbti-quiz {
+    text-align: left;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.question-box h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.question-box p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.answer-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.answer-box button {
+    padding: 20px;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    background: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.answer-box button:hover {
+    border-color: var(--primary-color);
+    background: #fff5f5;
+    transform: translateY(-2px);
+}
+
+.mbti-result .result-header {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.mbti-result .mbti-code {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.mbti-result .mbti-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mbti-result .mbti-desc {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.mbti-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
