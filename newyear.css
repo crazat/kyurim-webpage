@@ -2121,3 +2121,81 @@ button,
     border-radius: 8px 8px 0 0;
     /* Rounded top corners matching card */
 }
+
+/* =========================================
+   26. Smart Review Search
+   ========================================= */
+.review-search-container {
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    position: relative;
+    text-align: center;
+}
+
+.review-search-box {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.review-search-input {
+    width: 100%;
+    padding: 15px 50px 15px 25px;
+    border-radius: 50px;
+    border: 2px solid #eee;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.review-search-input:focus {
+    outline: none;
+    border-color: #D42426;
+    /* Primary Red */
+    box-shadow: 0 5px 20px rgba(212, 36, 38, 0.15);
+}
+
+.review-search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #D42426;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.search-tags {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-tag {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-tag:hover {
+    background: #D42426;
+    color: #fff;
+    border-color: #D42426;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1rem;
+    color: #999;
+}
