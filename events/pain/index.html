@@ -30,9 +30,93 @@
         rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Landing Page Optimization */
+        .navbar,
+        .quick-menu,
+        .section-header h2,
+        .section-header .subtitle,
+        .section-header .line {
+            display: none !important;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20000;
+            border-top: 1px solid #eee;
+        }
+
+        .sticky-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .sticky-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .sticky-btn.call {
+            color: #333;
+        }
+
+        .sticky-btn.kakao {
+            color: #3C1E1E;
+        }
+
+        .sticky-btn.talk {
+            color: #03C75A;
+        }
+
+        .sticky-btn.reserve {
+            background: #03C75A;
+            color: white;
+        }
+
+        .sticky-btn.kakao i {
+            color: #FEE500;
+            text-shadow: 0 0 1px #dbae00;
+        }
+
+        /* Adjust footer padding */
+        footer {
+            padding-bottom: 70px !important;
+        }
+
+        /* Ensure images are visible immediately */
+        body {
+            padding-top: 0 !important;
+        }
+
+        .hero-content {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- CRO 1. Closing Soon Banner (Redesigned) -->
+    <div class="closing-banner">
+        <span>[마감임박]</span> 1월 통증/교통사고 특별 혜택이 곧 종료됩니다.
+    </div>
     <!-- 1. Sunrise Opening Animation REMOVED -->
 
     <!-- 2. Kite (Parallax) -->
@@ -108,7 +192,7 @@
     <!-- Hero Section REMOVED -->
 
     <!-- Moved Events Section -->
-<section id="events" class="section events">
+    <section id="events" class="section events">
         <div class="container">
             <div class="section-header">
                 <h3>Special Events</h3>
@@ -163,17 +247,33 @@
     <!-- Video Section (Pain/Body) -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container" style="text-align: center;">
-            <video autoplay muted loop playsinline
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../26년%201월%20안면비대칭%20이벤트%20영상.mp4" type="video/mp4">
             </video>
         </div>
     </section>
 
+    <!-- CRO 4. Quick Inquiry Form (Redesigned & Google Connected) -->
+    <section class="quick-inquiry-section scroll-reveal">
+        <div class="quick-inquiry-box">
+            <h3>📝 간편 무료상담 신청</h3>
+            <p>연락처를 남겨주시면 상담원이<br>친절하게 안내해드립니다.</p>
+
+            <form name="submit-to-google-sheet" class="inquiry-form">
+                <input type="hidden" name="페이지" value="통증">
+                <input type="tel" name="연락처" placeholder="010-1234-5678" required>
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i> 상담 신청하기
+                </button>
+            </form>
+        </div>
+    </section>
+
     <!-- Calculator Link Section (New for Pain) -->
-    <section class="section" style="padding: 40px 0; background-color: #f9f9f9;">
+    <section class="section scroll-reveal" style="padding: 40px 0; background-color: #f9f9f9;">
         <div class="container" style="text-align: center;">
-            <h3>교통사고 합의금 계산기</h3>
+            <h2 class="section-title">내 자동차보험 합의금 계산</h2>
             <p>복잡한 교통사고 합의금, 예상 금액을 미리 확인해보세요.</p>
             <a href="https://traffic-accident-simulator.vercel.app/" target="_blank" class="btn btn-primary"
                 style="margin-top: 20px;">
@@ -183,7 +283,7 @@
     </section>
 
     <!-- Event Section (Pain/General) -->
-    
+
 
     <!-- Director Section -->
     <section id="about" class="section about">
@@ -612,10 +712,95 @@
             }
         });
     </script>
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <a href="tel:043-224-1075" class="sticky-btn call highlight-anim">
+            <i class="fa-solid fa-phone"></i>
+            <span>전화상담</span>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="sticky-btn kakao highlight-anim"
+            style="animation-delay: 2.5s;">
+            <i class="fa-solid fa-comment"></i>
+            <span>카톡문의</span>
+        </a>
+        <a href="http://talk.naver.com/w4y1te?frm=mnmb&frm=nmb_detail" target="_blank" class="sticky-btn talk">
+            <i class="fa-solid fa-comments"></i>
+            <span>네이버톡톡</span>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="sticky-btn reserve">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>간편예약</span>
+        </a>
+    </div>
+
+    <!-- CRO Scripts (Google Sheets Integration) -->
+    <script>
+        // 1. Google Sheets Submission Logic
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        if (form) {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                // Basic Validation
+                const phoneInput = form.querySelector('input[name="연락처"]');
+                if (phoneInput.value.length < 10) {
+                    alert('올바른 연락처를 입력해주세요.');
+                    return;
+                }
+
+                // Show Loading
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
+                btn.disabled = true;
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        alert('✅ 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
+                        form.reset();
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        // Fallback for demo mode (if URL is invalid)
+                        if (scriptURL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                            alert('✅ (데모) 신청 완료되었습니다.\n*실제 작동하려면 구글 스크립트 URL을 설정 파일에 넣어주세요.');
+                            form.reset();
+                        } else {
+                            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                        }
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    });
+            });
+        }
+    </script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 
 </html>
-
-
-
-
