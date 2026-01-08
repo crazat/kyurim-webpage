@@ -1621,3 +1621,49 @@ button,
 .delay-300 {
     transition-delay: 0.3s;
 }
+
+/* 4. Real-time Reservation Toast */
+.reservation-toast {
+    position: fixed;
+    bottom: 80px;
+    /* Above sticky bar */
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(10, 25, 47, 0.95);
+    /* Deep Navy */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    min-width: 280px;
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+.reservation-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.reservation-toast i {
+    color: #D4AF37;
+    /* Gold */
+}
+
+.reservation-toast .toast-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.reservation-toast .toast-time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-left: auto;
+}

@@ -804,26 +804,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 // We use a small buffer to ensure we don't jump too early
                 if (currentScroll >= reviewContainer.scrollWidth / 2) {
                     currentScroll = 0;
+                    reviewContainer.scrollLeft = 0;
+                } else {
+                    reviewContainer.scrollLeft = currentScroll;
                 }
-                reviewContainer.scrollLeft = currentScroll;
-            } else {
-                // Sync currentScroll with actual scroll position in case user scrolled manually
-                currentScroll = reviewContainer.scrollLeft;
             }
             requestAnimationFrame(autoScroll);
         }
 
-        // Start auto-scroll
-        autoScroll();
-
         // Pause on interaction
         reviewContainer.addEventListener('touchstart', () => { isPaused = true; });
-        reviewContainer.addEventListener('touchend', () => {
-            setTimeout(() => { isPaused = false; }, 2000); // Resume after 2s
-        });
-
-        // Also pause on mouse for testing
-        reviewContainer.addEventListener('mouseenter', () => { isPaused = true; });
         reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
     }
 
