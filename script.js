@@ -817,6 +817,56 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
     }
 
+    // 8. Real-time Reservation Notification (Social Proof)
+    const notificationPageType = document.body.getAttribute('data-page-type') || 'general';
+    const names = ['김OO', '이OO', '박OO', '최OO', '정OO', '강OO', '조OO', '윤OO', '장OO', '임OO'];
+    const actions = {
+        'diet': '다이어트 상담을 신청했습니다.',
+        'skin': '피부 상담을 신청했습니다.',
+        'pain': '통증 치료 상담을 신청했습니다.',
+        'body': '체형 교정 상담을 신청했습니다.',
+        'asymmetry': '안면비대칭 상담을 신청했습니다.',
+        'general': '진료 예약을 신청했습니다.'
+    };
+
+    function showToast() {
+        const toast = document.createElement('div');
+        toast.className = 'reservation-toast';
+
+        const name = names[Math.floor(Math.random() * names.length)];
+        const action = actions[notificationPageType] || actions['general'];
+        const time = Math.floor(Math.random() * 5) + 1; // 1-5 mins ago
+
+        toast.innerHTML = `
+            <i class="fa-solid fa-bell"></i>
+            <div>
+                <span class="toast-text" style="display:block;"><b>${name}님</b>이</span>
+                <span class="toast-text">${action}</span>
+            </div>
+            <span class="toast-time" style="font-size:0.75rem; margin-left: 10px;">${time}분 전</span>
+        `;
+
+        document.body.appendChild(toast);
+
+        // Animate In
+        setTimeout(() => toast.classList.add('show'), 100);
+
+        // Animate Out
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+        }, 4000); // Stay for 4 seconds
+    }
+
+    // Start Loop
+    setTimeout(() => {
+        showToast(); // Show first one quickly
+        setInterval(() => {
+            if (document.hidden) return; // Don't show if tab hidden
+            showToast();
+        }, 15000); // Every 15 seconds
+    }, 3000); // Start after 3 seconds
+
 });
 
 // Global Talisman Function (Outside DOMContentLoaded)
