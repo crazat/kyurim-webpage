@@ -375,6 +375,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Duplicate reviews for infinite scroll effect (x2 for smoother loop)
         const allReviews = [...filteredReviews, ...filteredReviews];
 
+
+        // Determine base path for assets
+        const basePath = window.location.pathname.includes('/events/') ? '../../' : '';
+        const logoSrc = basePath + 'assets/logo_icon.png';
+
         allReviews.forEach(review => {
             const card = document.createElement('div');
             card.className = 'review-card';
@@ -391,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="review-keywords">${keywordsHtml}</div>
                 <div class="review-footer">
                     <div class="reviewer-thumb">
-                        <img src="assets/logo_icon.png" alt="User">
+                        <img src="${logoSrc}" alt="User">
                     </div>
                     <div class="reviewer-meta">
                         <h5>${review.name}</h5>
