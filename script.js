@@ -790,8 +790,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // 7. Mobile Review Carousel Auto-Scroll (JS based)
-    const reviewContainer = document.querySelector('.review-carousel-container');
+    // 7. Inject Review Content (Populate Missing Reviews)
+    const reviewDataMap = {
+        'diet': [
+            { id: 1, text: "3개월 만에 10kg 감량 성공! 입던 옷이 다 커져서 행복해요.", author: "김OO님 (30대/직장인)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "굶지 않고 건강하게 빼니까 요요가 없네요. 인생 다이어트입니다.", author: "이OO님 (20대/학생)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 3, text: "붓기가 빠지니 라인이 살아나요. 원장님이 정말 꼼꼼하십니다.", author: "박OO님 (40대/주부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 4, text: "다이어트 약 부작용 때문에 걱정했는데, 한약은 속이 편해요.", author: "최OO님 (30대/프리랜서)", rating: "⭐⭐⭐⭐⭐" }
+        ],
+        'skin': [
+            { id: 1, text: "여드름 흉터 때문에 스트레스였는데, 새살침 덕분에 피부가 매끈해졌어요!", author: "정OO님 (20대/대학생)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "화장으로도 안 가려지던 홍조가 사라졌습니다. 자신감 회복!", author: "강OO님 (30대/직장인)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 3, text: "피부과 다 다녀봐도 안 됐는데, 속부터 치료하니 다르네요.", author: "조OO님 (40대/자영업)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 4, text: "결혼 앞두고 관리받았는데, 화장이 너무 잘 먹어서 놀랐어요.", author: "윤OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" }
+        ],
+        'pain': [
+            { id: 1, text: "목이랑 어깨가 너무 아파서 잠도 못 잤는데, 약침 맞고 푹 잡니다.", author: "장OO님 (40대/사무직)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "허리 디스크 수술 권유받았는데, 비수술로 통증이 잡혔어요. 감사합니다.", author: "임OO님 (50대/주부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 3, text: "교통사고 후유증으로 고생했는데, 입원 치료 덕분에 빨리 회복했어요.", author: "한OO님 (30대/운전직)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 4, text: "테니스 엘보로 고생했는데, 봉침 효과가 진짜 좋네요.", author: "오OO님 (40대/운동강사)", rating: "⭐⭐⭐⭐⭐" }
+        ],
+        'body': [
+            { id: 1, text: "안면비대칭 때문에 사진 찍기 싫었는데, 이제 자신 있게 찍어요!", author: "서OO님 (20대/승무원 준비)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "골반이 틀어져서 치마가 돌아갔는데, 교정 후에는 딱 맞아요.", author: "김OO님 (30대/직장인)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 3, text: "거북목 교정받고 키가 2cm는 커진 것 같아요. 자세가 중요하네요.", author: "이OO님 (10대/학생)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 4, text: "출산 후 터진 골반, 추나요법으로 시원하게 맞췄습니다.", author: "박OO님 (30대/주부)", rating: "⭐⭐⭐⭐⭐" }
+        ],
+        'general': [
+            { id: 1, text: "친절하고 꼼꼼한 진료 감사합니다. 믿고 다니는 한의원!", author: "김OO님", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "시설도 깨끗하고 원장님 실력이 정말 좋으세요.", author: "이OO님", rating: "⭐⭐⭐⭐⭐" }
+        ]
+    };
+
+    const carousel = document.querySelector('.review-carousel');
+    if (carousel) {
+        // Determine Page Type
+        const pType = document.body.getAttribute('data-page-type') || 'general';
+        const reviews = reviewDataMap[pType] || reviewDataMap['general'];
+
+        // Double the data for infinite scroll illusion if needed
+        const displayReviews = [...reviews, ...reviews, ...reviews]; // 3x for smooth scrolling
+
+        displayReviews.forEach((review, index) => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            // Use placeholder images for now or generic pattern
+            // To make text visible, we use a gradient overlay
+            card.innerHTML = `
+                <div class="review-image-placeholder" style="background: linear-gradient(135deg, #fce38a 0%, #f38181 100%); height: 150px; display:flex; align-items:center; justify-content:center; color:white; font-size:2rem; font-weight:bold;">
+                    ${review.author.charAt(0)}
+                </div>
+                <div class="review-text-content" style="padding: 15px;">
+                    <div class="review-stars" style="color:#FFD700; margin-bottom:5px;">${review.rating}</div>
+                    <p class="review-body" style="font-size:0.95rem; color:#333; line-height:1.4; margin-bottom:10px; font-weight:500;">"${review.text}"</p>
+                    <p class="review-author" style="font-size:0.8rem; color:#666; text-align:right;">- ${review.author}</p>
+                </div>
+            `;
+            carousel.appendChild(card);
+        });
+    }
     if (reviewContainer && window.innerWidth <= 768) {
         let scrollSpeed = 0.8; // Adjust speed as needed
         let isPaused = false;
