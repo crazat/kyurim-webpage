@@ -20,20 +20,99 @@
 
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../../newyear.css">
+
     <!-- Nanum Barun Gothic Font -->
     <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
-    <!-- New Year Fonts: Great Vibes (English), Nanum Myeongjo (Korean) -->
+    <!-- New Year Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
         rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Landing Page Optimization */
+        .navbar,
+        .quick-menu {
+            display: none !important;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20000;
+            border-top: 1px solid #eee;
+        }
+
+        .sticky-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .sticky-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .sticky-btn.call {
+            color: #333;
+        }
+
+        .sticky-btn.kakao {
+            color: #3C1E1E;
+        }
+
+        .sticky-btn.talk {
+            color: #03C75A;
+        }
+
+        .sticky-btn.reserve {
+            background: #03C75A;
+            color: white;
+        }
+
+        .sticky-btn.kakao i {
+            color: #FEE500;
+            text-shadow: 0 0 1px #dbae00;
+        }
+
+        footer {
+            padding-bottom: 70px !important;
+        }
+
+        body {
+            padding-top: 0 !important;
+        }
+
+        .hero-content {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body data-page-type="body">
-    <!-- 1. Sunrise Opening Animation REMOVED -->
+    <!-- CRO 1. Closing Soon Banner (Redesigned) -->
+    <div class="closing-banner">
+        <span>[마감임박]</span> 1월 체형교정 특별 혜택이 곧 종료됩니다.
+    </div>
 
     <!-- 2. Kite (Parallax) -->
     <div id="kite-container" class="kite-container">
@@ -108,7 +187,7 @@
     <!-- Hero Section REMOVED -->
 
     <!-- Moved Events Section -->
-<section id="events" class="section events">
+    <section id="events" class="section events scroll-reveal">
         <div class="container">
             <div class="section-header">
                 <h3>Special Events</h3>
@@ -183,7 +262,7 @@
         </div>
     </section>
 
-    
+
     <!-- Asymmetry Correction Event Video -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container" style="text-align: center;">
@@ -193,41 +272,31 @@
             </video>
         </div>
     </section>
-    <!-- Event Section (Body Only) -->
-    
-
-    <!-- Director Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <div class="section-header">
-                <h3>Director</h3>
-                <h2>원장님 소개</h2>
-                <div class="line"></div>
-            </div>
-            <div class="about-content">
-                <div class="director-image">
-                    <img src="../../assets/profile.gif" alt="한정우 대표원장"
-                        style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                </div>
-                <div class="director-info">
-                    <h3>한정우 대표원장</h3>
-                    <ul class="career-list">
-                        <li>경희대학교 한의과대학 한의학석사</li>
-                        <li>한방비만학회 정회원</li>
-                        <li>대한한의임상피부과학회 정회원</li>
-                        <li>대한스포츠한의학회 정회원</li>
-                        <li>응용근신경학회 정회원</li>
-                        <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
-                        <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
-                        <li>AI 경진대회 우승자 (2025)</li>
-                    </ul>
-                    <p class="philosophy">
-                        "단순한 증상 완화가 아닌, 몸의 근본적인 균형을 되찾아<br>
-                        스스로 빛나는 건강한 아름다움을 선사합니다."
-                    </p>
-                </div>
-            </div>
+    </div>
+    <div class="about-content">
+        <div class="director-image">
+            <img src="../../assets/profile.gif" alt="한정우 대표원장" style="width: 100%; height: 100%; object-fit: cover;"
+                loading="lazy">
         </div>
+        <div class="director-info">
+            <h3>한정우 대표원장</h3>
+            <ul class="career-list">
+                <li>경희대학교 한의과대학 한의학석사</li>
+                <li>한방비만학회 정회원</li>
+                <li>대한한의임상피부과학회 정회원</li>
+                <li>대한스포츠한의학회 정회원</li>
+                <li>응용근신경학회 정회원</li>
+                <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
+                <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
+                <li>AI 경진대회 우승자 (2025)</li>
+            </ul>
+            <p class="philosophy">
+                "단순한 증상 완화가 아닌, 몸의 근본적인 균형을 되찾아<br>
+                스스로 빛나는 건강한 아름다움을 선사합니다."
+            </p>
+        </div>
+    </div>
+    </div>
     </section>
 
     <!-- Specialties Section (Focused on Body) -->
@@ -347,19 +416,18 @@
                         <img src="../../assets/ba_5.png" alt="치료 사례 5" loading="lazy">
                     </div>
                 </div>
-                    <div class="ba-card">
-                        <img src="../../assets/ba_5.png" alt="치료 사례 5" loading="lazy">
-                    </div>
+                <div class="ba-card">
+                    <img src="../../assets/ba_5.png" alt="치료 사례 5" loading="lazy">
                 </div>
-                <button class="scroll-btn next" aria-label="다음 치료 사례 보기"><i
-                        class="fa-solid fa-chevron-right"></i></button>
             </div>
+            <button class="scroll-btn next" aria-label="다음 치료 사례 보기"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
 
-            <div class="ba-action">
-                <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-outline">
-                    더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
+        <div class="ba-action">
+            <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-outline">
+                더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
         </div>
     </section>
 
@@ -607,13 +675,29 @@
             }
         });
     </script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
