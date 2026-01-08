@@ -1117,6 +1117,71 @@ function createSparkle(x, y, colors, scaleMultiplier = 1) {
     }
 }
 
+// 6. Director's Letter Logic
+document.addEventListener('click', (e) => {
+    // Check if clicked trigger or its children
+    const trigger = e.target.closest('.letter-trigger-card');
+    if (trigger) {
+        // Define letters by type
+        const letters = {
+            'diet': {
+                title: "살 때문에 자꾸 움츠러드시나요?",
+                body: "거울을 볼 때마다 한숨부터 나오신다면, 그건 의지가 약해서가 아닙니다. <br><br>단지, '내 몸에 맞는 방법'을 아직 못 만났을 뿐이에요.<br><br>굶는 고통 없이, 당신이 다시 활짝 웃을 수 있도록 규림이 끝까지 함께하겠습니다."
+            },
+            'skin': {
+                title: "피부 때문에 약속을 피하시나요?",
+                body: "두꺼운 화장으로 가리는 것도 이제 지치셨죠. 깨끗한 피부는 단순한 미용이 아닌 '자신감'입니다.<br><br>피부 깊은 곳의 원인부터 치료해서, 민낯으로도 당당하게 웃는 날을 선물해드리겠습니다."
+            },
+            'pain': {
+                title: "지긋지긋한 통증, 참지 마세요.",
+                body: "‘시간 지나면 낫겠지’ 하며 파스만 붙이고 계신가요?<br><br>몸이 보내는 구조 신호를 무시하면 마음까지 병이 듭니다.<br><br>아픈 곳 없는 편안한 아침을 맞이하실 수 있도록, 정성을 다해 치료하겠습니다."
+            },
+            'body': {
+                title: "틀어진 몸, 숨은 라인을 찾으세요.",
+                body: "사진 찍을 때마다 비뚤어진 어깨가 신경 쓰이시나요?<br><br>균형이 잡혀야 건강도, 아름다움도 따라옵니다.<br><br>당신의 몸이 가진 본연의 우아한 라인을 되찾아드리겠습니다."
+            },
+            'general': {
+                title: "건강한 아름다움을 약속합니다.",
+                body: "병원은 두려운 곳이 아니라, 내 몸을 위한 힐링 공간이어야 합니다.<br><br>따뜻한 진료와 정직한 처방으로, 당신의 고민을 함께 나누는 든든한 주치의가 되겠습니다."
+            }
+        };
+
+        const pageType = document.body.getAttribute('data-page-type') || 'general';
+        const content = letters[pageType] || letters['general'];
+
+        // Create Modal HTML
+        const modal = document.createElement('div');
+        modal.className = 'letter-modal';
+        modal.style.display = 'flex'; // Immediately flex to calculate
+        modal.innerHTML = `
+            <div class="letter-paper">
+                <span class="close-letter">&times;</span>
+                <div class="letter-content">
+                    <h3>${content.title}</h3>
+                    <p>${content.body}</p>
+                    <div class="letter-stamp">
+                        대표원장 한정우 드림 🖋️
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Animate In
+        requestAnimationFrame(() => modal.classList.add('show'));
+
+        // Close Handlers
+        const close = () => {
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+        };
+        modal.querySelector('.close-letter').addEventListener('click', close);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) close();
+        });
+    }
+});
+
 function triggerBigFireworks() {
     // Intense burst
     const interval = setInterval(() => {
