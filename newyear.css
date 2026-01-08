@@ -1625,31 +1625,34 @@ button,
 /* 4. Real-time Reservation Notification (Social Proof) */
 .reservation-toast {
     position: fixed;
-    top: 20px;
-    /* Moved to Top as per user request */
+    top: 30px;
+    /* Safe distance from top edge */
     left: 50%;
-    transform: translateX(-50%) translateY(-100px);
-    /* Start purely from above */
+    transform: translateX(-50%) translateY(-150%);
+    /* Robust hiding */
     background: rgba(10, 25, 47, 0.95);
     /* Premium Navy */
     color: #fff;
     padding: 12px 20px;
     border-radius: 50px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 200000 !important;
+    /* Force on top of everything */
     display: flex;
     align-items: center;
     gap: 10px;
-    z-index: 10000;
     white-space: nowrap;
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     border: 1px solid rgba(212, 175, 55, 0.3);
     /* Gold border */
+    pointer-events: none;
+    /* Allow clicks to pass through */
 }
 
 .reservation-toast.show {
-    transform: translateX(-50%) translateY(0);
     opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .reservation-toast i {
@@ -1785,4 +1788,69 @@ button,
     50% {
         transform: translateY(-10px);
     }
+}
+
+/* 22. Mobile Review Carousel (Restored) */
+.review-carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+    scrollbar-width: none;
+    position: relative;
+    background: transparent;
+}
+
+.review-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.review-carousel {
+    display: flex;
+    gap: 15px;
+    width: max-content;
+    padding: 0 20px;
+}
+
+.review-card {
+    width: 280px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    /* Softer shadow */
+    overflow: hidden;
+    scroll-snap-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure placeholder image area looks good */
+.review-image-placeholder {
+    height: 150px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 23. Treatment Case Descriptions */
+.ba-desc {
+    padding: 15px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.ba-desc h4 {
+    font-size: 1rem;
+    color: #333;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.ba-desc p {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
 }
