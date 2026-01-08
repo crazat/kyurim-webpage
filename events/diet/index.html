@@ -23,6 +23,90 @@
     <!-- Nanum Barun Gothic Font -->
     <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
     <!-- New Year Fonts: Great Vibes (English), Nanum Myeongjo (Korean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Landing Page Optimization */
+        .navbar,
+        .quick-menu {
+            display: none !important;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20000;
+            border-top: 1px solid #eee;
+        }
+
+        .sticky-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .sticky-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .sticky-btn.call {
+            color: #333;
+        }
+
+        .sticky-btn.kakao {
+            color: #3C1E1E;
+        }
+
+        .sticky-btn.talk {
+            color: #03C75A;
+        }
+
+        .sticky-btn.reserve {
+            background: #03C75A;
+            color: white;
+        }
+
+        .sticky-btn.kakao i {
+            color: #FEE500;
+            text-shadow: 0 0 1px #dbae00;
+        }
+
+        /* Adjust footer padding */
+        footer {
+            padding-bottom: 70px !important;
+        }
+
+        /* Ensure images are visible immediately */
+        body {
+            padding-top: 0 !important;
+        }
+
+        .hero-content {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body data-page-type="diet">
