@@ -357,30 +357,22 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const reviewCarousel = document.querySelector('.review-carousel');
-    if (reviewCarousel) {
-        let filteredReviews = uniqueReviews;
-        const pageType = document.body.getAttribute('data-page-type');
+    const searchInput = document.getElementById('reviewSearchInput');
 
-        if (pageType === 'skin') {
-            filteredReviews = uniqueReviews.filter(r => r.category === 'skin');
-        } else if (pageType === 'diet') {
-            filteredReviews = uniqueReviews.filter(r => r.category === 'diet');
-        } else if (pageType === 'body' || pageType === 'asymmetry') {
-            // User requested: Asymmetry & TMJ Body Correction only
-            filteredReviews = uniqueReviews.filter(r => r.category === 'asymmetry');
-        } else if (pageType === 'pain') {
-            filteredReviews = uniqueReviews.filter(r => r.category === 'pain');
+    function renderReviews(reviews) {
+        if (!reviewCarousel) return;
+        reviewCarousel.innerHTML = ''; // Clear existing
+
+        if (reviews.length === 0) {
+            reviewCarousel.innerHTML = '<div class="no-results">검색 결과가 없습니다.<br>다른 키워드로 검색해보세요.</div>';
+            return;
         }
-
-        // Duplicate reviews for infinite scroll effect (x2 for smoother loop)
-        const allReviews = [...filteredReviews, ...filteredReviews];
-
 
         // Determine base path for assets
         const basePath = window.location.pathname.includes('/events/') ? '../../' : '';
         const logoSrc = basePath + 'assets/logo_icon.png';
 
-        allReviews.forEach(review => {
+        reviews.forEach(review => {
             const card = document.createElement('div');
             card.className = 'review-card';
 
@@ -406,6 +398,48 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             reviewCarousel.appendChild(card);
         });
+    }
+
+    if (reviewCarousel) {
+        // Initial Render
+        let filteredReviews = uniqueReviews;
+        const pageType = document.body.getAttribute('data-page-type');
+
+        if (pageType === 'skin') {
+            filteredReviews = uniqueReviews.filter(r => r.category === 'skin');
+        } else if (pageType === 'diet') {
+            filteredReviews = uniqueReviews.filter(r => r.category === 'diet');
+        } else if (pageType === 'body' || pageType === 'asymmetry') {
+            filteredReviews = uniqueReviews.filter(r => r.category === 'asymmetry');
+        } else if (pageType === 'pain') {
+            filteredReviews = uniqueReviews.filter(r => r.category === 'pain');
+        }
+
+        // Initial loop render (x2 for visual scroll if needed, but for search we typically show match list)
+        // Ideally search should show ALL matches, not looped. 
+        // For default view, we can loop. For search, no loop.
+        renderReviews([...filteredReviews, ...filteredReviews]);
+
+        // Search Listener
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+
+                if (term === '') {
+                    // Restore default looped view
+                    renderReviews([...filteredReviews, ...filteredReviews]);
+                    return;
+                }
+
+                const matches = uniqueReviews.filter(r =>
+                    r.text.includes(term) ||
+                    r.treatment.includes(term) ||
+                    r.keywords.some(k => k.includes(term))
+                );
+
+                renderReviews(matches);
+            });
+        }
     }
 
     // 3. FAQ Accordion Logic
@@ -1150,14 +1184,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000); // Stay for 4 seconds
     }
 
-    // Start Loop
+    // Start Loop (Organic Timing)
+    function scheduleNextToast() {
+        // Random interval between 40s and 80s attached to "realism"
+        const nextInterval = Math.floor(Math.random() * 40000) + 40000;
+
+        setTimeout(() => {
+            if (!document.hidden) {
+                showToast();
+            }
+            scheduleNextToast(); // Schedule next one recursively
+        }, nextInterval);
+    }
+
+    // Initial Trigger
     setTimeout(() => {
-        showToast(); // Show first one quickly
-        setInterval(() => {
-            if (document.hidden) return; // Don't show if tab hidden
-            showToast();
-        }, 15000); // Every 15 seconds
-    }, 3000); // Start after 3 seconds
+        showToast(); // Show first one after a short delay to hook attention
+        scheduleNextToast(); // Start the organic loop
+    }, 5000); // Start after 5 seconds
 
 });
 
