@@ -817,6 +817,31 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
     }
 
+    // 7. Game Hint Toast (Gamification Trigger)
+    setTimeout(() => {
+        const gameToast = document.createElement('div');
+        gameToast.className = 'reservation-toast game-toast';
+        gameToast.style.border = '1px solid #FF4D4D'; // Red border for distinction
+        gameToast.style.background = 'rgba(20, 0, 0, 0.95)'; // Darker Red-ish
+
+        gameToast.innerHTML = `
+            <span style="font-size: 1.5rem;">🧧</span>
+            <div>
+                <span class="toast-text" style="display:block; color:#FFD700;"><b>보물찾기 이벤트!</b></span>
+                <span class="toast-text">페이지 속 복주머니 3개를 찾아보세요.</span>
+            </div>
+        `;
+        document.body.appendChild(gameToast);
+
+        // Show
+        setTimeout(() => gameToast.classList.add('show'), 100);
+        // Hide after 4s
+        setTimeout(() => {
+            gameToast.classList.remove('show');
+            setTimeout(() => gameToast.remove(), 500);
+        }, 4000);
+    }, 1500); // Appear at 1.5s (Before the 3s Reservation Toast)
+
     // 8. Real-time Reservation Notification (Social Proof)
     const notificationPageType = document.body.getAttribute('data-page-type') || 'general';
     const names = ['김OO', '이OO', '박OO', '최OO', '정OO', '강OO', '조OO', '윤OO', '장OO', '임OO'];
