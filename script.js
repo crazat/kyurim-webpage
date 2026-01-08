@@ -1069,10 +1069,16 @@ document.addEventListener('click', (e) => {
                 successMsg.style.textAlign = 'center';
                 successMsg.style.border = '4px solid #D4AF37';
                 successMsg.innerHTML = `
-                    <h2 style="color:#D42426; margin-bottom:10px; font-size:2rem;">🎉 축하합니다! 🎉</h2>
-                    <p style="font-size:1.2rem; color:#333;">숨겨진 복을 모두 찾으셨군요!</p>
-                    <p style="font-size:1.5rem; font-weight:bold; margin-top:10px; color:#D4AF37;">2026년 대박 나세요!</p>
-                    <button id="closeSuccess" style="margin-top:20px; padding:10px 20px; background:#D4AF37; color:white; border:none; border-radius:5px; cursor:pointer; font-size:1rem;">감사합니다</button>
+                    <h2 style="color:#D42426; margin-bottom:15px; font-size:1.8rem;">🎉 축하합니다! 🎉</h2>
+                    <p style="font-size:1.1rem; color:#333;">숨겨진 복주머니 3개를 모두 찾으셨네요!</p>
+                    
+                    <div style="background:#f8f9fa; padding:15px; border-radius:15px; margin:20px 0; border:2px dashed #D4AF37;">
+                        <p style="font-size:1rem; color:#555; margin-bottom:5px; font-weight:bold;">📸 화면을 캡처해서 보여주세요</p>
+                        <p style="font-size:1.5rem; font-weight:800; color:#D42426; margin: 10px 0;">10,000원 추가 할인</p>
+                        <p style="font-size:0.8rem; color:#888;">(※ 상담 당일 데스크 제시 시 적용)</p>
+                    </div>
+
+                    <button id="closeSuccess" style="width:100%; padding:15px; background:#D4AF37; color:white; border:none; border-radius:12px; cursor:pointer; font-size:1.1rem; font-weight:bold; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);">혜택 받고 닫기</button>
                 `;
                 document.body.appendChild(successMsg);
 
