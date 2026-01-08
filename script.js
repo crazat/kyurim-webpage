@@ -1028,22 +1028,32 @@ if (fortuneWidget && fortuneMessage && fortuneText && fortuneIcon) {
 }
 
 // 5. Hidden Bok (Luck) Hunt
-const hiddenBoks = document.querySelectorAll('.hidden-bok');
-let foundCount = 0;
-const totalBoks = hiddenBoks.length;
+// 5. Hidden Bok (Luck) Hunt
+// Use Event Delegation to ensure it works even if elements are loaded dynamically or late
+let foundBokCount = 0;
+const totalBokTarget = 3; // We know there are 3
 
-hiddenBoks.forEach(bok => {
-    bok.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('hidden-bok')) {
+        const bok = e.target;
+
         e.stopPropagation(); // prevent default click sparkle
         if (bok.classList.contains('found')) return;
 
         bok.classList.add('found');
-        foundCount++;
+        // Visual feedback immediately
+        bok.style.opacity = '0.3';
+        bok.style.transform = 'scale(1.5)';
+
+        foundBokCount++;
+        console.log(`Found Bok: ${foundBokCount}/${totalBokTarget}`);
 
         // Add specific sparkle effect for Bok
-        createSparkle(e.clientX, e.clientY, ['#FFD700', '#FF0000']);
+        if (typeof createSparkle === 'function') {
+            createSparkle(e.clientX, e.clientY, ['#FFD700', '#FF0000']);
+        }
 
-        if (foundCount === totalBoks) {
+        if (foundBokCount >= totalBokTarget) {
             setTimeout(() => {
                 // Show Success Message Overlay
                 const successMsg = document.createElement('div');
@@ -1066,14 +1076,19 @@ hiddenBoks.forEach(bok => {
                 `;
                 document.body.appendChild(successMsg);
 
-                document.getElementById('closeSuccess').addEventListener('click', () => {
-                    successMsg.remove();
-                });
+                const closeBtn = document.getElementById('closeSuccess');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        successMsg.remove();
+                    });
+                }
 
-                triggerBigFireworks();
+                if (typeof triggerBigFireworks === 'function') {
+                    triggerBigFireworks();
+                }
             }, 500);
         }
-    });
+    }
 });
 
 function createSparkle(x, y, colors, scaleMultiplier = 1) {
