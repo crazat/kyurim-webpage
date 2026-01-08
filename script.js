@@ -772,8 +772,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Select images from Events and Treatment Cases
         const eventImages = document.querySelectorAll('.event-item img');
+        const baCards = document.querySelectorAll('.ba-card'); // Select Cards for Spotlight
         const baImages = document.querySelectorAll('.ba-card img');
         const allTargetImages = [...eventImages, ...baImages];
+
+        // --- Spotlight Effect Logic ---
+        baCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
 
         allTargetImages.forEach(img => {
             img.style.cursor = 'pointer'; // Indicate clickable
