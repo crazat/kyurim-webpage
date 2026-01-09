@@ -212,7 +212,7 @@ ul {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 90;
     overflow: hidden;
 }
 
@@ -1282,6 +1282,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
     /* Event scroll container mobile adjustments */
     .event-scroll-container {
         padding: 15px 0;
@@ -2326,7 +2327,7 @@ footer {
     background: #fff;
     border-radius: 15px;
     padding: 40px 30px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     text-align: center;
     position: relative;
     transition: transform 0.3s ease;
@@ -2420,9 +2421,11 @@ footer {
         flex-direction: column;
         gap: 50px;
     }
+
     .comparison-card.kyurim {
         transform: scale(1);
-        order: -1; /* Show Kyurim first on mobile */
+        order: -1;
+        /* Show Kyurim first on mobile */
     }
 }
 
@@ -2432,7 +2435,7 @@ footer {
     background: #fff;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
@@ -2542,4 +2545,3 @@ footer {
     gap: 10px;
     justify-content: center;
 }
-

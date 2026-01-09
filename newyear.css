@@ -1625,8 +1625,8 @@ button,
 /* 4. Real-time Reservation Notification (Social Proof) */
 .reservation-toast {
     position: fixed;
-    top: 30px;
-    /* Safe distance from top edge */
+    top: 100px;
+    /* Safe distance below navbar (desktop) */
     left: 50%;
     transform: translateX(-50%) translateY(-150%);
     /* Robust hiding */
@@ -1636,8 +1636,8 @@ button,
     padding: 12px 20px;
     border-radius: 50px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 200000 !important;
-    /* Force on top of everything */
+    z-index: 998;
+    /* Below navbar (1000) and ticker (999) to prevent overlap */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -2026,10 +2026,23 @@ button,
 }
 
 .reel.spinning {
-    filter: blur(5px);
-    /* Motion blur */
-    transform: translateY(-1000px);
-    /* Simulate spin */
+    filter: blur(3px);
+    /* Motion blur effect */
+    animation: reelSpin 0.1s linear infinite;
+}
+
+@keyframes reelSpin {
+    0% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
 }
 
 .lever-container {
@@ -2214,8 +2227,8 @@ button,
 
     /* Fixed Positioning below Navbar */
     position: fixed;
-    top: 83px;
-    /* Navbar Height (15+50+15+3) */
+    top: 80px;
+    /* Navbar Height - seamless connection */
     left: 0;
     z-index: 999;
     /* Below Navbar (1000), Above Content */
@@ -2264,15 +2277,7 @@ button,
     /* Gold Bottom Border */
 }
 
-width: 100%;
-background-color: #D42426;
-/* Urgent Red */
-color: white;
-z-index: 999;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-border-bottom: 2px solid #FFD700;
-/* Gold Bottom Border */
-}
+
 
 .ai-ticker-sticky-rolling .ticker-container-inner {
     max-width: 1200px;
@@ -2331,8 +2336,8 @@ border-bottom: 2px solid #FFD700;
     .ai-ticker-rolling {
         font-size: 0.8rem;
         padding: 10px 0;
-        top: 75px;
-        /* Mobile Navbar might be shorter? Assuming similar for now or adjusted */
+        top: 90px;
+        /* Seamless connection with Mobile Navbar */
     }
 
     .ai-ticker-sticky-rolling {
@@ -2356,5 +2361,24 @@ border-bottom: 2px solid #FFD700;
     .ai-ticker-sticky-rolling .ticker-btn {
         width: 100%;
         text-align: center;
+    }
+
+    /* Fix: Position toast below ticker on mobile */
+    /* Ticker is at 110px + ~45px height = bottom at ~155px */
+    .reservation-toast {
+        top: auto;
+        bottom: 120px;
+        /* Move toast to bottom area to avoid ticker completely */
+    }
+
+    /* Fix for content being covered by fixed ticker on mobile */
+    /* Main Page: Navbar + Ticker */
+    header.hero {
+        padding-top: 200px !important;
+    }
+
+    /* Landing Pages: Sticky Ticker only */
+    #events {
+        padding-top: 70px !important;
     }
 }
