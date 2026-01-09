@@ -110,9 +110,7 @@
 
 <body data-page-type="body">
     <!-- CRO 1. Closing Soon Banner (Redesigned) -->
-    <div class="closing-banner">
-        <span>[마감임박]</span> 1월 체형교정 특별 혜택이 곧 종료됩니다.
-    </div>
+    <!-- CRO 1. Closing Soon Banner REMOVED -->
 
     <!-- 2. Kite (Parallax) -->
     <div id="kite-container" class="kite-container">
@@ -730,6 +728,56 @@
             elements.forEach(el => observer.observe(el));
         });
     </script>
+    <!-- AI Sticky Rolling Ticker (Body Page) -->
+    <div class="ai-ticker-sticky-rolling">
+        <div class="ticker-container-inner">
+            <div class="ticker-content">
+                <div class="ticker-item active"><span class="live-indicator"></span><strong>[안면비대칭]</strong> "얼굴만 문지른다고
+                    대칭이 될까요? <strong>'턱관절과 경추'</strong>부터 맞춰야 진짜 교정입니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[체형불균형]</strong> "사진 찍을 때마다 기우뚱한 내
+                    모습, 뼈대가 틀어진 증거입니다. <strong>'3D 분석'</strong>이 필수입니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[거북목]</strong> "뒷목이 뻐근하고 두통까지? 단순한
+                    근육 뭉침이 아닌 <strong>'목뼈의 변형'</strong>입니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[골반교정]</strong> "치마가 자꾸 돌아가나요? 틀어진
+                    골반이 <strong>'하체 비만'</strong>의 진짜 원인일 수 있습니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[숨은키]</strong> "구부정한 자세만 펴도 키가 큽니다.
+                    숨어있는 내 <strong>'키와 자신감'</strong>을 찾으세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[휜다리]</strong> "예쁜 다리 라인은 뼈에서 나옵니다.
+                    O다리/X다리, <strong>'비수술 교정'</strong>으로 11자 다리 만드세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[산후골반]</strong> "출산 후 벌어진 골반, 방치하면
+                    평생 통증. 산후 6개월, <strong>'골반 회복'</strong>의 마지막 기회입니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[성장자세]</strong> "우리 아이 구부정한 등, 성장을
+                    방해합니다. <strong>'바른 자세'</strong>가 성적과 키를 키웁니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[턱관절]</strong> "입 벌릴 때마다 딱딱 소리? 전신
+                    불균형의 신호입니다. 더 심해지기 전에 <strong>'초기'</strong>에 잡으세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[보행교정]</strong> "걷는 모습만 봐도 건강이
+                    보입니다. 발바닥 아치부터 전신 밸런스까지 <strong>'토탈 케어'</strong>합니다."</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <a href="tel:043-224-1075" class="sticky-btn call highlight-anim">
+            <i class="fa-solid fa-phone"></i>
+            <span>전화상담</span>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="sticky-btn kakao highlight-anim"
+            style="animation-delay: 2.5s;">
+            <i class="fa-solid fa-comment"></i>
+            <span>카톡문의</span>
+        </a>
+        <a href="http://talk.naver.com/w4y1te?frm=mnmb&frm=nmb_detail" target="_blank" class="sticky-btn talk">
+            <i class="fa-solid fa-comments"></i>
+            <span>네이버톡톡</span>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="sticky-btn reserve">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>간편예약</span>
+        </a>
+    </div>
+
     <!-- Shared Script (Snow, Toast, Reviews) -->
     <script src="../../script.js"></script>
     <script>

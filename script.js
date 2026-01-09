@@ -1545,3 +1545,34 @@ window.addEventListener('scroll', () => {
         norigaeTassel.style.transform = 'rotate(0deg)';
     }, 150);
 });
+
+// --- AI Rolling Ticker Logic (Multi-Instance) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Select all ticker containers (both top rolling and bottom sticky)
+    // We assume any element with class 'ticker-content' (inside our custom structures) holds the items
+    const tickerContainers = document.querySelectorAll('.ai-ticker-content, .ai-ticker-sticky-rolling .ticker-content');
+
+    tickerContainers.forEach(container => {
+        const items = container.querySelectorAll('.ticker-item');
+        if (items.length <= 1) return; // No need to rotate if 0 or 1 item
+
+        let currentIndex = 0;
+
+        // Function to rotate this specific container
+        const rotate = () => {
+            // Hide current
+            items[currentIndex].classList.remove('active');
+
+            // Calc next
+            currentIndex = (currentIndex + 1) % items.length;
+
+            // Show next
+            items[currentIndex].classList.add('active');
+        };
+
+        // Start rotation for this container
+        // Randomize start time slightly to prevent "robotic" sync if multiple tickers exist
+        const delay = 3000 + Math.random() * 1000;
+        setInterval(rotate, delay);
+    });
+});

@@ -2199,3 +2199,162 @@ button,
     font-size: 1.1rem;
     color: #999;
 }
+
+/* --- AI Comparative Ticker Styles --- */
+
+/* 1. Rolling Ticker (Main Page - Top Fixed) */
+.ai-ticker-rolling {
+    width: 100%;
+    background-color: #0A192F;
+    /* Deep Navy */
+    color: #fff;
+    font-size: 0.95rem;
+    padding: 12px 0;
+    text-align: center;
+
+    /* Fixed Positioning below Navbar */
+    position: fixed;
+    top: 83px;
+    /* Navbar Height (15+50+15+3) */
+    left: 0;
+    z-index: 999;
+    /* Below Navbar (1000), Above Content */
+
+    overflow: hidden;
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ai-ticker-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ticker-item {
+    display: none;
+    animation: slideDownFade 0.5s ease-in-out;
+    width: 100%;
+}
+
+.ticker-item.active {
+    display: block;
+}
+
+.ticker-highlight {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* 2. Sticky Rolling Ticker (Landing Pages - Top Fixed) */
+.ai-ticker-sticky-rolling {
+    position: fixed;
+    top: 0;
+    /* NO Navbar on Landing Pages, so strict top */
+    left: 0;
+
+    width: 100%;
+    background-color: #D42426;
+    /* Urgent Red */
+    color: white;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #FFD700;
+    /* Gold Bottom Border */
+}
+
+width: 100%;
+background-color: #D42426;
+/* Urgent Red */
+color: white;
+z-index: 999;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+border-bottom: 2px solid #FFD700;
+/* Gold Bottom Border */
+}
+
+.ai-ticker-sticky-rolling .ticker-container-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.ai-ticker-sticky-rolling .ticker-content {
+    flex: 1;
+    text-align: left;
+    margin-right: 15px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.ai-ticker-sticky-rolling .ticker-btn {
+    background-color: white;
+    color: #D42426;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    animation: pulse-btn 1.5s infinite;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #00FF00;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes slideDownFade {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .ai-ticker-rolling {
+        font-size: 0.8rem;
+        padding: 10px 0;
+        top: 75px;
+        /* Mobile Navbar might be shorter? Assuming similar for now or adjusted */
+    }
+
+    .ai-ticker-sticky-rolling {
+        top: 0;
+        /* Mobile Landing also 0 */
+    }
+
+    .ai-ticker-sticky-rolling .ticker-container-inner {
+        padding: 8px 15px;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    .ai-ticker-sticky-rolling .ticker-content {
+        margin-right: 0;
+        text-align: center;
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .ai-ticker-sticky-rolling .ticker-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
