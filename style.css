@@ -1271,7 +1271,7 @@ footer {
 
 /* Responsive for New Features */
 @media (max-width: 992px) {
-    `r`n.process-steps {
+    .process-steps {
         flex-direction: column;
     }
 
