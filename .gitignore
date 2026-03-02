@@ -11,9 +11,6 @@ optimize-images.js
 optimize-images.sh
 convert-to-picture.js
 
-# Large video files
-*.mp4
-
 # OS files
 .DS_Store
 Thumbs.db
