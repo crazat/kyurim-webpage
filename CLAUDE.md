@@ -59,6 +59,19 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-02: 모바일 UX + CTA 개선
+- **style.css 추가** (~150 lines)
+  - 모바일 히어로 영역 개선: dvh 적용, 패딩 조정, 반응형 폰트
+  - 하단 고정바 충돌 해결: 푸터/섹션 패딩 추가
+  - CTA 버튼 계층 정리: Primary/Secondary/Tertiary 스타일 분리
+  - 플로팅 CTA 버튼 스타일 추가
+  - 상담 폼 스타일 개선: 16px 폰트 (iOS 확대 방지)
+  - 터치 타겟 확대: 최소 44px, 하단바 48px
+- **플로팅 CTA 추가**
+  - index.html 및 4개 랜딩 페이지 (skin, diet, pain, body)
+  - 💬 아이콘 + "무료 상담" 텍스트 (모바일: 아이콘만)
+  - 하단바 위 고정 위치
+
 ### 2026-03-02: 영상 파일 업로드
 - `.gitignore`에서 `*.mp4`, `event play/` 제외 해제
 - 총 10개 영상 파일 GitHub 업로드 (~20MB)
