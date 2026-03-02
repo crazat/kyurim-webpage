@@ -15,7 +15,7 @@
 ```
 kyurim-webpage-main/
 ├── index.html              # 메인 홈페이지
-├── style.css               # 메인 스타일시트 (~2959 lines)
+├── style.css               # 메인 스타일시트 (~3500 lines)
 ├── spring.css              # 봄 시즌 테마 (벚꽃)
 ├── script.js               # 메인 JavaScript (~1546 lines)
 ├── assets/                 # 이미지 파일 (WebP 변환됨)
@@ -59,18 +59,30 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
-### 2026-03-02: 모바일 UX + CTA 개선
-- **style.css 추가** (~150 lines)
-  - 모바일 히어로 영역 개선: dvh 적용, 패딩 조정, 반응형 폰트
-  - 하단 고정바 충돌 해결: 푸터/섹션 패딩 추가
-  - CTA 버튼 계층 정리: Primary/Secondary/Tertiary 스타일 분리
-  - 플로팅 CTA 버튼 스타일 추가
-  - 상담 폼 스타일 개선: 16px 폰트 (iOS 확대 방지)
-  - 터치 타겟 확대: 최소 44px, 하단바 48px
-- **플로팅 CTA 추가**
-  - index.html 및 4개 랜딩 페이지 (skin, diet, pain, body)
-  - 💬 아이콘 + "무료 상담" 텍스트 (모바일: 아이콘만)
-  - 하단바 위 고정 위치
+### 2026-03-02: 디자인 개선 + 모바일 성능 최적화
+- **디자인 개선** (style.css ~200 lines 추가)
+  - 아이콘 박스: 그라데이션 배경 + 호버 시 회전 효과
+  - 카드 그림자: 레이어드 box-shadow + 호버 상태
+  - 버튼: 샤인 효과 (::before 의사요소)
+  - 인테리어 이미지: 호버 줌 효과
+- **모바일 성능 최적화**
+  - 768px 이하에서 hover 효과 비활성화
+  - box-shadow 단일 그림자로 단순화
+  - transition 제거 (불필요한 애니메이션 계산 방지)
+  - 버튼 샤인 효과 모바일 비활성화
+- **CTA 정리**
+  - 플로팅 CTA 버튼 삭제 (5개 페이지)
+  - 하단바 "전화상담" → "무료상담" 변경 (4개 랜딩 페이지)
+- **이미지 로딩 수정**
+  - `26 jan event/` 폴더 이미지 URL 인코딩 적용
+  - `.gitignore`에서 해당 폴더 제외 해제
+
+### 2026-03-02: 모바일 UX + CTA 개선 (초기)
+- 모바일 히어로 영역 개선: dvh 적용, 패딩 조정, 반응형 폰트
+- 하단 고정바 충돌 해결: 푸터/섹션 패딩 추가
+- CTA 버튼 계층 정리: Primary/Secondary/Tertiary 스타일 분리
+- 상담 폼 스타일 개선: 16px 폰트 (iOS 확대 방지)
+- 터치 타겟 확대: 최소 44px, 하단바 48px
 
 ### 2026-03-02: 영상 파일 업로드
 - `.gitignore`에서 `*.mp4`, `event play/` 제외 해제
@@ -142,3 +154,21 @@ kyurim-webpage-main/
 - 콘솔에 경미한 경고 존재 (CORB, preload timing) - 크리티컬 아님
 - 시즌 변경 시 spring.css를 다른 테마로 교체
 - 새 이벤트 영상 추가 시 `event play/` 폴더에 저장 후 git push
+
+## 추후 개선 검토 사항
+### 높은 우선순위
+- 폼 유효성 검사 (전화번호 형식 검증)
+- 폼 제출 시 로딩 상태 표시
+- SEO: 랜딩 페이지별 고유 메타 데이터
+- 접근성: 색상 대비 개선 (골드 텍스트)
+- 코드 정리: console.log 제거
+
+### 중간 우선순위
+- sitemap.xml, robots.txt 추가
+- 리뷰 구조화 데이터 (별점 스키마)
+- JS 파일 분리 (main/common/landing)
+- 모달 포커스 관리
+
+### 낮은 우선순위
+- CSS 통합 (spring.css + style.css)
+- 4개 랜딩 페이지 템플릿화 (중복 코드 제거)
