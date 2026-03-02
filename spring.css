@@ -1,0 +1,2700 @@
+/* Spring Theme - Bright & Hopeful (White/Gold/Sunrise) */
+:root {
+    --gold-primary: #FFB7B2;
+    /* Cherry Blossom Pink */
+    --gold-light: #FFDAC1;
+    /* Peach */
+    --sunrise-red: #E2F0CB;
+    /* Sprout Green */
+    --sunrise-orange: #B5EAD7;
+    /* Mint Green */
+    --cream-bg: #FFFDF5;
+    --white: #FFFFFF;
+    --text-dark: #4A3B32;
+    --text-soft: #63534B;
+    --navy-deep: #FF9AA2;
+    /* Soft Pink replacing Deep Navy for headings */
+
+    /* Global Overrides for Spring Theme */
+    --primary-color: var(--navy-deep);
+    --secondary-color: var(--navy-deep);
+    --accent-color: var(--gold-light);
+}
+
+/* 3. Spring Wave Background */
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FFD1DC' fill-opacity='0.3' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,202.7C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 2. Spring Petal Mouse Trail */
+.petal-dust {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--gold-primary);
+    border-radius: 5px 0 5px 0;
+    /* Petal shape */
+    pointer-events: none;
+    box-shadow: 0 0 6px rgba(255, 183, 178, 0.6);
+    animation: petalFall 0.8s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes petalFall {
+    0% {
+        transform: scale(0.5) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0;
+        top: 20px;
+        /* Fall down slightly instead of floating up */
+    }
+}
+
+
+/* Global Brightening */
+body {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+/* Force override for legacy styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--secondary-color) !important;
+    /* Navy Headings */
+}
+
+/* Hero Section Styles */
+.hero-overlay {
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 239, 235, 0.6) 60%,
+            rgba(255, 209, 220, 0.7) 100%) !important;
+}
+
+.hero-content {
+    border: 2px solid rgba(255, 218, 193, 0.5);
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 20px rgba(255, 218, 193, 0.1);
+    margin-bottom: 20px;
+    /* Prevent card border from overlapping with video section */
+}
+
+.hero-content::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid rgba(255, 218, 193, 0.3);
+    pointer-events: none;
+}
+
+.hero-content::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold-primary);
+    font-size: 2rem;
+    background: transparent;
+}
+
+.hero-content h1 {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 5rem !important;
+    font-weight: 400 !important;
+    background: linear-gradient(to right, #FF9A9E, #FECFEF, #FFC3A0, #FFAECA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard property */
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 10px;
+    letter-spacing: 2px !important;
+}
+
+.hero-content h2 {
+    font-family: 'Nanum Myeongjo', serif !important;
+    color: var(--text-dark) !important;
+    font-weight: 800 !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 7px !important;
+    text-transform: uppercase;
+    margin-bottom: 0 !important;
+}
+
+.hero-content p {
+    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    margin-top: 20px;
+    text-shadow: none !important;
+}
+
+/* Button & Nav Overrides */
+.btn-primary {
+    background-color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 6px rgba(255, 218, 193, 0.3) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--gold-light) !important;
+    border-color: var(--gold-light) !important;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.navbar {
+    border-bottom: 3px solid var(--gold-primary) !important;
+}
+
+.nav-links a {
+    color: var(--text-dark) !important;
+    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-weight: 600;
+    /* Optional: Make it slightly bold for readability */
+}
+
+.nav-links a:hover {
+    color: var(--gold-primary) !important;
+}
+
+.hamburger .bar {
+    background-color: var(--text-dark) !important;
+}
+
+footer {
+    background-color: var(--sunrise-orange) !important;
+    border-top: 5px solid var(--gold-primary) !important;
+    color: var(--text-dark) !important;
+}
+
+.icon-box,
+.info-item i {
+    color: var(--gold-primary) !important;
+}
+
+.section-header h3 {
+    color: var(--gold-primary) !important;
+}
+
+.line {
+    background-color: var(--gold-primary) !important;
+}
+
+/* Countdown Timer */
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 40px;
+    color: var(--text-dark) !important;
+    text-shadow: none !important;
+}
+
+.time-segment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 218, 193, 0.2);
+    border: 1px solid var(--gold-light);
+}
+
+.time-segment span:first-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gold-primary);
+    text-shadow: none !important;
+}
+
+.time-segment .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-top: 5px;
+    opacity: 0.8;
+    color: var(--text-soft);
+}
+
+.separator {
+    color: var(--gold-primary) !important;
+    margin-top: 10px;
+}
+
+/* Floating Elements */
+.floating-item {
+    position: fixed;
+    bottom: -10vh;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: floatUp 15s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* Fortune Box Game Styles - Premium Redesign */
+.lucky-box-game {
+    background: linear-gradient(135deg, #FFFDF5 0%, #FFF5E6 100%);
+    border: 4px solid var(--gold-primary);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.lucky-box-game::before {
+    /* Traditional Pattern Overlay */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--gold-light) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.lucky-box-game h3 {
+    font-family: 'NanumBarunGothic', sans-serif !important;
+    color: var(--navy-deep);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 0 var(--gold-primary);
+}
+
+.lucky-box-game p {
+    font-family: 'NanumBarunGothic', sans-serif;
+    color: var(--text-soft);
+    margin-bottom: 25px;
+}
+
+.slot-machine-container {
+    background: #FF9AA2;
+    /* Dark Red Frame */
+    border-radius: 15px;
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    margin: 0 auto;
+    border: 5px solid #FFDAC1;
+    /* Gold Border */
+    padding: 20px;
+    position: relative;
+    background-image: linear-gradient(to bottom, #FF9AA2, #FFDAC1);
+}
+
+/* =========================================
+   CRO Boosters (Phase 3 Premium Redesign)
+   ========================================= */
+
+/* 1. Closing Soon Banner (Sleek & Text Only) */
+.closing-banner {
+    background: #B5EAD7;
+    /* Deep Navy */
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 100;
+}
+
+.closing-banner span {
+    color: #FFDAC1;
+    /* Gold Accent */
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+/* 2. Quick Inquiry Form (Premium Card - Truly Centered) */
+.quick-inquiry-section {
+    background: #fdfdfd;
+    padding: 60px 20px;
+    display: flex;
+    /* Flex centering */
+    justify-content: center;
+    align-items: center;
+}
+
+.quick-inquiry-box {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    /* Optimal reading width */
+    padding: 35px 25px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    /* Soft classy shadow */
+    text-align: center;
+    border: 1px solid rgba(255, 218, 193, 0.2);
+    /* Subtle Gold Border */
+}
+
+.quick-inquiry-box h3 {
+    color: #333;
+    font-family: 'NanumBarunGothic', sans-serif;
+    /* User Request: Consistency */
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    font-weight: 800;
+    /* Extra bold for emphasis */
+    letter-spacing: -0.5px;
+}
+
+.quick-inquiry-box p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+/* Form Input Styling */
+.inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inquiry-form input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f9f9f9;
+    color: #333;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    /* Crucial for width */
+}
+
+.inquiry-form input:focus {
+    background: #fff;
+    border-color: #FFDAC1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 218, 193, 0.1);
+}
+
+.inquiry-form button {
+    width: 100%;
+    padding: 15px;
+    background: #B5EAD7;
+    /* Navy */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.inquiry-form button:hover {
+    background: #1a2f4d;
+}
+
+/* Button Wiggle Animation */
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    5% {
+        transform: rotate(-10deg);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    15% {
+        transform: rotate(-10deg);
+    }
+
+    20% {
+        transform: rotate(10deg);
+    }
+
+    25% {
+        transform: rotate(0deg);
+    }
+}
+
+.sticky-btn.highlight-anim i {
+    animation: wiggle 3000ms ease-in-out infinite;
+    /* Slower, more elegant */
+    color: #FFD700 !important;
+}
+
+
+
+/* 4. Health Talisman Styles */
+#talisman-modal {
+    z-index: 20000 !important;
+    /* Ensure it's on top of everything */
+}
+
+.talisman-content {
+    background-color: #FFFDF5;
+    /* Cream */
+    text-align: center;
+    border: 4px solid var(--gold-primary);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: centerZoomIn 0.5s ease forwards !important;
+    /* Override generic animation */
+}
+
+@keyframes centerZoomIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.talisman-card {
+    background: #FFB7B2;
+    /* Red paper */
+    width: 200px;
+    height: 300px;
+    margin: 20px auto;
+    border: 2px solid #FFD700;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.talisman-body {
+    border: 2px dashed #FFD700;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.talisman-text h3 {
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 2rem;
+    color: #FFD700;
+    writing-mode: vertical-rl;
+    /* Vertical Text */
+    text-orientation: upright;
+    margin: 0 auto;
+    border: 2px solid #FFD700;
+    padding: 10px;
+    letter-spacing: 10px;
+}
+
+.talisman-text p {
+    display: none;
+    /* Hide description in talisman itself for simplicity */
+}
+
+.seal {
+    width: 40px;
+    height: 40px;
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+.talisman-desc {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Sparkles/Snow - Unify to Rising Animation (Like Champagne Bubbles) */
+
+.snowflake {
+    z-index: 999999 !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+    text-shadow: 0 0 2px rgba(255, 183, 178, 0.5);
+    /* Pink tint */
+    animation-name: cherryBlossomFall, windDrift !important;
+    animation-timing-function: linear, ease-in-out !important;
+    animation-iteration-count: infinite, infinite !important;
+    top: -10vh;
+    /* Start from bottom */
+    color: #FFB7B2;
+    /* Make the unicode text pink */
+    font-size: 1.5rem;
+    /* Larger */
+}
+
+@keyframes cherryBlossomFall {
+    0% {
+        top: -10vh;
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100vh;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes windDrift {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(80px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+
+
+/* Fix Remaining Red Elements */
+
+/* 1. Diagnosis Tabs (Self-Check) */
+.tab-btn.active,
+.tab-btn:hover {
+    background-color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+    color: white !important;
+}
+
+/* 2. Gender Selection Buttons (Diet Prediction) */
+.gender-btn:hover {
+    border-color: var(--gold-primary) !important;
+    color: var(--gold-primary) !important;
+}
+
+input[type="radio"]:checked+.gender-btn {
+    background-color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+    color: white !important;
+}
+
+/* 3. Process Section Icons */
+.step-icon {
+    color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+}
+
+.step-arrow {
+    color: var(--gold-light) !important;
+}
+
+/* 4. Font Consistency Updates */
+.wish-header {
+    font-family: 'NanumBarunGothic', sans-serif !important;
+    /* Changed from Myeongjo to Gothic */
+}
+
+#wish-input {
+    font-family: 'NanumBarunGothic', sans-serif !important;
+}
+
+/* FORCE BUTTON ON TOP */
+#open-talisman-btn {
+    position: relative;
+    z-index: 20002 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    box-shadow: 0 0 20px rgba(255, 218, 193, 0.8) !important;
+    /* Glow to prove it's active */
+}
+
+/* 5. Generic Modal Styles (Missing) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 20000;
+    /* High z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+/* Modal Content Defaults */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.3s ease-out;
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 10;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--secondary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 6. Sunrise Opening Animation (Ultra Fast Version) */
+#sunrise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #B5EAD7 0%, #000 100%);
+    z-index: 30000;
+    /* Highest */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: morningBreak 1s ease-in-out forwards;
+
+    /* Total life 1s */
+    animation-delay: 0.2s;
+    pointer-events: none;
+}
+
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #FFB7B2 0%, transparent 50%);
+    opacity: 0;
+    animation: skyBrighten 0.5s ease-in-out forwards;
+}
+
+.sun {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #FFF 20%, #FFDAC1 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #FFB7B2;
+    position: relative;
+    top: 200px;
+    animation: sunRise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.morning-message {
+    margin-top: 50px;
+    color: white;
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: textFadeIn 0.4s ease-in-out forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes sunRise {
+    to {
+        top: 0;
+        transform: scale(1.5);
+        box-shadow: 0 0 80px #FFDAC1;
+    }
+}
+
+@keyframes skyBrighten {
+    to {
+        opacity: 0.8;
+    }
+}
+
+@keyframes morningBreak {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes textFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 10. Selection Highlight (Gold & Red) */
+::selection {
+    background: var(--gold-primary);
+    color: #FF9AA2;
+    /* Dark Red */
+    text-shadow: none;
+}
+
+/* 11. Footer Seal (Nak-gwan) */
+.footer-seal {
+    display: inline-block;
+    border: 3px solid #FFB7B2;
+    /* Seal Red */
+    color: #FFB7B2;
+    font-family: 'Nanum Myeongjo', serif;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    transform: rotate(-3deg);
+    margin-left: 8px;
+    font-size: 0.9rem;
+    line-height: 1;
+    vertical-align: middle;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 12. Blessing Tooltip */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: var(--gold-primary);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1000;
+    font-family: 'NanumBarunGothic', sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+[data-tooltip]::before {
+    /* Arrow */
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    border: 5px solid transparent;
+    border-top-color: var(--gold-primary);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+/* 13. Flower Path (Scroll Effect) */
+.flower-path-item {
+    position: fixed;
+    pointer-events: none;
+    z-index: 5;
+    /* Behind text but above bg */
+    font-size: 1.5rem;
+    animation: flowerBloomFade 2s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes flowerBloomFade {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        transform: scale(1.2) rotate(45deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1) rotate(90deg);
+        opacity: 0;
+        top: 50px;
+    }
+}
+
+/* 15. Mobile Optimization for Wish Widget */
+@media (max-width: 768px) {
+
+    /* CRITICAL: Prevent all horizontal overflow */
+    * {
+        max-width: 100vw !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding-left: 20px !important;
+        padding-right: 15px !important;
+    }
+
+    /* Hide kite and norigae on mobile to prevent overflow */
+
+    .norigae-widget {
+        display: none !important;
+    }
+
+    .wish-widget {
+        width: 180px;
+        padding: 10px;
+        bottom: 10px;
+        left: 10px;
+        gap: 5px;
+    }
+
+    .wish-header {
+        font-size: 0.9rem;
+    }
+
+    #wish-input {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    #wish-btn {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    /* Constrain countdown timer */
+    #countdown {
+        gap: 8px !important;
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+
+    .time-segment {
+        padding: 8px 10px !important;
+        min-width: 60px;
+    }
+
+    /* Adjust Kite Position for Mobile */
+    /* Fix Hero Text Crop on Mobile */
+    .hero-content {
+        padding-top: 80px !important;
+        /* Add space for navbar */
+        margin-top: 20px;
+    }
+
+    /* Fortune Box - Balanced for mobile readability */
+    .modal-content {
+        width: 92%;
+        margin: 3% auto !important;
+        padding: 12px !important;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+
+    .lucky-box-game h3 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .lucky-box-game p {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .slot-machine-container {
+        max-width: 320px;
+        padding: 10px;
+        border-width: 3px;
+        margin: 15px auto;
+    }
+
+    .slot-machine-header,
+    .slot-machine-footer {
+        display: none;
+        /* Hide decorative lights on mobile */
+    }
+
+    .slot-machine-body {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .reels-container {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .reel-wrapper {
+        width: 55px;
+        height: 70px;
+    }
+
+    .reel {
+        font-size: 2.5rem;
+        line-height: 70px;
+    }
+
+    .spin-btn {
+        padding: 12px;
+        font-size: 1.05rem;
+    }
+
+    .prize-result {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .coupon-card {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    .modal-footer {
+        padding: 8px 0;
+    }
+
+    #closeModalBtn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem !important;
+        /* Reduce from 5rem */
+        line-height: 1.2 !important;
+    }
+
+    .hero-content h2 {
+        font-size: 1rem !important;
+        margin-top: 10px !important;
+    }
+}
+
+/* 16. Fix Scroll Top Button Spin & Color */
+.top-btn {
+    color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+}
+
+.top-btn:hover {
+    transform: none !important;
+    background-color: var(--gold-primary) !important;
+    border-color: var(--gold-primary) !important;
+    color: var(--white) !important;
+}
+
+/* 17. Custom Spring Cursor */
+html,
+body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+    /* Soft Spring Pink Cursor Arrow */
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L28 14 L2 2' fill='%23FFB7B2' stroke='%23FFF' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+}
+
+body {
+    background-color: var(--cream-bg) !important;
+}
+
+a,
+button,
+.btn {
+    /* Hover/Pointer Spring Darker Pink Cursor */
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L28 14 L2 2' fill='%23FF9AA2' stroke='%23FFF' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer !important;
+}
+
+/* 18. Fortune Cookie Widget */
+.fortune-cookie-widget {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.fortune-cookie-icon {
+    font-size: 3.5rem;
+    animation: cookieShake 3s infinite;
+    display: inline-block;
+}
+
+.fortune-cookie-widget:hover .fortune-cookie-icon {
+    animation: cookieShakeFast 0.5s infinite;
+}
+
+.fortune-message-bubble {
+    position: absolute;
+    bottom: 80px;
+    /* Above cookie */
+    left: 0;
+    background: #FFF;
+    border: 2px solid var(--gold-primary);
+    padding: 10px 15px;
+    border-radius: 15px;
+    width: 200px;
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+    transform-origin: bottom left;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.fortune-message-bubble.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    /* Enable clicks for close button */
+}
+
+.fortune-message-bubble::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    border: 8px solid transparent;
+    border-top-color: var(--gold-primary);
+}
+
+@keyframes cookieShake {
+
+    0%,
+    90% {
+        transform: rotate(0deg);
+    }
+
+    92% {
+        transform: rotate(-10deg);
+    }
+
+    94% {
+        transform: rotate(10deg);
+    }
+
+    96% {
+        transform: rotate(-10deg);
+    }
+
+    98% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes cookieShakeFast {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    75% {
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Fortune Close Button */
+.fortune-close {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 1.2rem;
+    color: #ccc;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.fortune-close:hover {
+    color: var(--sunrise-red);
+}
+
+#fortune-text {
+    display: block;
+    padding-right: 15px;
+    /* Spacing for close button */
+    word-break: keep-all;
+}
+
+/* 19. Click Sparkle (Firecracker) */
+.click-sparkle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: sparklePop 0.8s ease-out forwards;
+}
+
+@keyframes sparklePop {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+
+
+/* 21. Hidden Bok (Luck) Hunt */
+.hidden-bok {
+    position: absolute;
+    font-size: 2rem;
+    /* Larger for mobile visibility */
+    cursor: pointer;
+    z-index: 10001;
+    /* Above AI ticker (999) and navbar (1000) */
+    transition: transform 0.2s;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    animation: bokPulse 2s infinite;
+}
+
+.hidden-bok:hover {
+    transform: scale(1.3) rotate(10deg);
+}
+
+.hidden-bok.found {
+    animation: popOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    pointer-events: none;
+}
+
+@keyframes bokPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes popOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(2.5) rotate(180deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 22. Ink Wash (Brush Stroke) Divider */
+.ink-divider {
+    width: 100%;
+    height: 60px;
+    /* Reduced from 150px to be subtle */
+    margin: 20px 0;
+    /* Soft watercolor petal wave */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0,45 C150,25 300,55 450,35 C600,15 750,45 900,25 C1050,5 1150,35 1200,45 L1200,60 L0,60 Z' fill='%23FFB7B2' opacity='0.3'/%3E%3Cpath d='M0,50 C200,60 400,20 600,40 C800,60 1000,20 1200,40 L1200,60 L0,60 Z' fill='%23FFDAC1' opacity='0.4'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 100% 100%;
+    background-position: center;
+    pointer-events: none;
+}
+
+/* Variant for randomness */
+.ink-divider.reverse {
+    transform: scaleX(-1);
+}
+
+/* 23. Changhoji (Paper Door) Effect */
+.changhoji-door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: #FDFBF7;
+    z-index: 20;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    background-image:
+        linear-gradient(90deg, rgba(255, 218, 193, 0.2) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 218, 193, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    border: 4px solid var(--navy-deep);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.changhoji-door.left {
+    left: 0;
+    border-right: 2px solid var(--navy-deep);
+    transform-origin: left;
+}
+
+.changhoji-door.right {
+    right: 0;
+    border-left: 2px solid var(--navy-deep);
+    transform-origin: right;
+}
+
+/* Fix for Mobile: Ensure doors cover screen even when scrolled */
+@media (max-width: 768px) {
+    .changhoji-door {
+        position: fixed;
+        /* Relative to viewport */
+        height: 100vh;
+        top: 0;
+    }
+}
+
+/* Open State (Targeting parent .modal.show or .story-modal.show) */
+.modal.show .changhoji-door.left,
+.story-modal.show .changhoji-door.left {
+    animation: doorOpenLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.modal.show .changhoji-door.right,
+.story-modal.show .changhoji-door.right {
+    animation: doorOpenRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Door Handles */
+.changhoji-door::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 50px;
+    background: var(--gold-primary);
+    /* Gold Handle */
+    border: 1px solid var(--navy-deep);
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.changhoji-door.left::after {
+    right: 15px;
+}
+
+.changhoji-door.right::after {
+    left: 15px;
+}
+
+/* 24. Norigae Scroll Widget */
+.norigae-widget {
+    position: fixed;
+    top: 100px;
+    /* Initial top */
+    left: 20px;
+    /* Moved to Left */
+    width: 40px;
+    z-index: 1000;
+    pointer-events: none;
+    /* Let clicks pass through unless interactive */
+    transition: transform 0.1s linear;
+    filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
+}
+
+.norigae-knot {
+    width: 30px;
+    height: 30px;
+    background: #FFB7B2;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 2px solid #FFDAC1;
+    position: relative;
+}
+
+.norigae-knot::after {
+    content: '🌸';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFDAC1;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.norigae-tassel {
+    width: 10px;
+    height: 80px;
+    background: linear-gradient(to bottom, #FFB7B2, #FFDAC1);
+    margin: -5px auto 0;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    transform-origin: top center;
+    transition: transform 0.2s ease-out;
+}
+
+/* Changhoji Door Animations */
+@keyframes doorOpenLeft {
+    0% {
+        transform: translateX(0) skewY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-95%) skewY(5deg);
+        opacity: 0.9;
+    }
+}
+
+@keyframes doorOpenRight {
+    0% {
+        transform: translateX(0) skewY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(95%) skewY(-5deg);
+        opacity: 0.9;
+    }
+}
+
+@keyframes doorCloseLeft {
+    0% {
+        transform: translateX(-95%) skewY(5deg);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateX(0) skewY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes doorCloseRight {
+    0% {
+        transform: translateX(95%) skewY(-5deg);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateX(0) skewY(0);
+        opacity: 1;
+    }
+}
+
+/* Close State */
+.modal.closing .changhoji-door.left,
+.story-modal.closing .changhoji-door.left {
+    animation: doorCloseLeft 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.modal.closing .changhoji-door.right,
+.story-modal.closing .changhoji-door.right {
+    animation: doorCloseRight 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Strands */
+.norigae-tassel::before,
+.norigae-tassel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.norigae-tassel::before {
+    left: 2px;
+}
+
+.norigae-tassel::after {
+    right: 2px;
+}
+
+/* Swing Animation Base */
+@keyframes norigaeSway {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(5deg);
+    }
+}
+
+.norigae-widget {
+    transform-origin: top center;
+    /* Animation handled by JS for physics or fallback CSS */
+    animation: norigaeSway 2s ease-in-out infinite alternate;
+}
+
+/* 3. Scroll Reveal Animations (Premium Fade-Up) */
+.scroll-reveal {
+    opacity: 0 !important;
+    /* Force invisibility initially */
+    transform: translateY(50px);
+    /* Larger movement (30px -> 50px) */
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Slower, smoother easing */
+    will-change: opacity, transform;
+}
+
+.scroll-reveal.scroll-reveal-active {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+/* 4. Real-time Reservation Notification (Social Proof) */
+.reservation-toast {
+    position: fixed;
+    top: 100px;
+    /* Safe distance below navbar (desktop) */
+    left: 50%;
+    transform: translateX(-50%) translateY(-150%);
+    /* Robust hiding */
+    background: rgba(10, 25, 47, 0.95);
+    /* Premium Navy */
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 998;
+    /* Below navbar (1000) and ticker (999) to prevent overlap */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    border: 1px solid rgba(255, 218, 193, 0.3);
+    /* Gold border */
+    pointer-events: none;
+    /* Allow clicks to pass through */
+}
+
+.reservation-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.reservation-toast i {
+    color: #FFDAC1;
+    /* Gold */
+}
+
+.reservation-toast .toast-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.reservation-toast .toast-time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-left: auto;
+}
+
+/* 5. Director's Secret Letter (Emotional Hook) */
+.letter-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.letter-trigger-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 218, 193, 0.1);
+}
+
+.letter-trigger-card:hover {
+    transform: translateY(-5px);
+}
+
+.letter-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: bounceSlow 3s infinite;
+}
+
+.letter-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 20000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.letter-modal.show {
+    opacity: 1;
+}
+
+.letter-paper {
+    background: #fffaf0;
+    /* Cream paper */
+    width: 90%;
+    max-width: 380px;
+    padding: 40px 30px;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: scale(0.8) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'Nanum Myeongjo', serif;
+    /* Emotional Serif */
+    background-image: linear-gradient(#999 0.05em, transparent 0.05em);
+    /* Notebook lines */
+    background-size: 100% 2em;
+    line-height: 2em;
+}
+
+.letter-modal.show .letter-paper {
+    transform: scale(1) translateY(0);
+}
+
+.letter-content h3 {
+    font-size: 1.4rem;
+    color: #B5EAD7;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    background: none;
+    /* remove line background for header */
+}
+
+.letter-content p {
+    font-size: 1.05rem;
+    color: #444;
+    word-break: keep-all;
+    margin-bottom: 1rem;
+}
+
+.letter-stamp {
+    text-align: right;
+    margin-top: 30px;
+    font-style: italic;
+    color: #FFDAC1;
+    font-weight: bold;
+}
+
+.close-letter {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    background: transparent;
+}
+
+@keyframes bounceSlow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 22. Mobile Review Carousel (Restored) */
+.review-carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+    scrollbar-width: none;
+    position: relative;
+    background: transparent;
+}
+
+.review-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.review-carousel {
+    display: flex;
+    gap: 15px;
+    width: max-content;
+    padding: 0 20px;
+}
+
+.review-card {
+    width: 280px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    /* Softer shadow */
+    overflow: hidden;
+    scroll-snap-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure placeholder image area looks good */
+.review-image-placeholder {
+    height: 150px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 23. Treatment Case Descriptions & Scan Effect */
+.ba-card {
+    position: relative;
+    overflow: hidden;
+    /* Necessary for the scan effect */
+    border-radius: 12px;
+    /* Ensure radius clips the effect */
+    transform: translateZ(0);
+    /* Fix for Safari overflow bug */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ba-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Scan (Shimmer) Effect */
+.ba-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.ba-card:hover::after {
+    animation: shine 0.75s ease-in-out;
+}
+
+@keyframes shine {
+    100% {
+        left: 150%;
+    }
+}
+
+/* Spotlight Effect (Magnifying Glass) */
+.ba-card {
+    /* Existing properties (merged) */
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transform: translateZ(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* For Spotlight */
+    --x: 50%;
+    --y: 50%;
+    --spotlight-opacity: 0;
+}
+
+.ba-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--x) var(--y),
+            rgba(255, 255, 255, 0.1) 0px,
+            /* Glassy Center */
+            rgba(255, 255, 255, 0) 100px,
+            /* Soft Edge */
+            rgba(0, 0, 0, 0.6) 150px
+            /* Darker Outer for Contrast */
+        );
+    opacity: var(--spotlight-opacity);
+    transition: opacity 0.3s ease;
+    z-index: 3;
+}
+
+/* Removed empty ::after block */
+
+.ba-card:hover {
+    --spotlight-opacity: 1;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   25. Fortune Box (Slot Machine) Styles
+   ========================================= */
+.lucky-box-game {
+    text-align: center;
+    padding: 20px;
+    background: #fdfbf7;
+    border-radius: 12px;
+}
+
+.lucky-box-game h3 {
+    color: #FFB7B2;
+    margin-bottom: 5px;
+}
+
+.slot-machine-container {
+    background: #E2F0CB;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #f1c40f;
+    /* Gold Border */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    max-width: 400px;
+    position: relative;
+}
+
+.slot-machine-header .lights-row,
+.slot-machine-footer .lights-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.slot-machine-footer .lights-row {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.light {
+    width: 10px;
+    height: 10px;
+    background: #FF9AA2;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #FF9AA2;
+    animation: blink 1s infinite alternate;
+}
+
+.light:nth-child(even) {
+    background: #f1c40f;
+    box-shadow: 0 0 5px #f1c40f;
+    animation-delay: 0.5s;
+}
+
+@keyframes blink {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slot-machine-body {
+    background: #B5EAD7;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.reels-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #000;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #95a5a6;
+}
+
+.reel-wrapper {
+    flex: 1;
+    background: #fff;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.reel {
+    font-size: 3rem;
+    line-height: 100px;
+    text-align: center;
+    transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Spin easing */
+    filter: blur(0);
+}
+
+.reel.spinning {
+    filter: blur(3px);
+    /* Motion blur effect */
+    animation: reelSpin 0.1s linear infinite;
+}
+
+@keyframes reelSpin {
+    0% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+.lever-container {
+    text-align: center;
+}
+
+.spin-btn {
+    background: linear-gradient(#FF9AA2, #FFB7B2);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #FFDAC1, 0 10px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.spin-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #FFDAC1, inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.spin-btn:disabled {
+    background: #95a5a6;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: translateY(5px);
+}
+
+.prize-result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFB7B2;
+    min-height: 1.5em;
+    animation: popIn 0.5s ease-out;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.ba-desc {
+    padding: 15px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.ba-desc h4 {
+    font-size: 1rem;
+    color: #333;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.ba-desc p {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Placeholder for missing images */
+.ba-placeholder {
+    width: 100%;
+    height: 200px;
+    /* Match typical image height */
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px 8px 0 0;
+    /* Rounded top corners matching card */
+}
+
+/* =========================================
+   26. Smart Review Search
+   ========================================= */
+.review-search-container {
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    position: relative;
+    text-align: center;
+}
+
+.review-search-box {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.review-search-input {
+    width: 100%;
+    padding: 15px 50px 15px 25px;
+    border-radius: 50px;
+    border: 2px solid #eee;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.review-search-input:focus {
+    outline: none;
+    border-color: #FFB7B2;
+    /* Primary Red */
+    box-shadow: 0 5px 20px rgba(212, 36, 38, 0.15);
+}
+
+.review-search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFB7B2;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.search-tags {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-tag {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-tag:hover {
+    background: #FFB7B2;
+    color: #fff;
+    border-color: #FFB7B2;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1rem;
+    color: #999;
+}
+
+/* --- AI Comparative Ticker Styles --- */
+
+/* 1. Rolling Ticker (Main Page - Top Fixed) */
+.ai-ticker-rolling {
+    width: 100%;
+    background-color: var(--sunrise-orange);
+    /* Soft Mint Green */
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    padding: 12px 0;
+    text-align: center;
+
+    /* Fixed Positioning below Navbar */
+    position: fixed;
+    top: 80px;
+    /* Navbar Height - seamless connection */
+    left: 0;
+    z-index: 999;
+    /* Below Navbar (1000), Above Content */
+
+    overflow: hidden;
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ai-ticker-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ticker-item {
+    display: none;
+    animation: slideDownFade 0.5s ease-in-out;
+    width: 100%;
+}
+
+.ticker-item.active {
+    display: block;
+}
+
+.ticker-highlight {
+    color: var(--navy-deep);
+    font-weight: bold;
+}
+
+/* 2. Sticky Rolling Ticker (Landing Pages - Top Fixed) */
+.ai-ticker-sticky-rolling {
+    position: fixed;
+    top: 0;
+    /* NO Navbar on Landing Pages, so strict top */
+    left: 0;
+
+    width: 100%;
+    background-color: var(--gold-primary);
+    /* Cherry Blossom Pink */
+    color: var(--text-dark);
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--white);
+    /* White Bottom Border */
+}
+
+
+
+.ai-ticker-sticky-rolling .ticker-container-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.ai-ticker-sticky-rolling .ticker-content {
+    flex: 1;
+    text-align: left;
+    margin-right: 15px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.ai-ticker-sticky-rolling .ticker-btn {
+    background-color: var(--white);
+    color: var(--text-dark);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    animation: pulse-btn 1.5s infinite;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #00FF00;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes slideDownFade {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .ai-ticker-rolling {
+        font-size: 0.8rem;
+        padding: 10px 0;
+        top: 90px;
+        /* Seamless connection with Mobile Navbar */
+    }
+
+    .ai-ticker-sticky-rolling {
+        top: 0;
+        /* Mobile Landing also 0 */
+    }
+
+    .ai-ticker-sticky-rolling .ticker-container-inner {
+        padding: 8px 15px;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    .ai-ticker-sticky-rolling .ticker-content {
+        margin-right: 0;
+        text-align: center;
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .ai-ticker-sticky-rolling .ticker-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Fix: Position toast below ticker on mobile */
+    /* Main Page: Navbar(90px) + Ticker(~45px) = ~135px */
+    .reservation-toast {
+        top: 135px;
+        bottom: auto;
+        /* Position below ticker to avoid thumb scrolling area */
+    }
+
+    /* Landing Pages: No navbar, sticky ticker at top */
+    body[data-page-type] .reservation-toast {
+        top: 50px;
+        /* Just below sticky ticker */
+    }
+
+    /* Fix for content being covered by fixed ticker on mobile */
+    /* Main Page: Navbar + Ticker */
+    header.hero {
+        padding-top: 200px !important;
+    }
+
+    /* Landing Pages: Sticky Ticker only */
+    #events {
+        padding-top: 70px !important;
+    }
+}
+
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999998 !important;
+    overflow: hidden;
+}
+
+
+@keyframes cherryBlossomFall {
+    0% {
+        top: -10vh;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 110vh;
+        opacity: 0;
+    }
+}
+
+/* --- Spring Theme FAB Pastel Colors --- */
+.quick-btn.tel {
+    background-color: #A8E6CF !important;
+    color: #4A5D23 !important;
+}
+
+.quick-btn.kakao {
+    background-color: #FDFFB6 !important;
+    color: #3C1E1E !important;
+}
+
+.quick-btn.naver {
+    background-color: #CAFFBF !important;
+    color: #4A5D23 !important;
+}
+
+.quick-btn.simulator {
+    background-color: #FFD6A5 !important;
+    color: #FFB7B2 !important;
+}
+
+/* =========================================
+   Spring Theme Phase 3: Subtle Enhancements
+   ========================================= */
+
+/* 1. Typography Softening */
+body,
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-dark {
+    /* Slightly soften deep blacks to dark chestnut to reduce eye strain */
+    color: #3C1E1E;
+}
+
+/* 2. Soft Hover Glow (Buttons & Cards) */
+.btn:hover,
+.btn-primary:hover,
+.btn-outline:hover,
+.quick-btn:hover {
+    box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4) !important;
+    /* Soft Pink Glow & Blooming Scale */
+    transform: translateY(-3px) scale(1.03) !important;
+}
+
+.card:hover,
+.ba-card:hover,
+.review-card:hover {
+    box-shadow: 0 12px 30px rgba(255, 209, 220, 0.5) !important;
+    transform: translateY(-5px);
+}
+
+/* 3. Micro-interactions (Icons) */
+.icon-box i,
+.step-icon i {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .icon-box i,
+.step-item:hover .step-icon i {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* 4. Breezy Gradients (Slow Animated Background) */
+@keyframes breezySpring {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hero,
+.section.blog {
+    /* Create an oversized abstract gradient and animate its position very slowly */
+    background: linear-gradient(120deg, #FFEFD5 0%, #FFF0F5 50%, #E0FFFF 100%) !important;
+    background-size: 200% 200% !important;
+    animation: breezySpring 15s ease infinite !important;
+}
+
+/* 5. Watercolor Borders */
+.line {
+    /* Replace solid colored lines with soft gradients */
+    background: linear-gradient(to right, transparent, #FFB6C1, #98FB98, transparent) !important;
+    height: 3px !important;
+    border: none !important;
+    opacity: 0.8;
+}
+
+.ink-divider {
+    /* Tint legacy dividers to be more peach/pink than harsh ink */
+    filter: sepia(0.3) hue-rotate(300deg) saturate(1.5) opacity(0.7) !important;
+}
+
+/* =========================================
+   Spring Theme 2.0 (Phase 2): Deep Enhancements
+   ========================================= */
+
+/* 1. Shadow & Border Filter Softening */
+.card,
+.ba-card,
+.review-card,
+.step-item,
+.summary-card,
+.prediction-input-box {
+    box-shadow: 0 5px 15px rgba(255, 183, 178, 0.15) !important;
+    border: 1px solid rgba(255, 183, 178, 0.3) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* 2. Diet Prediction UI Tuning */
+.summary-card.rapid {
+    background: linear-gradient(135deg, #FFFDF5, #FFF0F5) !important;
+    border-color: #FFB7B2 !important;
+}
+
+.summary-card.rapid h5::before {
+    content: '🌷 ';
+}
+
+.summary-card.rapid .badge {
+    background: #FF9AA2 !important;
+    color: white !important;
+}
+
+.summary-card.slow {
+    background: linear-gradient(135deg, #FFFDF5, #F2FFF5) !important;
+    border-color: #A8E6CF !important;
+}
+
+.summary-card.slow h5::before {
+    content: '🌱 ';
+}
+
+/* 3. Blooming/Bouncing Hover Interactions */
+.card:hover,
+.step-item:hover,
+.ba-card:hover {
+    box-shadow: 0 12px 25px rgba(255, 154, 162, 0.3) !important;
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: #FF9AA2 !important;
+}
+
+/* Bouncing leaves/icons inside */
+.card:hover .icon-box i {
+    transform: scale(1.2) rotate(10deg) translateY(-5px);
+    color: #FF9AA2 !important;
+    text-shadow: 0 4px 10px rgba(255, 154, 162, 0.5);
+}
+
+.step-item:hover .step-icon i {
+    transform: scale(1.2) rotate(-10deg) translateY(-5px);
+    color: #8FBC8F !important;
+    text-shadow: 0 4px 10px rgba(168, 230, 207, 0.5);
+}
+
+/* 4. Event Thumbnail Image Hover Effect */
+.event-item img {
+    transition: transform 0.4s ease !important;
+}
+
+.event-item img:hover {
+    transform: scale(1.02);
+}
+/* =========================================
+   Frontend Retention Features (Spring Theme Variations)
+   Premium Spring Blossom Edition
+   ========================================= */
+
+/* Update Scroll Progress Bar - Cherry Blossom Gradient */
+.scroll-progress-bar {
+    background: linear-gradient(
+        90deg,
+        #FFB7C5 0%,
+        #FF69B4 25%,
+        var(--gold-primary, #C9A227) 50%,
+        #FF69B4 75%,
+        #FFB7C5 100%
+    );
+    background-size: 200% 100%;
+    box-shadow:
+        0 0 12px rgba(255, 105, 180, 0.5),
+        0 0 24px rgba(255, 183, 197, 0.3),
+        0 0 36px rgba(201, 162, 39, 0.2);
+}
+
+@keyframes progress-glow {
+    0%, 100% {
+        background-position: 0% 50%;
+        filter: brightness(1) saturate(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        filter: brightness(1.15) saturate(1.1);
+    }
+}
+
+/* Spring Skeleton - Soft Pink Tint */
+.skeleton {
+    background: linear-gradient(
+        135deg,
+        #FFF5F7 0%,
+        #FFE4E9 50%,
+        #FFF5F7 100%
+    );
+}
+
+.skeleton::after {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 183, 197, 0.2) 15%,
+        rgba(255, 255, 255, 0.6) 30%,
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.6) 70%,
+        rgba(255, 183, 197, 0.2) 85%,
+        transparent 100%
+    );
+}
+
+/* Spring Button Hover - Blossom Glow */
+@media (hover: hover) {
+    .btn-primary:hover {
+        box-shadow:
+            0 8px 25px rgba(255, 105, 180, 0.3),
+            0 4px 10px rgba(201, 162, 39, 0.25);
+    }
+
+    .ba-card:hover {
+        box-shadow:
+            0 20px 40px rgba(255, 183, 197, 0.25),
+            0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .interior-item:hover {
+        box-shadow:
+            0 15px 35px rgba(255, 183, 197, 0.2),
+            0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+}
+
+/* Reward Burst Animation (Cherry Blossom Petals) */
+.reward-particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 10001;
+    animation: petal-fall 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.reward-particle:nth-child(odd) {
+    border-radius: 50% 0 50% 50%;
+    background: linear-gradient(135deg, #FFB7C5, #FF69B4);
+}
+
+.reward-particle:nth-child(even) {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+@keyframes petal-fall {
+    0% {
+        transform: scale(0) translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translate(var(--dx), var(--dy)) rotate(var(--rotation, 180deg));
+        opacity: 0;
+    }
+}
+
+/* Spring Scroll Progress Container */
+.scroll-progress-container {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 183, 197, 0.1) 0%,
+        rgba(255, 228, 233, 0.15) 50%,
+        rgba(255, 183, 197, 0.1) 100%
+    );
+}

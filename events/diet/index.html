@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no, address=no, email=no"> <!-- Prevent auto-linking -->
+    <title>규림한의원 청주점 | 다이어트 클리닉</title>
+    <meta name="description" content="청주 규림한의원 다이어트 클리닉. 굶지 않는 건강한 감량, 요요 없는 다이어트. 체질별 맞춤 한약과 관리.">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="규림한의원 청주점 | 다이어트 클리닉">
+    <meta property="og:description" content="굶지 않는 건강한 감량, 요요 없는 다이어트. 체질별 맞춤 한약과 관리.">
+    <meta property="og:image" content="../../assets/interior_1.jpg">
+    <meta property="og:url" content="https://kyurim-webpage.vercel.app/events/diet">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/logo_icon.png">
+
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../spring.css">
+
+    <!-- Fonts -->
+    <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome - Deferred -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <style>
+        /* Landing Page Optimization */
+        .navbar,
+        .quick-menu {
+            display: none !important;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20000;
+            border-top: 1px solid #eee;
+        }
+
+        .sticky-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .sticky-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .sticky-btn.call {
+            color: #333;
+        }
+
+        .sticky-btn.kakao {
+            color: #3C1E1E;
+        }
+
+        .sticky-btn.talk {
+            color: #03C75A;
+        }
+
+        .sticky-btn.reserve {
+            background: #03C75A;
+            color: white;
+        }
+
+        .sticky-btn.kakao i {
+            color: #FEE500;
+            text-shadow: 0 0 1px #dbae00;
+        }
+
+        /* Adjust footer padding */
+        footer {
+            padding-bottom: 70px !important;
+        }
+
+        /* Ensure images are visible immediately */
+        body {
+            padding-top: 0 !important;
+        }
+
+        .hero-content {
+            display: none !important;
+        }
+    </style>
+    <!-- Diet MBTI Styles -->
+    <style>
+        #pastLifeTest {
+            min-height: 550px;
+            position: relative;
+            overflow: hidden;
+            background-color: #fffdf5;
+            /* Old paper feel */
+            border-radius: 20px;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.03);
+            margin-top: 20px;
+        }
+
+        .test-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s, transform 0.4s ease;
+            transform: translateY(20px);
+            overflow-y: auto;
+        }
+
+        .test-screen.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            position: relative;
+            /* Take up space */
+        }
+
+        /* Intro */
+        .test-visual span {
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+            margin-bottom: 20px;
+        }
+
+        /* Quiz */
+        .progress-bar-container {
+            width: 100%;
+            max-width: 300px;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #D4AF37, #FFD700);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .question-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .answer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-btn {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 18px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            color: #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+            font-family: 'NanumBarunGothic', sans-serif;
+            font-weight: 500;
+        }
+
+        .answer-btn:hover {
+            border-color: #D4AF37;
+            background-color: #fffbf0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(212, 175, 55, 0.15);
+            color: #002c5f;
+        }
+
+        /* Result */
+        .bad-habit-badge {
+            display: inline-block;
+            background-color: #002c5f;
+            color: #D4AF37;
+            font-size: 0.9rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-character-box {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #fff 40%, #fffdf5 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+            border: 4px solid #D4AF37;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .prescription-box {
+            border: 2px solid #D4AF37;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #fff;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .prescription-box::before {
+            content: "處方";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #D4AF37;
+            color: #fff;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            font-family: 'Nanum Myeongjo', serif;
+        }
+    </style>
+</head>
+
+<body data-page-type="diet">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Fixed Lucky Bag - Above Ticker (Bypasses stacking context) -->
+    <!-- CRO 1. Closing Soon Banner (Redesigned) -->
+
+    <!-- 1. Sunrise Opening Animation REMOVED -->
+
+    <!-- Snow/Sparkle Container -->
+    <div id="snow-container"></div>
+
+    <!-- Event Modal REMOVED -->
+
+    <!-- Rich Spring Letter Modal -->
+    <div id="talisman-modal" class="modal">
+        <div class="modal-content talisman-content"
+            style="position: relative; overflow: hidden; border-radius: 15px; border: 3px solid #FFDAC1; background: #FFFDF5; padding: 30px;">
+            <span class="close-btn" id="close-talisman"
+                style="z-index: 30; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #FF9AA2;">&times;</span>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2
+                    style="color: #FF9AA2; font-family: 'Great Vibes', 'Nanum Myeongjo', serif; font-size: 2.2rem; margin-bottom: 5px; font-weight: bold;">
+                    🌸 봄꽃편지 🌸</h2>
+                <p style="color: #888; font-size: 1.05rem; letter-spacing: 0.5px; margin-top: 5px;">올 봄, 당신의 일상에 벚꽃길만
+                    가득하길 바랍니다.</p>
+            </div>
+
+            <div class="talisman-card"
+                style="width: 100%; max-width: 320px; height: auto; background: #FFB7B2; border-radius: 10px; margin: 0 auto 20px; box-shadow: 0 8px 15px rgba(255,183,178,0.4); border: none; padding: 3px; writing-mode: horizontal-tb;">
+                <div class="talisman-body"
+                    style="background: #FFFDF5; border-radius: 8px; border: 1px dashed #FF9AA2; padding: 25px 20px; writing-mode: horizontal-tb; flex-direction: column;">
+                    <h3
+                        style="color: #FF9AA2; font-size: 1.4rem; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #FFDAC1; padding-bottom: 10px; width: 100%; writing-mode: horizontal-tb; letter-spacing: 0;">
+                        가뿐한 봄, 새로운 나</h3>
+                    <p
+                        style="font-size: 1.05rem; line-height: 1.8; color: #555; text-align: center; margin-bottom: 15px; word-break: keep-all; display: block;">
+                        한결 단출해지는 봄날의 옷차림,<br>
+                        숨겨둔 예쁜 라인을 꺼낼 시간입니다.<br><br>
+                        건강하고 아름다운 나를 되찾는 여정,<br>
+                        가장 찬란한 올 봄은<br>
+                        규림과 함께 가뿐하게 시작하세요.
+                    </p>
+                    <div class="seal"
+                        style="margin: 0 auto; border-color: #FF9AA2; color: #FF9AA2; background: transparent; writing-mode: horizontal-tb;">
+                        규림</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(226, 240, 203, 0.4); padding: 15px; border-radius: 8px; text-align: center;">
+                <p style="color: #6B8E23; font-weight: bold; margin-bottom: 5px; font-size: 1.1rem;">🌿 봄맞이 다이어트 팁 🌿
+                </p>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">봄 제철 채소를 풍성하게 곁들인 식단으로<br>산뜻하고 가벼운 하루를
+                    열어보세요!</p>
+            </div>
+
+            <button class="btn"
+                style="margin-top: 20px; width: 100%; background: linear-gradient(135deg, #FF9AA2, #FFB7B2); border: none; padding: 15px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(255,154,162,0.3);"
+                onclick="document.getElementById('close-talisman').click(); window.location.href='#quick-inquiry';">🌸
+                특가 다이어트 신청</button>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <picture>
+  <source srcset="../../assets/logo.webp" type="image/webp">
+  <img src="../../assets/logo.png" alt="규림한의원 로고">
+</picture>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">원장님 소개</a></li>
+                <li><a href="#specialties">진료과목</a></li>
+                <li><a href="#before-after">치료사례</a></li>
+                <li><a href="#interior">병원 둘러보기</a></li>
+                <li><a href="#blog">공식블로그</a></li>
+                <li><a href="#contact">오시는 길</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+    <!-- Before & After Section -->
+    <section id="before-after" class="section before-after">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real-time Cases</h3>
+                <h2>치료 사례</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원의 놀라운 변화를 확인하세요.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="gallery-wrapper">
+                <button class="scroll-btn prev" aria-label="이전 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <div class="ba-gallery-grid">
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_1.webp" type="image/webp">
+  <img src="../../assets/ba_1.png" alt="치료 사례 1" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>대사질환/고도비만 극복</h4>
+                            <p>6개월 -20kg (당뇨/혈압 개선)</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_2.webp" type="image/webp">
+  <img src="../../assets/ba_2.png" alt="치료 사례 2" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>셀룰라이트/탄력 개선</h4>
+                            <p>지방분해 + 콜라겐 매선</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_3.webp" type="image/webp">
+  <img src="../../assets/ba_3.png" alt="치료 사례 3" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>갱년기 나잇살 관리</h4>
+                            <p>호르몬 밸런스 + 순환 한약</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_new_1.webp" type="image/webp">
+  <img src="../../assets/ba_diet_new_1.png" alt="다이어트 치료 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>고도비만 집중 감량</h4>
+                            <p>3개월 -15kg (체지방 위주)</p>
+                        </div>
+                    </div>
+                    <!-- New Diet Cases -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_full_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_full_k.png" alt="전신 감량 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>전신 대사 다이어트</h4>
+                            <p>4개월 -22kg (요요 방지)</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_thigh_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_thigh_k.png" alt="하체 비만 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>하체 비만/허벅지 축소</h4>
+                            <p>지방분해 약침 + 순환 한약</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_arm_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_arm_k.png" alt="팔뚝살 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>팔뚝살/브라라인 정리</h4>
+                            <p>산삼 비만 약침 10회</p>
+                        </div>
+                    </div>
+                    <!-- Additional 5 Cases (Generated) -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_add_1.webp" type="image/webp">
+  <img src="../../assets/ba_diet_add_1.png" alt="산후 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>산후 비만/붓기 관리</h4>
+                            <p>산후 보약 + 체형 교정</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_wedding.webp" type="image/webp">
+  <img src="../../assets/ba_diet_wedding.png" alt="웨딩 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>D-30 웨딩 라인 관리</h4>
+                            <p>급속 감량 + 드레스 라인</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_man_belly.webp" type="image/webp">
+  <img src="../../assets/ba_diet_man_belly.png" alt="남성 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>남성 복부/내장 지방</h4>
+                            <p>회식/음주 맞춤 처방</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_add_4.webp" type="image/webp">
+  <img src="../../assets/ba_diet_add_4.png" alt="아랫배 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>안 빠지는 아랫배/똥배</h4>
+                            <p>장 해독 + 순환 약침</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_add_5.webp" type="image/webp">
+  <img src="../../assets/ba_diet_add_5.png" alt="종아리 알 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>종아리 알/부종 개선</h4>
+                            <p>종아리 매선 + 씬 주사</p>
+                        </div>
+                    </div>
+                    <!-- Restored Cases (Pending Image Update) -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_back_fat.webp" type="image/webp">
+  <img src="../../assets/ba_diet_back_fat.png" alt="등살 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>숨은 등살/러브핸들</h4>
+                            <p>심부 온열 + 해독 다이어트</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_side_flank.webp" type="image/webp">
+  <img src="../../assets/ba_diet_side_flank.png" alt="옆구리 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>옆구리살/S라인 완성</h4>
+                            <p>라인 매선 + 체형 교정</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-btn next" aria-label="다음 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="ba-action">
+                <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-outline">
+                    더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <!-- Hero Section REMOVED -->
+
+    <!-- Moved Events Section -->
+    <section id="events" class="section events scroll-reveal">
+        <div class="container">
+            <div class="section-header">
+                <h3>Special Events</h3>
+                <h2>진행 중인 다이어트 이벤트</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원 청주점만의 특별한 다이어트 혜택.</p>
+            </div>
+            <div class="event-scroll-container">
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/벚꽃컷팅이벤트 최종.png" alt="벚꽃 컷팅 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/블라우스핏 최종.png" alt="블라우스핏 확정" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/산후 3일 확정.png" alt="산후 3일 확정" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/투플러스원최종.png" alt="투플러스원 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/복부 리마스터 4주 확정.png" alt="복부 리마스터 4주" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/긴급구조대 확정.png" alt="긴급구조대 확정" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/웨딩올킬 확정.png" alt="웨딩올킬 확정" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26 march diet/12주 최종 확정.png" alt="12주 최종 확정" loading="lazy">
+                </div>
+                <!-- Removed Premium Gift Event -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="section comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h3>Why Kyurim Diet?</h3>
+                <h2>왜 규림 다이어트인가요?</h2>
+                <div class="line"></div>
+                <p class="subtitle">단순한 체중 감량이 아닌, 건강한 라인을 만듭니다.</p>
+            </div>
+            <div class="comparison-container">
+                <!-- Competitor -->
+                <div class="comparison-card competitor">
+                    <h3>일반 다이어트</h3>
+                    <ul class="comparison-list">
+                        <li><strong>단순 체중 측정</strong><br>인바디 수치에만 의존한 획일적 처방</li>
+                        <li><strong>무리한 절식</strong><br>식욕억제제 위주로 건강을 해치는 감량</li>
+                        <li><strong>요요 현상</strong><br>약 복용 중단 시 급격한 체중 증가</li>
+                    </ul>
+                </div>
+                <!-- Kyurim -->
+                <div class="comparison-card kyurim">
+                    <div class="badge">SIGNATURE DIET</div>
+                    <h3>규림한의원 청주점</h3>
+                    <ul class="comparison-list">
+                        <li><strong>체질별 정밀 분석</strong><br>인바디 + 맥진/복진으로 살이 찌는 원인 파악</li>
+                        <li><strong>건강한 감량</strong><br>대사 기능 회복과 해독을 통한 체지방 분해</li>
+                        <li><strong>요요 방지 프로그램</strong><br>살이 찌지 않는 체질로 개선 및 생활 코칭</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section (Diet) -->
+    <section class="section video-section" style="padding: 40px 0 0 0;">
+        <div class="container"
+            style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+            <!-- 1. 2+1 Event Video 0 -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../event%20play/26년%201월%20투플러스원%20이벤트%20영상%20확정0.mp4" type="video/mp4">
+            </video>
+            <!-- 2. Rapid Weight Loss Event Video -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../event%20play/급찐급빠%20이벤트.mp4" type="video/mp4">
+            </video>
+            <!-- 3. 2+1 Event Video Final -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../event%20play/26년%201월%20투플러스원%20이벤트%20영상%20확정.mp4" type="video/mp4">
+            </video>
+            <!-- 4. Bridal Event Video -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../event%20play/10%2026년%201월%20브라이덜%20이벤트%20영상%204.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- CRO 4. Quick Inquiry Form (Redesigned & Google Connected) -->
+    <section id="quick-inquiry" class="quick-inquiry-section scroll-reveal">
+        <div class="quick-inquiry-box">
+            <h3> 간편 무료상담 신청</h3>
+            <p>연락처를 남겨주시면 상담원이<br>친절하게 안내해드립니다.</p>
+
+            <form name="submit-to-google-sheet" class="inquiry-form">
+                <input type="hidden" name="페이지" value="다이어트">
+                <input type="tel" name="연락처" placeholder="010-1234-5678" required>
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i> 상담 신청하기
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Diet Prediction Section (Moved Up) -->
+    <section id="diet-prediction" class="section diet-prediction scroll-reveal" style="background-color: #fff;">
+        <div class="container">
+            <div class="section-header">
+                <h3>Diet Simulation</h3>
+                <h2>내 다이어트 성공 예측</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원의 맞춤 프로그램으로 변화될 나의 모습을 미리 확인하세요.</p>
+            </div>
+
+            <div class="prediction-container">
+                <!-- Input Area -->
+                <div class="prediction-input-box">
+                    <h4>나의 정보 입력</h4>
+
+                    <div class="gender-group">
+                        <input type="radio" name="gender" id="gender-female" value="female" checked>
+                        <label for="gender-female" class="gender-btn">여성</label>
+
+                        <input type="radio" name="gender" id="gender-male" value="male">
+                        <label for="gender-male" class="gender-btn">남성</label>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <label for="userHeight">키 (cm)</label>
+                            <input type="number" id="userHeight" placeholder="160">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="currentWeight">현재 체중 (kg)</label>
+                            <input type="number" id="currentWeight" placeholder="60">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="userAge">나이 (세)</label>
+                            <input type="number" id="userAge" placeholder="30">
+                        </div>
+                    </div>
+                    <button id="calculateDietBtn" class="btn btn-primary full-width">
+                        <i class="fa-solid fa-chart-line"></i> 감량 결과 확인하기
+                    </button>
+                </div>
+
+                <!-- Result Area (Hidden initially) -->
+                <div id="dietResult" class="prediction-result">
+                    <div class="chart-container">
+                        <canvas id="dietChart"></canvas>
+                    </div>
+
+                    <div class="result-summary-grid">
+                        <div class="summary-card rapid">
+                            <div class="badge">BEST</div>
+                            <h5>급속 감량 프로그램</h5>
+                            <p class="desc">중요한 일정을 앞두고<br>빠른 변화가 필요할 때</p>
+                            <div class="stat">
+                                <span class="label">3개월 예상 감량</span>
+                                <span class="value" id="rapidTotalLoss">-00kg</span>
+                            </div>
+                            <div class="final-weight">
+                                예상 체중 <span id="rapidFinalWeight">00kg</span>
+                            </div>
+                        </div>
+                        <div class="summary-card slow">
+                            <h5>완속 감량 프로그램</h5>
+                            <p class="desc">일상 생활에 무리 없이<br>건강하게 빼고 싶을 때</p>
+                            <div class="stat">
+                                <span class="label">3개월 예상 감량</span>
+                                <span class="value" id="slowTotalLoss">-00kg</span>
+                            </div>
+                            <div class="final-weight">
+                                예상 체중 <span id="slowFinalWeight">00kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-box">
+                        <p>혼자서는 힘든 다이어트, 규림과 함께라면 성공할 수 있습니다.</p>
+                        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+                            target="_blank" class="btn btn-primary">
+                            <i class="fa-solid fa-calendar-check"></i> 맞춤 상담 예약하기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self-Diagnosis Section (Moved Here) -->
+    <section id="diagnosis" class="section diagnosis">
+        <div class="container">
+            <div class="section-header">
+                <h3>Self-Check</h3>
+                <h2>나의 비만 유형 찾기</h2>
+                <div class="line"></div>
+                <p class="subtitle">간단한 테스트로 내 몸의 상태를 확인해보세요.</p>
+            </div>
+            <div class="diagnosis-container">
+                <div class="diagnosis-tabs">
+                    <button class="tab-btn active" data-type="diet">다이어트</button> <!-- Active -->
+                    <!-- Removed other tabs -->
+                </div>
+                <div class="diagnosis-content" id="pastLifeTest">
+                    <!-- 1. Intro Screen -->
+                    <div id="test-intro" class="test-screen active">
+                        <div class="test-visual">
+                            <span style="font-size: 4rem; animation: float 3s infinite;"></span>
+                        </div>
+                        <h4 style="font-family: 'Nanum Myeongjo', serif; margin: 20px 0;">전생(前生) 테스트</h4>
+                        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">
+                            "당신의 맥을 짚어보니...<br>범상치 않은 <strong>전생의 기운</strong>이 느껴집니다."<br><br>
+                            나의 비만, 혹시 전생의 업보일까요?<br>재미로 보는 나의 전생 유형 찾기
+                        </p>
+                        <button class="btn btn-primary" onclick="startTest()">
+                            내 전생 확인하기 <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- 2. Quiz Screen -->
+                    <div id="test-quiz" class="test-screen" style="display: none;">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="testProgress"></div>
+                        </div>
+                        <div class="question-container">
+                            <h3 id="questionText"
+                                style="font-family: 'Nanum Myeongjo', serif; font-size: 1.3rem; margin-bottom: 30px; line-height: 1.4;">
+                                질문이 들어갑니다</h3>
+                            <div class="answer-buttons">
+                                <button class="answer-btn" onclick="nextQuestion(0)">A. 답변 1</button>
+                                <button class="answer-btn" onclick="nextQuestion(1)">B. 답변 2</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Loading Screen -->
+                    <div id="test-loading" class="test-screen" style="display: none;">
+                        <div class="loading-icon">
+                            <i class="fa-solid fa-hourglass-half fa-spin"
+                                style="font-size: 3rem; color: var(--gold-primary);"></i>
+                        </div>
+                        <h4 style="margin-top: 20px; font-family: 'Nanum Myeongjo', serif;">맥진(脈診) 중입니다...</h4>
+                        <p>당신의 전생 기억을 읽어내는 중...</p>
+                    </div>
+
+                    <!-- 4. Result Screen -->
+                    <div id="test-result" class="test-screen" style="display: none;">
+                        <span class="bad-habit-badge" id="resultSubtitle">전생 유형</span>
+                        <h3 id="resultTitle"
+                            style="font-family: 'Nanum Myeongjo', serif; font-size: 2rem; margin: 15px 0; color: var(--navy-deep);">
+                            결과 타이틀</h3>
+
+                        <div class="result-character-box">
+                            <span id="resultIcon" style="font-size: 5rem;"></span>
+                        </div>
+
+                        <div class="result-desc-box">
+                            <p id="resultDesc">결과 설명이 들어갑니다.</p>
+                        </div>
+
+                        <div class="prescription-box">
+                            <h5> 규림 전생 처방전</h5>
+                            <p id="resultSolution"
+                                style="font-weight: bold; color: var(--gold-primary); font-size: 1.1rem;">처방 내용</p>
+                        </div>
+
+                        <div class="action-buttons"
+                            style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                            <button class="btn btn-outline" onclick="shareTest()">
+                                <i class="fa-solid fa-share-nodes"></i> 친구에게 공유
+                            </button>
+                            <a href="#quick-inquiry" class="btn btn-primary"
+                                style="background-color: var(--navy-deep);">
+                                현생 구제 신청하기 (상담)
+                            </a>
+                        </div>
+                        <button class="retry-btn" onclick="resetTest()"
+                            style="margin-top: 15px; background: none; border: none; text-decoration: underline; color: #888; cursor: pointer;">
+                            다시 하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Section (Diet Only) -->
+
+
+    <!-- Director Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <h3>Director</h3>
+                <h2>원장님 소개</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-content">
+                <div class="director-image">
+                    <img src="../../assets/profile.gif" alt="한정우 대표원장"
+                        style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="director-info">
+                    <h3>한정우 대표원장</h3>
+                    <ul class="career-list">
+                        <li>경희대학교 한의과대학 한의학석사</li>
+                        <li>한방비만학회 정회원</li>
+                        <li>대한한의임상피부과학회 정회원</li>
+                        <li>대한스포츠한의학회 정회원</li>
+                        <li>응용근신경학회 정회원</li>
+                        <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
+                        <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
+                        <li>AI 경진대회 우승자 (2025)</li>
+                    </ul>
+                    <p class="philosophy">
+                        "단순한 증상 완화가 아닌, 몸의 근본적인 균형을 되찾아<br>
+                        스스로 빛나는 건강한 아름다움을 선사합니다."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section (Focused on Diet) -->
+    <section id="specialties" class="section specialties">
+        <div class="container">
+            <div class="section-header">
+                <h3>Specialties</h3>
+                <h2>진료 과목</h2>
+                <div class="line"></div>
+            </div>
+            <div class="grid-4">
+                <div class="card" style="grid-column: span 4; max-width: 400px; margin: 0 auto;">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3>다이어트</h3>
+                    <p>체질별 맞춤 한약과 관리를 통해<br>건강하고 요요 없는 감량</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self-Diagnosis Section (Diet Default) -->
+
+
+    <!-- Treatment Process Section -->
+    <section id="process" class="section process">
+        <div class="container">
+            <div class="section-header">
+                <h3>Process</h3>
+                <h2>진료 프로세스</h2>
+                <div class="line"></div>
+                <p class="subtitle">체계적인 1:1 맞춤 진료 시스템을 경험해보세요.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item fade-in">
+                    <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h4>01. 접수 및 설문</h4>
+                    <p>내원 후 접수 및<br>기초 설문지 작성</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-1">
+                    <div class="step-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4>02. 검사</h4>
+                    <p>인바디, 체형 분석 등<br>정밀 검사 진행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-2">
+                    <div class="step-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h4>03. 원장님 상담</h4>
+                    <p>검사 결과 기반<br>1:1 심층 상담</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-3">
+                    <div class="step-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+                    <h4>04. 맞춤 치료</h4>
+                    <p>체질과 증상에 맞는<br>최적의 치료 시행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-4">
+                    <div class="step-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                    <h4>05. 사후 관리</h4>
+                    <p>치료 후 경과 확인<br>및 생활 습관 코칭</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Director's Letter Trigger -->
+    <section class="letter-section scroll-reveal">
+        <div class="container">
+            <div class="letter-trigger-card">
+                <div class="letter-icon"></div>
+                <h3 style="font-size:1.2rem; font-weight:bold; margin-bottom:5px;">원장님이 보내는 비밀 편지</h3>
+                <p style="color:#666; font-size:0.9rem;">살 때문에 고민하는 당신께 꼭 드리고 싶은 말씀이 있습니다.<br>터치해서 확인해보세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Reviews Section -->
+    <section id="reviews" class="section reviews">
+        <div class="container">
+            <div class="section-header" style="position:relative;">
+                <h3>Real Reviews</h3>
+                <h2>생생 치료 후기</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원과 함께 건강한 아름다움을 찾은 분들의 이야기입니다.</p>
+            </div>
+            <div class="review-carousel-container">
+                <div class="review-carousel">
+                    <!-- Reviews will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior Section -->
+    <section id="interior" class="section interior">
+        <div class="container">
+            <div class="section-header">
+                <h3>Interior</h3>
+                <h2>병원 둘러보기</h2>
+                <div class="line"></div>
+                <p class="subtitle">편안하고 아늑한 규림한의원 청주점의 내부입니다.</p>
+            </div>
+            <div class="interior-grid">
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_1.webp" type="image/webp">
+  <img src="../../assets/interior_1.jpg" alt="병원 내부 1" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_2.webp" type="image/webp">
+  <img src="../../assets/interior_2.jpg" alt="병원 내부 2" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item" style="position: relative; overflow: visible !important;">
+                    <picture>
+  <source srcset="../../assets/interior_3.webp" type="image/webp">
+  <img src="../../assets/interior_3.jpg" alt="병원 내부 3" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_4.webp" type="image/webp">
+  <img src="../../assets/interior_4.jpg" alt="병원 내부 4" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_5.webp" type="image/webp">
+  <img src="../../assets/interior_5.jpg" alt="병원 내부 5" loading="lazy">
+</picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider -->
+    <div class="ink-divider"></div>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <div class="blog-wrapper">
+                <div class="blog-text">
+                    <h3>Kyurim's Story</h3>
+                    <h2>규림한의원 공식 블로그</h2>
+                    <p>한정우 원장의 진료 일기, 건강 정보, 그리고 병원 소식을<br>블로그에서 가장 먼저 만나보세요.</p>
+                    <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-n"></i> 블로그 방문하기
+                    </a>
+                </div>
+                <div class="blog-visual">
+                    <!-- Decorative visual -->
+                    <div class="circle-deco"></div>
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider (Reverse) -->
+    <div class="ink-divider reverse"></div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-header">
+                <h3>Q&A</h3>
+                <h2>자주 묻는 질문</h2>
+                <div class="line"></div>
+            </div>
+            <div class="faq-container">
+                <!-- FAQ Items will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Fortune Cookie Widget REMOVED -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>오시는 길 & 진료안내</h2>
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>충청북도 청주시 상당구 상당로 81번길 36, 5층
+                            <button onclick="copyAddress()" class="btn-copy-address" title="주소 복사"
+                                style="margin-left:5px; padding: 2px 8px; font-size: 0.8rem; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; background: #fff;">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <p><a href="tel:043-224-1075">043-224-1075</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <p>평일: 10:30 - 20:30</p>
+                            <p>토요일: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary"
+                            style="background-color: #FEE500; border-color: #FEE500; color: #3C1E1E;">
+                            <i class="fa-solid fa-comment"></i> 카카오톡 문의하기
+                        </a>
+                        <a href="https://talk.naver.com/ct/w4y1te?frm=mnmb#nafullscreen" target="_blank"
+                            class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white;">
+                            <i class="fa-solid fa-comments"></i> 네이버 톡톡 문의
+                        </a>
+                        <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-primary"
+                            style="background-color: #E1306C; border-color: #E1306C; color: white;">
+                            <i class="fa-brands fa-instagram"></i> 인스타그램
+                        </a>
+                        <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary"
+                            style="background-color: #2DB400; border-color: #2DB400; color: white;">
+                            <i class="fa-solid fa-blog"></i> 블로그 바로가기
+                        </a>
+                        <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                            target="_blank" class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white; grid-column: span 2;">
+                            <i class="fa-solid fa-map-location-dot"></i> 네이버 지도 보기
+                        </a>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- Naver Map Image Link -->
+                    <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                        target="_blank" title="네이버 지도로 보기">
+                        <picture>
+  <source srcset="../../assets/naver_map.webp" type="image/webp">
+  <img src="../../assets/naver_map.png" alt="규림한의원 청주점 위치 (네이버 지도)"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+</picture>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Menu (Floating) -->
+    <div class="quick-menu">
+        <a href="tel:043-224-1075" class="quick-btn tel" aria-label="전화 상담">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="quick-btn kakao" aria-label="카카오톡 상담">
+            <i class="fa-solid fa-comment"></i>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="quick-btn naver" aria-label="네이버 예약">
+            <i class="fa-solid fa-calendar-check"></i>
+        </a>
+    </div>
+
+    <!-- Top Button -->
+    <button id="topBtn" class="top-btn" aria-label="맨 위로 이동"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-info">
+                <p>상호명: 규림한의원 청주점 | 대표자: 한정우</p>
+                <p>사업자등록번호: 538-66-00350 </p>
+                <p>주소: 충청북도 청주시 상당구 상당로 81번길 36, 5층</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 규림한의원 청주점. All Rights Reserved. <span class="footer-seal">규림</span></p>
+                <p><a href="#" style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">개인정보처리방침</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Story Modal -->
+    <div id="storyModal" class="story-modal">
+        <button class="story-close" aria-label="닫기" style="z-index: 30;">&times;</button>
+        <div class="story-content" style="position: relative;">
+            <div class="changhoji-door left"></div>
+            <div class="changhoji-door right"></div>
+            <div class="story-image-wrapper">
+                <img id="storyImage" src="" alt="치료 사례">
+            </div>
+            <div class="story-text-wrapper">
+                <span id="storyTag" class="story-tag">TAG</span>
+                <div class="story-header">
+                    <h3 id="storyTitle">TITLE</h3>
+                </div>
+                <div id="storyProfile" class="story-profile">
+                    PROFILE
+                </div>
+                <div id="storyDesc" class="story-desc">
+                    DESCRIPTION
+                </div>
+                <div id="storyResult" class="story-result">
+                    RESULT
+                </div>
+                <div class="story-footer">
+                    <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-comment"></i> 내 증상 상담하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <!-- Keep diet_prediction.js -->
+    <script src="../../diet_prediction.js" defer></script>
+    <script src="../../diagnosis.js" defer></script>
+    <script src="../../script.js" defer></script>
+
+    <!-- Failsafe Script for Talisman -->
+    <script>
+        window.openTalismanModal = function () {
+            console.log("Failsafe Open Talisman Triggered");
+            var modal = document.getElementById('talisman-modal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.style.opacity = '1'; /* Force Visibility */
+                modal.classList.add('show'); /* Add show class just in case */
+                modal.style.zIndex = '2147483647'; // Max Z-Index
+            } else {
+                alert('Talisman Modal Not Found in DOM');
+            }
+        };
+
+        // Also re-attach event listener just in case
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('open-talisman-btn');
+            if (btn) {
+                btn.onclick = window.openTalismanModal;
+                btn.setAttribute('data-tooltip', ' 따뜻한 봄날 되세요!'); // Add Tooltip dynamically
+            }
+        });
+    </script>
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <a href="tel:043-224-1075" class="sticky-btn call highlight-anim">
+            <i class="fa-solid fa-phone"></i>
+            <span>전화상담</span>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="sticky-btn kakao highlight-anim"
+            style="animation-delay: 2.5s;">
+            <i class="fa-solid fa-comment"></i>
+            <span>카톡문의</span>
+        </a>
+        <a href="http://talk.naver.com/w4y1te?frm=mnmb&frm=nmb_detail" target="_blank" class="sticky-btn talk">
+            <i class="fa-solid fa-comments"></i>
+            <span>네이버톡톡</span>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="sticky-btn reserve">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>간편예약</span>
+        </a>
+    </div>
+
+    <!-- AI Sticky Rolling Ticker (Diet Page) -->
+    <div class="ai-ticker-sticky-rolling">
+        <div class="ticker-container-inner">
+            <div class="ticker-content">
+                <div class="ticker-item active"><span class="live-indicator"></span><strong>[요요방지]</strong> "굶어서 뺀 살은
+                    100% 돌아옵니다. 규림은 <strong>'살이 안 찌는 체질'</strong>로 바꿉니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[식욕조절]</strong> "참기만 하는 다이어트는 결국
+                    폭발합니다. <strong>'비움환'</strong>으로 자연스럽게 식욕을 잠재우세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[대사증진]</strong> "운동해도 안 빠지나요? 꺼져있는
+                    <strong>'대사 스위치'</strong>를 켜야 지방이 탑니다."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[라인관리]</strong> "몸무게는 줄었는데 라인은 그대로?
+                    <strong>'킬팻약침'</strong>으로 고민 부위만 골라 뺍니다."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[디톡스]</strong> "몸속 독소가 살의 원인입니다. 단순
+                    감량이 아닌 <strong>'속'</strong>부터 비워내세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[맞춤처방]</strong> "남들과 똑같은 약? 당신의 살찌는
+                    원인은 다릅니다. <strong>'1:1 맞춤 처방'</strong>이 정답입니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[건강관리]</strong> "살 빼다가 골다공증? 규림은
+                    <strong>'건강'과 '라인'</strong> 두 마리 토끼를 잡습니다."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[유지관리]</strong> "뺄 때보다 유지할 때가 더
+                    중요합니다. 규림의 <strong>'요요 케어 시스템'</strong>을 믿으세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[약재안심]</strong> "양약의 부작용이 걱정되시나요?
+                    <strong>'천연 한방 성분'</strong>으로 속 편하게 시작하세요."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[급찐급빠]</strong> "중요한 날을 앞두고 있나요?
+                    <strong>'3일 단기 프로그램'</strong>으로 가볍게 비우세요."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRO Scripts (Google Sheets Integration) -->
+    <script>
+        // 1. Google Sheets Submission Logic
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        if (form) {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                // Basic Validation
+                const phoneInput = form.querySelector('input[name="연락처"]');
+                if (phoneInput.value.length < 10) {
+                    alert('올바른 연락처를 입력해주세요.');
+                    return;
+                }
+
+                // Show Loading
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
+                btn.disabled = true;
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        alert('? 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
+                        form.reset();
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        // Fallback for demo mode (if URL is invalid)
+                        if (scriptURL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                            alert('? (데모) 신청 완료되었습니다.\n*실제 작동하려면 구글 스크립트 URL을 설정 파일에 넣어주세요.');
+                            form.reset();
+                        } else {
+                            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                        }
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    });
+            });
+        }
+    </script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-reveal-active');
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+    <!-- Shared Script (Snow, Toast, Reviews) -->
+    <script src="../../script.js" defer></script>
+    <script>
+        function copyAddress() {
+            const address = "충청북도 청주시 상당구 상당로 81번길 36, 5층";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("주소가 복사되었습니다! \n지도 앱에 붙여넣기 하세요.");
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+    <!-- Diet MBTI Logic Script -->
+    <script>
+        // 1. Data: Personas (8 Types)
+        const personas = {
+            'dolsoe': {
+                name: '천하장사 돌쇠',
+                icon: '',
+                desc: '밥심이 곧 국력! 탄수화물을 사랑하는 당신.<br>활동량은 많지만 그만큼 많이 드시는군요.',
+                product: '[S캡슐] 대사 부스터',
+                solution: '숨만 쉬어도 지방이 타는 몸으로! 대사 엔진을 켜드립니다.'
+            },
+            'royal': {
+                name: '잠자는 숲속의 안방마님',
+                icon: '',
+                desc: '움직이는 게 세상에서 제일 귀찮으시군요.<br>순환이 안 되어 물만 먹어도 살이 찝니다.',
+                product: '[슬립 앤 슬림] 수면 다이어트',
+                solution: '운동하지 마세요. 자면서 살이 빠지는 꿈의 다이어트.'
+            },
+            'king': {
+                name: '미식가 임금님',
+                icon: '',
+                desc: '수라상 투정이 심하고 입이 심심한 걸 못 참으시는군요.<br>가짜 식욕과 당 중독이 원인입니다.',
+                product: '[입맛제로젤리] 식욕 억제',
+                solution: '참지 말고 드세요. 간식처럼 먹으면 마법처럼 입맛이 사라집니다.'
+            },
+            'playboy': {
+                name: '풍류대장 한량',
+                icon: '',
+                desc: '음주가무를 즐기다 몸에 독소가 쌓였군요.<br>술살과 붓기가 빠질 날이 없습니다.',
+                product: '[3일 비움환] 디톡스 컷팅',
+                solution: '딱 3일만 비우세요. 숙변과 독소를 배출해 몸을 가볍게 리셋!'
+            },
+            'scholar': {
+                name: '책만 보는 선비',
+                icon: '',
+                desc: '앉아있는 시간이 길어 배만 뽈록 나오셨군요.<br>팔다리는 가늘지만 내장지방이 위험합니다.',
+                product: '[복부 킬팻 + S환]',
+                solution: '복부 집중 타격! 굳은 지방을 녹이고 배출합니다.'
+            },
+            'peasant': {
+                name: '밭일하는 아낙네',
+                icon: '',
+                desc: '하루 종일 서서 일하느라 다리가 퉁퉁 부으셨군요.<br>살이 아니라 부종입니다.',
+                product: '[S하비환] 하체 순환',
+                solution: '하체 순환을 뚫어 코끼리 다리를 사슴 다리로 만듭니다.'
+            },
+            'bride': {
+                name: '혼례 앞둔 낭자',
+                icon: '',
+                desc: '중요한 날이 코앞이라 마음이 급하시군요.<br>단기간에 확실한 라인 정리가 필요합니다.',
+                product: '[브라이덜 패키지]',
+                solution: 'D-Day 완벽 대비! 드레스 라인과 얼굴 윤곽을 동시에 잡습니다.'
+            },
+            'merchant': {
+                name: '천리길 보부상',
+                icon: '?♂?',
+                desc: '체력이 바닥이라 다이어트할 엄두가 안 나시는군요.<br>기력이 없으면 살도 안 빠집니다.',
+                product: '[녹용 다이어트 보약]',
+                solution: '보약으로 기운은 채우고, 체지방은 태우는 1석 2조 비법.'
+            }
+        };
+
+        // 2. Data: Questions (7 items)
+        const questions = [
+            {
+                q: "Q1. 밥상에 내가 제일 좋아하는 반찬은?",
+                a: [{ text: "고봉밥 & 면치기 (탄수화물)", types: ['dolsoe', 'scholar'] }, { text: "고기반찬 & 튀김 (지방)", types: ['king', 'playboy'] }]
+            },
+            {
+                q: "Q2. 평소 나의 활동량은?",
+                a: [{ text: "숨쉬기 운동이 전부다 (누워있음)", types: ['royal', 'scholar'] }, { text: "동에 번쩍 서에 번쩍 (많이 움직임)", types: ['dolsoe', 'merchant', 'peasant'] }]
+            },
+            {
+                q: "Q3. 스트레스를 받을 때 나는?",
+                a: [{ text: "맵고 단 거 폭식! (먹방)", types: ['king', 'dolsoe'] }, { text: "오늘 마시고 죽자! (술)", types: ['playboy'] }]
+            },
+            {
+                q: "Q4. 거울을 볼 때 가장 신경 쓰이는 부위는?",
+                a: [{ text: "남산만한 뱃살 (상체)", types: ['scholar', 'playboy'] }, { text: "코끼리 허벅지/종아리 (하체)", types: ['peasant'] }] // Peasant gets 2 points effectively
+            },
+            {
+                q: "Q5. 다이어트를 결심한 이유는?",
+                a: [{ text: "결혼식/면접 등 급한 일정 때문에", types: ['bride'] }, { text: "건강이 안 좋아져서 / 옷이 안 맞아서", types: ['royal', 'merchant'] }]
+            },
+            {
+                q: "Q6. 요즘 나의 체력 상태는?",
+                a: [{ text: "자고 일어나도 피곤하다 (만성피로)", types: ['merchant', 'royal'] }, { text: "체력은 좋은데 식욕이 문제다", types: ['dolsoe', 'king'] }]
+            },
+            {
+                q: "Q7. 내가 원하는 다이어트 기간은?",
+                a: [{ text: "3일 ~ 2주 (초단기)", types: ['bride', 'playboy'] }, { text: "1개월 ~ 3개월 (꾸준히)", types: ['scholar', 'peasant'] }]
+            }
+        ];
+
+        // 3. Logic Variables
+        let currentQIndex = 0;
+        let scores = {
+            'dolsoe': 0, 'royal': 0, 'king': 0, 'playboy': 0,
+            'scholar': 0, 'peasant': 0, 'bride': 0, 'merchant': 0
+        };
+
+        // 4. Functions
+        function startTest() {
+            document.getElementById('test-intro').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('test-intro').style.display = 'none';
+                document.getElementById('test-quiz').style.display = 'block';
+                setTimeout(() => document.getElementById('test-quiz').classList.add('active'), 50);
+                showQuestion();
+            }, 300);
+        }
+
+        function showQuestion() {
+            const qData = questions[currentQIndex];
+            document.getElementById('questionText').innerText = qData.q;
+
+            // Progress Bar
+            const progress = ((currentQIndex) / questions.length) * 100;
+            document.getElementById('testProgress').style.width = `${progress}%`;
+
+            const btnContainer = document.querySelector('.answer-buttons');
+            btnContainer.innerHTML = ''; // Clear old buttons
+
+            qData.a.forEach((ans, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.innerText = (idx === 0 ? "A. " : "B. ") + ans.text;
+                btn.onclick = () => nextQuestion(ans.types);
+                btnContainer.appendChild(btn);
+            });
+        }
+
+        function nextQuestion(targetTypes) {
+            // Score Update
+            targetTypes.forEach(type => {
+                if (scores[type] !== undefined) scores[type] += 2; // Basic weight
+            });
+
+            // Special Logic: If choosing Lower Body in Q4, boost Peasant extra
+            if (currentQIndex === 3 && targetTypes.includes('peasant')) {
+                scores['peasant'] += 3;
+            }
+            // Special Logic: If choosing Urgent in Q5, boost Bride extra
+            if (currentQIndex === 4 && targetTypes.includes('bride')) {
+                scores['bride'] += 5; // Very strong indicator
+            }
+
+            currentQIndex++;
+
+            if (currentQIndex < questions.length) {
+                showQuestion();
+            } else {
+                finishTest();
+            }
+        }
+
+        function finishTest() {
+            document.getElementById('test-quiz').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('test-quiz').style.display = 'none';
+                document.getElementById('test-loading').style.display = 'block';
+                setTimeout(() => document.getElementById('test-loading').classList.add('active'), 50);
+
+                // Simulate calculations
+                setTimeout(() => {
+                    showResult();
+                }, 1500);
+            }, 300);
+        }
+
+        function showResult() {
+            // Find max score
+            let maxScore = -1;
+            let resultType = 'dolsoe'; // Default
+
+            for (const [key, value] of Object.entries(scores)) {
+                if (value > maxScore) {
+                    maxScore = value;
+                    resultType = key;
+                }
+            }
+
+            const data = personas[resultType];
+
+            // Render Result
+            document.getElementById('resultSubtitle').innerText = "당신의 전생은...";
+            document.getElementById('resultTitle').innerText = data.name;
+            document.getElementById('resultIcon').innerText = data.icon;
+            document.getElementById('resultDesc').innerHTML = data.desc;
+            document.getElementById('resultSolution').innerText = data.product + "\n" + data.solution;
+
+            document.getElementById('test-loading').classList.remove('active');
+            document.getElementById('test-loading').style.display = 'none';
+            document.getElementById('test-result').style.display = 'block';
+            setTimeout(() => document.getElementById('test-result').classList.add('active'), 50);
+        }
+
+        function resetTest() {
+            currentQIndex = 0;
+            for (let key in scores) scores[key] = 0;
+            document.getElementById('test-result').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('test-result').style.display = 'none';
+                document.getElementById('test-intro').style.display = 'block';
+                setTimeout(() => document.getElementById('test-intro').classList.add('active'), 50);
+            }, 300);
+        }
+
+        function shareTest() {
+            if (!navigator.clipboard) {
+                // Fallback
+                const dummy = document.createElement("textarea");
+                document.body.appendChild(dummy);
+                dummy.value = window.location.href;
+                dummy.select();
+                document.execCommand("copy");
+                document.body.removeChild(dummy);
+                showToast("링크가 복사되었습니다!");
+                return;
+            }
+
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("결과 링크가 복사되었습니다!");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showToast("복사에 실패했습니다.");
+            });
+        }
+
+        function showToast(message) {
+            // Create toast element if not exists
+            let toast = document.getElementById('share-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'share-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 15%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: rgba(0,0,0,0.85);
+                    color: white;
+                    padding: 14px 28px;
+                    border-radius: 30px;
+                    z-index: 10002;
+                    font-size: 1rem;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                `;
+                document.body.appendChild(toast);
+            }
+
+            toast.innerText = message;
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

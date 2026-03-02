@@ -1,0 +1,24 @@
+# Backups
+*.backup.html
+assets_original_backup/
+
+# Node
+node_modules/
+package-lock.json
+
+# Scripts (development only)
+optimize-images.js
+optimize-images.sh
+convert-to-picture.js
+
+# Large video files
+*.mp4
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Legacy/temp folders
+legacy/
+26 jan event/
+event play/
