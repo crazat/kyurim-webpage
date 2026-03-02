@@ -3234,3 +3234,205 @@ a.btn {
         font-size: 0.7rem;
     }
 }
+
+/* =========================================
+   디자인 개선 (2026-03-02)
+   ========================================= */
+
+/* 1. 아이콘 박스 개선 (진료과목 섹션) */
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border: 2px solid #FFB7B2;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+    color: #FF9AA2;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(255, 183, 178, 0.2);
+}
+
+.card:hover .icon-box {
+    background: linear-gradient(135deg, #FFB7B2 0%, #FF9AA2 100%);
+    color: white;
+    transform: scale(1.1) rotate(8deg);
+    box-shadow: 0 8px 24px rgba(255, 154, 162, 0.4);
+    border-color: transparent;
+}
+
+/* 2. 카드 그림자 강화 */
+.card {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 183, 178, 0.15);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(255, 183, 178, 0.15);
+    border-color: rgba(255, 183, 178, 0.4);
+}
+
+/* BA 카드 그림자 강화 */
+.ba-card {
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ba-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(255, 183, 178, 0.2);
+    border-color: #FFB7B2;
+}
+
+/* 리뷰 카드 그림자 */
+.review-card {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: #ddd;
+}
+
+/* 이벤트 아이템 그림자 */
+.event-item {
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.event-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 3. 모바일 카운트다운 최적화 */
+@media (max-width: 768px) {
+    #countdown {
+        gap: 6px !important;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    #countdown .time-segment {
+        padding: 8px 10px;
+        min-width: 52px;
+    }
+
+    #countdown .time-segment span:first-child {
+        font-size: 1.6rem;
+    }
+
+    #countdown .time-segment .label {
+        font-size: 0.6rem;
+        letter-spacing: 0;
+    }
+
+    #countdown .separator {
+        font-size: 1.2rem;
+        margin: 0 2px;
+    }
+}
+
+/* 4. 추가: 프로세스 스텝 아이콘 개선 */
+.step-icon {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border: 2px solid #FFB7B2;
+    box-shadow: 0 4px 12px rgba(255, 183, 178, 0.2);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.step-item:hover .step-icon {
+    background: linear-gradient(135deg, #FFB7B2 0%, #FF9AA2 100%);
+    color: white;
+    border-color: transparent;
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(255, 154, 162, 0.4);
+}
+
+/* 5. 추가: 섹션 헤더 타이포그래피 개선 */
+.section-header h2 {
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+}
+
+.section-header h3 {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section-header .line {
+    height: 3px;
+    background: linear-gradient(90deg, #FFB7B2, #FF9AA2);
+    border-radius: 2px;
+}
+
+/* 6. 추가: 버튼 호버 효과 강화 */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* 7. 추가: 인테리어 이미지 호버 효과 */
+.interior-item {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interior-item:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.interior-item img {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interior-item:hover img {
+    transform: scale(1.08);
+}
