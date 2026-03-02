@@ -3436,3 +3436,67 @@ a.btn {
 .interior-item:hover img {
     transform: scale(1.08);
 }
+
+/* =========================================
+   모바일 성능 최적화 (2026-03-02)
+   - hover 효과 비활성화 (터치 기기)
+   - box-shadow 단순화
+   - transform 애니메이션 제거
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 모바일에서 hover 효과 비활성화 */
+    .card:hover,
+    .ba-card:hover,
+    .review-card:hover,
+    .event-item:hover,
+    .interior-item:hover {
+        transform: none !important;
+    }
+
+    .card:hover .icon-box,
+    .step-item:hover .step-icon {
+        transform: none !important;
+        background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%) !important;
+        color: #FF9AA2 !important;
+    }
+
+    .interior-item:hover img {
+        transform: none !important;
+    }
+
+    /* box-shadow 단순화 (단일 그림자) */
+    .card,
+    .ba-card,
+    .review-card,
+    .event-item,
+    .interior-item {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .icon-box,
+    .step-icon {
+        box-shadow: 0 2px 6px rgba(255, 183, 178, 0.15) !important;
+    }
+
+    /* 트랜지션 단순화 */
+    .card,
+    .ba-card,
+    .review-card,
+    .event-item,
+    .interior-item,
+    .icon-box,
+    .step-icon {
+        transition: none !important;
+    }
+
+    /* 버튼 샤인 효과 제거 */
+    .btn-primary::before {
+        display: none !important;
+    }
+
+    /* 플로팅 CTA 그림자 단순화 */
+    .floating-cta {
+        box-shadow: 0 4px 12px rgba(212, 36, 38, 0.3) !important;
+    }
+}
