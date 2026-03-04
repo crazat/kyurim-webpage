@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no, address=no, email=no"> <!-- Prevent auto-linking -->
+    <title>규림한의원 청주점 | 웨딩 클리닉</title>
+    <meta name="description" content="청주 규림한의원 웨딩 클리닉. D-Day 완벽 준비, 드레스 라인부터 피부 광채까지. 신부를 위한 맞춤 프로그램.">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="규림한의원 청주점 | 웨딩 클리닉">
+    <meta property="og:description" content="D-Day 완벽 준비, 드레스 라인부터 피부 광채까지. 신부를 위한 맞춤 프로그램.">
+    <meta property="og:image" content="../../assets/interior_1.jpg">
+    <meta property="og:url" content="https://kyurim-webpage.vercel.app/events/wedding">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/logo_icon.png">
+
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../spring.css">
+
+    <!-- Fonts -->
+    <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome - Deferred -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <style>
+        /* Landing Page Optimization */
+        .navbar,
+        .quick-menu {
+            display: none !important;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20000;
+            border-top: 1px solid #eee;
+        }
+
+        .sticky-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .sticky-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .sticky-btn.call {
+            color: #333;
+        }
+
+        .sticky-btn.kakao {
+            color: #3C1E1E;
+        }
+
+        .sticky-btn.talk {
+            color: #03C75A;
+        }
+
+        .sticky-btn.reserve {
+            background: #03C75A;
+            color: white;
+        }
+
+        .sticky-btn.kakao i {
+            color: #FEE500;
+            text-shadow: 0 0 1px #dbae00;
+        }
+
+        /* Adjust footer padding */
+        footer {
+            padding-bottom: 70px !important;
+        }
+
+        /* Ensure images are visible immediately */
+        body {
+            padding-top: 0 !important;
+        }
+
+        .hero-content {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body data-page-type="wedding">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Snow/Sparkle Container -->
+    <div id="snow-container"></div>
+
+    <!-- Rich Spring Letter Modal -->
+    <div id="talisman-modal" class="modal">
+        <div class="modal-content talisman-content"
+            style="position: relative; overflow: hidden; border-radius: 15px; border: 3px solid #FFDAC1; background: #FFFDF5; padding: 30px;">
+            <span class="close-btn" id="close-talisman"
+                style="z-index: 30; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #FF9AA2;">&times;</span>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2
+                    style="color: #FF9AA2; font-family: 'Great Vibes', 'Nanum Myeongjo', serif; font-size: 2.2rem; margin-bottom: 5px; font-weight: bold;">
+                    💒 웨딩 축복 편지 💒</h2>
+                <p style="color: #888; font-size: 1.05rem; letter-spacing: 0.5px; margin-top: 5px;">인생에서 가장 빛나는 날을 위해 준비하세요.</p>
+            </div>
+
+            <div class="talisman-card"
+                style="width: 100%; max-width: 320px; height: auto; background: #FFB7B2; border-radius: 10px; margin: 0 auto 20px; box-shadow: 0 8px 15px rgba(255,183,178,0.4); border: none; padding: 3px; writing-mode: horizontal-tb;">
+                <div class="talisman-body"
+                    style="background: #FFFDF5; border-radius: 8px; border: 1px dashed #FF9AA2; padding: 25px 20px; writing-mode: horizontal-tb; flex-direction: column;">
+                    <h3
+                        style="color: #FF9AA2; font-size: 1.4rem; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #FFDAC1; padding-bottom: 10px; width: 100%; writing-mode: horizontal-tb; letter-spacing: 0;">
+                        가장 아름다운 신부</h3>
+                    <p
+                        style="font-size: 1.05rem; line-height: 1.8; color: #555; text-align: center; margin-bottom: 15px; word-break: keep-all; display: block;">
+                        결혼식 날, 모든 시선이 당신에게<br>
+                        집중되는 그 순간을 위해,<br><br>
+                        드레스 라인부터 피부 광채까지<br>
+                        완벽하게 준비된 신부가 되도록<br>
+                        규림이 함께하겠습니다.
+                    </p>
+                    <div class="seal"
+                        style="margin: 0 auto; border-color: #FF9AA2; color: #FF9AA2; background: transparent; writing-mode: horizontal-tb;">
+                        규림</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(226, 240, 203, 0.4); padding: 15px; border-radius: 8px; text-align: center;">
+                <p style="color: #6B8E23; font-weight: bold; margin-bottom: 5px; font-size: 1.1rem;">💐 웨딩 준비 팁 💐</p>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">D-30부터 시작하는 집중 관리로<br>최상의 컨디션을 만들어보세요!</p>
+            </div>
+
+            <button class="btn"
+                style="margin-top: 20px; width: 100%; background: linear-gradient(135deg, #FF9AA2, #FFB7B2); border: none; padding: 15px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(255,154,162,0.3);"
+                onclick="document.getElementById('close-talisman').click(); window.location.href='#quick-inquiry';">💒
+                웨딩 프로그램 신청</button>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <picture>
+  <source srcset="../../assets/logo.webp" type="image/webp">
+  <img src="../../assets/logo.png" alt="규림한의원 로고">
+</picture>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">원장님 소개</a></li>
+                <li><a href="#specialties">진료과목</a></li>
+                <li><a href="#before-after">치료사례</a></li>
+                <li><a href="#interior">병원 둘러보기</a></li>
+                <li><a href="#blog">공식블로그</a></li>
+                <li><a href="#contact">오시는 길</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Before & After Section -->
+    <section id="before-after" class="section before-after">
+        <div class="container">
+            <div class="section-header">
+                <h3>Real-time Cases</h3>
+                <h2>치료 사례</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원의 놀라운 변화를 확인하세요.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="gallery-wrapper">
+                <button class="scroll-btn prev" aria-label="이전 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <div class="ba-gallery-grid">
+                    <!-- 1. 웨딩 다이어트 -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_wedding.webp" type="image/webp">
+  <img src="../../assets/ba_diet_wedding.png" alt="웨딩 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>D-30 웨딩 라인 관리</h4>
+                            <p>급속 감량 + 드레스 라인</p>
+                        </div>
+                    </div>
+                    <!-- 2. 숨은 등살 & 브라 라인 -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_back_fat.webp" type="image/webp">
+  <img src="../../assets/ba_diet_back_fat.png" alt="등살 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>숨은 등살 & 브라 라인</h4>
+                            <p>심부 온열 + 해독 다이어트</p>
+                        </div>
+                    </div>
+                    <!-- 3. 러브핸들 & 뱃살 삭제 -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_side_flank.webp" type="image/webp">
+  <img src="../../assets/ba_diet_side_flank.png" alt="옆구리 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>러브핸들 & 뱃살 삭제</h4>
+                            <p>라인 매선 + 체형 교정</p>
+                        </div>
+                    </div>
+                    <!-- 4. 하체 비만(승마살) 탈출 -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_thigh_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_thigh_k.png" alt="하체 비만 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>하체 비만(승마살) 탈출</h4>
+                            <p>지방분해 약침 + 순환 한약</p>
+                        </div>
+                    </div>
+                    <!-- 나머지 사례들 -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_arm_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_arm_k.png" alt="팔뚝살 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>팔뚝살/브라라인 정리</h4>
+                            <p>산삼 비만 약침 10회</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_1.webp" type="image/webp">
+  <img src="../../assets/ba_1.png" alt="치료 사례 1" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>대사질환/고도비만 극복</h4>
+                            <p>6개월 -20kg (당뇨/혈압 개선)</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_2.webp" type="image/webp">
+  <img src="../../assets/ba_2.png" alt="치료 사례 2" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>셀룰라이트/탄력 개선</h4>
+                            <p>지방분해 + 콜라겐 매선</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_3.webp" type="image/webp">
+  <img src="../../assets/ba_3.png" alt="치료 사례 3" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>갱년기 나잇살 관리</h4>
+                            <p>호르몬 밸런스 + 순환 한약</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_new_1.webp" type="image/webp">
+  <img src="../../assets/ba_diet_new_1.png" alt="다이어트 치료 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>고도비만 집중 감량</h4>
+                            <p>3개월 -15kg (체지방 위주)</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_full_k.webp" type="image/webp">
+  <img src="../../assets/ba_diet_full_k.png" alt="전신 감량 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>전신 대사 다이어트</h4>
+                            <p>4개월 -22kg (요요 방지)</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_diet_add_1.webp" type="image/webp">
+  <img src="../../assets/ba_diet_add_1.png" alt="산후 다이어트 전후" loading="lazy">
+</picture>
+                        <div class="ba-desc">
+                            <h4>산후 비만/붓기 관리</h4>
+                            <p>산후 보약 + 체형 교정</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-btn next" aria-label="다음 치료 사례 보기"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="ba-action">
+                <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-outline">
+                    더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section (Wedding) - Moved after Before & After -->
+    <section class="section video-section" style="padding: 40px 0 0 0;">
+        <div class="container"
+            style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+            <!-- 1. ComfyUI_00246_ -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20wedding/ComfyUI_00246_.mp4" type="video/mp4">
+            </video>
+            <!-- 2. ComfyUI_00249_ -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20wedding/ComfyUI_00249_.mp4" type="video/mp4">
+            </video>
+            <!-- 3. ComfyUI_00255_ -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20wedding/ComfyUI_00255_.mp4" type="video/mp4">
+            </video>
+            <!-- 4. ComfyUI_00260_ -->
+            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+                style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20wedding/ComfyUI_00260_.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Hero Section REMOVED -->
+
+    <!-- Moved Events Section -->
+    <section id="events" class="section events scroll-reveal">
+        <div class="container">
+            <div class="section-header">
+                <h3>Special Events</h3>
+                <h2>진행 중인 웨딩 이벤트</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원 청주점만의 특별한 웨딩 혜택.</p>
+            </div>
+            <div class="event-scroll-container">
+                <div class="event-item">
+                    <img src="../../assets/26%20march%20wedding/긴급구조대%20확정.png" alt="긴급구조대 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26%20march%20wedding/긴급구조대%202순위%20.png" alt="긴급구조대 2순위 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26%20march%20wedding/웨딩올킬%20확정.png" alt="웨딩올킬 이벤트" loading="lazy">
+                </div>
+                <div class="event-item">
+                    <img src="../../assets/26%20march%20wedding/웨딩올킬2.png" alt="웨딩올킬2 이벤트" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="section comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h3>Why Kyurim Wedding?</h3>
+                <h2>왜 규림 웨딩 클리닉인가요?</h2>
+                <div class="line"></div>
+                <p class="subtitle">인생에서 가장 빛나는 날을 위한 완벽 준비.</p>
+            </div>
+            <div class="comparison-container">
+                <!-- Competitor -->
+                <div class="comparison-card competitor">
+                    <h3>일반 웨딩케어</h3>
+                    <ul class="comparison-list">
+                        <li><strong>단순 체중 감량</strong><br>무리한 다이어트로 피부 트러블 발생</li>
+                        <li><strong>획일적 관리</strong><br>개인 체형과 드레스 라인 고려 부족</li>
+                        <li><strong>짧은 효과</strong><br>결혼식 직후 요요 현상 발생</li>
+                    </ul>
+                </div>
+                <!-- Kyurim -->
+                <div class="comparison-card kyurim">
+                    <div class="badge">BRIDAL SIGNATURE</div>
+                    <h3>규림한의원 청주점</h3>
+                    <ul class="comparison-list">
+                        <li><strong>토탈 브라이덜 케어</strong><br>체형 + 피부 + 컨디션 동시 관리</li>
+                        <li><strong>드레스 라인 맞춤</strong><br>등/팔뚝/턱선 등 노출 부위 집중 케어</li>
+                        <li><strong>D-Day 컨디션 최적화</strong><br>붓기 제로 + 피부 광채 + 최상의 컨디션</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRO 4. Quick Inquiry Form (Redesigned & Google Connected) -->
+    <section id="quick-inquiry" class="quick-inquiry-section scroll-reveal">
+        <div class="quick-inquiry-box">
+            <h3>💒 간편 무료상담 신청</h3>
+            <p>연락처를 남겨주시면 상담원이<br>친절하게 안내해드립니다.</p>
+
+            <form name="submit-to-google-sheet" class="inquiry-form">
+                <input type="hidden" name="페이지" value="웨딩">
+                <input type="tel" name="연락처" placeholder="010-1234-5678" required>
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i> 상담 신청하기
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Director Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <h3>Director</h3>
+                <h2>원장님 소개</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-content">
+                <div class="director-image">
+                    <img src="../../assets/profile.gif" alt="한정우 대표원장"
+                        style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                </div>
+                <div class="director-info">
+                    <h3>한정우 대표원장</h3>
+                    <ul class="career-list">
+                        <li>경희대학교 한의과대학 한의학석사</li>
+                        <li>한방비만학회 정회원</li>
+                        <li>대한한의임상피부과학회 정회원</li>
+                        <li>대한스포츠한의학회 정회원</li>
+                        <li>응용근신경학회 정회원</li>
+                        <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
+                        <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
+                        <li>AI 경진대회 우승자 (2025)</li>
+                    </ul>
+                    <p class="philosophy">
+                        "단순한 증상 완화가 아닌, 몸의 근본적인 균형을 되찾아<br>
+                        스스로 빛나는 건강한 아름다움을 선사합니다."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section (Focused on Wedding) -->
+    <section id="specialties" class="section specialties">
+        <div class="container">
+            <div class="section-header">
+                <h3>Specialties</h3>
+                <h2>진료 과목</h2>
+                <div class="line"></div>
+            </div>
+            <div class="grid-4">
+                <div class="card" style="grid-column: span 4; max-width: 400px; margin: 0 auto;">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-ring"></i>
+                    </div>
+                    <h3>웨딩 클리닉</h3>
+                    <p>드레스 라인 + 피부 광채 + 컨디션 관리<br>D-Day를 위한 토탈 브라이덜 케어</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatment Process Section -->
+    <section id="process" class="section process">
+        <div class="container">
+            <div class="section-header">
+                <h3>Process</h3>
+                <h2>진료 프로세스</h2>
+                <div class="line"></div>
+                <p class="subtitle">체계적인 1:1 맞춤 진료 시스템을 경험해보세요.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step-item fade-in">
+                    <div class="step-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <h4>01. 접수 및 설문</h4>
+                    <p>내원 후 접수 및<br>기초 설문지 작성</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-1">
+                    <div class="step-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4>02. 검사</h4>
+                    <p>인바디, 체형 분석 등<br>정밀 검사 진행</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-2">
+                    <div class="step-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h4>03. 원장님 상담</h4>
+                    <p>D-Day 일정 기반<br>1:1 심층 상담</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-3">
+                    <div class="step-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+                    <h4>04. 맞춤 치료</h4>
+                    <p>체형+피부+컨디션<br>토탈 브라이덜 케어</p>
+                </div>
+                <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-item fade-in delay-4">
+                    <div class="step-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                    <h4>05. D-Day 관리</h4>
+                    <p>결혼식 직전 최종<br>붓기 제거 + 광채 케어</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Director's Letter Trigger -->
+    <section class="letter-section scroll-reveal">
+        <div class="container">
+            <div class="letter-trigger-card">
+                <div class="letter-icon">💌</div>
+                <h3 style="font-size:1.2rem; font-weight:bold; margin-bottom:5px;">원장님이 보내는 비밀 편지</h3>
+                <p style="color:#666; font-size:0.9rem;">결혼을 앞둔 당신께 꼭 드리고 싶은 말씀이 있습니다.<br>터치해서 확인해보세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Reviews Section -->
+    <section id="reviews" class="section reviews">
+        <div class="container">
+            <div class="section-header" style="position:relative;">
+                <h3>Real Reviews</h3>
+                <h2>생생 치료 후기</h2>
+                <div class="line"></div>
+                <p class="subtitle">규림한의원과 함께 건강한 아름다움을 찾은 분들의 이야기입니다.</p>
+            </div>
+            <div class="review-carousel-container">
+                <div class="review-carousel">
+                    <!-- Reviews will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior Section -->
+    <section id="interior" class="section interior">
+        <div class="container">
+            <div class="section-header">
+                <h3>Interior</h3>
+                <h2>병원 둘러보기</h2>
+                <div class="line"></div>
+                <p class="subtitle">편안하고 아늑한 규림한의원 청주점의 내부입니다.</p>
+            </div>
+            <div class="interior-grid">
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_1.webp" type="image/webp">
+  <img src="../../assets/interior_1.jpg" alt="병원 내부 1" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_2.webp" type="image/webp">
+  <img src="../../assets/interior_2.jpg" alt="병원 내부 2" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item" style="position: relative; overflow: visible !important;">
+                    <picture>
+  <source srcset="../../assets/interior_3.webp" type="image/webp">
+  <img src="../../assets/interior_3.jpg" alt="병원 내부 3" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_4.webp" type="image/webp">
+  <img src="../../assets/interior_4.jpg" alt="병원 내부 4" loading="lazy">
+</picture>
+                </div>
+                <div class="interior-item">
+                    <picture>
+  <source srcset="../../assets/interior_5.webp" type="image/webp">
+  <img src="../../assets/interior_5.jpg" alt="병원 내부 5" loading="lazy">
+</picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider -->
+    <div class="ink-divider"></div>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <div class="blog-wrapper">
+                <div class="blog-text">
+                    <h3>Kyurim's Story</h3>
+                    <h2>규림한의원 공식 블로그</h2>
+                    <p>한정우 원장의 진료 일기, 건강 정보, 그리고 병원 소식을<br>블로그에서 가장 먼저 만나보세요.</p>
+                    <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-n"></i> 블로그 방문하기
+                    </a>
+                </div>
+                <div class="blog-visual">
+                    <!-- Decorative visual -->
+                    <div class="circle-deco"></div>
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ink Wash Divider (Reverse) -->
+    <div class="ink-divider reverse"></div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-header">
+                <h3>Q&A</h3>
+                <h2>자주 묻는 질문</h2>
+                <div class="line"></div>
+            </div>
+            <div class="faq-container">
+                <!-- FAQ Items will be injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>오시는 길 & 진료안내</h2>
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>충청북도 청주시 상당구 상당로 81번길 36, 5층
+                            <button onclick="copyAddress()" class="btn-copy-address" title="주소 복사"
+                                style="margin-left:5px; padding: 2px 8px; font-size: 0.8rem; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; background: #fff;">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <p><a href="tel:043-224-1075">043-224-1075</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <p>평일: 10:30 - 20:30</p>
+                            <p>토요일: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-buttons">
+                        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary"
+                            style="background-color: #FEE500; border-color: #FEE500; color: #3C1E1E;">
+                            <i class="fa-solid fa-comment"></i> 카카오톡 문의하기
+                        </a>
+                        <a href="https://talk.naver.com/ct/w4y1te?frm=mnmb#nafullscreen" target="_blank"
+                            class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white;">
+                            <i class="fa-solid fa-comments"></i> 네이버 톡톡 문의
+                        </a>
+                        <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-primary"
+                            style="background-color: #E1306C; border-color: #E1306C; color: white;">
+                            <i class="fa-brands fa-instagram"></i> 인스타그램
+                        </a>
+                        <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary"
+                            style="background-color: #2DB400; border-color: #2DB400; color: white;">
+                            <i class="fa-solid fa-blog"></i> 블로그 바로가기
+                        </a>
+                        <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                            target="_blank" class="btn btn-primary"
+                            style="background-color: #03C75A; border-color: #03C75A; color: white; grid-column: span 2;">
+                            <i class="fa-solid fa-map-location-dot"></i> 네이버 지도 보기
+                        </a>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- Naver Map Image Link -->
+                    <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
+                        target="_blank" title="네이버 지도로 보기">
+                        <picture>
+  <source srcset="../../assets/naver_map.webp" type="image/webp">
+  <img src="../../assets/naver_map.png" alt="규림한의원 청주점 위치 (네이버 지도)"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+</picture>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Menu (Floating) -->
+    <div class="quick-menu">
+        <a href="tel:043-224-1075" class="quick-btn tel" aria-label="전화 상담">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="quick-btn kakao" aria-label="카카오톡 상담">
+            <i class="fa-solid fa-comment"></i>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="quick-btn naver" aria-label="네이버 예약">
+            <i class="fa-solid fa-calendar-check"></i>
+        </a>
+    </div>
+
+    <!-- Top Button -->
+    <button id="topBtn" class="top-btn" aria-label="맨 위로 이동"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-info">
+                <p>상호명: 규림한의원 청주점 | 대표자: 한정우</p>
+                <p>사업자등록번호: 538-66-00350 </p>
+                <p>주소: 충청북도 청주시 상당구 상당로 81번길 36, 5층</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 규림한의원 청주점. All Rights Reserved. <span class="footer-seal">규림</span></p>
+                <p><a href="#" style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">개인정보처리방침</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Story Modal -->
+    <div id="storyModal" class="story-modal">
+        <button class="story-close" aria-label="닫기" style="z-index: 30;">&times;</button>
+        <div class="story-content" style="position: relative;">
+            <div class="changhoji-door left"></div>
+            <div class="changhoji-door right"></div>
+            <div class="story-image-wrapper">
+                <img id="storyImage" src="" alt="치료 사례">
+            </div>
+            <div class="story-text-wrapper">
+                <span id="storyTag" class="story-tag">TAG</span>
+                <div class="story-header">
+                    <h3 id="storyTitle">TITLE</h3>
+                </div>
+                <div id="storyProfile" class="story-profile">
+                    PROFILE
+                </div>
+                <div id="storyDesc" class="story-desc">
+                    DESCRIPTION
+                </div>
+                <div id="storyResult" class="story-result">
+                    RESULT
+                </div>
+                <div class="story-footer">
+                    <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary">
+                        <i class="fa-solid fa-comment"></i> 내 증상 상담하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../../diagnosis.js" defer></script>
+    <script src="../../script.js" defer></script>
+
+    <!-- Failsafe Script for Talisman -->
+    <script>
+        window.openTalismanModal = function () {
+            console.log("Failsafe Open Talisman Triggered");
+            var modal = document.getElementById('talisman-modal');
+            if (modal) {
+                modal.style.display = 'block';
+                modal.style.opacity = '1';
+                modal.classList.add('show');
+                modal.style.zIndex = '2147483647';
+            } else {
+                alert('Talisman Modal Not Found in DOM');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('open-talisman-btn');
+            if (btn) {
+                btn.onclick = window.openTalismanModal;
+                btn.setAttribute('data-tooltip', '💒 행복한 결혼 준비하세요!');
+            }
+        });
+    </script>
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <a href="tel:043-224-1075" class="sticky-btn call highlight-anim">
+            <i class="fa-solid fa-phone"></i>
+            <span>무료상담</span>
+        </a>
+        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="sticky-btn kakao highlight-anim"
+            style="animation-delay: 2.5s;">
+            <i class="fa-solid fa-comment"></i>
+            <span>카톡문의</span>
+        </a>
+        <a href="http://talk.naver.com/w4y1te?frm=mnmb&frm=nmb_detail" target="_blank" class="sticky-btn talk">
+            <i class="fa-solid fa-comments"></i>
+            <span>네이버톡톡</span>
+        </a>
+        <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
+            target="_blank" class="sticky-btn reserve">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>간편예약</span>
+        </a>
+    </div>
+
+    <!-- AI Sticky Rolling Ticker (Wedding Page) -->
+    <div class="ai-ticker-sticky-rolling">
+        <div class="ticker-container-inner">
+            <div class="ticker-content">
+                <div class="ticker-item active"><span class="live-indicator"></span><strong>[드레스핏]</strong> "드레스 입을 때 삐져나오는 등살/팔뚝, <strong>'D-30 집중 케어'</strong>로 완벽한 라인을 만드세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[피부광채]</strong> "결혼식 날 조명 아래 빛나는 피부, <strong>'물광 약침'</strong>으로 신부 광채를 완성하세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[턱선정리]</strong> "웨딩 사진에서 가장 중요한 건 V라인. <strong>'윤곽 매선'</strong>으로 갸름한 턱선을 잡으세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[붓기제로]</strong> "결혼식 아침 얼굴이 퉁퉁? <strong>'D-Day 붓기 케어'</strong>로 최상의 컨디션을 유지하세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[토탈케어]</strong> "체형+피부+컨디션 동시 관리! 규림만의 <strong>'브라이덜 토탈 패키지'</strong>를 경험하세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[급속감량]</strong> "결혼식이 코앞? <strong>'3주 급속 프로그램'</strong>으로 드레스 사이즈를 줄이세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[셀프웨딩]</strong> "야외 촬영도 걱정 없이! <strong>'지속력 높은 피부 관리'</strong>로 하루 종일 빛나세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[신랑케어]</strong> "신부만? 신랑도 함께! <strong>'커플 패키지'</strong>로 둘 다 완벽하게 준비하세요."</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRO Scripts (Google Sheets Integration) -->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        if (form) {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const phoneInput = form.querySelector('input[name="연락처"]');
+                if (phoneInput.value.length < 10) {
+                    alert('올바른 연락처를 입력해주세요.');
+                    return;
+                }
+
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
+                btn.disabled = true;
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        alert('💒 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
+                        form.reset();
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        if (scriptURL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                            alert('💒 (데모) 신청 완료되었습니다.\n*실제 작동하려면 구글 스크립트 URL을 설정 파일에 넣어주세요.');
+                            form.reset();
+                        } else {
+                            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                        }
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    });
+            });
+        }
+    </script>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-reveal-active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+    <script>
+        function copyAddress() {
+            const address = "충청북도 청주시 상당구 상당로 81번길 36, 5층";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("주소가 복사되었습니다! \n지도 앱에 붙여넣기 하세요.");
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
