@@ -1100,28 +1100,15 @@
             });
         });
 
-        // Modal timer management (hoisted variables and functions)
-        let closeTimeout = null;
-
+        // Modal open/close functions (simplified for reliability)
         function openStoryModal() {
-            if (closeTimeout) {
-                clearTimeout(closeTimeout);
-                closeTimeout = null;
-            }
             storyModal.classList.remove('closing');
             storyModal.classList.add('show');
         }
 
         function closeStoryModal() {
-            if (closeTimeout) {
-                clearTimeout(closeTimeout);
-            }
-            storyModal.classList.add('closing');
-            closeTimeout = setTimeout(() => {
-                storyModal.classList.remove('show');
-                storyModal.classList.remove('closing');
-                closeTimeout = null;
-            }, 250); // 0.25s to match ultra fast animation
+            storyModal.classList.remove('show');
+            storyModal.classList.remove('closing');
         }
 
         if (storyClose) storyClose.addEventListener('click', closeStoryModal);
