@@ -2254,10 +2254,13 @@ button,
     display: none;
     animation: slideDownFade 0.5s ease-in-out;
     width: 100%;
+    line-height: 1.5;
 }
 
 .ticker-item.active {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ticker-highlight {
