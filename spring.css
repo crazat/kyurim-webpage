@@ -3430,3 +3430,282 @@ button:focus-visible {
         page-break-inside: avoid;
     }
 }
+
+/* ============================================
+   #12. Navbar Shrink on Scroll
+   ============================================ */
+.navbar {
+    transition: all var(--duration-normal) ease;
+}
+
+.navbar.scrolled {
+    padding: 8px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar.scrolled .logo img {
+    height: 40px;
+    transition: height var(--duration-normal) ease;
+}
+
+.navbar.scrolled .nav-links a {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   #13. Active Section Highlight (Navigation)
+   ============================================ */
+.nav-links a {
+    position: relative;
+    transition: color var(--duration-fast) ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--spring-blossom-pink),
+        var(--spring-coral-pink)
+    );
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width var(--duration-fast) ease;
+}
+
+.nav-links a.active {
+    color: var(--spring-coral-pink);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a:hover::after {
+    width: 80%;
+}
+
+/* ============================================
+   #14. Card 3D Tilt Effect
+   ============================================ */
+.tilt-card,
+.ba-card,
+.benefit-item,
+.service-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform var(--duration-normal) ease;
+}
+
+.tilt-card:hover,
+.ba-card:hover,
+.benefit-item:hover,
+.service-card:hover {
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.02);
+}
+
+.tilt-card .card-content,
+.ba-card .card-content {
+    transform: translateZ(20px);
+}
+
+/* Shine overlay effect on tilt */
+.tilt-card::before,
+.ba-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        transparent 50%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity var(--duration-fast) ease;
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 1;
+}
+
+.tilt-card:hover::before,
+.ba-card:hover::before {
+    opacity: 1;
+}
+
+/* ============================================
+   #15. Floating Label Input Animation
+   ============================================ */
+.floating-label-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.floating-label-group input,
+.floating-label-group textarea {
+    width: 100%;
+    padding: 16px 12px 8px;
+    font-size: 1rem;
+    border: 2px solid var(--spring-mint-light);
+    border-radius: 8px;
+    background: transparent;
+    transition: border-color var(--duration-fast) ease;
+}
+
+.floating-label-group label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all var(--duration-fast) ease;
+    background: var(--cream-bg);
+    padding: 0 4px;
+}
+
+.floating-label-group textarea ~ label {
+    top: 16px;
+    transform: none;
+}
+
+.floating-label-group input:focus,
+.floating-label-group textarea:focus {
+    border-color: var(--spring-coral-pink);
+    outline: none;
+}
+
+.floating-label-group input:focus ~ label,
+.floating-label-group input:not(:placeholder-shown) ~ label,
+.floating-label-group textarea:focus ~ label,
+.floating-label-group textarea:not(:placeholder-shown) ~ label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: var(--spring-coral-pink);
+}
+
+/* ============================================
+   #16. Custom Mouse Cursor (Desktop Only)
+   ============================================ */
+@media (hover: hover) and (pointer: fine) {
+    .cursor-dot {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--spring-coral-pink);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 100001;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    }
+
+    .cursor-outline {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--spring-blossom-pink);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 100000;
+        transform: translate(-50%, -50%);
+        transition: all 0.15s ease-out;
+        opacity: 0.6;
+    }
+
+    /* Hover states for interactive elements */
+    .cursor-hover .cursor-dot {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 183, 178, 0.3);
+    }
+
+    .cursor-hover .cursor-outline {
+        width: 60px;
+        height: 60px;
+        border-color: var(--spring-coral-pink);
+        opacity: 1;
+    }
+
+    /* Click animation */
+    .cursor-click .cursor-dot {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .cursor-click .cursor-outline {
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    /* Hide default cursor on body */
+    body.custom-cursor {
+        cursor: none;
+    }
+
+    body.custom-cursor a,
+    body.custom-cursor button,
+    body.custom-cursor input,
+    body.custom-cursor textarea,
+    body.custom-cursor select,
+    body.custom-cursor [onclick] {
+        cursor: none;
+    }
+}
+
+/* ============================================
+   #17. Pull-to-Refresh Effect (Mobile Only)
+   ============================================ */
+@media (max-width: 768px) {
+    .pull-to-refresh {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+            180deg,
+            var(--cream-bg) 0%,
+            transparent 100%
+        );
+        transform: translateY(-100%);
+        transition: transform var(--duration-fast) ease;
+        z-index: 9998;
+        pointer-events: none;
+    }
+
+    .pull-to-refresh.visible {
+        transform: translateY(0);
+    }
+
+    .pull-to-refresh.refreshing .pull-spinner {
+        animation: spin 1s linear infinite;
+    }
+
+    .pull-spinner {
+        width: 24px;
+        height: 24px;
+        border: 3px solid var(--spring-mint-light);
+        border-top-color: var(--spring-coral-pink);
+        border-radius: 50%;
+    }
+
+    .pull-text {
+        margin-left: 10px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+}

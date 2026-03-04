@@ -2039,3 +2039,241 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ============================================
+// #12. Navbar Shrink on Scroll
+// ============================================
+(function() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateNavbar() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+
+// ============================================
+// #13. Active Section Highlight (Navigation)
+// ============================================
+(function() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    if (sections.length === 0 || navLinks.length === 0) return;
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach(section => observer.observe(section));
+})();
+
+// ============================================
+// #14. Card 3D Tilt Effect
+// ============================================
+(function() {
+    const isMobile = window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isMobile || prefersReducedMotion) return;
+
+    const tiltCards = document.querySelectorAll('.tilt-card, .ba-card, .benefit-item, .service-card');
+
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.setProperty('--tilt-x', `${rotateX}deg`);
+            card.style.setProperty('--tilt-y', `${rotateY}deg`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--tilt-x', '0deg');
+            card.style.setProperty('--tilt-y', '0deg');
+        });
+    });
+})();
+
+// ============================================
+// #16. Custom Mouse Cursor (Desktop Only)
+// ============================================
+(function() {
+    const isMobile = window.innerWidth <= 768;
+    const isTouch = 'ontouchstart' in window;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isMobile || isTouch || prefersReducedMotion) return;
+
+    // Create cursor elements
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+
+    const cursorOutline = document.createElement('div');
+    cursorOutline.className = 'cursor-outline';
+
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorOutline);
+    document.body.classList.add('custom-cursor');
+
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    // Update cursor position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+    });
+
+    // Smooth follow for outline
+    function animateOutline() {
+        outlineX += (mouseX - outlineX) * 0.15;
+        outlineY += (mouseY - outlineY) * 0.15;
+
+        cursorOutline.style.left = `${outlineX}px`;
+        cursorOutline.style.top = `${outlineY}px`;
+
+        requestAnimationFrame(animateOutline);
+    }
+    animateOutline();
+
+    // Hover effect for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, [onclick], .btn, .sticky-btn');
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-hover');
+        });
+    });
+
+    // Click effect
+    document.addEventListener('mousedown', () => {
+        document.body.classList.add('cursor-click');
+    });
+    document.addEventListener('mouseup', () => {
+        document.body.classList.remove('cursor-click');
+    });
+
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '0.6';
+    });
+})();
+
+// ============================================
+// #17. Pull-to-Refresh Effect (Mobile Only)
+// ============================================
+(function() {
+    const isMobile = window.innerWidth <= 768;
+    if (!isMobile) return;
+
+    // Create pull-to-refresh element
+    const pullToRefresh = document.createElement('div');
+    pullToRefresh.className = 'pull-to-refresh';
+    pullToRefresh.innerHTML = `
+        <div class="pull-spinner"></div>
+        <span class="pull-text">당겨서 새로고침</span>
+    `;
+    document.body.prepend(pullToRefresh);
+
+    let startY = 0;
+    let isPulling = false;
+    const threshold = 80;
+
+    document.addEventListener('touchstart', (e) => {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+            isPulling = true;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isPulling || window.scrollY > 0) return;
+
+        const currentY = e.touches[0].clientY;
+        const diff = currentY - startY;
+
+        if (diff > 0 && diff < threshold * 2) {
+            pullToRefresh.classList.add('visible');
+            const progress = Math.min(diff / threshold, 1);
+            pullToRefresh.style.transform = `translateY(${progress * 60 - 60}px)`;
+
+            if (diff >= threshold) {
+                pullToRefresh.querySelector('.pull-text').textContent = '놓아서 새로고침';
+            } else {
+                pullToRefresh.querySelector('.pull-text').textContent = '당겨서 새로고침';
+            }
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => {
+        if (!isPulling) return;
+
+        const pullText = pullToRefresh.querySelector('.pull-text');
+        if (pullText.textContent === '놓아서 새로고침') {
+            pullToRefresh.classList.add('refreshing');
+            pullText.textContent = '새로고침 중...';
+
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        } else {
+            pullToRefresh.classList.remove('visible');
+            pullToRefresh.style.transform = '';
+        }
+
+        isPulling = false;
+    }, { passive: true });
+})();
