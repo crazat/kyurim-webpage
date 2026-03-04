@@ -1,17 +1,25 @@
-﻿/* Variables */
+﻿/* ===========================================
+   Base Variables (Season-Independent)
+   - These are overridden by seasonal theme CSS
+   - spring.css, summer.css, fall.css, winter.css
+   =========================================== */
 :root {
-    --primary-color: #D42426;
-    /* Christmas Red */
-    --secondary-color: #165B33;
-    /* Forest Green */
-    --accent-color: #F8B229;
-    /* Gold */
+    /* Brand Colors */
+    --primary-color: #D42426;       /* Kyurim Brand Red */
+    --secondary-color: #4A3B32;     /* Warm Brown (Text) */
+    --accent-color: #FFB7C5;        /* Accent (Theme-dependent) */
+
+    /* Neutral Colors */
     --text-color: #333333;
-    --bg-color: #FDFBF7;
-    /* Warm White */
+    --text-soft: #666666;
+    --bg-color: #FFFDF5;            /* Warm Cream */
     --white: #FFFFFF;
     --gray: #F0F0F0;
+
+    /* Transitions */
     --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+    --transition-slow: all 0.6s ease;
 }
 
 /* Reset & Base Styles */
@@ -42,7 +50,6 @@ h5,
 h6 {
     font-family: 'NanumBarunGothic', sans-serif;
     color: var(--secondary-color);
-    /* Headers in Green */
     font-weight: 700;
 }
 

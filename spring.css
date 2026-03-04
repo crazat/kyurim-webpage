@@ -1900,53 +1900,127 @@ button,
     transition-delay: 0.3s;
 }
 
-/* 4. Real-time Reservation Notification (Social Proof) */
+/* 4. Real-time Reservation Notification (Social Proof) - Redesigned */
 .reservation-toast {
     position: fixed;
     top: 100px;
-    /* Safe distance below navbar (desktop) */
     left: 50%;
     transform: translateX(-50%) translateY(-150%);
-    /* Robust hiding */
-    background: rgba(10, 25, 47, 0.95);
-    /* Premium Navy */
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%);
+    color: var(--text-dark);
+    padding: 0;
+    border-radius: 16px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.12),
+        0 2px 10px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     z-index: 998;
-    /* Below navbar (1000) and ticker (999) to prevent overlap */
     display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap;
+    align-items: stretch;
     opacity: 0;
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    border: 1px solid rgba(255, 218, 193, 0.3);
-    /* Gold border */
+    transition: all 0.5s var(--ease-spring);
+    border: 1px solid rgba(255, 183, 178, 0.3);
     pointer-events: none;
-    /* Allow clicks to pass through */
+    overflow: hidden;
+    max-width: 320px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .reservation-toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
 }
 
-.reservation-toast i {
-    color: #FFDAC1;
-    /* Gold */
+/* Icon badge */
+.reservation-toast > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    background: linear-gradient(135deg, var(--spring-blossom-pink) 0%, var(--spring-coral-pink) 100%);
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Content area */
+.reservation-toast > div {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
 }
 
 .reservation-toast .toast-text {
-    font-size: 0.9rem;
-    font-weight: 300;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text-dark);
+}
+
+.reservation-toast .toast-text b {
+    color: var(--spring-coral-dark);
+    font-weight: 600;
 }
 
 .reservation-toast .toast-time {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px 12px 0;
+    align-self: center;
+}
+
+.reservation-toast .toast-time::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: toastPulse 2s infinite;
+}
+
+@keyframes toastPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Progress bar (auto-dismiss indicator) */
+.reservation-toast::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--spring-blossom-pink), var(--spring-coral-pink));
+    animation: toastProgress 4s linear forwards;
+    border-radius: 0 0 16px 16px;
+}
+
+@keyframes toastProgress {
+    0% { width: 100%; }
+    100% { width: 0%; }
+}
+
+/* Dark mode toast */
+@media (prefers-color-scheme: dark) {
+    .reservation-toast {
+        background: linear-gradient(135deg, rgba(42, 42, 42, 0.98) 0%, rgba(30, 30, 30, 0.98) 100%);
+        border-color: rgba(255, 154, 154, 0.3);
+    }
+
+    .reservation-toast .toast-text {
+        color: var(--text-dark);
+    }
+
+    .reservation-toast .toast-text b {
+        color: var(--spring-coral-pink);
+    }
 }
 
 /* 5. Director's Secret Letter (Emotional Hook) */
@@ -2649,13 +2723,20 @@ header.hero {
     .reservation-toast {
         top: 135px;
         bottom: auto;
-        /* Position below ticker to avoid thumb scrolling area */
+        left: 10px;
+        right: 10px;
+        transform: translateX(0) translateY(-150%);
+        max-width: none;
+        border-radius: 12px;
+    }
+
+    .reservation-toast.show {
+        transform: translateX(0) translateY(0);
     }
 
     /* Landing Pages: No navbar, sticky ticker at top */
     body[data-page-type] .reservation-toast {
         top: 50px;
-        /* Just below sticky ticker */
     }
 
     /* Fix for content being covered by fixed ticker on mobile */
