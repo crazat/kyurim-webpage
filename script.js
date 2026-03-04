@@ -1039,87 +1039,90 @@
             sparklePool.length = 0;
         });
 
-        // Select images from Events and Treatment Cases
-        const eventImages = document.querySelectorAll('.event-item img');
-        const baCards = document.querySelectorAll('.ba-card'); // Select Cards for Spotlight
-        const baImages = document.querySelectorAll('.ba-card img');
-        const allTargetImages = [...eventImages, ...baImages];
-
-        // --- Spotlight Effect Logic ---
+        // --- Spotlight Effect Logic for ba-cards ---
+        const baCards = document.querySelectorAll('.ba-card');
         baCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-
                 card.style.setProperty('--x', `${x}px`);
                 card.style.setProperty('--y', `${y}px`);
             });
         });
 
-        allTargetImages.forEach(img => {
-            img.style.cursor = 'pointer'; // Indicate clickable
-            img.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent bubbling
-
-                // Get filename from src
-                const src = img.getAttribute('src');
-                // Handle potential query parameters and URL encoding
-                const filename = decodeURIComponent(src.split('/').pop().split('?')[0]);
-
-                // Populate Modal
-                storyImage.src = src;
-
-                const data = storyData[filename];
-                if (data) {
-                    document.getElementById('storyTag').innerText = data.tag;
-                    document.getElementById('storyTitle').innerText = data.title;
-                    document.getElementById('storyProfile').innerText = data.profile;
-                    document.getElementById('storyDesc').innerText = data.desc;
-                    document.getElementById('storyResult').innerText = data.result;
-                } else {
-                    // Fallback for images without specific story (e.g., event images)
-                    document.getElementById('storyTag').innerText = "이벤트";
-                    document.getElementById('storyTitle').innerText = "진행 중인 이벤트";
-                    document.getElementById('storyProfile').innerText = "규림한의원 청주점";
-                    document.getElementById('storyDesc').innerText = "지금 바로 상담 신청하고 혜택을 받아보세요!";
-                    document.getElementById('storyResult').innerText = "선착순 마감될 수 있습니다.";
-                }
-
-                openStoryModal();
-
-                // Reset scroll position to top
-                const storyContent = document.querySelector('.story-content');
-                if (storyContent) {
-                    storyContent.scrollTop = 0;
-                }
-                const storyTextWrapper = document.querySelector('.story-text-wrapper');
-                if (storyTextWrapper) {
-                    storyTextWrapper.scrollTop = 0;
-                }
-            });
+        // Set cursor pointer for all target images
+        document.querySelectorAll('.event-item img, .ba-card img').forEach(img => {
+            img.style.cursor = 'pointer';
         });
 
-        // Modal open/close functions (simplified for reliability)
+        // Modal open/close functions
         function openStoryModal() {
-            storyModal.classList.remove('closing');
+            storyModal.style.display = 'flex';
             storyModal.classList.add('show');
         }
 
         function closeStoryModal() {
             storyModal.classList.remove('show');
-            storyModal.classList.remove('closing');
+            storyModal.style.display = 'none';
         }
 
-        if (storyClose) storyClose.addEventListener('click', closeStoryModal);
+        // EVENT DELEGATION: Handle all image clicks at document level
+        document.addEventListener('click', (e) => {
+            const img = e.target.closest('.event-item img, .ba-card img');
+            if (!img) return;
 
+            // Prevent if modal is already open
+            if (storyModal.classList.contains('show')) return;
+
+            const src = img.getAttribute('src');
+            if (!src) return;
+
+            const filename = decodeURIComponent(src.split('/').pop().split('?')[0]);
+
+            // Populate Modal
+            storyImage.src = src;
+
+            const data = storyData[filename];
+            if (data) {
+                document.getElementById('storyTag').innerText = data.tag;
+                document.getElementById('storyTitle').innerText = data.title;
+                document.getElementById('storyProfile').innerText = data.profile;
+                document.getElementById('storyDesc').innerText = data.desc;
+                document.getElementById('storyResult').innerText = data.result;
+            } else {
+                document.getElementById('storyTag').innerText = "이벤트";
+                document.getElementById('storyTitle').innerText = "진행 중인 이벤트";
+                document.getElementById('storyProfile').innerText = "규림한의원 청주점";
+                document.getElementById('storyDesc').innerText = "지금 바로 상담 신청하고 혜택을 받아보세요!";
+                document.getElementById('storyResult').innerText = "선착순 마감될 수 있습니다.";
+            }
+
+            openStoryModal();
+
+            // Reset scroll position
+            const storyContent = document.querySelector('.story-content');
+            if (storyContent) storyContent.scrollTop = 0;
+            const storyTextWrapper = document.querySelector('.story-text-wrapper');
+            if (storyTextWrapper) storyTextWrapper.scrollTop = 0;
+        });
+
+        // Close button click
+        if (storyClose) {
+            storyClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeStoryModal();
+            });
+        }
+
+        // Background click to close
         storyModal.addEventListener('click', (e) => {
-            if (e.target === storyModal || e.target === storyClose) {
+            if (e.target === storyModal) {
                 closeStoryModal();
             }
         });
 
-        // Close on Escape key
+        // Escape key to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && storyModal.classList.contains('show')) {
                 closeStoryModal();
