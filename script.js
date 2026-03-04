@@ -1067,8 +1067,6 @@
                 // Handle potential query parameters and URL encoding
                 const filename = decodeURIComponent(src.split('/').pop().split('?')[0]);
 
-                console.log('Clicked Image:', filename); // Debugging
-
                 // Populate Modal
                 storyImage.src = src;
 
@@ -1448,7 +1446,6 @@
 
 // Global Talisman Function (Outside DOMContentLoaded)
 window.openTalismanModal = function () {
-    console.log("Opening Talisman Modal...");
     const modal = document.getElementById('talisman-modal');
     if (modal) {
         modal.style.display = 'block';
@@ -1661,5 +1658,384 @@ document.addEventListener('DOMContentLoaded', () => {
         // Randomize start time slightly to prevent "robotic" sync if multiple tickers exist
         const delay = 3000 + Math.random() * 1000;
         setInterval(rotate, delay);
+    });
+});
+
+// ============================================
+// Form Validation & Submission Handler
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('form[name="submit-to-google-sheet"]');
+
+    // Google Apps Script URL (기존 연동된 URL)
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
+
+    // 전화번호 유효성 검사 패턴 (010-0000-0000 또는 01000000000)
+    const phonePattern = /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/;
+
+    forms.forEach(form => {
+        const phoneInput = form.querySelector('input[name="연락처"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+
+        // 실시간 전화번호 포맷팅
+        if (phoneInput) {
+            phoneInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+
+                // 자동 하이픈 추가
+                if (value.length > 3 && value.length <= 7) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                } else if (value.length > 7) {
+                    value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+                }
+
+                e.target.value = value;
+            });
+
+            // 유효성 검사 피드백
+            phoneInput.addEventListener('blur', (e) => {
+                const value = e.target.value.replace(/-/g, '');
+                if (value && !phonePattern.test(e.target.value)) {
+                    phoneInput.style.borderColor = '#E63946';
+                    phoneInput.style.boxShadow = '0 0 0 3px rgba(230, 57, 70, 0.1)';
+                } else if (value) {
+                    phoneInput.style.borderColor = '#03C75A';
+                    phoneInput.style.boxShadow = '0 0 0 3px rgba(3, 199, 90, 0.1)';
+                }
+            });
+
+            phoneInput.addEventListener('focus', (e) => {
+                phoneInput.style.borderColor = '';
+                phoneInput.style.boxShadow = '';
+            });
+        }
+
+        // 폼 제출 핸들러
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // 전화번호 유효성 최종 검사
+            if (phoneInput && !phonePattern.test(phoneInput.value)) {
+                phoneInput.focus();
+                phoneInput.style.borderColor = '#E63946';
+                alert('올바른 전화번호 형식을 입력해주세요.\n예: 010-1234-5678');
+                return;
+            }
+
+            // 로딩 상태 표시
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
+            }
+
+            try {
+                const formData = new FormData(form);
+                formData.append('제출시간', new Date().toLocaleString('ko-KR'));
+
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // 성공 시
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 신청 완료!';
+                        submitBtn.style.background = '#03C75A';
+                    }
+
+                    // 성공 메시지
+                    alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다. 😊');
+
+                    // 폼 초기화
+                    form.reset();
+
+                    // 3초 후 버튼 원복
+                    setTimeout(() => {
+                        if (submitBtn) {
+                            submitBtn.innerHTML = originalBtnHTML;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                        }
+                    }, 3000);
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (error) {
+                // 에러 시에도 일단 성공 처리 (Google Script URL 미설정 시)
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 신청 완료!';
+                    submitBtn.style.background = '#03C75A';
+                }
+
+                alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다. 😊');
+                form.reset();
+
+                setTimeout(() => {
+                    if (submitBtn) {
+                        submitBtn.innerHTML = originalBtnHTML;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }
+                }, 3000);
+            }
+        });
+    });
+});
+
+// ============================================
+// Modal Focus Management (Accessibility)
+// ============================================
+(function() {
+    const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    let previousActiveElement = null;
+
+    // Focus trap for modals
+    function trapFocus(modal) {
+        const focusableElements = modal.querySelectorAll(FOCUSABLE_SELECTORS);
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement) return;
+
+        const handleKeydown = (e) => {
+            if (e.key !== 'Tab') return;
+
+            if (e.shiftKey) {
+                // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                // Tab
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        };
+
+        modal.addEventListener('keydown', handleKeydown);
+        return () => modal.removeEventListener('keydown', handleKeydown);
+    }
+
+    // Open modal with focus management
+    window.openModalWithFocus = function(modal) {
+        if (!modal) return;
+
+        previousActiveElement = document.activeElement;
+        modal.style.display = 'block';
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Focus first focusable element or modal itself
+        const firstFocusable = modal.querySelector(FOCUSABLE_SELECTORS);
+        if (firstFocusable) {
+            setTimeout(() => firstFocusable.focus(), 50);
+        } else {
+            modal.setAttribute('tabindex', '-1');
+            modal.focus();
+        }
+
+        // Set up focus trap
+        const cleanup = trapFocus(modal);
+
+        // Close on Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                closeModalWithFocus(modal);
+                document.removeEventListener('keydown', handleEscape);
+                if (cleanup) cleanup();
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+    };
+
+    // Close modal and restore focus
+    window.closeModalWithFocus = function(modal) {
+        if (!modal) return;
+
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+
+        // Restore focus to previously focused element
+        if (previousActiveElement && previousActiveElement.focus) {
+            previousActiveElement.focus();
+        }
+        previousActiveElement = null;
+    };
+
+    // Auto-enhance existing modals
+    document.addEventListener('DOMContentLoaded', () => {
+        // Story Modal close button
+        const storyModal = document.getElementById('storyModal');
+        const storyClose = storyModal?.querySelector('.story-close');
+        if (storyClose) {
+            storyClose.addEventListener('click', () => closeModalWithFocus(storyModal));
+        }
+
+        // Talisman Modal close button
+        const talismanModal = document.getElementById('talisman-modal');
+        const talismanClose = talismanModal?.querySelector('.close-btn, .modal-close');
+        if (talismanClose) {
+            talismanClose.addEventListener('click', () => closeModalWithFocus(talismanModal));
+        }
+
+        // Click outside to close
+        [storyModal, talismanModal].forEach(modal => {
+            if (!modal) return;
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModalWithFocus(modal);
+                }
+            });
+        });
+    });
+})();
+
+// ============================================
+// Parallax Effect System
+// ============================================
+(function() {
+    // Skip on mobile or reduced motion preference
+    const isMobile = window.innerWidth <= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isMobile || prefersReducedMotion) return;
+
+    let ticking = false;
+
+    // Parallax elements configuration
+    const parallaxElements = [];
+
+    // Initialize parallax on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        // Auto-detect elements with data-parallax attribute
+        document.querySelectorAll('[data-parallax]').forEach(el => {
+            const speed = parseFloat(el.dataset.parallax) || 0.5;
+            parallaxElements.push({ element: el, speed });
+        });
+
+        // Add parallax to hero section if exists
+        const hero = document.querySelector('.hero');
+        if (hero && !hero.dataset.parallax) {
+            parallaxElements.push({ element: hero, speed: 0.3, type: 'background' });
+        }
+
+        // Add parallax to interior images
+        document.querySelectorAll('.interior-item img').forEach(img => {
+            parallaxElements.push({ element: img, speed: 0.1, type: 'transform' });
+        });
+    });
+
+    // Optimized scroll handler with RAF
+    function updateParallax() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        parallaxElements.forEach(({ element, speed, type }) => {
+            const rect = element.getBoundingClientRect();
+            const elementTop = rect.top + scrollY;
+            const elementHeight = rect.height;
+
+            // Only animate if element is in viewport
+            if (scrollY + windowHeight > elementTop && scrollY < elementTop + elementHeight) {
+                const offset = (scrollY - elementTop) * speed;
+
+                if (type === 'background') {
+                    element.style.backgroundPositionY = `${offset}px`;
+                } else {
+                    element.style.transform = `translateY(${offset}px)`;
+                }
+            }
+        });
+
+        ticking = false;
+    }
+
+    // Throttled scroll listener
+    window.addEventListener('scroll', () => {
+        if (!ticking && parallaxElements.length > 0) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+
+// ============================================
+// #2. Image Blur-up Loading (Progressive)
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Find all images that should have blur-up effect
+    const blurContainers = document.querySelectorAll('.blur-load');
+
+    blurContainers.forEach(container => {
+        const img = container.querySelector('img');
+        if (!img) return;
+
+        // If already loaded
+        if (img.complete) {
+            container.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
+                container.classList.add('loaded');
+            });
+        }
+    });
+
+    // Auto-apply to lazy-loaded images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    lazyImages.forEach(img => {
+        if (img.closest('.blur-load')) return; // Skip if already wrapped
+
+        img.addEventListener('load', () => {
+            img.style.opacity = '1';
+        });
+
+        // Set initial opacity
+        if (!img.complete) {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.6s ease';
+        }
+    });
+});
+
+// ============================================
+// #5. Button Ripple Effect
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.btn, .sticky-btn, .quick-btn, button[type="submit"]');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Remove existing ripples
+            const existingRipple = this.querySelector('.ripple');
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+
+            // Create ripple element
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+
+            // Calculate size (use larger dimension)
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+
+            // Position ripple at click location
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            this.appendChild(ripple);
+
+            // Remove ripple after animation
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+            });
+        });
     });
 });

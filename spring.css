@@ -79,6 +79,203 @@
 }
 
 /* ============================================
+   #3. Dark Mode Support
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark mode color overrides */
+        --cream-bg: #1a1a1a;
+        --white: #242424;
+        --text-dark: #e8e8e8;
+        --text-soft: #b0b0b0;
+
+        /* Adjusted spring colors for dark mode */
+        --spring-blossom-pink: #ff9a9a;
+        --spring-peach: #ffcba4;
+        --spring-sprout-green: #a8d4a0;
+        --spring-mint-green: #7ec4b0;
+        --spring-coral-pink: #ff8a8a;
+
+        /* Dark mode specific */
+        --card-bg: #2a2a2a;
+        --border-color: #3a3a3a;
+    }
+
+    /* Body and containers */
+    body {
+        background-color: var(--cream-bg) !important;
+        color: var(--text-dark) !important;
+    }
+
+    /* Cards and sections */
+    .section,
+    .card,
+    .ba-card,
+    .review-card,
+    .interior-item,
+    .quick-inquiry-box,
+    .letter-paper {
+        background-color: var(--card-bg) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: rgba(26, 26, 26, 0.95) !important;
+        border-bottom-color: var(--border-color) !important;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #0f0f0f !important;
+    }
+
+    /* Buttons - keep vibrant */
+    .btn-primary {
+        background-color: var(--spring-coral-pink) !important;
+        color: #1a1a1a !important;
+    }
+
+    /* Form inputs */
+    input,
+    select,
+    textarea {
+        background-color: var(--card-bg) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-dark) !important;
+    }
+
+    input::placeholder {
+        color: var(--text-soft) !important;
+    }
+
+    /* Modals */
+    .modal,
+    .letter-modal,
+    .story-modal {
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    /* Images - slight brightness reduction */
+    img {
+        filter: brightness(0.9);
+    }
+
+    img:hover {
+        filter: brightness(1);
+    }
+
+    /* Scrollbar for dark mode */
+    ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+            180deg,
+            #ff9a9a 0%,
+            #ff8a8a 100%
+        );
+        border-color: #1a1a1a;
+    }
+}
+
+/* ============================================
+   #7. Scroll Snap (Optional - Sections)
+   ============================================ */
+@media (min-width: 769px) {
+    /* Only on desktop for smooth section navigation */
+    html {
+        scroll-snap-type: y proximity;
+    }
+
+    .section,
+    .hero,
+    footer {
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
+    }
+}
+
+/* ============================================
+   #8. Skeleton Loading (Unified)
+   ============================================ */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    animation: skeletonShimmer 1.5s infinite;
+}
+
+@keyframes skeletonShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Skeleton variants */
+.skeleton-text {
+    height: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+}
+
+.skeleton-text:last-child {
+    width: 70%;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.skeleton-image {
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.skeleton-card {
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Dark mode skeleton */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        background-color: #3a3a3a;
+    }
+
+    .skeleton::after {
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%
+        );
+    }
+}
+
+/* ============================================
    Accessibility: Reduced Motion Support
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -510,7 +707,8 @@ footer {
     gap: 12px;
 }
 
-.inquiry-form input {
+.inquiry-form input,
+.inquiry-form select {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid #e0e0e0;
@@ -520,10 +718,20 @@ footer {
     color: #333;
     transition: all var(--duration-fast) ease;
     box-sizing: border-box;
-    /* Crucial for width */
+    font-family: 'NanumBarunGothic', sans-serif;
 }
 
-.inquiry-form input:focus {
+.inquiry-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus {
     background: #fff;
     border-color: #FFDAC1;
     outline: none;
@@ -2788,4 +2996,356 @@ h6,
         rgba(255, 228, 233, 0.15) 50%,
         rgba(255, 183, 197, 0.1) 100%
     );
+}
+
+/* ============================================
+   Parallax Effect System
+   ============================================ */
+
+/* Parallax Container */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Hero Section Parallax */
+.hero {
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 245, 0) 0%,
+            rgba(255, 253, 245, 0.3) 50%,
+            rgba(255, 253, 245, 0.8) 100%
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Parallax Background Layers */
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size: cover;
+    will-change: transform;
+    z-index: -1;
+}
+
+/* Subtle Floating Elements for Depth */
+.parallax-float {
+    animation: parallaxFloat 6s ease-in-out infinite;
+}
+
+.parallax-float-slow {
+    animation: parallaxFloat 10s ease-in-out infinite;
+}
+
+.parallax-float-fast {
+    animation: parallaxFloat 4s ease-in-out infinite;
+}
+
+@keyframes parallaxFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(-1deg);
+    }
+}
+
+/* Section Depth Layers */
+.depth-layer-1 {
+    transform: translateZ(-100px) scale(1.1);
+}
+
+.depth-layer-2 {
+    transform: translateZ(-200px) scale(1.2);
+}
+
+/* Perspective Container for 3D Parallax */
+.parallax-perspective {
+    perspective: 1000px;
+    perspective-origin: center center;
+}
+
+/* Scroll-based Parallax via CSS (for supported browsers) */
+@supports (animation-timeline: scroll()) {
+    .parallax-scroll {
+        animation: parallaxScroll linear;
+        animation-timeline: scroll();
+    }
+
+    @keyframes parallaxScroll {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50px);
+        }
+    }
+}
+
+/* Disable parallax on mobile for performance */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+    .parallax-section,
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+
+    .parallax-float,
+    .parallax-float-slow,
+    .parallax-float-fast {
+        animation: none;
+    }
+
+    .parallax-scroll {
+        animation: none;
+        transform: none;
+    }
+}
+
+/* ============================================
+   #1. Skip Navigation (Accessibility)
+   ============================================ */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--spring-coral-dark);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 100000;
+    transition: top var(--duration-fast) ease;
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--spring-mint-dark);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   #2. Image Blur-up Loading (Progressive)
+   ============================================ */
+.blur-load {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--cream-bg);
+}
+
+.blur-load::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    filter: blur(20px);
+    transform: scale(1.1);
+    opacity: 1;
+    transition: opacity var(--duration-slow) ease;
+}
+
+.blur-load.loaded::before {
+    opacity: 0;
+}
+
+.blur-load img {
+    opacity: 0;
+    transition: opacity var(--duration-slow) ease;
+}
+
+.blur-load.loaded img {
+    opacity: 1;
+}
+
+/* ============================================
+   #5. Button Ripple Effect
+   ============================================ */
+.btn,
+.sticky-btn,
+.quick-btn,
+button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   #6. Input Focus Ring (Custom focus-visible)
+   ============================================ */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    border-color: var(--spring-mint-dark) !important;
+    box-shadow:
+        0 0 0 3px rgba(61, 122, 106, 0.2),
+        var(--shadow-sm) !important;
+}
+
+/* Remove default outline for mouse users */
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Button focus styles */
+.btn:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--spring-mint-dark);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   #9. Custom Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cream-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        var(--spring-blossom-pink) 0%,
+        var(--spring-coral-pink) 100%
+    );
+    border-radius: 5px;
+    border: 2px solid var(--cream-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        var(--spring-coral-pink) 0%,
+        var(--spring-pink-dark) 100%
+    );
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--spring-blossom-pink) var(--cream-bg);
+}
+
+/* ============================================
+   #10. Selection Color
+   ============================================ */
+::selection {
+    background: var(--spring-blossom-pink);
+    color: var(--text-dark);
+}
+
+::-moz-selection {
+    background: var(--spring-blossom-pink);
+    color: var(--text-dark);
+}
+
+/* ============================================
+   #11. Print Styles
+   ============================================ */
+@media print {
+    /* Hide non-essential elements */
+    .navbar,
+    .quick-menu,
+    .sticky-bottom-bar,
+    .top-btn,
+    .skip-link,
+    .scroll-progress-container,
+    .ai-ticker-rolling,
+    .ai-ticker-sticky-rolling,
+    .fortune-cookie-widget,
+    .norigae-widget,
+    #snow-container,
+    .modal,
+    .letter-modal,
+    .story-modal,
+    video,
+    iframe {
+        display: none !important;
+    }
+
+    /* Reset backgrounds */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Ensure text is readable */
+    * {
+        color: black !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* Show link URLs */
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    /* Page breaks */
+    .section {
+        page-break-inside: avoid;
+    }
+
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
 }

@@ -1,0 +1,16 @@
+# robots.txt for 규림한의원 청주점
+# https://kyurim-webpage.vercel.app/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://kyurim-webpage.vercel.app/sitemap.xml
+
+# Disallow backup and development files
+Disallow: /*.backup.html
+Disallow: /optimize-images.js
+Disallow: /convert-to-picture.js
+
+# Allow all crawlers to index assets
+Allow: /assets/
