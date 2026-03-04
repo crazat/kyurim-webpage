@@ -2121,7 +2121,7 @@ button,
 /* 4. Real-time Reservation Notification (Social Proof) - Redesigned */
 .reservation-toast {
     position: fixed;
-    top: 100px;
+    top: 150px;
     left: 50%;
     transform: translateX(-50%) translateY(-150%);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%);
@@ -2921,9 +2921,9 @@ header.hero {
     }
 
     /* Fix: Position toast below ticker on mobile */
-    /* Main Page: Navbar(90px) + Ticker(~45px) = ~135px */
+    /* Main Page: Navbar(90px) + Ticker(~60px) = ~150px + margin */
     .reservation-toast {
-        top: 135px;
+        top: 160px;
         bottom: auto;
         left: 10px;
         right: 10px;
