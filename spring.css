@@ -2218,30 +2218,32 @@ button,
 .ai-ticker-rolling {
     width: 100%;
     background-color: var(--sunrise-orange);
-    /* Soft Mint Green */
     color: var(--text-dark);
     font-size: 0.95rem;
-    padding: 12px 0 16px 0;
-    /* 위 12px, 아래 16px로 텍스트를 시각적으로 중앙 배치 */
     text-align: center;
 
     /* Fixed Positioning below Navbar */
     position: fixed;
     top: 80px;
-    /* Navbar Height - seamless connection */
     left: 0;
     z-index: 999;
-    /* Below Navbar (1000), Above Content */
 
     overflow: hidden;
     border-bottom: 2px solid var(--accent-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
-    /* Vertical centering */
+    /* 명시적 높이와 중앙 정렬 */
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
+}
+
+.ai-ticker-rolling .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .ai-ticker-content {
@@ -2249,13 +2251,15 @@ button,
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
 
 .ticker-item {
     display: none;
     animation: slideDownFade 0.5s ease-in-out;
     width: 100%;
-    line-height: 1.5;
+    line-height: 50px;
+    height: 50px;
 }
 
 .ticker-item.active {
