@@ -1,4 +1,23 @@
 ﻿﻿document.addEventListener('DOMContentLoaded', () => {
+    // ============================================
+    // Memory Management & Cleanup System
+    // ============================================
+    const cleanupCallbacks = [];
+    const registerCleanup = (callback) => cleanupCallbacks.push(callback);
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        cleanupCallbacks.forEach(cb => {
+            try { cb(); } catch (e) { console.warn('Cleanup error:', e); }
+        });
+    });
+
+    // Visibility change handler - pause animations when hidden
+    let isPageVisible = !document.hidden;
+    document.addEventListener('visibilitychange', () => {
+        isPageVisible = !document.hidden;
+    });
+
     // --- Snowfall Effect ---
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
@@ -137,14 +156,39 @@
         // Initial floating decor is already created above, so no need to call createFloatingDecor() here.
     };
 
-    // --- 2. Spring Petal Mouse Trail ---
-    document.addEventListener('mousemove', function (e) {
-        if (Math.random() > 0.4) return; // Throttle creation (40% chance)
+    // --- 2. Spring Petal Mouse Trail (with Element Pool) ---
+    const petalPool = [];
+    const MAX_PETALS = 50;
+    let activePetals = 0;
 
+    function getPetalFromPool() {
+        if (petalPool.length > 0) {
+            return petalPool.pop();
+        }
         const dust = document.createElement('div');
         dust.classList.add('petal-dust');
+        return dust;
+    }
+
+    function returnPetalToPool(dust) {
+        activePetals--;
+        if (petalPool.length < MAX_PETALS) {
+            dust.style.opacity = '0';
+            petalPool.push(dust);
+        } else {
+            dust.remove();
+        }
+    }
+
+    document.addEventListener('mousemove', function (e) {
+        // Skip if page is hidden or too many active petals
+        if (!isPageVisible || activePetals >= MAX_PETALS) return;
+        if (Math.random() > 0.4) return; // Throttle creation (40% chance)
+
+        const dust = getPetalFromPool();
         dust.style.left = e.clientX + 'px';
         dust.style.top = e.clientY + 'px';
+        dust.style.opacity = '0.8';
 
         // Random spring color variation (Pinks, whites)
         const colors = ['#FFB7B2', '#FFDAC1', '#FF9AA2', '#FFF', '#FFE4E1'];
@@ -153,11 +197,20 @@
         // Random small rotation
         dust.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
 
-        document.body.appendChild(dust);
+        if (!dust.parentElement) {
+            document.body.appendChild(dust);
+        }
+        activePetals++;
 
         setTimeout(() => {
-            dust.remove();
-        }, 800); // Remove after animation
+            returnPetalToPool(dust);
+        }, 800); // Return after animation
+    });
+
+    // Cleanup petal pool on unload
+    registerCleanup(() => {
+        petalPool.forEach(p => p.remove());
+        petalPool.length = 0;
     });
 
 
@@ -917,17 +970,43 @@
     };
 
     if (storyModal && storyImage) {
-        // 4. Click Sparkle (Firecracker)
+        // 4. Click Sparkle (Firecracker) with Element Pool
+        const sparklePool = [];
+        const MAX_SPARKLES = 100;
+        let activeSparkles = 0;
+
+        function getSparkleFromPool() {
+            if (sparklePool.length > 0) {
+                return sparklePool.pop();
+            }
+            const particle = document.createElement('div');
+            particle.classList.add('click-sparkle');
+            return particle;
+        }
+
+        function returnSparkleToPool(particle) {
+            activeSparkles--;
+            if (sparklePool.length < MAX_SPARKLES) {
+                particle.style.opacity = '0';
+                sparklePool.push(particle);
+            } else {
+                particle.remove();
+            }
+        }
+
         document.addEventListener('click', (e) => {
+            // Skip if page is hidden or too many sparkles
+            if (!isPageVisible || activeSparkles >= MAX_SPARKLES) return;
+
             const color = ['#FFD700', '#E63946', '#FFFFFF', '#FFA500']; // Gold, Red, White, Orange
-            const particleCount = 12;
+            const particleCount = Math.min(12, MAX_SPARKLES - activeSparkles);
 
             for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('click-sparkle');
+                const particle = getSparkleFromPool();
 
                 // Random color
                 particle.style.backgroundColor = color[Math.floor(Math.random() * color.length)];
+                particle.style.opacity = '1';
 
                 // Initial position (Mouse coordinates)
                 particle.style.left = e.clientX + 'px';
@@ -942,13 +1021,22 @@
                 particle.style.setProperty('--tx', tx);
                 particle.style.setProperty('--ty', ty);
 
-                document.body.appendChild(particle);
+                if (!particle.parentElement) {
+                    document.body.appendChild(particle);
+                }
+                activeSparkles++;
 
-                // Cleanup
+                // Return to pool
                 setTimeout(() => {
-                    particle.remove();
+                    returnSparkleToPool(particle);
                 }, 800);
             }
+        });
+
+        // Cleanup sparkle pool on unload
+        registerCleanup(() => {
+            sparklePool.forEach(p => p.remove());
+            sparklePool.length = 0;
         });
 
         // Select images from Events and Treatment Cases
@@ -1277,7 +1365,24 @@
         'general': '진료 예약을 신청했습니다.'
     };
 
+    // Toast management with limits
+    const MAX_TOASTS = 3;
+    const activeToasts = [];
+    let toastTimeoutId = null;
+
     function showToast() {
+        // Skip if page is hidden
+        if (!isPageVisible) return;
+
+        // Remove oldest toast if at limit
+        while (activeToasts.length >= MAX_TOASTS) {
+            const oldToast = activeToasts.shift();
+            if (oldToast && oldToast.parentElement) {
+                oldToast.classList.remove('show');
+                setTimeout(() => oldToast.remove(), 500);
+            }
+        }
+
         const toast = document.createElement('div');
         toast.className = 'reservation-toast';
 
@@ -1295,6 +1400,7 @@
         `;
 
         document.body.appendChild(toast);
+        activeToasts.push(toast);
 
         // Animate In
         setTimeout(() => toast.classList.add('show'), 100);
@@ -1302,28 +1408,41 @@
         // Animate Out
         setTimeout(() => {
             toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 500);
+            setTimeout(() => {
+                const idx = activeToasts.indexOf(toast);
+                if (idx > -1) activeToasts.splice(idx, 1);
+                toast.remove();
+            }, 500);
         }, 4000); // Stay for 4 seconds
     }
 
-    // Start Loop (Organic Timing)
+    // Non-recursive toast scheduling (prevents memory leak)
     function scheduleNextToast() {
-        // Random interval between 40s and 80s attached to "realism"
+        if (toastTimeoutId) clearTimeout(toastTimeoutId);
+
+        // Random interval between 40s and 80s
         const nextInterval = Math.floor(Math.random() * 40000) + 40000;
 
-        setTimeout(() => {
-            if (!document.hidden) {
+        toastTimeoutId = setTimeout(() => {
+            if (isPageVisible) {
                 showToast();
             }
-            scheduleNextToast(); // Schedule next one recursively
+            scheduleNextToast();
         }, nextInterval);
     }
 
     // Initial Trigger
     setTimeout(() => {
-        showToast(); // Show first one after a short delay to hook attention
-        scheduleNextToast(); // Start the organic loop
+        showToast(); // Show first one after a short delay
+        scheduleNextToast(); // Start the loop
     }, 5000); // Start after 5 seconds
+
+    // Cleanup toast timers on unload
+    registerCleanup(() => {
+        if (toastTimeoutId) clearTimeout(toastTimeoutId);
+        activeToasts.forEach(t => t.remove());
+        activeToasts.length = 0;
+    });
 
 });
 
