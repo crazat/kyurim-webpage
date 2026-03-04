@@ -1086,7 +1086,7 @@
                     document.getElementById('storyResult').innerText = "선착순 마감될 수 있습니다.";
                 }
 
-                storyModal.classList.add('show');
+                openStoryModal();
 
                 // Reset scroll position to top
                 const storyContent = document.querySelector('.story-content');
@@ -1100,13 +1100,27 @@
             });
         });
 
-        // Close logic
-        // Close logic
+        // Modal timer management (hoisted variables and functions)
+        let closeTimeout = null;
+
+        function openStoryModal() {
+            if (closeTimeout) {
+                clearTimeout(closeTimeout);
+                closeTimeout = null;
+            }
+            storyModal.classList.remove('closing');
+            storyModal.classList.add('show');
+        }
+
         function closeStoryModal() {
+            if (closeTimeout) {
+                clearTimeout(closeTimeout);
+            }
             storyModal.classList.add('closing');
-            setTimeout(() => {
+            closeTimeout = setTimeout(() => {
                 storyModal.classList.remove('show');
                 storyModal.classList.remove('closing');
+                closeTimeout = null;
             }, 250); // 0.25s to match ultra fast animation
         }
 
