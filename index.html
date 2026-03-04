@@ -18,6 +18,14 @@
     <!-- Favicon -->
     <link rel="icon" href="assets/logo_icon.png">
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#FF9AA2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="규림한의원">
+    <link rel="apple-touch-icon" href="assets/logo-192.png">
+
     <!-- Preconnect to external origins (DNS prefetch) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1436,6 +1444,21 @@
                 alert("주소가 복사되었습니다! \n지도 앱에 붙여넣기 하세요.");
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('[SW] Registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('[SW] Registration failed:', error);
+                    });
             });
         }
     </script>

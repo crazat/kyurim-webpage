@@ -2277,3 +2277,340 @@ document.addEventListener('DOMContentLoaded', () => {
         isPulling = false;
     }, { passive: true });
 })();
+
+// ============================================
+// A/B Testing Framework
+// ============================================
+const ABTest = (function() {
+    const STORAGE_KEY = 'kyurim_ab_tests';
+    const tests = {};
+
+    // Get or assign variant for a test
+    function getVariant(testName, variants) {
+        const stored = getStoredTests();
+
+        // Return stored variant if exists
+        if (stored[testName]) {
+            return stored[testName];
+        }
+
+        // Assign random variant
+        const variant = variants[Math.floor(Math.random() * variants.length)];
+        stored[testName] = variant;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+
+        // Track assignment
+        trackEvent('ab_test_assigned', { test: testName, variant });
+
+        return variant;
+    }
+
+    function getStoredTests() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch {
+            return {};
+        }
+    }
+
+    // Track conversion event
+    function trackConversion(testName, eventName) {
+        const stored = getStoredTests();
+        const variant = stored[testName];
+
+        if (variant) {
+            trackEvent('ab_test_conversion', {
+                test: testName,
+                variant,
+                event: eventName
+            });
+        }
+    }
+
+    // Generic event tracking (can be connected to analytics)
+    function trackEvent(eventType, data) {
+        // Console log for debugging
+        console.log(`[AB Test] ${eventType}:`, data);
+
+        // Send to Google Analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventType, data);
+        }
+
+        // Send to custom analytics endpoint if needed
+        // fetch('/api/analytics', { method: 'POST', body: JSON.stringify({ eventType, data }) });
+    }
+
+    // Register a test
+    function register(testName, config) {
+        tests[testName] = config;
+        return getVariant(testName, config.variants);
+    }
+
+    // Apply variant to elements
+    function apply(testName, selector) {
+        const config = tests[testName];
+        if (!config) return;
+
+        const variant = getVariant(testName, config.variants);
+        const elements = document.querySelectorAll(selector);
+
+        elements.forEach(el => {
+            if (config.type === 'text') {
+                el.textContent = variant;
+            } else if (config.type === 'class') {
+                el.classList.add(variant);
+            } else if (config.type === 'style') {
+                Object.assign(el.style, variant);
+            }
+
+            // Add data attribute for tracking
+            el.dataset.abTest = testName;
+            el.dataset.abVariant = typeof variant === 'object' ? JSON.stringify(variant) : variant;
+        });
+    }
+
+    return {
+        register,
+        apply,
+        getVariant,
+        trackConversion
+    };
+})();
+
+// Example A/B Tests (activate as needed)
+document.addEventListener('DOMContentLoaded', () => {
+    // Test 1: CTA Button Text
+    // ABTest.register('cta_text', {
+    //     variants: ['무료 상담 신청', '지금 상담받기', '1분 상담 신청'],
+    //     type: 'text'
+    // });
+    // ABTest.apply('cta_text', '.btn-primary, button[type="submit"]');
+
+    // Test 2: CTA Button Color
+    // ABTest.register('cta_color', {
+    //     variants: ['cta-pink', 'cta-coral', 'cta-gold'],
+    //     type: 'class'
+    // });
+    // ABTest.apply('cta_color', '.btn-primary');
+
+    // Track CTA clicks
+    document.querySelectorAll('.btn-primary, button[type="submit"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            ABTest.trackConversion('cta_text', 'click');
+            ABTest.trackConversion('cta_color', 'click');
+        });
+    });
+});
+
+// ============================================
+// Text Reveal Animation (Letter by Letter)
+// ============================================
+(function() {
+    const textRevealElements = document.querySelectorAll('.text-reveal');
+    if (textRevealElements.length === 0) return;
+
+    // Split text into characters
+    textRevealElements.forEach(el => {
+        const text = el.textContent;
+        el.innerHTML = '';
+
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.transitionDelay = `${index * 0.03}s`;
+            el.appendChild(span);
+        });
+    });
+
+    // Observe for scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    textRevealElements.forEach(el => observer.observe(el));
+})();
+
+// ============================================
+// Word Reveal Animation
+// ============================================
+(function() {
+    const wordRevealElements = document.querySelectorAll('.word-reveal');
+    if (wordRevealElements.length === 0) return;
+
+    // Split text into words
+    wordRevealElements.forEach(el => {
+        const text = el.textContent;
+        el.innerHTML = '';
+
+        text.split(' ').forEach((word, index) => {
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.textContent = word;
+            span.style.transitionDelay = `${index * 0.1}s`;
+            el.appendChild(span);
+
+            // Add space after word
+            if (index < text.split(' ').length - 1) {
+                el.appendChild(document.createTextNode(' '));
+            }
+        });
+    });
+
+    // Observe for scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    wordRevealElements.forEach(el => observer.observe(el));
+})();
+
+// ============================================
+// Scroll-Triggered Animations (Generic)
+// ============================================
+(function() {
+    const animatedElements = document.querySelectorAll(
+        '.image-reveal, .image-reveal-up, .line-draw, .stagger-fade, .scale-reveal, .rotate-reveal'
+    );
+
+    if (animatedElements.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    animatedElements.forEach(el => observer.observe(el));
+})();
+
+// ============================================
+// Count Up Animation
+// ============================================
+(function() {
+    const countUpElements = document.querySelectorAll('[data-count-up]');
+    if (countUpElements.length === 0) return;
+
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+
+    const animateCount = (el) => {
+        const target = parseInt(el.dataset.countUp, 10);
+        const duration = parseInt(el.dataset.countDuration, 10) || 2000;
+        const suffix = el.dataset.countSuffix || '';
+        const prefix = el.dataset.countPrefix || '';
+
+        let startTime = null;
+        const startValue = 0;
+
+        const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+
+        const updateCount = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const easedProgress = easeOutQuart(progress);
+            const currentValue = Math.floor(startValue + (target - startValue) * easedProgress);
+
+            el.textContent = prefix + currentValue.toLocaleString() + suffix;
+            el.classList.add('animating');
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCount);
+            } else {
+                el.textContent = prefix + target.toLocaleString() + suffix;
+                el.classList.remove('animating');
+            }
+        };
+
+        requestAnimationFrame(updateCount);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    countUpElements.forEach(el => observer.observe(el));
+})();
+
+// ============================================
+// Dark Mode Toggle
+// ============================================
+(function() {
+    const STORAGE_KEY = 'kyurim_dark_mode';
+
+    // Create toggle button
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'dark-mode-toggle';
+    toggleBtn.setAttribute('aria-label', '다크 모드 전환');
+    toggleBtn.innerHTML = `
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+    `;
+    document.body.appendChild(toggleBtn);
+
+    // Check saved preference or system preference
+    function getPreferredTheme() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Apply theme
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+        }
+    }
+
+    // Initialize
+    const initialTheme = getPreferredTheme();
+    applyTheme(initialTheme);
+
+    // Toggle handler
+    toggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark-mode');
+        const newTheme = isDark ? 'light' : 'dark';
+
+        applyTheme(newTheme);
+        localStorage.setItem(STORAGE_KEY, newTheme);
+
+        // Announce to screen readers
+        const message = newTheme === 'dark' ? '다크 모드가 활성화되었습니다' : '라이트 모드가 활성화되었습니다';
+        toggleBtn.setAttribute('aria-label', message);
+    });
+
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only update if no manual preference is saved
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+})();

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오프라인 - 규림한의원 청주점</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'NanumBarunGothic', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #FFFDF5 0%, #FFE4E1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .offline-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #B5585C;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #63534B;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .contact-info {
+            background: #FFF5F5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info h3 {
+            color: #B5585C;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            display: block;
+            color: #FF9AA2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .retry-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFB7B2, #FF9AA2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 154, 162, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📶</div>
+        <h1>인터넷 연결이 필요합니다</h1>
+        <p>현재 오프라인 상태입니다.<br>인터넷 연결을 확인해주세요.</p>
+
+        <div class="contact-info">
+            <h3>전화 상담</h3>
+            <a href="tel:043-236-2275">043-236-2275</a>
+        </div>
+
+        <a href="/" class="retry-btn" onclick="location.reload(); return false;">
+            다시 시도하기
+        </a>
+    </div>
+</body>
+</html>
