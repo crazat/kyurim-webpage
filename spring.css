@@ -3659,6 +3659,11 @@ button:focus-visible {
     font-size: 0.85rem;
 }
 
+/* Ticker follows navbar height change */
+.navbar.scrolled ~ .ai-ticker-rolling {
+    top: 60px;
+}
+
 /* ============================================
    #13. Active Section Highlight (Navigation)
    ============================================ */
