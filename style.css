@@ -3188,13 +3188,15 @@ a.btn {
     align-items: center;
 }
 
-/* 모바일 햄버거 메뉴 */
-.hamburger {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* 모바일 햄버거 메뉴 - 768px 이하에서만 표시 */
+@media (max-width: 768px) {
+    .hamburger {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* FAQ 아코디언 터치 개선 */
