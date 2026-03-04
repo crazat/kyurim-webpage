@@ -21,6 +21,23 @@
     --accent-color: var(--gold-light);
 }
 
+/* Navbar Fix - Prevent nav-links from wrapping */
+.nav-links {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+/* Reduce gap on medium screens to prevent overflow */
+@media (max-width: 1100px) and (min-width: 769px) {
+    .nav-links {
+        gap: 15px;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 10px 8px;
+    }
+}
+
 /* 3. Spring Wave Background */
 body::before {
     content: "";
@@ -2204,7 +2221,7 @@ button,
     /* Soft Mint Green */
     color: var(--text-dark);
     font-size: 0.95rem;
-    padding: 12px 0;
+    padding: 14px 0;
     text-align: center;
 
     /* Fixed Positioning below Navbar */
@@ -2218,13 +2235,19 @@ button,
     overflow: hidden;
     border-bottom: 2px solid var(--accent-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    /* Vertical centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
 }
 
 .ai-ticker-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 100%;
 }
 
 .ticker-item {
