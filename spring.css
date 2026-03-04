@@ -84,108 +84,6 @@
 }
 
 /* ============================================
-   #3. Dark Mode Support
-   ============================================ */
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Dark mode color overrides */
-        --cream-bg: #1a1a1a;
-        --white: #242424;
-        --text-dark: #e8e8e8;
-        --text-soft: #b0b0b0;
-
-        /* Adjusted spring colors for dark mode */
-        --spring-blossom-pink: #ff9a9a;
-        --spring-peach: #ffcba4;
-        --spring-sprout-green: #a8d4a0;
-        --spring-mint-green: #7ec4b0;
-        --spring-coral-pink: #ff8a8a;
-
-        /* Dark mode specific */
-        --card-bg: #2a2a2a;
-        --border-color: #3a3a3a;
-    }
-
-    /* Body and containers */
-    body {
-        background-color: var(--cream-bg) !important;
-        color: var(--text-dark) !important;
-    }
-
-    /* Cards and sections */
-    .section,
-    .card,
-    .ba-card,
-    .review-card,
-    .interior-item,
-    .quick-inquiry-box,
-    .letter-paper {
-        background-color: var(--card-bg) !important;
-        border-color: var(--border-color) !important;
-    }
-
-    /* Navbar */
-    .navbar {
-        background-color: rgba(26, 26, 26, 0.95) !important;
-        border-bottom-color: var(--border-color) !important;
-    }
-
-    /* Footer */
-    footer {
-        background-color: #0f0f0f !important;
-    }
-
-    /* Buttons - keep vibrant */
-    .btn-primary {
-        background-color: var(--spring-coral-pink) !important;
-        color: #1a1a1a !important;
-    }
-
-    /* Form inputs */
-    input,
-    select,
-    textarea {
-        background-color: var(--card-bg) !important;
-        border-color: var(--border-color) !important;
-        color: var(--text-dark) !important;
-    }
-
-    input::placeholder {
-        color: var(--text-soft) !important;
-    }
-
-    /* Modals */
-    .modal,
-    .letter-modal,
-    .story-modal {
-        background: rgba(0, 0, 0, 0.8) !important;
-    }
-
-    /* Images - slight brightness reduction */
-    img {
-        filter: brightness(0.9);
-    }
-
-    img:hover {
-        filter: brightness(1);
-    }
-
-    /* Scrollbar for dark mode */
-    ::-webkit-scrollbar-track {
-        background: #1a1a1a;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(
-            180deg,
-            #ff9a9a 0%,
-            #ff8a8a 100%
-        );
-        border-color: #1a1a1a;
-    }
-}
-
-/* ============================================
    #7. Scroll Snap (Optional - Sections)
    ============================================ */
 @media (min-width: 769px) {
@@ -311,22 +209,6 @@
     display: flex;
     align-items: center;
     gap: 12px;
-}
-
-/* Dark mode skeleton */
-@media (prefers-color-scheme: dark) {
-    .skeleton {
-        background-color: #3a3a3a;
-    }
-
-    .skeleton::after {
-        background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent 100%
-        );
-    }
 }
 
 /* ============================================
@@ -2341,22 +2223,6 @@ button,
 @keyframes toastProgress {
     0% { width: 100%; }
     100% { width: 0%; }
-}
-
-/* Dark mode toast */
-@media (prefers-color-scheme: dark) {
-    .reservation-toast {
-        background: linear-gradient(135deg, rgba(42, 42, 42, 0.98) 0%, rgba(30, 30, 30, 0.98) 100%);
-        border-color: rgba(255, 154, 154, 0.3);
-    }
-
-    .reservation-toast .toast-text {
-        color: var(--text-dark);
-    }
-
-    .reservation-toast .toast-text b {
-        color: var(--spring-coral-pink);
-    }
 }
 
 /* 5. Director's Secret Letter (Emotional Hook) */
