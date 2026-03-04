@@ -2314,6 +2314,12 @@ button,
     }
 }
 
+/* Fix for content being covered by fixed navbar + ticker on desktop */
+header.hero {
+    padding-top: 130px;
+    /* Navbar (80px) + Ticker (~50px) = 130px */
+}
+
 @media (max-width: 768px) {
     .ai-ticker-rolling {
         font-size: 0.8rem;
