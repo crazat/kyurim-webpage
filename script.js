@@ -65,6 +65,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // ============================================
+    // HTML Escape Utility (XSS Prevention)
+    // ============================================
+    const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    };
+
+    // ============================================
+    // Throttle Utility for Scroll Performance
+    // ============================================
+    const throttle = (fn, wait) => {
+        let lastTime = 0;
+        return function(...args) {
+            const now = Date.now();
+            if (now - lastTime >= wait) {
+                lastTime = now;
+                fn.apply(this, args);
+            }
+        };
+    };
+
+    // ============================================
+    // Unified Scroll Handler (Performance Optimized)
+    // ============================================
+    const scrollHandlers = [];
+    const addScrollHandler = (handler) => scrollHandlers.push(handler);
+
+    // Single throttled scroll listener
+    window.addEventListener('scroll', throttle(() => {
+        const scrollY = window.scrollY;
+        const scrollPercent = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        scrollHandlers.forEach(handler => {
+            try {
+                handler(scrollY, scrollPercent);
+            } catch (e) {
+                console.warn('Scroll handler error:', e);
+            }
+        });
+    }, 16), { passive: true }); // ~60fps
+
     // --- Snowfall Effect ---
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
@@ -297,11 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Navbar Background Change on Scroll
+    // Navbar Background Change on Scroll (Using unified handler)
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+        addScrollHandler((scrollY) => {
+            if (scrollY > 50) {
                 navbar.style.backgroundColor = '#FFFFFF';
                 navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             } else {
@@ -531,12 +573,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Top Button Logic
+    // Top Button Logic (Using unified handler)
     const topBtn = document.getElementById('topBtn');
 
     if (topBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+        addScrollHandler((scrollY) => {
+            if (scrollY > 300) {
                 topBtn.style.display = 'flex';
             } else {
                 topBtn.style.display = 'none';
@@ -1700,11 +1742,17 @@ if (fortuneWidget && fortuneMessage && fortuneText && fortuneIcon) {
 }
 
 
-// 6. Director's Letter Logic
+// 6. Director's Letter Logic (with duplicate prevention)
+let isLetterModalOpen = false;
+
 document.addEventListener('click', (e) => {
     // Check if clicked trigger or its children
     const trigger = e.target.closest('.letter-trigger-card');
     if (trigger) {
+        // Prevent duplicate modals
+        if (isLetterModalOpen) return;
+        isLetterModalOpen = true;
+
         // Define letters by type
         const letters = {
             'diet': {
@@ -1756,52 +1804,83 @@ document.addEventListener('click', (e) => {
         // Close Handlers
         const close = () => {
             modal.classList.remove('show');
-            setTimeout(() => modal.remove(), 300);
+            setTimeout(() => {
+                modal.remove();
+                isLetterModalOpen = false;
+            }, 300);
         };
         modal.querySelector('.close-letter').addEventListener('click', close);
         modal.addEventListener('click', (e) => {
             if (e.target === modal) close();
         });
+        // ESC key close
+        const handleEsc = (e) => {
+            if (e.key === 'Escape') {
+                close();
+                document.removeEventListener('keydown', handleEsc);
+            }
+        };
+        document.addEventListener('keydown', handleEsc);
     }
 });
 
+// Fireworks with duplicate prevention
+let fireworksActive = false;
+let fireworksIntervalId = null;
+
 function triggerBigFireworks() {
+    // Prevent duplicate fireworks
+    if (fireworksActive) return;
+    fireworksActive = true;
+
     // Intense burst
-    const interval = setInterval(() => {
+    fireworksIntervalId = setInterval(() => {
         const x = Math.random() * window.innerWidth;
         const y = Math.random() * (window.innerHeight * 0.8); // Top 80%
         createSparkle(x, y, ['#FFD700', '#E63946', '#FFFFFF', '#00FF00', '#FFA500'], 2.0); // Bigger scale
     }, 50); // Faster interval (50ms)
 
-    setTimeout(() => clearInterval(interval), 4000); // 4 seconds duration
+    setTimeout(() => {
+        if (fireworksIntervalId) {
+            clearInterval(fireworksIntervalId);
+            fireworksIntervalId = null;
+        }
+        fireworksActive = false;
+    }, 4000); // 4 seconds duration
 }
 
-// 7. Norigae Scroll Physics
+// 7. Norigae Scroll Physics (Throttled)
 const norigaeTassel = document.querySelector('.norigae-tassel');
 let lastScrollY_Norigae = window.scrollY;
 let norigaeTimeout;
+let norigaeTicking = false;
 
 window.addEventListener('scroll', () => {
-    if (!norigaeTassel) return;
+    if (!norigaeTassel || norigaeTicking) return;
 
-    const currentScrollY = window.scrollY;
-    const diff = currentScrollY - lastScrollY_Norigae;
-    lastScrollY_Norigae = currentScrollY;
+    norigaeTicking = true;
+    requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const diff = currentScrollY - lastScrollY_Norigae;
+        lastScrollY_Norigae = currentScrollY;
 
-    // Swing based on scroll direction/speed
-    // Cap at 45 degrees
-    let angle = -diff * 1.5; // Negative to lagging effect? Or positive?
-    if (angle > 45) angle = 45;
-    if (angle < -45) angle = -45;
+        // Swing based on scroll direction/speed
+        // Cap at 45 degrees
+        let angle = -diff * 1.5;
+        if (angle > 45) angle = 45;
+        if (angle < -45) angle = -45;
 
-    norigaeTassel.style.transform = `rotate(${angle}deg)`;
+        norigaeTassel.style.transform = `rotate(${angle}deg)`;
 
-    // Reset when stopped
-    clearTimeout(norigaeTimeout);
-    norigaeTimeout = setTimeout(() => {
-        norigaeTassel.style.transform = 'rotate(0deg)';
-    }, 150);
-});
+        // Reset when stopped
+        clearTimeout(norigaeTimeout);
+        norigaeTimeout = setTimeout(() => {
+            norigaeTassel.style.transform = 'rotate(0deg)';
+        }, 150);
+
+        norigaeTicking = false;
+    });
+}, { passive: true });
 
 // --- AI Rolling Ticker Logic (Multi-Instance) ---
 document.addEventListener('DOMContentLoaded', () => {
