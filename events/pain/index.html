@@ -650,50 +650,15 @@
         </div>
     </section>
 
-    <!-- Video Section (Pain/Body) - Lazy Loading for Performance -->
+    <!-- Video Section (Pain/Body) - 즉시 로드 (비디오 1개) -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container" style="text-align: center;">
-            <video class="lazy-video" muted loop playsinline poster="../../assets/logo.png"
-                data-src="../../26년%201월%20안면비대칭%20이벤트%20영상.mp4"
+            <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../26년%201월%20안면비대칭%20이벤트%20영상.mp4" type="video/mp4">
             </video>
         </div>
     </section>
-    <!-- Video Lazy Loading Script -->
-    <script>
-    (function(){
-        var videos = document.querySelectorAll('.lazy-video');
-        if ('IntersectionObserver' in window) {
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting) {
-                        var v = e.target;
-                        var src = v.dataset.src;
-                        if (src) {
-                            var s = document.createElement('source');
-                            s.src = src;
-                            s.type = 'video/mp4';
-                            v.appendChild(s);
-                            v.load();
-                            v.play();
-                            delete v.dataset.src;
-                        }
-                        obs.unobserve(v);
-                    }
-                });
-            }, {rootMargin: '100px'});
-            videos.forEach(function(v){ obs.observe(v); });
-        } else {
-            videos.forEach(function(v){
-                var s = document.createElement('source');
-                s.src = v.dataset.src;
-                s.type = 'video/mp4';
-                v.appendChild(s);
-                v.load();
-            });
-        }
-    })();
-    </script>
 
 <!-- Hero Section -->
     <!-- Hero Section REMOVED -->

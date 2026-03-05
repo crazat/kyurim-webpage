@@ -434,25 +434,27 @@
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container"
             style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-            <video class="lazy-video" muted loop playsinline poster="../../assets/logo.png"
-                data-src="../../assets/26%20march%20skin/ComfyUI_00210_.mp4"
+            <!-- 첫 번째 비디오: 즉시 로드 -->
+            <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20skin/ComfyUI_00210_.mp4" type="video/mp4">
             </video>
-            <video class="lazy-video" muted loop playsinline poster="../../assets/logo.png"
+            <!-- 나머지: lazy loading (500px 미리 로드) -->
+            <video class="lazy-video" muted loop playsinline preload="none"
                 data-src="../../assets/26%20march%20skin/ComfyUI_00191_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             </video>
-            <video class="lazy-video" muted loop playsinline poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline preload="none"
                 data-src="../../assets/26%20march%20skin/ComfyUI_00195_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             </video>
-            <video class="lazy-video" muted loop playsinline poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline preload="none"
                 data-src="../../assets/26%20march%20skin/ComfyUI_00207_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             </video>
         </div>
     </section>
-    <!-- Video Lazy Loading Script -->
+    <!-- Video Lazy Loading Script (rootMargin 500px for earlier preload) -->
     <script>
     (function(){
         var videos = document.querySelectorAll('.lazy-video');
@@ -474,7 +476,7 @@
                         obs.unobserve(v);
                     }
                 });
-            }, {rootMargin: '100px'});
+            }, {rootMargin: '500px'});
             videos.forEach(function(v){ obs.observe(v); });
         } else {
             videos.forEach(function(v){
