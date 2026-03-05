@@ -320,8 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollRevealObserver.observe(el);
     });
 
-    // Auto-apply scroll-reveal to cards and sections
-    document.querySelectorAll('.card, .ba-card, .review-card, .section h2, .section h3').forEach((el, index) => {
+    // Auto-apply scroll-reveal to cards and sections (excluding ba-card and review-card which are in horizontal scrolls)
+    document.querySelectorAll('.card, .section h2, .section h3').forEach((el, index) => {
         if (!el.classList.contains('scroll-reveal') && !el.classList.contains('revealed')) {
             el.classList.add('scroll-reveal');
             el.style.transitionDelay = `${(index % 4) * 0.1}s`;
