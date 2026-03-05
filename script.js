@@ -1,4 +1,19 @@
-﻿﻿document.addEventListener('DOMContentLoaded', () => {
+﻿﻿// ============================================
+// Page Loader - Hide after content loads
+// ============================================
+window.addEventListener('load', () => {
+    const pageLoader = document.querySelector('.page-loader');
+    if (pageLoader) {
+        // Wait for progress animation to complete
+        setTimeout(() => {
+            pageLoader.classList.add('hidden');
+            // Remove from DOM after transition
+            setTimeout(() => pageLoader.remove(), 500);
+        }, 800);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // Memory Management & Cleanup System
     // ============================================
@@ -312,6 +327,43 @@
             el.style.transitionDelay = `${(index % 4) * 0.1}s`;
             scrollRevealObserver.observe(el);
         }
+    });
+
+    // Counter Animation for Statistics
+    const counterElements = document.querySelectorAll('.stat-number[data-count]');
+
+    const animateCounter = (el) => {
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+
+        el.classList.add('counting');
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                el.textContent = Math.floor(current).toLocaleString();
+                requestAnimationFrame(updateCounter);
+            } else {
+                el.textContent = target.toLocaleString();
+            }
+        };
+
+        requestAnimationFrame(updateCounter);
+    };
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counterElements.forEach(el => {
+        counterObserver.observe(el);
     });
 
     // =========================================
