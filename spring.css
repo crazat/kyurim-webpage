@@ -2151,6 +2151,15 @@ button,
     pointer-events: auto;
 }
 
+/* Landing Pages: Position toast below ticker (no navbar, ticker ~50px) */
+body[data-page-type] .reservation-toast {
+    top: 70px;
+}
+
+body[data-page-type] .reservation-toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
 /* Icon badge */
 .reservation-toast > i {
     display: flex;
@@ -2936,9 +2945,9 @@ header.hero {
         transform: translateX(0) translateY(0);
     }
 
-    /* Landing Pages: No navbar, sticky ticker at top */
+    /* Landing Pages: No navbar, sticky ticker at top (mobile ticker height ~90px) */
     body[data-page-type] .reservation-toast {
-        top: 50px;
+        top: 100px;
     }
 
     /* Fix for content being covered by fixed ticker on mobile */
