@@ -3507,13 +3507,6 @@ body[data-page-type] .reservation-toast {
     flex-shrink: 0;
 }
 
-/* Content area - inline */
-.reservation-toast > div {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
 .reservation-toast .toast-text {
     font-size: 0.8rem;
     font-weight: 400;
@@ -4275,6 +4268,9 @@ header.hero {
         border-radius: 50px;
         font-size: 0.75rem;
         padding: 6px 12px 6px 8px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        max-width: 90vw;
     }
 
     .reservation-toast.show {
@@ -4285,14 +4281,19 @@ header.hero {
         width: 20px;
         height: 20px;
         font-size: 0.6rem;
+        flex-shrink: 0;
     }
 
     .reservation-toast .toast-text {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        flex-shrink: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .reservation-toast .toast-time {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        flex-shrink: 0;
     }
 
     /* Landing Pages: No navbar, sticky ticker at top */
