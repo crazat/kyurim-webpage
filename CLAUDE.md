@@ -16,8 +16,11 @@
 kyurim-webpage-main/
 ├── index.html              # 메인 홈페이지
 ├── style.css               # 메인 스타일시트 (~3500 lines)
-├── spring.css              # 봄 시즌 테마 (벚꽃)
-├── script.js               # 메인 JavaScript (~1546 lines)
+├── spring.css              # 봄 시즌 테마 (벚꽃) + 디자인 토큰
+├── script.js               # 메인 JavaScript (~2200 lines)
+├── manifest.json           # PWA 매니페스트
+├── sw.js                   # Service Worker (캐싱/오프라인)
+├── offline.html            # 오프라인 폴백 페이지
 ├── assets/                 # 이미지 파일 (WebP 변환됨)
 ├── events/                 # 랜딩 페이지들
 │   ├── skin/index.html     # 피부 클리닉
@@ -57,7 +60,51 @@ kyurim-webpage-main/
 - `<picture>` 태그로 WebP/PNG 폴백
 - lazy loading 적용
 
+### 6. PWA (Progressive Web App)
+- 홈 화면 추가 지원 (manifest.json)
+- 오프라인 캐싱 (Service Worker)
+- 오프라인 폴백 페이지 제공
+- 푸시 알림 준비 완료
+
+### 7. Navbar Shrink
+- 스크롤 시 네비게이션바 축소 (80px → 60px)
+- 핑크 톤 그림자 및 테두리 추가
+- 티커 위치 자동 동기화
+
+### 8. 디자인 시스템
+- 타이포그래피: Modular Scale 1.25 (h1-h6)
+- 스페이싱: 8px 기반 그리드
+- 색상: WCAG AA 준수 (4.5:1 명도비)
+- 그림자: sm/md/lg/xl + glow 변형
+- 애니메이션: fast/normal/slow 토큰
+
 ## 최근 작업 이력
+
+### 2026-03-05: 모달/네비게이션/UX 버그 수정 + PWA 지원
+- **모달 클릭 버그 수정**
+  - 이벤트 위임 방식으로 전면 수정 (document 레벨 클릭 감지)
+  - 첫 클릭만 작동하던 문제 해결
+  - 닫기 애니메이션 타이밍 충돌 해결
+- **네비게이션바 개선**
+  - 데스크톱 햄버거 메뉴 숨김 (768px 이하에서만 표시)
+  - Navbar shrink 효과 강화 (80px → 60px, 핑크 그림자/테두리)
+  - 티커 위치 동기화 (navbar 축소 시 함께 이동)
+- **티커 정렬**
+  - 랜딩 페이지 티커 가운데 정렬로 변경
+- **PWA 지원 추가**
+  - manifest.json (앱 아이콘, 바로가기)
+  - sw.js (Service Worker - 캐싱, 오프라인)
+  - offline.html (오프라인 폴백 페이지)
+- **디자인 시스템 개선**
+  - 타이포그래피 계층 (Modular Scale 1.25)
+  - 8px 기반 스페이싱 시스템
+  - WCAG AA 색상 대비 개선
+  - 그림자/애니메이션 토큰 표준화
+- **제거된 기능**
+  - 다크 모드 (가독성 문제)
+  - 커스텀 마우스 커서 (사용성 저하)
+- **토스트 알림 수정**
+  - z-index 및 위치 조정 (티커에 가려지지 않도록)
 
 ### 2026-03-02: 디자인 개선 + 모바일 성능 최적화
 - **디자인 개선** (style.css ~200 lines 추가)
@@ -160,7 +207,6 @@ kyurim-webpage-main/
 - 폼 유효성 검사 (전화번호 형식 검증)
 - 폼 제출 시 로딩 상태 표시
 - SEO: 랜딩 페이지별 고유 메타 데이터
-- 접근성: 색상 대비 개선 (골드 텍스트)
 - 코드 정리: console.log 제거
 
 ### 중간 우선순위
@@ -172,3 +218,8 @@ kyurim-webpage-main/
 ### 낮은 우선순위
 - CSS 통합 (spring.css + style.css)
 - 4개 랜딩 페이지 템플릿화 (중복 코드 제거)
+
+### ✅ 완료된 항목
+- ~~접근성: 색상 대비 개선~~ → WCAG AA 준수 완료
+- ~~PWA 지원~~ → manifest.json, sw.js 추가 완료
+- ~~모달 클릭 버그~~ → 이벤트 위임 방식으로 해결
