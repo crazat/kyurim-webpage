@@ -315,14 +315,8 @@ button,
         0 8px 24px rgba(181, 88, 92, 0.15);
 }
 
-/* Active/Pressed state */
-.btn:active,
-.cta-btn:active,
-.sticky-btn:active {
-    transform: translateY(0) scale(0.98) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-    transition: all 0.1s ease !important;
-}
+/* Active/Pressed state - Enhanced touch feedback */
+/* Main active styles moved to "Mobile Stability Enhancements" section at end of file */
 
 /* Focus state - keyboard navigation */
 .btn:focus,
@@ -5776,4 +5770,158 @@ button:focus-visible {
 .form-filled select {
     background: var(--spring-mint-light) !important;
     border: none !important;
+}
+
+/* ============================================
+   Mobile Stability Enhancements
+   - Practical UX improvements with minimal risk
+   - CSS-only, no additional JS overhead
+   ============================================ */
+
+/* 1. Enhanced Button Touch Feedback */
+.btn:active,
+.cta-btn:active,
+.sticky-btn:active,
+.quick-menu-btn:active,
+.phone-btn:active,
+.kakao-btn:active {
+    transform: scale(0.96) !important;
+    opacity: 0.9 !important;
+    transition: transform 0.08s ease-out, opacity 0.08s ease-out !important;
+}
+
+/* 2. Input Focus Micro-interactions */
+input,
+textarea,
+select {
+    transition:
+        border-color var(--duration-fast) ease,
+        box-shadow var(--duration-fast) ease,
+        transform var(--duration-fast) ease !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    transform: translateY(-1px);
+}
+
+input::placeholder,
+textarea::placeholder {
+    transition: opacity var(--duration-fast) ease;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+    opacity: 0.5;
+}
+
+/* 3. Section Title Typography Enhancement */
+.section h2,
+.hero-content h1 {
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.subtitle,
+.section p:first-of-type {
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--text-soft);
+}
+
+/* 4. Hero Overlay Gradient Refinement */
+.hero-overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 239, 235, 0.5) 40%,
+        rgba(255, 209, 220, 0.6) 80%,
+        rgba(255, 183, 178, 0.4) 100%
+    ) !important;
+}
+
+/* 5. Card Hover Subtle Enhancement (Desktop only) */
+@media (min-width: 769px) and (hover: hover) {
+    .card,
+    .ba-card,
+    .review-card {
+        transition:
+            transform var(--duration-normal) var(--ease-out-expo),
+            box-shadow var(--duration-normal) ease !important;
+    }
+
+    .card:hover,
+    .ba-card:hover,
+    .review-card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* 6. Link Touch Target Enhancement */
+.nav-links a,
+.footer a,
+.social-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 7. Smooth Scroll Indicator Pulse */
+@keyframes scrollPulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(4px);
+    }
+}
+
+.scroll-indicator,
+.hero-scroll-down {
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* 8. Loading State Improvements */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--spring-mint-light) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        var(--spring-mint-light) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 9. Toast Notification Stability */
+.reservation-toast {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 10. Reduced Motion Support (Accessibility) */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .scroll-indicator,
+    .hero-scroll-down {
+        animation: none !important;
+    }
 }
