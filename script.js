@@ -2606,48 +2606,30 @@ document.addEventListener('DOMContentLoaded', () => {
 (function() {
     // Target all horizontal scroll containers
     const scrollContainers = document.querySelectorAll(
-        '.ba-gallery-grid, .event-scroll-container, .review-carousel-container, .story-images'
+        '.ba-gallery-grid, .event-scroll-container, .review-carousel-container'
     );
 
     if (scrollContainers.length === 0) return;
 
     scrollContainers.forEach(container => {
-        // Wheel event for desktop trackpad/mouse
         container.addEventListener('wheel', (e) => {
-            // Check if horizontal scroll is dominant
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                // Prevent browser back/forward navigation
+            // Only handle horizontal scroll (trackpad gesture)
+            if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+
+            const { scrollLeft, scrollWidth, clientWidth } = container;
+            const maxScroll = scrollWidth - clientWidth;
+
+            // At left boundary, scrolling left (would trigger back)
+            if (scrollLeft <= 0 && e.deltaX < 0) {
                 e.preventDefault();
-                // Manually scroll the container
-                container.scrollLeft += e.deltaX;
+                return;
             }
-        }, { passive: false });
 
-        // Also handle cases where vertical scroll should convert to horizontal
-        container.addEventListener('wheel', (e) => {
-            // If scrolling vertically but container only scrolls horizontally
-            const hasHorizontalScroll = container.scrollWidth > container.clientWidth;
-            const hasVerticalScroll = container.scrollHeight > container.clientHeight;
-
-            if (hasHorizontalScroll && !hasVerticalScroll && Math.abs(e.deltaY) > 0) {
+            // At right boundary, scrolling right (would trigger forward)
+            if (scrollLeft >= maxScroll - 1 && e.deltaX > 0) {
                 e.preventDefault();
-                container.scrollLeft += e.deltaY;
+                return;
             }
         }, { passive: false });
     });
-
-    // Also prevent overscroll on body when at scroll boundaries
-    document.body.addEventListener('wheel', (e) => {
-        const target = e.target.closest('.ba-gallery-grid, .event-scroll-container, .review-carousel-container, .story-images');
-        if (!target) return;
-
-        const { scrollLeft, scrollWidth, clientWidth } = target;
-        const atStart = scrollLeft === 0;
-        const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
-
-        // If at boundary and trying to scroll further, prevent default
-        if ((atStart && e.deltaX < 0) || (atEnd && e.deltaX > 0)) {
-            e.preventDefault();
-        }
-    }, { passive: false });
 })();
