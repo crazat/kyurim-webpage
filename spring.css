@@ -3461,31 +3461,29 @@ button,
     transition-delay: 0.3s;
 }
 
-/* 4. Real-time Reservation Notification (Social Proof) - Redesigned */
+/* 4. Real-time Reservation Notification (Social Proof) - Compact Single Line */
 .reservation-toast {
     position: fixed;
     top: 150px;
     left: 50%;
-    transform: translateX(-50%) translateY(-150%);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%);
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(255, 255, 255, 0.95);
     color: var(--text-dark);
-    padding: 0;
-    border-radius: 16px;
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.12),
-        0 2px 10px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    padding: 8px 14px 8px 10px;
+    border-radius: 50px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     z-index: 10000;
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    gap: 8px;
     opacity: 0;
-    transition: all 0.5s var(--ease-spring);
-    border: 1px solid rgba(255, 183, 178, 0.3);
+    transition: all 0.4s var(--ease-spring);
+    border: 1px solid rgba(255, 183, 178, 0.2);
     pointer-events: none;
-    overflow: hidden;
-    max-width: 320px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    white-space: nowrap;
+    font-size: 0.8rem;
 }
 
 .reservation-toast.show {
@@ -3494,41 +3492,38 @@ button,
     pointer-events: auto;
 }
 
-/* Landing Pages: Position toast below ticker (no navbar, ticker ~50px) */
+/* Landing Pages: Position toast below ticker */
 body[data-page-type] .reservation-toast {
     top: 70px;
 }
 
-body[data-page-type] .reservation-toast.show {
-    transform: translateX(-50%) translateY(0);
-}
-
-/* Icon badge */
+/* Icon badge - compact circle */
 .reservation-toast > i {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
+    width: 24px;
+    height: 24px;
     background: linear-gradient(135deg, var(--spring-blossom-pink) 0%, var(--spring-coral-pink) 100%);
     color: white;
-    font-size: 1.1rem;
+    font-size: 0.7rem;
+    border-radius: 50%;
     flex-shrink: 0;
 }
 
-/* Content area */
+/* Content area - inline */
 .reservation-toast > div {
-    padding: 12px 16px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
+    align-items: center;
+    gap: 4px;
 }
 
 .reservation-toast .toast-text {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 400;
-    line-height: 1.4;
+    line-height: 1;
     color: var(--text-dark);
+    display: inline;
 }
 
 .reservation-toast .toast-text b {
@@ -3537,44 +3532,47 @@ body[data-page-type] .reservation-toast.show {
 }
 
 .reservation-toast .toast-time {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-soft);
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 12px 16px 12px 0;
-    align-self: center;
+    margin-left: 6px;
+    padding-left: 8px;
+    border-left: 1px solid rgba(0,0,0,0.1);
 }
 
 .reservation-toast .toast-time::before {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     background: #4CAF50;
     border-radius: 50%;
     animation: toastPulse 2s infinite;
 }
 
 @keyframes toastPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
 }
 
-/* Progress bar (auto-dismiss indicator) */
+/* Progress bar - thin bottom line */
 .reservation-toast::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    height: 3px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
     background: linear-gradient(90deg, var(--spring-blossom-pink), var(--spring-coral-pink));
     animation: toastProgress 4s linear forwards;
-    border-radius: 0 0 16px 16px;
+    border-radius: 2px;
+    opacity: 0.6;
 }
 
 @keyframes toastProgress {
-    0% { width: 100%; }
-    100% { width: 0%; }
+    0% { transform: scaleX(1); transform-origin: left; }
+    100% { transform: scaleX(0); transform-origin: left; }
 }
 
 /* 5. Director's Secret Letter (Emotional Hook) */
@@ -4272,23 +4270,36 @@ header.hero {
         text-align: center;
     }
 
-    /* Fix: Position toast below ticker on mobile */
-    /* Main Page: Navbar(90px) + Ticker(~60px) = ~150px + margin */
+    /* Fix: Position toast below ticker on mobile - compact pill style */
     .reservation-toast {
         top: 160px;
-        bottom: auto;
-        left: 10px;
-        right: 10px;
-        transform: translateX(0) translateY(-150%);
-        max-width: none;
-        border-radius: 12px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(-100%);
+        border-radius: 50px;
+        font-size: 0.75rem;
+        padding: 6px 12px 6px 8px;
     }
 
     .reservation-toast.show {
-        transform: translateX(0) translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
 
-    /* Landing Pages: No navbar, sticky ticker at top (mobile ticker height ~90px) */
+    .reservation-toast > i {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6rem;
+    }
+
+    .reservation-toast .toast-text {
+        font-size: 0.75rem;
+    }
+
+    .reservation-toast .toast-time {
+        font-size: 0.65rem;
+    }
+
+    /* Landing Pages: No navbar, sticky ticker at top */
     body[data-page-type] .reservation-toast {
         top: 100px;
     }

@@ -1510,11 +1510,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toast.innerHTML = `
             <i class="fa-solid fa-bell"></i>
-            <div>
-                <span class="toast-text" style="display:block;"><b>${name}님</b>이</span>
-                <span class="toast-text">${action}</span>
-            </div>
-            <span class="toast-time" style="font-size:0.75rem; margin-left: 10px;">${time}분 전</span>
+            <span class="toast-text"><b>${name}</b>님 ${action}</span>
+            <span class="toast-time">${time}분 전</span>
         `;
 
         document.body.appendChild(toast);
