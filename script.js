@@ -1056,16 +1056,50 @@
             img.style.cursor = 'pointer';
         });
 
-        // Modal open/close functions
+        // Modal open/close functions with history management
+        let modalHistoryPushed = false;
+
         function openStoryModal() {
             storyModal.style.display = 'flex';
             storyModal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+            // Add history state for mobile back button
+            if (!modalHistoryPushed) {
+                history.pushState({ modal: 'story' }, '');
+                modalHistoryPushed = true;
+            }
         }
 
         function closeStoryModal() {
             storyModal.classList.remove('show');
             storyModal.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scroll
+
+            // Clear image to free memory (important for mobile)
+            if (storyImage) storyImage.src = '';
+
+            // Go back in history if we pushed state
+            if (modalHistoryPushed) {
+                modalHistoryPushed = false;
+                // Only go back if current state has modal
+                if (history.state && history.state.modal === 'story') {
+                    history.back();
+                }
+            }
         }
+
+        // Handle browser back button
+        window.addEventListener('popstate', (e) => {
+            if (storyModal.classList.contains('show')) {
+                modalHistoryPushed = false; // Prevent double history.back()
+                storyModal.classList.remove('show');
+                storyModal.style.display = 'none';
+                document.body.style.overflow = '';
+                // Clear image to free memory
+                if (storyImage) storyImage.src = '';
+            }
+        });
 
         // EVENT DELEGATION: Handle all image clicks at document level
         document.addEventListener('click', (e) => {
