@@ -3022,21 +3022,8 @@ footer {
     padding-bottom: 100px;
 }
 
-/* 하단바 자체 개선 */
-.sticky-bottom-bar {
-    height: 64px;
-    padding: 8px 12px;
-}
-
-.sticky-btn {
-    min-height: 48px;  /* 터치 타겟 확대 */
-    font-size: 0.85rem;
-    gap: 6px;
-}
-
-.sticky-btn i {
-    font-size: 1.3rem;
-}
+/* 하단바 스타일은 각 랜딩 페이지 인라인 CSS에서 관리 */
+/* 메인 페이지에서는 sticky-bottom-bar 미사용 */
 
 /* Task 3: CTA 버튼 계층 정리 */
 /* Primary CTA - 강조 */
@@ -3248,16 +3235,7 @@ a.btn {
     }
 }
 
-/* 추가: 랜딩 페이지 하단바 스타일 개선 */
-@media (max-width: 768px) {
-    .sticky-bottom-bar .sticky-btn {
-        padding: 6px 4px;
-    }
-
-    .sticky-bottom-bar .sticky-btn span {
-        font-size: 0.7rem;
-    }
-}
+/* 랜딩 페이지 하단바 스타일은 각 페이지 인라인 CSS에서 관리 */
 
 /* =========================================
    디자인 개선 (2026-03-02)
