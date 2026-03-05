@@ -17,13 +17,6 @@
     --spring-green-dark: #5A7A3A;         /* Darkened green for text - 5.5:1 on white */
     --spring-mint-dark: #3D7A6A;          /* Darkened mint for text - 5.0:1 on white */
 
-    /* Legacy aliases (for backward compatibility - mapped to correct values) */
-    --gold-primary: var(--spring-blossom-pink);
-    --gold-light: var(--spring-peach);
-    --sunrise-red: var(--spring-sprout-green);
-    --sunrise-orange: var(--spring-mint-green);
-    --navy-deep: var(--spring-coral-pink);
-
     /* Neutral Colors */
     --cream-bg: #FFFDF5;
     --white: #FFFFFF;
@@ -1736,7 +1729,7 @@ body::before {
     position: fixed;
     width: 10px;
     height: 10px;
-    background: var(--gold-primary);
+    background: var(--spring-blossom-pink);
     border-radius: 5px 0 5px 0;
     /* Petal shape */
     pointer-events: none;
@@ -1968,7 +1961,7 @@ p {
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    color: var(--gold-primary);
+    color: var(--spring-blossom-pink);
     font-size: 2rem;
     background: transparent;
 }
@@ -2009,15 +2002,15 @@ p {
 
 /* Button & Nav Overrides */
 .btn-primary {
-    background-color: var(--gold-primary) !important;
-    border-color: var(--gold-primary) !important;
+    background-color: var(--spring-blossom-pink) !important;
+    border-color: var(--spring-blossom-pink) !important;
     color: var(--white) !important;
     box-shadow: 0 4px 6px rgba(255, 218, 193, 0.3) !important;
 }
 
 .btn-primary:hover {
-    background-color: var(--gold-light) !important;
-    border-color: var(--gold-light) !important;
+    background-color: var(--spring-peach) !important;
+    border-color: var(--spring-peach) !important;
     transform: translateY(-2px);
 }
 
@@ -2027,7 +2020,7 @@ p {
 }
 
 .navbar {
-    border-bottom: 3px solid var(--gold-primary) !important;
+    border-bottom: 3px solid var(--spring-blossom-pink) !important;
 }
 
 .nav-links a {
@@ -2046,8 +2039,8 @@ p {
 }
 
 footer {
-    background-color: var(--sunrise-orange) !important;
-    border-top: 5px solid var(--gold-primary) !important;
+    background-color: var(--spring-mint-green) !important;
+    border-top: 5px solid var(--spring-blossom-pink) !important;
     color: var(--text-dark) !important;
 }
 
@@ -2061,7 +2054,7 @@ footer {
 }
 
 .line {
-    background-color: var(--gold-primary) !important;
+    background-color: var(--spring-blossom-pink) !important;
 }
 
 /* Countdown Timer */
@@ -2082,7 +2075,7 @@ footer {
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: var(--shadow-glow-pink);
-    border: 1px solid var(--gold-light);
+    border: 1px solid var(--spring-peach);
 }
 
 .time-segment span:first-child {
@@ -2141,7 +2134,7 @@ footer {
 /* Fortune Box Game Styles - Premium Redesign */
 .lucky-box-game {
     background: linear-gradient(135deg, #FFFDF5 0%, #FFF5E6 100%);
-    border: 4px solid var(--gold-primary);
+    border: 4px solid var(--spring-blossom-pink);
     border-radius: 20px;
     padding: 30px;
     text-align: center;
@@ -2158,7 +2151,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(var(--gold-light) 1px, transparent 1px);
+    background-image: radial-gradient(var(--spring-peach) 1px, transparent 1px);
     background-size: 20px 20px;
     opacity: 0.1;
     pointer-events: none;
@@ -2166,11 +2159,11 @@ footer {
 
 .lucky-box-game h3 {
     font-family: 'NanumBarunGothic', sans-serif !important;
-    color: var(--navy-deep);
+    color: var(--spring-coral-pink);
     margin-bottom: 20px;
     font-size: 1.8rem;
     font-weight: 800;
-    text-shadow: 1px 1px 0 var(--gold-primary);
+    text-shadow: 1px 1px 0 var(--spring-blossom-pink);
 }
 
 .lucky-box-game p {
@@ -2366,7 +2359,7 @@ footer {
     background-color: #FFFDF5;
     /* Cream */
     text-align: center;
-    border: 4px solid var(--gold-primary);
+    border: 4px solid var(--spring-blossom-pink);
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -2510,31 +2503,31 @@ footer {
 /* 1. Diagnosis Tabs (Self-Check) */
 .tab-btn.active,
 .tab-btn:hover {
-    background-color: var(--gold-primary) !important;
-    border-color: var(--gold-primary) !important;
+    background-color: var(--spring-blossom-pink) !important;
+    border-color: var(--spring-blossom-pink) !important;
     color: white !important;
 }
 
 /* 2. Gender Selection Buttons (Diet Prediction) */
 .gender-btn:hover {
-    border-color: var(--gold-primary) !important;
+    border-color: var(--spring-blossom-pink) !important;
     color: var(--spring-pink-dark) !important;
 }
 
 input[type="radio"]:checked+.gender-btn {
-    background-color: var(--gold-primary) !important;
-    border-color: var(--gold-primary) !important;
+    background-color: var(--spring-blossom-pink) !important;
+    border-color: var(--spring-blossom-pink) !important;
     color: white !important;
 }
 
 /* 3. Process Section Icons */
 .step-icon {
     color: var(--spring-pink-dark) !important;
-    border-color: var(--gold-primary) !important;
+    border-color: var(--spring-blossom-pink) !important;
 }
 
 .step-arrow {
-    color: var(--gold-light) !important;
+    color: var(--spring-peach) !important;
 }
 
 /* 4. Font Consistency Updates */
@@ -2709,7 +2702,7 @@ input[type="radio"]:checked+.gender-btn {
 
 /* 10. Selection Highlight (Gold & Red) */
 ::selection {
-    background: var(--gold-primary);
+    background: var(--spring-blossom-pink);
     color: #FF9AA2;
     /* Dark Red */
     text-shadow: none;
@@ -2745,7 +2738,7 @@ input[type="radio"]:checked+.gender-btn {
     bottom: 110%;
     left: 50%;
     transform: translateX(-50%) scale(0);
-    background: var(--gold-primary);
+    background: var(--spring-blossom-pink);
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
@@ -2767,7 +2760,7 @@ input[type="radio"]:checked+.gender-btn {
     left: 50%;
     transform: translateX(-50%) scale(0);
     border: 5px solid transparent;
-    border-top-color: var(--gold-primary);
+    border-top-color: var(--spring-blossom-pink);
     opacity: 0;
     transition: all var(--duration-fast) ease;
 }
@@ -2961,13 +2954,13 @@ input[type="radio"]:checked+.gender-btn {
 /* 16. Fix Scroll Top Button Spin & Color */
 .top-btn {
     color: var(--spring-pink-dark) !important;
-    border-color: var(--gold-primary) !important;
+    border-color: var(--spring-blossom-pink) !important;
 }
 
 .top-btn:hover {
     transform: none !important;
-    background-color: var(--gold-primary) !important;
-    border-color: var(--gold-primary) !important;
+    background-color: var(--spring-blossom-pink) !important;
+    border-color: var(--spring-blossom-pink) !important;
     color: var(--white) !important;
 }
 
@@ -3019,7 +3012,7 @@ button,
     /* Above cookie */
     left: 0;
     background: #FFF;
-    border: 2px solid var(--gold-primary);
+    border: 2px solid var(--spring-blossom-pink);
     padding: 10px 15px;
     border-radius: 15px;
     width: 200px;
@@ -3049,7 +3042,7 @@ button,
     top: 100%;
     left: 20px;
     border: 8px solid transparent;
-    border-top-color: var(--gold-primary);
+    border-top-color: var(--spring-blossom-pink);
 }
 
 @keyframes cookieShake {
@@ -3115,7 +3108,7 @@ button,
 }
 
 .fortune-close:hover {
-    color: var(--sunrise-red);
+    color: var(--spring-sprout-green);
 }
 
 #fortune-text {
@@ -3234,19 +3227,19 @@ button,
         linear-gradient(90deg, rgba(255, 218, 193, 0.2) 1px, transparent 1px),
         linear-gradient(0deg, rgba(255, 218, 193, 0.2) 1px, transparent 1px);
     background-size: 40px 40px;
-    border: 4px solid var(--navy-deep);
+    border: 4px solid var(--spring-coral-pink);
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 .changhoji-door.left {
     left: 0;
-    border-right: 2px solid var(--navy-deep);
+    border-right: 2px solid var(--spring-coral-pink);
     transform-origin: left;
 }
 
 .changhoji-door.right {
     right: 0;
-    border-left: 2px solid var(--navy-deep);
+    border-left: 2px solid var(--spring-coral-pink);
     transform-origin: right;
 }
 
@@ -3278,9 +3271,9 @@ button,
     top: 50%;
     width: 12px;
     height: 50px;
-    background: var(--gold-primary);
+    background: var(--spring-blossom-pink);
     /* Gold Handle */
-    border: 1px solid var(--navy-deep);
+    border: 1px solid var(--spring-coral-pink);
     border-radius: 4px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
@@ -4125,7 +4118,7 @@ body[data-page-type] .reservation-toast {
 /* 1. Rolling Ticker (Main Page - Top Fixed) */
 .ai-ticker-rolling {
     width: 100%;
-    background-color: var(--sunrise-orange);
+    background-color: var(--spring-mint-green);
     color: var(--text-dark);
     font-size: 0.95rem;
     text-align: center;
@@ -4160,7 +4153,7 @@ body[data-page-type] .reservation-toast {
 }
 
 .ticker-highlight {
-    color: var(--navy-deep);
+    color: var(--spring-coral-pink);
     font-weight: bold;
 }
 
@@ -4172,7 +4165,7 @@ body[data-page-type] .reservation-toast {
     left: 0;
 
     width: 100%;
-    background-color: var(--gold-primary);
+    background-color: var(--spring-blossom-pink);
     /* Cherry Blossom Pink */
     color: var(--text-dark);
     z-index: 999;
