@@ -281,65 +281,28 @@
         </div>
     </section>
 
-    <!-- Video Section (Body) - Lazy Loading for Performance -->
+    <!-- Video Section (Body) - 모든 비디오 즉시 로드 -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container"
             style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-            <!-- 첫 번째 비디오: 즉시 로드 -->
             <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../assets/26%20march%20body/ComfyUI_00149_.mp4" type="video/mp4">
             </video>
-            <!-- 나머지: lazy loading (500px 미리 로드) -->
-            <video class="lazy-video" muted loop playsinline preload="none"
-                data-src="../../assets/26%20march%20body/ComfyUI_00159_.mp4"
+            <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20body/ComfyUI_00159_.mp4" type="video/mp4">
             </video>
-            <video class="lazy-video" muted loop playsinline preload="none"
-                data-src="../../assets/26%20march%20body/ComfyUI_00169_.mp4"
+            <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20body/ComfyUI_00169_.mp4" type="video/mp4">
             </video>
-            <video class="lazy-video" muted loop playsinline preload="none"
-                data-src="../../assets/26%20march%20body/ComfyUI_00170_.mp4"
+            <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <source src="../../assets/26%20march%20body/ComfyUI_00170_.mp4" type="video/mp4">
             </video>
         </div>
     </section>
-    <!-- Video Lazy Loading Script (rootMargin 500px for earlier preload) -->
-    <script>
-    (function(){
-        var videos = document.querySelectorAll('.lazy-video');
-        if ('IntersectionObserver' in window) {
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting) {
-                        var v = e.target;
-                        var src = v.dataset.src;
-                        if (src) {
-                            var s = document.createElement('source');
-                            s.src = src;
-                            s.type = 'video/mp4';
-                            v.appendChild(s);
-                            v.load();
-                            v.play();
-                            delete v.dataset.src;
-                        }
-                        obs.unobserve(v);
-                    }
-                });
-            }, {rootMargin: '500px'});
-            videos.forEach(function(v){ obs.observe(v); });
-        } else {
-            videos.forEach(function(v){
-                var s = document.createElement('source');
-                s.src = v.dataset.src;
-                s.type = 'video/mp4';
-                v.appendChild(s);
-                v.load();
-            });
-        }
-    })();
-    </script>
 
 <!-- Hero Section -->
     <!-- Hero Section REMOVED -->
