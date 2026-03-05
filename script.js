@@ -2145,14 +2145,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('DOMContentLoaded', () => {
         // Story Modal close button
         const storyModal = document.getElementById('storyModal');
-        const storyClose = storyModal?.querySelector('.story-close');
+        const storyClose = storyModal ? storyModal.querySelector('.story-close') : null;
         if (storyClose) {
             storyClose.addEventListener('click', () => closeModalWithFocus(storyModal));
         }
 
         // Talisman Modal close button
         const talismanModal = document.getElementById('talisman-modal');
-        const talismanClose = talismanModal?.querySelector('.close-btn, .modal-close');
+        const talismanClose = talismanModal ? talismanModal.querySelector('.close-btn, .modal-close') : null;
         if (talismanClose) {
             talismanClose.addEventListener('click', () => closeModalWithFocus(talismanModal));
         }
@@ -2175,7 +2175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 (function() {
     // Skip on mobile or reduced motion preference
     const isMobile = window.innerWidth <= 768;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isMobile || prefersReducedMotion) return;
 
@@ -2383,36 +2383,50 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ============================================
-// #14. Card 3D Tilt Effect
+// #14. Card 3D Tilt Effect (Throttled with RAF)
 // ============================================
 (function() {
     const isMobile = window.innerWidth <= 768;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isMobile || prefersReducedMotion) return;
 
     const tiltCards = document.querySelectorAll('.tilt-card, .ba-card, .benefit-item, .service-card');
 
     tiltCards.forEach(card => {
+        let tiltTicking = false;
+        let lastX = 0;
+        let lastY = 0;
+
         card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            lastX = e.clientX;
+            lastY = e.clientY;
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+            if (!tiltTicking) {
+                tiltTicking = true;
+                requestAnimationFrame(() => {
+                    const rect = card.getBoundingClientRect();
+                    const x = lastX - rect.left;
+                    const y = lastY - rect.top;
 
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
 
-            card.style.setProperty('--tilt-x', `${rotateX}deg`);
-            card.style.setProperty('--tilt-y', `${rotateY}deg`);
-        });
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+
+                    card.style.setProperty('--tilt-x', rotateX + 'deg');
+                    card.style.setProperty('--tilt-y', rotateY + 'deg');
+
+                    tiltTicking = false;
+                });
+            }
+        }, { passive: true });
 
         card.addEventListener('mouseleave', () => {
             card.style.setProperty('--tilt-x', '0deg');
             card.style.setProperty('--tilt-y', '0deg');
-        });
+        }, { passive: true });
     });
 })();
 

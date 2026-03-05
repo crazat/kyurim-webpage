@@ -2581,6 +2581,7 @@ footer {
     background: rgba(0, 0, 0, 0.08);
     z-index: 10000;
     pointer-events: none;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
 
