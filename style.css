@@ -456,14 +456,18 @@ ul {
     display: flex;
     overflow-x: auto;
     gap: 20px;
-    padding-bottom: 20px;
+    padding: 10px 20px 20px 20px; /* Side padding to avoid edge swipe area */
+    margin: 0 -20px; /* Compensate for padding */
     scrollbar-width: none;
     scroll-behavior: smooth;
-    width: 100%;
+    width: calc(100% + 40px);
     /* Prevent iOS Safari edge swipe (back gesture) during horizontal scroll */
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x pinch-zoom;
+    /* Additional iOS fix */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 .ba-gallery-grid::-webkit-scrollbar {
