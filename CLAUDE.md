@@ -17,7 +17,7 @@ kyurim-webpage-main/
 ├── index.html              # 메인 홈페이지
 ├── style.css               # 메인 스타일시트 (~3500 lines)
 ├── spring.css              # 봄 시즌 테마 (벚꽃) + 디자인 토큰
-├── script.js               # 메인 JavaScript (~2200 lines)
+├── script.js               # 메인 JavaScript (~2650 lines)
 ├── manifest.json           # PWA 매니페스트
 ├── sw.js                   # Service Worker (캐싱/오프라인)
 ├── offline.html            # 오프라인 폴백 페이지
@@ -26,7 +26,8 @@ kyurim-webpage-main/
 │   ├── skin/index.html     # 피부 클리닉
 │   ├── diet/index.html     # 다이어트 클리닉
 │   ├── pain/index.html     # 통증 클리닉
-│   └── body/index.html     # 체형 클리닉
+│   ├── body/index.html     # 체형 클리닉
+│   └── wedding/index.html  # 웨딩 클리닉
 ├── event play/             # 이벤트 영상 파일 (.mp4)
 ├── vercel.json             # Vercel 배포 설정
 └── .gitignore
@@ -79,6 +80,21 @@ kyurim-webpage-main/
 - 애니메이션: fast/normal/slow 토큰
 
 ## 최근 작업 이력
+
+### 2026-03-05: UX 버그 수정 + 토스트 알림 개선
+- **데스크톱 가로 스크롤 브라우저 네비게이션 방지**
+  - 트랙패드/마우스 휠 가로 스크롤 시 브라우저 뒤로/앞으로 이동 차단
+  - wheel 이벤트 핸들러 추가 (script.js)
+  - 대상: `.ba-gallery-grid`, `.event-scroll-container`, `.review-carousel-container`
+  - 스크롤 경계에서만 preventDefault() 호출
+- **토스트 알림 컴팩트화**
+  - 두 줄 → 한 줄 pill 스타일로 변경
+  - 알약 모양 디자인 (border-radius: 50px)
+  - 아이콘 크기 축소 (데스크톱 24px, 모바일 20px)
+  - 콘텐츠 방해 최소화
+- **웨딩 클리닉 랜딩 페이지 추가**
+  - events/wedding/index.html 신규 생성
+  - 봄 테마 적용, 하단바 CTA 포함
 
 ### 2026-03-05: 랜딩 페이지 성능 최적화 (모바일 인스타 광고 사용자 대응)
 - **CSS 비동기 로딩**
@@ -238,3 +254,5 @@ kyurim-webpage-main/
 - ~~접근성: 색상 대비 개선~~ → WCAG AA 준수 완료
 - ~~PWA 지원~~ → manifest.json, sw.js 추가 완료
 - ~~모달 클릭 버그~~ → 이벤트 위임 방식으로 해결
+- ~~가로 스크롤 브라우저 네비게이션 방지~~ → wheel 이벤트 핸들러 추가
+- ~~토스트 알림 컴팩트화~~ → 한 줄 pill 스타일로 변경
