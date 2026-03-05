@@ -24,9 +24,13 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Critical CSS -->
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../../spring.css">
+    <!-- Critical CSS - Async Loading for Performance -->
+    <link rel="preload" href="../../style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="../../spring.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="../../spring.css">
+    </noscript>
 
     <!-- Fonts -->
     <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
@@ -279,32 +283,63 @@
         </div>
     </section>
 
-    <!-- Video Section (Body) - Moved after Before & After -->
+    <!-- Video Section (Body) - Lazy Loading for Performance -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container"
             style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-            <!-- 1. ComfyUI_00149_ -->
-            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline controls poster="../../assets/logo.png"
+                data-src="../../assets/26%20march%20body/ComfyUI_00149_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20body/ComfyUI_00149_.mp4" type="video/mp4">
             </video>
-            <!-- 2. ComfyUI_00159_ -->
-            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline controls poster="../../assets/logo.png"
+                data-src="../../assets/26%20march%20body/ComfyUI_00159_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20body/ComfyUI_00159_.mp4" type="video/mp4">
             </video>
-            <!-- 3. ComfyUI_00169_ -->
-            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline controls poster="../../assets/logo.png"
+                data-src="../../assets/26%20march%20body/ComfyUI_00169_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20body/ComfyUI_00169_.mp4" type="video/mp4">
             </video>
-            <!-- 4. ComfyUI_00170_ -->
-            <video autoplay muted loop playsinline controls poster="../../assets/logo.png"
+            <video class="lazy-video" muted loop playsinline controls poster="../../assets/logo.png"
+                data-src="../../assets/26%20march%20body/ComfyUI_00170_.mp4"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20body/ComfyUI_00170_.mp4" type="video/mp4">
             </video>
         </div>
     </section>
+    <!-- Video Lazy Loading Script -->
+    <script>
+    (function(){
+        var videos = document.querySelectorAll('.lazy-video');
+        if ('IntersectionObserver' in window) {
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        var v = e.target;
+                        var src = v.dataset.src;
+                        if (src) {
+                            var s = document.createElement('source');
+                            s.src = src;
+                            s.type = 'video/mp4';
+                            v.appendChild(s);
+                            v.load();
+                            v.play();
+                            delete v.dataset.src;
+                        }
+                        obs.unobserve(v);
+                    }
+                });
+            }, {rootMargin: '100px'});
+            videos.forEach(function(v){ obs.observe(v); });
+        } else {
+            videos.forEach(function(v){
+                var s = document.createElement('source');
+                s.src = v.dataset.src;
+                s.type = 'video/mp4';
+                v.appendChild(s);
+                v.load();
+            });
+        }
+    })();
+    </script>
 
 <!-- Hero Section -->
     <!-- Hero Section REMOVED -->
@@ -747,9 +782,8 @@
         </div>
     </section>
 
+    <!-- Performance: Removed Chart.js (unused) -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-    <!-- Removed diet_prediction.js -->
     <script src="../../diagnosis.js" defer></script>
     <script src="../../script.js" defer></script>
 
@@ -849,8 +883,7 @@
         </a>
     </div>
 
-    <!-- Shared Script (Snow, Toast, Reviews) -->
-    <script src="../../script.js" defer></script>
+    <!-- Removed duplicate script.js -->
     <script>
         function copyAddress() {
             const address = "충청북도 청주시 상당구 상당로 81번길 36, 5층";

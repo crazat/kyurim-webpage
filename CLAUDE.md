@@ -80,6 +80,21 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-05: 랜딩 페이지 성능 최적화 (모바일 인스타 광고 사용자 대응)
+- **CSS 비동기 로딩**
+  - style.css, spring.css를 preload + onload 패턴으로 변경
+  - render-blocking 제거로 FCP 개선
+- **스크립트 중복 제거**
+  - script.js 2중 로드 문제 해결 (모든 랜딩 페이지)
+  - skin_mbti.js 2중 로드 제거 (skin 페이지)
+- **Chart.js 제거**
+  - 랜딩 페이지에서 불필요한 Chart.js (~70KB) 제거
+- **비디오 Lazy Loading**
+  - IntersectionObserver 기반 비디오 지연 로드
+  - 뷰포트 진입 시에만 비디오 소스 로드 및 재생
+  - 초기 페이지 로드 데이터 절약 (모바일 사용자 대응)
+- **적용 페이지**: skin, body, pain, diet (4개 랜딩 페이지)
+
 ### 2026-03-05: 모달/네비게이션/UX 버그 수정 + PWA 지원
 - **모달 클릭 버그 수정**
   - 이벤트 위임 방식으로 전면 수정 (document 레벨 클릭 감지)
