@@ -320,14 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollRevealObserver.observe(el);
     });
 
-    // Auto-apply scroll-reveal to cards and sections (excluding ba-card and review-card which are in horizontal scrolls)
-    document.querySelectorAll('.card, .section h2, .section h3').forEach((el, index) => {
-        if (!el.classList.contains('scroll-reveal') && !el.classList.contains('revealed')) {
-            el.classList.add('scroll-reveal');
-            el.style.transitionDelay = `${(index % 4) * 0.1}s`;
-            scrollRevealObserver.observe(el);
-        }
-    });
+    // Note: Auto-apply scroll-reveal removed - was causing elements to disappear
+    // Use explicit .scroll-reveal class in HTML if animation is needed
 
     // Counter Animation for Statistics
     const counterElements = document.querySelectorAll('.stat-number[data-count]');
