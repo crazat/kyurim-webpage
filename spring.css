@@ -390,20 +390,674 @@ button:disabled,
     background: rgba(255, 183, 178, 0.25);
 }
 
-/* CTA Button with pulse animation */
+/* CTA Button with enhanced pulse animation */
 .cta-btn,
-.btn-cta,
-.sticky-btn.reserve {
-    animation: subtlePulse 2s ease-in-out infinite;
+.btn-cta {
+    background: linear-gradient(135deg, #03C75A 0%, #00a850 100%) !important;
+    color: white !important;
+    font-weight: 700;
+    animation: ctaPulse 2s ease-in-out infinite;
+    position: relative;
 }
 
-@keyframes subtlePulse {
+.sticky-btn.reserve {
+    background: linear-gradient(135deg, #03C75A 0%, #00a850 100%) !important;
+    animation: ctaPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
     0%, 100% {
-        box-shadow: 0 4px 15px rgba(3, 199, 90, 0.3);
+        box-shadow:
+            0 4px 15px rgba(3, 199, 90, 0.4),
+            0 0 0 0 rgba(3, 199, 90, 0.4);
     }
     50% {
-        box-shadow: 0 4px 25px rgba(3, 199, 90, 0.5), 0 0 10px rgba(3, 199, 90, 0.3);
+        box-shadow:
+            0 6px 25px rgba(3, 199, 90, 0.5),
+            0 0 0 8px rgba(3, 199, 90, 0);
     }
+}
+
+/* Gradient shine effect for CTA */
+.cta-btn::before,
+.btn-cta::before,
+.sticky-btn.reserve::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: ctaShine 3s ease-in-out infinite;
+}
+
+@keyframes ctaShine {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+/* Phone/Call button glow */
+.sticky-btn.call {
+    position: relative;
+}
+
+.sticky-btn.call::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--spring-blossom-pink), var(--spring-coral-pink));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sticky-btn.call:hover::after {
+    opacity: 0.5;
+    animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+/* ============================================
+   #7.10. Section Dividers (Wave & Diagonal)
+   ============================================ */
+
+/* Wave divider - top */
+.section-wave-top {
+    position: relative;
+}
+
+.section-wave-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23FFFDF5' d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,45 1440,30 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+    z-index: 1;
+}
+
+/* Wave divider - bottom */
+.section-wave-bottom {
+    position: relative;
+}
+
+.section-wave-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23FFFDF5' d='M0,30 C360,0 720,60 1080,30 C1260,15 1380,15 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+    z-index: 1;
+}
+
+/* Automatic wave dividers between sections */
+.specialties,
+.before-after,
+.interior,
+.reviews-section,
+.blog-section {
+    position: relative;
+}
+
+/* Wave between white and cream sections */
+.specialties::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,0 C240,40 480,50 720,40 C960,30 1200,50 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.before-after::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23FFFDF5' d='M0,60 C240,20 480,10 720,20 C960,30 1200,10 1440,30 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Diagonal accent line */
+.section-diagonal {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-diagonal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 120%;
+    height: 4px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--spring-blossom-pink),
+        var(--spring-coral-pink),
+        var(--spring-blossom-pink),
+        transparent
+    );
+    transform: rotate(-1deg);
+}
+
+/* Decorative dots between sections */
+.section-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 30px 0;
+}
+
+.section-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--spring-blossom-pink);
+    opacity: 0.6;
+}
+
+.section-dots span:nth-child(2) {
+    width: 12px;
+    height: 12px;
+    background: var(--spring-coral-pink);
+    opacity: 0.8;
+}
+
+.section-dots span:nth-child(3) {
+    background: var(--spring-peach);
+}
+
+/* ============================================
+   #7.11. Enhanced Scroll Animations
+   ============================================ */
+
+/* Scroll reveal base */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered reveal for grid items */
+.scroll-reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.1s; }
+.scroll-reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.2s; }
+.scroll-reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.3s; }
+.scroll-reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.4s; }
+.scroll-reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.5s; }
+.scroll-reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.6s; }
+
+.scroll-reveal-stagger.revealed > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide in from sides */
+.scroll-slide-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-slide-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-slide-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-slide-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale up reveal */
+.scroll-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Rotate in */
+.scroll-rotate {
+    opacity: 0;
+    transform: rotate(-5deg) translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-rotate.revealed {
+    opacity: 1;
+    transform: rotate(0) translateY(0);
+}
+
+/* Blur in */
+.scroll-blur {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-blur.revealed {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Clip reveal (curtain effect) */
+.scroll-clip {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-clip.revealed {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Counter animation for statistics */
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--spring-coral-dark);
+    display: block;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-soft);
+}
+
+/* Parallax effect for backgrounds */
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* ============================================
+   #7.12. 3D Card Tilt Effect (Treatment Gallery)
+   ============================================ */
+
+/* Gallery container perspective */
+.ba-gallery-grid {
+    perspective: 1000px;
+}
+
+/* 3D tilt effect for BA cards */
+.ba-card {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transition: transform 0.15s ease-out, box-shadow 0.4s ease !important;
+}
+
+/* Image inside card */
+.ba-card img {
+    transition: transform 0.5s ease, filter 0.3s ease;
+    transform: translateZ(20px);
+}
+
+.ba-card:hover img {
+    transform: translateZ(40px) scale(1.05);
+}
+
+/* Shine overlay on hover */
+.ba-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.ba-card:hover::after {
+    opacity: 1;
+}
+
+/* Focus indicator for gallery */
+.ba-card:focus-within {
+    outline: 3px solid var(--spring-coral-pink);
+    outline-offset: 4px;
+}
+
+/* Active/selected card state */
+.ba-card.active,
+.ba-card:focus {
+    transform: scale(1.05) translateZ(30px);
+    z-index: 10;
+    box-shadow:
+        0 20px 40px rgba(181, 88, 92, 0.2),
+        0 0 0 3px var(--spring-blossom-pink);
+}
+
+/* Mobile: Disable 3D for performance */
+@media (max-width: 768px) {
+    .ba-gallery-grid {
+        perspective: none;
+    }
+
+    .ba-card {
+        transform-style: flat;
+    }
+
+    .ba-card img {
+        transform: none;
+    }
+
+    .ba-card:hover img {
+        transform: scale(1.02);
+    }
+}
+
+/* ============================================
+   #7.13. Enhanced Form Design
+   ============================================ */
+
+/* Form container */
+.form-container,
+.contact-form,
+.consultation-form {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Floating label input group */
+.form-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 16px;
+    padding-top: 24px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: transparent;
+    padding: 0 4px;
+}
+
+.form-group textarea ~ label {
+    top: 24px;
+}
+
+/* Floating label on focus/filled */
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label,
+.form-group select:focus ~ label,
+.form-group select:valid ~ label {
+    top: 8px;
+    transform: translateY(0);
+    font-size: 12px;
+    color: var(--spring-coral-dark);
+    font-weight: 600;
+}
+
+/* Input focus state */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--spring-coral-pink);
+    box-shadow:
+        0 0 0 4px rgba(255, 154, 162, 0.15),
+        0 4px 12px rgba(181, 88, 92, 0.1);
+    background: white;
+}
+
+/* Valid state */
+.form-group input:valid:not(:placeholder-shown),
+.form-group textarea:valid:not(:placeholder-shown) {
+    border-color: #4CAF50;
+}
+
+.form-group input:valid:not(:placeholder-shown) ~ .form-icon,
+.form-group textarea:valid:not(:placeholder-shown) ~ .form-icon {
+    color: #4CAF50;
+}
+
+/* Invalid state */
+.form-group input:invalid:not(:placeholder-shown):not(:focus),
+.form-group textarea:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #f44336;
+}
+
+/* Validation icon */
+.form-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* Error message */
+.form-error {
+    display: none;
+    font-size: 12px;
+    color: #f44336;
+    margin-top: 6px;
+    padding-left: 4px;
+}
+
+.form-group input:invalid:not(:placeholder-shown):not(:focus) ~ .form-error {
+    display: block;
+}
+
+/* Submit button */
+.form-submit,
+.submit-btn {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--spring-coral-dark) 0%, var(--spring-pink-dark) 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-submit:hover,
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 20px rgba(181, 88, 92, 0.3),
+        0 2px 8px rgba(181, 88, 92, 0.2);
+}
+
+.form-submit:active,
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Loading state */
+.form-submit.loading,
+.submit-btn.loading {
+    color: transparent;
+    pointer-events: none;
+}
+
+.form-submit.loading::after,
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: formSpinner 0.8s linear infinite;
+}
+
+@keyframes formSpinner {
+    to { transform: rotate(360deg); }
+}
+
+/* Phone input with country code */
+.phone-input-group {
+    display: flex;
+    gap: 12px;
+}
+
+.phone-input-group .country-code {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.phone-input-group .phone-number {
+    flex: 1;
+}
+
+/* Checkbox/Radio custom style */
+.form-checkbox,
+.form-radio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.form-checkbox input,
+.form-radio input {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.form-radio input {
+    border-radius: 50%;
+}
+
+.form-checkbox input:checked,
+.form-radio input:checked {
+    background: var(--spring-coral-pink);
+    border-color: var(--spring-coral-pink);
+}
+
+.form-checkbox input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-radio input:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
 }
 
 /* Ripple effect on click */

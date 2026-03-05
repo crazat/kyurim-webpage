@@ -284,6 +284,36 @@
         fadeObserver.observe(el);
     });
 
+    // Enhanced Scroll Reveal Animations
+    const scrollRevealElements = document.querySelectorAll(
+        '.scroll-reveal, .scroll-reveal-stagger, .scroll-slide-left, .scroll-slide-right, .scroll-scale, .scroll-rotate, .scroll-blur, .scroll-clip'
+    );
+
+    const scrollRevealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    scrollRevealElements.forEach(el => {
+        scrollRevealObserver.observe(el);
+    });
+
+    // Auto-apply scroll-reveal to cards and sections
+    document.querySelectorAll('.card, .ba-card, .review-card, .section h2, .section h3').forEach((el, index) => {
+        if (!el.classList.contains('scroll-reveal') && !el.classList.contains('revealed')) {
+            el.classList.add('scroll-reveal');
+            el.style.transitionDelay = `${(index % 4) * 0.1}s`;
+            scrollRevealObserver.observe(el);
+        }
+    });
+
     // =========================================
     // Scroll Progress Bar (JS Fallback for browsers without CSS scroll-timeline)
     // =========================================
