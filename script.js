@@ -2599,3 +2599,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     countUpElements.forEach(el => observer.observe(el));
 })();
+
+// ============================================
+// Horizontal Scroll - Prevent Browser History Navigation
+// ============================================
+(function() {
+    // Target all horizontal scroll containers
+    const scrollContainers = document.querySelectorAll(
+        '.ba-gallery-grid, .event-scroll-container, .review-carousel-container, .story-images'
+    );
+
+    if (scrollContainers.length === 0) return;
+
+    scrollContainers.forEach(container => {
+        // Wheel event for desktop trackpad/mouse
+        container.addEventListener('wheel', (e) => {
+            // Check if horizontal scroll is dominant
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                // Prevent browser back/forward navigation
+                e.preventDefault();
+                // Manually scroll the container
+                container.scrollLeft += e.deltaX;
+            }
+        }, { passive: false });
+
+        // Also handle cases where vertical scroll should convert to horizontal
+        container.addEventListener('wheel', (e) => {
+            // If scrolling vertically but container only scrolls horizontally
+            const hasHorizontalScroll = container.scrollWidth > container.clientWidth;
+            const hasVerticalScroll = container.scrollHeight > container.clientHeight;
+
+            if (hasHorizontalScroll && !hasVerticalScroll && Math.abs(e.deltaY) > 0) {
+                e.preventDefault();
+                container.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+    });
+
+    // Also prevent overscroll on body when at scroll boundaries
+    document.body.addEventListener('wheel', (e) => {
+        const target = e.target.closest('.ba-gallery-grid, .event-scroll-container, .review-carousel-container, .story-images');
+        if (!target) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = target;
+        const atStart = scrollLeft === 0;
+        const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
+
+        // If at boundary and trying to scroll further, prevent default
+        if ((atStart && e.deltaX < 0) || (atEnd && e.deltaX > 0)) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+})();
