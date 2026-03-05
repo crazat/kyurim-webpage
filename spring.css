@@ -2038,7 +2038,7 @@ p {
 }
 
 .nav-links a:hover {
-    color: var(--gold-primary) !important;
+    color: var(--spring-pink-dark) !important;
 }
 
 .hamburger .bar {
@@ -2053,11 +2053,11 @@ footer {
 
 .icon-box,
 .info-item i {
-    color: var(--gold-primary) !important;
+    color: var(--spring-coral-dark) !important;
 }
 
 .section-header h3 {
-    color: var(--gold-primary) !important;
+    color: var(--spring-coral-dark) !important;
 }
 
 .line {
@@ -2518,7 +2518,7 @@ footer {
 /* 2. Gender Selection Buttons (Diet Prediction) */
 .gender-btn:hover {
     border-color: var(--gold-primary) !important;
-    color: var(--gold-primary) !important;
+    color: var(--spring-pink-dark) !important;
 }
 
 input[type="radio"]:checked+.gender-btn {
@@ -2529,7 +2529,7 @@ input[type="radio"]:checked+.gender-btn {
 
 /* 3. Process Section Icons */
 .step-icon {
-    color: var(--gold-primary) !important;
+    color: var(--spring-pink-dark) !important;
     border-color: var(--gold-primary) !important;
 }
 
@@ -2720,7 +2720,7 @@ input[type="radio"]:checked+.gender-btn {
     display: inline-block;
     border: 3px solid #FFB7B2;
     /* Seal Red */
-    color: #FFB7B2;
+    color: var(--spring-pink-dark);
     font-family: 'Nanum Myeongjo', serif;
     padding: 2px 6px;
     border-radius: 4px;
@@ -2960,7 +2960,7 @@ input[type="radio"]:checked+.gender-btn {
 
 /* 16. Fix Scroll Top Button Spin & Color */
 .top-btn {
-    color: var(--gold-primary) !important;
+    color: var(--spring-pink-dark) !important;
     border-color: var(--gold-primary) !important;
 }
 
@@ -3842,7 +3842,7 @@ body[data-page-type] .reservation-toast {
 }
 
 .lucky-box-game h3 {
-    color: #FFB7B2;
+    color: var(--spring-coral-dark);
     margin-bottom: 5px;
 }
 
@@ -3987,7 +3987,7 @@ body[data-page-type] .reservation-toast {
     margin-top: 20px;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #FFB7B2;
+    color: var(--spring-coral-dark);
     min-height: 1.5em;
     animation: popIn 0.5s ease-out;
 }
@@ -4083,7 +4083,7 @@ body[data-page-type] .reservation-toast {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #FFB7B2;
+    color: var(--spring-pink-dark);
     font-size: 1.2rem;
     cursor: pointer;
 }
@@ -4369,7 +4369,7 @@ header.hero {
 
 .quick-btn.simulator {
     background-color: #FFD6A5 !important;
-    color: #FFB7B2 !important;
+    color: var(--spring-pink-dark) !important;
 }
 
 /* =========================================
