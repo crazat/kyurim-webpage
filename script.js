@@ -1058,20 +1058,24 @@
 
         // Modal open/close functions with history management
         let modalHistoryPushed = false;
+        let savedScrollY = 0;
 
         function openStoryModal() {
+            // Save scroll position before opening modal
+            savedScrollY = window.scrollY;
+
             storyModal.style.display = 'flex';
             storyModal.classList.add('show');
             document.body.style.overflow = 'hidden'; // Prevent background scroll
 
             // Add history state for mobile back button
             if (!modalHistoryPushed) {
-                history.pushState({ modal: 'story' }, '');
+                history.pushState({ modal: 'story', scrollY: savedScrollY }, '');
                 modalHistoryPushed = true;
             }
         }
 
-        function closeStoryModal() {
+        function closeStoryModal(fromPopstate = false) {
             storyModal.classList.remove('show');
             storyModal.style.display = 'none';
             document.body.style.overflow = ''; // Restore scroll
@@ -1079,25 +1083,27 @@
             // Clear image to free memory (important for mobile)
             if (storyImage) storyImage.src = '';
 
-            // Go back in history if we pushed state
-            if (modalHistoryPushed) {
+            // Restore scroll position
+            window.scrollTo(0, savedScrollY);
+
+            // Only manipulate history if not called from popstate
+            if (modalHistoryPushed && !fromPopstate) {
                 modalHistoryPushed = false;
-                // Only go back if current state has modal
-                if (history.state && history.state.modal === 'story') {
-                    history.back();
-                }
+                // Use replaceState instead of back() to preserve scroll position
+                history.replaceState(null, '');
+            } else {
+                modalHistoryPushed = false;
             }
         }
 
-        // Handle browser back button
+        // Handle browser back button/gesture
         window.addEventListener('popstate', (e) => {
             if (storyModal.classList.contains('show')) {
-                modalHistoryPushed = false; // Prevent double history.back()
-                storyModal.classList.remove('show');
-                storyModal.style.display = 'none';
-                document.body.style.overflow = '';
-                // Clear image to free memory
-                if (storyImage) storyImage.src = '';
+                // Get saved scroll position from state if available
+                if (e.state && e.state.scrollY !== undefined) {
+                    savedScrollY = e.state.scrollY;
+                }
+                closeStoryModal(true); // Pass true to prevent history manipulation
             }
         });
 
