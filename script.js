@@ -33,6 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
         isPageVisible = !document.hidden;
     });
 
+    // ============================================
+    // Safe localStorage Access (Private Browsing Support)
+    // ============================================
+    const safeStorage = {
+        getItem: (key) => {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                console.warn('localStorage not available:', e);
+                return null;
+            }
+        },
+        setItem: (key, value) => {
+            try {
+                localStorage.setItem(key, value);
+                return true;
+            } catch (e) {
+                console.warn('localStorage not available:', e);
+                return false;
+            }
+        },
+        removeItem: (key) => {
+            try {
+                localStorage.removeItem(key);
+                return true;
+            } catch (e) {
+                console.warn('localStorage not available:', e);
+                return false;
+            }
+        }
+    };
+
     // --- Snowfall Effect ---
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
@@ -360,6 +392,13 @@ document.addEventListener('DOMContentLoaded', () => {
         counterObserver.observe(el);
     });
 
+    // Register cleanup for all observers
+    registerCleanup(() => {
+        fadeObserver.disconnect();
+        scrollRevealObserver.disconnect();
+        counterObserver.disconnect();
+    });
+
     // =========================================
     // Scroll Progress Bar (JS Fallback for browsers without CSS scroll-timeline)
     // =========================================
@@ -520,7 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dontShowCheckbox = document.getElementById('dontShowToday');
 
     // Check if modal should be shown
-    const dontShowDate = localStorage.getItem('kyurim_event_dont_show');
+    const dontShowDate = safeStorage.getItem('kyurim_event_dont_show');
     const todayStr = new Date().toDateString();
 
     if (modal && dontShowDate !== todayStr) {
@@ -531,7 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeModal() {
         if (dontShowCheckbox && dontShowCheckbox.checked) {
-            localStorage.setItem('kyurim_event_dont_show', todayStr);
+            safeStorage.setItem('kyurim_event_dont_show', todayStr);
         }
         modal.classList.remove('show');
     }
@@ -1257,6 +1296,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (distance < 0) {
                 countdownContainer.innerHTML = "<h3>따뜻한 봄날 되세요!</h3>";
+                if (countdownIntervalId) {
+                    clearInterval(countdownIntervalId);
+                    countdownIntervalId = null;
+                }
                 return;
             }
 
@@ -1265,14 +1308,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+            if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.innerText = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
         }
 
-        setInterval(updateCountdown, 1000);
+        let countdownIntervalId = setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call
+
+        // Register cleanup
+        registerCleanup(() => {
+            if (countdownIntervalId) {
+                clearInterval(countdownIntervalId);
+                countdownIntervalId = null;
+            }
+        });
     }
 
     // 6. Slot Machine Logic (New)
@@ -1311,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let hasPlayed = false;
 
         // Check if already played today
-        const lastPlayed = localStorage.getItem('kyurim_luckybox_played');
+        const lastPlayed = safeStorage.getItem('kyurim_luckybox_played');
         if (lastPlayed === new Date().toDateString()) {
             prizeResult.innerText = "오늘의 운세를 이미 확인하셨습니다.";
             spinBtn.disabled = true;
@@ -1323,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hasPlayed) return;
 
             hasPlayed = true;
-            localStorage.setItem('kyurim_luckybox_played', new Date().toDateString());
+            safeStorage.setItem('kyurim_luckybox_played', new Date().toDateString());
             spinBtn.disabled = true;
 
             const finalPrize = getWeightedPrize();
@@ -1828,9 +1884,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 폼 제출 핸들러
+        // 폼 제출 핸들러 (중복 제출 방지)
+        let isSubmitting = false;
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // 중복 제출 방지
+            if (isSubmitting) return;
 
             // 전화번호 유효성 최종 검사
             if (phoneInput && !phonePattern.test(phoneInput.value)) {
@@ -1839,6 +1900,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('올바른 전화번호 형식을 입력해주세요.\n예: 010-1234-5678');
                 return;
             }
+
+            isSubmitting = true;
 
             // 로딩 상태 표시
             if (submitBtn) {
@@ -1850,10 +1913,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const formData = new FormData(form);
                 formData.append('제출시간', new Date().toLocaleString('ko-KR'));
 
+                // Timeout을 위한 AbortController
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10초 타임아웃
+
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    signal: controller.signal
                 });
+
+                clearTimeout(timeoutId);
 
                 if (response.ok) {
                     // 성공 시
@@ -1875,27 +1945,36 @@ document.addEventListener('DOMContentLoaded', () => {
                             submitBtn.style.background = '';
                             submitBtn.disabled = false;
                         }
+                        isSubmitting = false;
                     }, 3000);
                 } else {
                     throw new Error('Server error');
                 }
             } catch (error) {
-                // 에러 시에도 일단 성공 처리 (Google Script URL 미설정 시)
+                // 에러 처리
+                console.warn('Form submission error:', error);
+
                 if (submitBtn) {
-                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 신청 완료!';
-                    submitBtn.style.background = '#03C75A';
+                    submitBtn.innerHTML = '<i class="fa-solid fa-exclamation-triangle"></i> 재시도';
+                    submitBtn.style.background = '#E63946';
                 }
 
-                alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다. 😊');
-                form.reset();
+                // 네트워크 에러 vs 타임아웃 구분
+                if (error.name === 'AbortError') {
+                    alert('네트워크 연결이 느립니다.\n잠시 후 다시 시도해주세요.');
+                } else {
+                    alert('일시적인 오류가 발생했습니다.\n전화(043-236-8575)로 문의해주세요.');
+                }
 
+                // 2초 후 버튼 원복 (재시도 가능)
                 setTimeout(() => {
                     if (submitBtn) {
                         submitBtn.innerHTML = originalBtnHTML;
                         submitBtn.style.background = '';
                         submitBtn.disabled = false;
                     }
-                }, 3000);
+                    isSubmitting = false;
+                }, 2000);
             }
         });
     });
@@ -2217,6 +2296,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     sections.forEach(section => observer.observe(section));
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        observer.disconnect();
+    }, { once: true });
 })();
 
 // ============================================
