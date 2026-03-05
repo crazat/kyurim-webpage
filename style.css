@@ -460,6 +460,10 @@ ul {
     scrollbar-width: none;
     scroll-behavior: smooth;
     width: 100%;
+    /* Prevent iOS Safari edge swipe (back gesture) during horizontal scroll */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pinch-zoom;
 }
 
 .ba-gallery-grid::-webkit-scrollbar {
@@ -992,6 +996,9 @@ footer {
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) var(--bg-color);
     max-width: 100%;
+    /* Prevent iOS Safari edge swipe (back gesture) */
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pinch-zoom;
 }
 
 .event-scroll-container::-webkit-scrollbar {
@@ -1307,6 +1314,9 @@ footer {
         -webkit-overflow-scrolling: touch;
         width: 100%;
         overflow-y: hidden;
+        /* Prevent iOS Safari edge swipe (back gesture) */
+        overscroll-behavior-x: contain;
+        touch-action: pan-x pinch-zoom;
     }
 
     .review-carousel {
