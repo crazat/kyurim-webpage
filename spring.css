@@ -259,7 +259,7 @@ video {
         0 4px 8px rgba(0, 0, 0, 0.04),
         0 8px 16px rgba(0, 0, 0, 0.06),
         0 16px 32px rgba(0, 0, 0, 0.06) !important;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    transition: all var(--duration-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
 .ba-card:hover {
@@ -303,7 +303,7 @@ button,
 .cta-btn {
     position: relative;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Hover state - already exists, enhance */
@@ -448,7 +448,7 @@ button:disabled,
     border-radius: inherit;
     z-index: -1;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--duration-normal) ease;
 }
 
 .sticky-btn.call:hover::after {
@@ -605,7 +605,7 @@ button:disabled,
 .scroll-reveal-stagger > * {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--duration-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.1s; }
@@ -839,7 +839,7 @@ button:disabled,
     border: 2px solid #e0e0e0;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     outline: none;
 }
 
@@ -851,7 +851,7 @@ button:disabled,
     font-size: 16px;
     color: var(--text-muted);
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: transparent;
     padding: 0 4px;
 }
@@ -910,7 +910,7 @@ button:disabled,
     transform: translateY(-50%);
     font-size: 18px;
     color: var(--text-muted);
-    transition: color 0.3s ease;
+    transition: color var(--duration-normal) ease;
 }
 
 /* Error message */
@@ -938,7 +938,7 @@ button:disabled,
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--duration-normal) ease;
     position: relative;
     overflow: hidden;
 }
@@ -1016,7 +1016,7 @@ button:disabled,
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--duration-fast) ease;
     position: relative;
 }
 
@@ -1072,7 +1072,7 @@ button:disabled,
     background: linear-gradient(180deg, var(--spring-blossom-pink) 0%, var(--spring-coral-pink) 100%);
     border-radius: 10px;
     border: 2px solid #FFF5F5;
-    transition: background 0.3s ease;
+    transition: background var(--duration-normal) ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -1159,7 +1159,7 @@ button:disabled,
     align-items: center;
     justify-content: center;
     z-index: 999999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity var(--duration-slow) ease, visibility 0.5s ease;
 }
 
 .page-loader.hidden {
@@ -1364,7 +1364,7 @@ body {
 .stat-number[data-count] {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity var(--duration-slow) ease, transform 0.5s ease;
 }
 
 .stat-number[data-count].counting {
@@ -3151,7 +3151,7 @@ button,
     cursor: pointer;
     z-index: 10001;
     /* Above AI ticker (999) and navbar (1000) */
-    transition: transform 0.2s;
+    transition: transform var(--duration-fast);
     opacity: 0.9;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
     animation: bokPulse 2s infinite;
