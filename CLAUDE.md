@@ -81,6 +81,28 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-05: 모바일 안정성 중심 UX 개선
+- **모바일 안정성 개선** (spring.css ~120 lines 추가)
+  - 버튼 터치 피드백 강화 (scale 0.96 + opacity 0.9)
+  - 입력 필드 마이크로인터랙션 (focus translateY, placeholder fade)
+  - 섹션 제목 타이포그래피 개선 (font-weight 800, letter-spacing)
+  - 히어로 그라데이션 4단계 부드러운 핑크 톤
+  - 데스크톱 전용 카드 호버 효과 (hover: hover 미디어 쿼리)
+  - 링크 터치 타겟 44px (Apple HIG 준수)
+  - 스크롤 인디케이터 펄스 애니메이션
+  - 스켈레톤 로딩 봄 테마 shimmer
+  - 토스트 GPU 가속 힌트 (will-change)
+  - prefers-reduced-motion 접근성 지원
+- **다이어트 랜딩 페이지 하단 바 수정**
+  - CSS를 다른 랜딩 페이지와 동일한 형식으로 통일
+  - .sticky-btn i에 margin-bottom: 0 추가
+  - .sticky-btn.call, .sticky-btn.talk 색상 스타일 추가
+  - footer padding 50px → 66px 증가
+- **style.css 하단 바 스타일 충돌 해결**
+  - style.css의 .sticky-bottom-bar, .sticky-btn 스타일 제거
+  - 랜딩 페이지 인라인 CSS를 덮어쓰던 문제 해결
+  - 각 랜딩 페이지에서 독립적으로 스타일 관리
+
 ### 2026-03-05: UX 버그 수정 + 토스트 알림 개선
 - **데스크톱 가로 스크롤 브라우저 네비게이션 방지**
   - 트랙패드/마우스 휠 가로 스크롤 시 브라우저 뒤로/앞으로 이동 차단
@@ -256,3 +278,6 @@ kyurim-webpage-main/
 - ~~모달 클릭 버그~~ → 이벤트 위임 방식으로 해결
 - ~~가로 스크롤 브라우저 네비게이션 방지~~ → wheel 이벤트 핸들러 추가
 - ~~토스트 알림 컴팩트화~~ → 한 줄 pill 스타일로 변경
+- ~~모바일 안정성 UX 개선~~ → 터치 피드백, 접근성 지원 완료
+- ~~랜딩 페이지 하단 바 통일~~ → 모든 페이지 48px 높이로 통일
+- ~~style.css 스타일 충돌~~ → sticky-bottom-bar 스타일 분리 완료
