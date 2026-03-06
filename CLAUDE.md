@@ -81,6 +81,31 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-06: Phase 2 디자인 개선 + 리뷰 통일 + 갤러리 UX
+- **리뷰 카드 디자인 통일** (spring.css + script.js)
+  - 영수증 스타일 제거 → 통일된 깔끔한 카드 디자인
+  - 구조: 별점 → 후기 본문 → 구분선 → 작성자 + 인증 배지
+  - 카드 크기 300px (모바일 280px/260px), 패딩 24px
+  - 인라인 스타일 전부 제거, CSS로 통일
+- **웨딩 리뷰 8개 신규 추가** (script.js reviewDataMap)
+  - 웨딩 다이어트, 팔뚝살, 뱃살, 리프팅, 붓기, 비대칭, 등살, 커플 관리
+- **갤러리 UX 개선** (spring.css + script.js)
+  - 모바일 스크롤 progress dots (pill 형태 active)
+  - 카드 카운터 ("1 / N") 오버레이
+  - 우측 페이드 힌트 (스크롤 끝에서 사라짐)
+- **전반 비주얼 업그레이드** (spring.css ~250줄 추가)
+  - 하단바 glassmorphism (backdrop-filter blur)
+  - 비디오 premium frame (둥근 모서리 + 핑크 테두리)
+  - 섹션 제목 shimmer 애니메이션
+  - FAQ active 좌측 빨강 보더 + 배경 그라데이션
+  - 랜딩 페이지 섹션 디바이더
+  - 리뷰 섹션 배경 그라데이션
+- **인테리어 3번째 이미지 수정** (전 페이지)
+  - overflow:visible !important 인라인 스타일 제거
+  - 적용: index.html, body, pain, skin, wedding (5개)
+- **Body 페이지 상담 폼 위치 수정**
+  - footer 뒤 → 진료 프로세스 바로 다음으로 이동
+
 ### 2026-03-06: 인스타그램 인앱 브라우저 치료 사례 갤러리 수정
 - **문제**: 인스타그램 인앱 브라우저에서 치료 사례(ba-gallery) 카드가 2개만 표시됨
 - **원인**: style.css가 비동기 로드(`preload` + `onload`)되면서, 인라인 CSS에 `flex-shrink: 0`이 없어 카드들이 축소됨
