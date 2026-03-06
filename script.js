@@ -573,6 +573,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gallery Dots, Counter & Scroll Hint
+    if (galleryGrid) {
+        const wrapper = galleryGrid.closest('.gallery-wrapper');
+        const cards = galleryGrid.querySelectorAll('.ba-card');
+        const cardCount = cards.length;
+
+        if (cardCount > 1 && wrapper) {
+            // Create counter
+            const counter = document.createElement('span');
+            counter.className = 'gallery-counter';
+            counter.textContent = '1 / ' + cardCount;
+            wrapper.insertBefore(counter, galleryGrid);
+
+            // Create dots
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'gallery-dots' + (cardCount > 8 ? ' many-dots' : '');
+            for (let i = 0; i < cardCount; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', (i + 1) + '번째 사례');
+                dot.addEventListener('click', () => {
+                    cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                });
+                dotsContainer.appendChild(dot);
+            }
+            wrapper.after(dotsContainer);
+
+            // Update on scroll
+            let galleryTicking = false;
+            galleryGrid.addEventListener('scroll', () => {
+                if (!galleryTicking) {
+                    requestAnimationFrame(() => {
+                        const scrollLeft = galleryGrid.scrollLeft;
+                        const cardWidth = cards[0].offsetWidth;
+                        const gap = parseFloat(getComputedStyle(galleryGrid).gap) || 15;
+                        const activeIdx = Math.round(scrollLeft / (cardWidth + gap));
+                        const clamped = Math.max(0, Math.min(activeIdx, cardCount - 1));
+
+                        counter.textContent = (clamped + 1) + ' / ' + cardCount;
+
+                        const dots = dotsContainer.querySelectorAll('.gallery-dot');
+                        dots.forEach((d, i) => d.classList.toggle('active', i === clamped));
+
+                        // Scroll-end hint (B-3)
+                        const atEnd = galleryGrid.scrollLeft + galleryGrid.clientWidth >= galleryGrid.scrollWidth - 10;
+                        wrapper.classList.toggle('scroll-end', atEnd);
+
+                        galleryTicking = false;
+                    });
+                    galleryTicking = true;
+                }
+            }, { passive: true });
+        }
+    }
+
     // Top Button Logic (Using unified handler)
     const topBtn = document.getElementById('topBtn');
 
@@ -1510,6 +1565,16 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 3, text: "거북목 교정받고 키가 2cm는 커진 것 같아요. 자세가 중요하네요.", author: "이OO님 (10대/학생)", rating: "⭐⭐⭐⭐⭐" },
             { id: 4, text: "출산 후 터진 골반, 추나요법으로 시원하게 맞췄습니다.", author: "박OO님 (30대/주부)", rating: "⭐⭐⭐⭐⭐" }
         ],
+        'wedding': [
+            { id: 1, text: "D-30 웨딩 다이어트로 5kg 감량! 드레스 피팅 때 실장님이 깜짝 놀랐어요.", author: "김OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 2, text: "팔뚝살 때문에 민소매 드레스 포기하려 했는데, 팔라인이 완전 달라졌어요!", author: "이OO님 (20대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 3, text: "뱃살이 쏙 빠지니 머메이드 드레스도 자신 있게 입어요. 감사합니다!", author: "박OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 4, text: "웨딩 리프팅 받고 턱선이 살아났어요. 웨딩 사진 결과가 너무 만족스럽습니다.", author: "최OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 5, text: "결혼식 당일 아침 붓기 케어 받았는데, 하루 종일 얼굴이 작았어요!", author: "정OO님 (20대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 6, text: "안면비대칭 교정 후 사진 좌우가 대칭이 됐어요. 셀프웨딩 촬영 대성공!", author: "강OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 7, text: "등살+브라라인 정리하니 오프숄더 드레스가 완벽하게 맞아요.", author: "윤OO님 (20대/예비신부)", rating: "⭐⭐⭐⭐⭐" },
+            { id: 8, text: "신랑이랑 커플로 관리받았는데, 둘 다 인생샷 건졌습니다!", author: "서OO님 (30대/예비신부)", rating: "⭐⭐⭐⭐⭐" }
+        ],
         'general': [
             { id: 1, text: "친절하고 꼼꼼한 진료 감사합니다. 믿고 다니는 한의원!", author: "김OO님", rating: "⭐⭐⭐⭐⭐" },
             { id: 2, text: "시설도 깨끗하고 원장님 실력이 정말 좋으세요.", author: "이OO님", rating: "⭐⭐⭐⭐⭐" }
@@ -1528,16 +1593,16 @@ document.addEventListener('DOMContentLoaded', () => {
         displayReviews.forEach((review, index) => {
             const card = document.createElement('div');
             card.className = 'review-card';
-            // Use placeholder images for now or generic pattern
-            // To make text visible, we use a gradient overlay
             card.innerHTML = `
-                <div class="review-image-placeholder" style="background: linear-gradient(135deg, #fce38a 0%, #f38181 100%); height: 150px; display:flex; align-items:center; justify-content:center; color:white; font-size:2rem; font-weight:bold;">
-                    ${review.author.charAt(0)}
+                <div class="review-card-top">
+                    <div class="review-stars">${review.rating}</div>
                 </div>
-                <div class="review-text-content" style="padding: 15px;">
-                    <div class="review-stars" style="color:#FFD700; margin-bottom:5px;">${review.rating}</div>
-                    <p class="review-body" style="font-size:0.95rem; color:#333; line-height:1.4; margin-bottom:10px; font-weight:500;">"${review.text}"</p>
-                    <p class="review-author" style="font-size:0.8rem; color:#666; text-align:right;">- ${review.author}</p>
+                <div class="review-card-body">
+                    <p class="review-body">"${review.text}"</p>
+                </div>
+                <div class="review-card-footer">
+                    <span class="review-author">${review.author}</span>
+                    <span class="review-verified"><i class="fa-solid fa-circle-check"></i> 인증</span>
                 </div>
             `;
             carousel.appendChild(card);
