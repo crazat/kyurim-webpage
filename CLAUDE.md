@@ -81,6 +81,16 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-06: 인스타그램 인앱 브라우저 치료 사례 갤러리 수정
+- **문제**: 인스타그램 인앱 브라우저에서 치료 사례(ba-gallery) 카드가 2개만 표시됨
+- **원인**: style.css가 비동기 로드(`preload` + `onload`)되면서, 인라인 CSS에 `flex-shrink: 0`이 없어 카드들이 축소됨
+- **해결**: 모든 랜딩 페이지(5개) 인라인 CSS에 BA Gallery 스타일 추가
+  ```css
+  .ba-gallery-grid{display:flex;gap:15px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:10px 0}
+  .ba-card{min-width:280px;flex-shrink:0;scroll-snap-align:start;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+  ```
+- **적용 파일**: events/diet, skin, body, pain, wedding (5개 index.html)
+
 ### 2026-03-05: 모바일 안정성 중심 UX 개선
 - **모바일 안정성 개선** (spring.css ~120 lines 추가)
   - 버튼 터치 피드백 강화 (scale 0.96 + opacity 0.9)
@@ -281,3 +291,4 @@ kyurim-webpage-main/
 - ~~모바일 안정성 UX 개선~~ → 터치 피드백, 접근성 지원 완료
 - ~~랜딩 페이지 하단 바 통일~~ → 모든 페이지 48px 높이로 통일
 - ~~style.css 스타일 충돌~~ → sticky-bottom-bar 스타일 분리 완료
+- ~~인스타그램 인앱 브라우저 갤러리 버그~~ → 인라인 CSS에 flex-shrink:0 추가
