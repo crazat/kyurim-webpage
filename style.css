@@ -460,6 +460,7 @@ ul {
     margin: 0 -20px; /* Compensate for padding */
     scrollbar-width: none;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     width: calc(100% + 40px);
     /* Prevent iOS Safari edge swipe (back gesture) during horizontal scroll */
     overscroll-behavior-x: contain;
@@ -481,6 +482,7 @@ ul {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+    scroll-snap-align: start;
     transition: var(--transition);
     border: 3px solid var(--white);
 }
@@ -1276,7 +1278,7 @@ footer {
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: #fafafa;
 }
 
@@ -2113,89 +2115,6 @@ footer {
     width: 100% !important;
 }
 
-
-/* Diet Prediction Overrides (Retry) */
-.input-group {
-    gap: 30px !important;
-    flex-wrap: wrap !important;
-}
-
-.input-wrapper {
-    text-align: center !important;
-    align-items: center !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.chart-container {
-    height: 450px !important;
-    border-radius: 20px !important;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05) !important;
-}
-
-.summary-card {
-    border: none !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
-    transition: transform 0.3s ease !important;
-}
-
-.summary-card:hover {
-    transform: translateY(-5px) !important;
-}
-
-.summary-card.rapid {
-    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%) !important;
-    border-top: 5px solid #D42426 !important;
-}
-
-.summary-card.slow {
-    background: linear-gradient(135deg, #f5fff8 0%, #ffffff 100%) !important;
-    border-top: 5px solid #165B33 !important;
-}
-
-.summary-card .badge {
-    top: 15px !important;
-    right: 15px !important;
-    padding: 5px 12px !important;
-    border-radius: 20px !important;
-    box-shadow: 0 2px 5px rgba(212, 36, 38, 0.3) !important;
-}
-
-.summary-card h5 {
-    font-size: 1.4rem !important;
-    font-weight: 800 !important;
-    margin-bottom: 10px !important;
-}
-
-.summary-card .desc {
-    font-size: 1rem !important;
-    background-color: rgba(255, 255, 255, 0.6) !important;
-    padding: 10px !important;
-    border-radius: 10px !important;
-}
-
-.summary-card .stat .value {
-    font-size: 2.5rem !important;
-    font-weight: 900 !important;
-    letter-spacing: -1px !important;
-}
-
-.summary-card.rapid .stat .value {
-    text-shadow: 2px 2px 0px rgba(212, 36, 38, 0.1) !important;
-}
-
-.summary-card.slow .stat .value {
-    text-shadow: 2px 2px 0px rgba(22, 91, 51, 0.1) !important;
-}
-
-.summary-card .final-weight {
-    background-color: #f9f9f9 !important;
-    padding: 10px !important;
-    border-radius: 50px !important;
-    display: inline-block !important;
-    width: 100% !important;
-}
-
 /* Gender Selection Styles */
 .gender-group {
     display: flex;
@@ -2355,9 +2274,10 @@ footer {
 }
 
 .comparison-card.competitor {
-    border: 1px solid #eee;
-    background: #f5f5f5;
-    opacity: 0.9;
+    border: 1px solid #e0e0e0;
+    background: #f7f7f7;
+    opacity: 0.85;
+    filter: grayscale(0.1);
 }
 
 .comparison-card.kyurim {
@@ -3500,5 +3420,32 @@ a.btn {
     /* 플로팅 CTA 그림자 단순화 */
     .floating-cta {
         box-shadow: 0 4px 12px rgba(212, 36, 38, 0.3) !important;
+    }
+}
+
+/* =========================================
+   갤러리 스크롤 힌트 (모바일)
+   ========================================= */
+@media (max-width: 768px) {
+    .gallery-wrapper {
+        position: relative;
+    }
+
+    /* 오른쪽 페이드 그라데이션 - 더 스크롤할 콘텐츠가 있음을 암시 */
+    .gallery-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 100%;
+        background: linear-gradient(to left, var(--bg-color, #FFFDF5) 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 5;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .event-scroll-container {
+        position: relative;
     }
 }

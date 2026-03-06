@@ -24,9 +24,13 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Critical CSS -->
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../../spring.css">
+    <!-- Non-blocking CSS (async load) -->
+    <link rel="stylesheet" href="../../style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../spring.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="../../spring.css">
+    </noscript>
 
     <!-- Fonts -->
     <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
@@ -363,15 +367,15 @@
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../assets/26%20march%20wedding/ComfyUI_00246_.mp4" type="video/mp4">
             </video>
-            <video autoplay muted loop playsinline preload="auto"
+            <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../assets/26%20march%20wedding/ComfyUI_00249_.mp4" type="video/mp4">
             </video>
-            <video autoplay muted loop playsinline preload="auto"
+            <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../assets/26%20march%20wedding/ComfyUI_00255_.mp4" type="video/mp4">
             </video>
-            <video autoplay muted loop playsinline preload="auto"
+            <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 <source src="../../assets/26%20march%20wedding/ComfyUI_00260_.mp4" type="video/mp4">
             </video>

@@ -1576,8 +1576,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'diet': '다이어트 상담을 신청했습니다.',
         'skin': '피부 상담을 신청했습니다.',
         'pain': '통증 치료 상담을 신청했습니다.',
-        'body': '체형 교정 상담을 신청했습니다.',
-        'asymmetry': '안면비대칭 상담을 신청했습니다.',
+        'body': '비대칭 상담을 신청했습니다.',
+        'asymmetry': '비대칭 상담을 신청했습니다.',
         'general': '진료 예약을 신청했습니다.'
     };
 
