@@ -24,9 +24,9 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Critical CSS - Async Loading for Performance -->
-    <link rel="preload" href="../../style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="../../spring.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Full CSS (Non-blocking) -->
+    <link rel="stylesheet" href="../../style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../spring.css" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="../../spring.css">
@@ -1024,7 +1024,7 @@
                             alert('✨ (데모) 신청 완료되었습니다.\n*실제 작동하려면 구글 스크립트 URL을 설정해주세요.');
                             form.reset();
                         } else {
-                            alert('일시적인 오류가 발생했습니다.\n전화(043-236-8575)로 문의해주세요.');
+                            alert('일시적인 오류가 발생했습니다.\n전화(043-224-1075)로 문의해주세요.');
                         }
                         btn.innerHTML = originalText;
                         btn.disabled = false;

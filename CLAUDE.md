@@ -274,6 +274,18 @@ kyurim-webpage-main/
 }
 ```
 
+## 진료과목별 네이버 블로그 계정 (의도적으로 분리)
+각 진료과목에 특화된 콘텐츠를 위해 별도 블로그 계정 운영. BA갤러리 링크도 과목별로 다름.
+
+| 페이지 | 블로그 계정 | URL |
+|--------|------------|-----|
+| 메인 | crazat | blog.naver.com/crazat |
+| 피부 | crazat7 | blog.naver.com/crazat7 |
+| 다이어트 | eliteacu | blog.naver.com/eliteacu |
+| 체형 | sangshan1 | blog.naver.com/sangshan1 |
+| 통증 | cozypark5959 | blog.naver.com/cozypark5959 |
+| 웨딩 | eliteacu | blog.naver.com/eliteacu |
+
 ## 주의사항
 1. **모바일 우선**: 대부분의 트래픽이 인스타그램 광고 → 모바일
 2. **이미지 원본**: `assets_original_backup/`에 백업 (gitignore)

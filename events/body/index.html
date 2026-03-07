@@ -24,9 +24,9 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Critical CSS - Async Loading for Performance -->
-    <link rel="preload" href="../../style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="../../spring.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Full CSS (Non-blocking) -->
+    <link rel="stylesheet" href="../../style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../spring.css" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="../../spring.css">

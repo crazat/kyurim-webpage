@@ -163,7 +163,7 @@ ul {
 .hero {
     height: 100vh;
     /* Fallback or overlay */
-    background: linear-gradient(rgba(22, 91, 51, 0.7), rgba(212, 36, 38, 0.3)), url('assets/hero_bg.png?v=1') no-repeat center center/cover;
+    background: url('assets/hero_bg.png?v=1') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;
