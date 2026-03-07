@@ -34,7 +34,7 @@ html {
 }
 
 body {
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     color: var(--text-color);
     background-color: var(--bg-color);
     line-height: 1.6;
@@ -48,7 +48,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     color: var(--secondary-color);
     font-weight: 700;
 }
@@ -334,8 +334,9 @@ ul {
 .line {
     width: 60px;
     height: 3px;
-    background-color: var(--primary-color);
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color));
     margin: 0 auto;
+    border-radius: 2px;
 }
 
 .subtitle {
@@ -383,11 +384,12 @@ ul {
 }
 
 .career-list li::before {
-    content: "";
+    content: "✦";
     color: var(--primary-color);
     position: absolute;
     left: 0;
     top: 0;
+    font-size: 0.7rem;
 }
 
 .philosophy {
@@ -613,8 +615,19 @@ ul {
 
 .interior-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 20px;
+}
+
+.interior-item:nth-child(1),
+.interior-item:nth-child(2) {
+    grid-column: span 3;
+}
+
+.interior-item:nth-child(3),
+.interior-item:nth-child(4),
+.interior-item:nth-child(5) {
+    grid-column: span 2;
 }
 
 .interior-item {
@@ -681,6 +694,40 @@ ul {
     font-size: 0.95rem;
 }
 
+/* Contact Button Variants */
+.btn-contact {
+    color: var(--white);
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-contact:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-kakao {
+    background-color: #FEE500;
+    color: #3C1E1E;
+}
+
+.btn-naver {
+    background-color: #03C75A;
+}
+
+.btn-instagram {
+    background-color: #E1306C;
+}
+
+.btn-blog {
+    background-color: #2DB400;
+}
+
+.btn-map {
+    background-color: #03C75A;
+    grid-column: span 2;
+}
+
 .map-container {
     flex: 1;
     height: 400px;
@@ -689,13 +736,7 @@ ul {
     overflow: hidden;
 }
 
-/* Specific fix for Talisman Button Jump */
-#open-talisman-btn.fade-in {
-    opacity: 0;
-    animation: fadeInUpSmooth 0.8s ease-out forwards;
-    animation-play-state: paused;
-    /* Controlled by observer */
-}
+/* Talisman Button — handled by .fade-in / .visible transition system */
 
 @keyframes fadeInUpSmooth {
     from {
@@ -712,7 +753,7 @@ ul {
 /* Footer */
 footer {
     background-color: var(--secondary-color);
-    /* Green Footer */
+    /* Warm Brown Footer (overridden by seasonal theme) */
     color: var(--white);
     padding: 60px 0 30px;
     margin-top: 50px;
@@ -831,6 +872,10 @@ footer {
 
     .interior-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .interior-item:nth-child(n) {
+        grid-column: span 1;
     }
 }
 
@@ -1129,7 +1174,7 @@ footer {
 }
 
 .step-arrow {
-    color: var(--gray);
+    color: var(--accent-color);
     font-size: 1.5rem;
 }
 

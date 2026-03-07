@@ -41,7 +41,7 @@
         *{margin:0;padding:0;box-sizing:border-box}
         :root{--primary-color:#D42426;--bg-color:#FFFDF5;--text-color:#333;--white:#fff}
         html{scroll-behavior:smooth}
-        body{font-family:'NanumBarunGothic',sans-serif;color:var(--text-color);background:var(--bg-color);line-height:1.6;overflow-x:hidden}
+        body{font-family:'Wanted Sans Variable',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--text-color);background:var(--bg-color);line-height:1.6;overflow-x:hidden}
 
         /* Critical: Skip Link */
         .skip-link{position:absolute;top:-100px;left:50%;transform:translateX(-50%);background:#B5585C;color:#fff;padding:12px 24px;border-radius:0 0 8px 8px;font-weight:600;z-index:100000;transition:top .15s}
@@ -73,8 +73,8 @@
     </noscript>
 
     <!-- Fonts with display=swap for FOIT prevention -->
-    <link href="https://cdn.jsdelivr.net/font-nanumlight/1.0/nanumbarungothic.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <!-- Font Awesome - Deferred Loading -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -237,7 +237,7 @@
 
             <div style="text-align: center; margin-bottom: 20px;">
                 <h2
-                    style="color: #FF9AA2; font-family: 'Great Vibes', 'Nanum Myeongjo', serif; font-size: 2.2rem; margin-bottom: 5px; font-weight: bold;">
+                    style="color: #FF9AA2; font-family: 'Great Vibes', 'Wanted Sans Variable', sans-serif; font-size: 2.2rem; margin-bottom: 5px; font-weight: bold;">
                     🌸 봄꽃편지 🌸</h2>
                 <p style="color: #888; font-size: 1.05rem; letter-spacing: 0.5px; margin-top: 5px;">올 봄, 당신의 일상에 벚꽃길만
                     가득하길 바랍니다.</p>
@@ -340,10 +340,10 @@
                 Spring
             </h2>
             <h1 class="fade-in delay-1"
-                style="font-family: 'Nanum Myeongjo', serif !important; font-size: 3rem !important; letter-spacing: -1px; margin-bottom: 20px;">
+                style="font-family: 'Wanted Sans Variable', sans-serif !important; font-size: 3rem !important; font-weight: 700; letter-spacing: -1px; margin-bottom: 20px;">
                 설레는 봄, 다시 피어나는 아름다움</h1>
             <!-- Countdown Timer -->
-            <div style="color: var(--gold-primary); font-size: 1.2rem; margin-bottom: 10px;" class="fade-in delay-2">따뜻한
+            <div style="color: #8B6914; font-size: 1.1rem; margin-bottom: 10px; font-weight: 600; letter-spacing: 1px;" class="fade-in delay-2">따뜻한
                 봄맞이 이벤트 마감까지</div>
             <div id="countdown" class="fade-in delay-2">
                 <div class="time-segment">
@@ -369,7 +369,7 @@
 
             <!-- Health Talisman Button -->
             <button id="open-talisman-btn" class="btn btn-outline fade-in delay-2" onclick="openTalismanModal()"
-                style="margin-top: 10px; border-color: var(--gold-primary); color: var(--gold-primary); z-index: 5; position: relative;">
+                style="margin-top: 10px; border-color: #8B6914; color: #8B6914; z-index: 5; position: relative; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px);">
                 봄맞이 벚꽃편지
                 받기</button>
 
@@ -1298,26 +1298,21 @@
                         </div>
                     </div>
                     <div class="contact-buttons">
-                        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-primary"
-                            style="background-color: #FEE500; border-color: #FEE500; color: #3C1E1E;">
+                        <a href="http://pf.kakao.com/_DxewtT/chat" target="_blank" class="btn btn-contact btn-kakao">
                             <i class="fa-solid fa-comment"></i> 카카오톡 문의하기
                         </a>
                         <a href="https://talk.naver.com/ct/w4y1te?frm=mnmb#nafullscreen" target="_blank"
-                            class="btn btn-primary"
-                            style="background-color: #03C75A; border-color: #03C75A; color: white;">
+                            class="btn btn-contact btn-naver">
                             <i class="fa-solid fa-comments"></i> 네이버 톡톡 문의
                         </a>
-                        <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-primary"
-                            style="background-color: #E1306C; border-color: #E1306C; color: white;">
+                        <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-contact btn-instagram">
                             <i class="fa-brands fa-instagram"></i> 인스타그램
                         </a>
-                        <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-primary"
-                            style="background-color: #2DB400; border-color: #2DB400; color: white;">
+                        <a href="https://blog.naver.com/crazat" target="_blank" class="btn btn-contact btn-blog">
                             <i class="fa-solid fa-blog"></i> 블로그 바로가기
                         </a>
                         <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180"
-                            target="_blank" class="btn btn-primary"
-                            style="background-color: #03C75A; border-color: #03C75A; color: white; grid-column: span 2;">
+                            target="_blank" class="btn btn-contact btn-map">
                             <i class="fa-solid fa-map-location-dot"></i> 네이버 지도 보기
                         </a>
                     </div>

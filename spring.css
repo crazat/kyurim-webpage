@@ -1213,7 +1213,7 @@ button:disabled,
 
 .loader-text {
     margin-top: 24px;
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
     font-size: 1.1rem;
     color: var(--spring-coral-dark);
     letter-spacing: 3px;
@@ -1336,7 +1336,7 @@ body {
     font-size: 3rem;
     font-weight: 700;
     color: var(--spring-coral-dark);
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
     display: block;
     line-height: 1.2;
 }
@@ -1761,7 +1761,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--secondary-color);
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-weight: 700;
     line-height: 1.3;
     margin-top: 0;
@@ -1957,7 +1957,7 @@ p {
 }
 
 .hero-content h1 {
-    font-family: 'Nanum Myeongjo', serif !important;
+    font-family: 'Wanted Sans Variable', sans-serif !important;
     font-size: 3.5rem !important;
     font-weight: 700 !important;
     background: linear-gradient(135deg, #B5585C 0%, #FF9A9E 50%, #B5585C 100%);
@@ -1972,7 +1972,7 @@ p {
 }
 
 .hero-content h2 {
-    font-family: 'Nanum Myeongjo', serif !important;
+    font-family: 'Wanted Sans Variable', sans-serif !important;
     color: var(--text-dark) !important;
     font-weight: 800 !important;
     font-size: 1.5rem !important;
@@ -1982,7 +1982,7 @@ p {
 }
 
 .hero-content p {
-    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     font-size: 1.2rem !important;
     font-weight: 700 !important;
     color: var(--text-dark) !important;
@@ -2009,13 +2009,23 @@ p {
     border-color: var(--secondary-color) !important;
 }
 
+/* Hero talisman button — ensure visibility on light hero background */
+.hero #open-talisman-btn.btn-outline {
+    color: #fff !important;
+    background: linear-gradient(135deg, #FFB7B2, #FF9AA2) !important;
+    border-color: transparent !important;
+    font-weight: 600;
+    padding: 12px 28px;
+    box-shadow: 0 4px 15px rgba(255, 154, 162, 0.4);
+}
+
 .navbar {
     border-bottom: 3px solid var(--spring-blossom-pink) !important;
 }
 
 .nav-links a {
     color: var(--text-dark) !important;
-    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     font-weight: 600;
     /* Optional: Make it slightly bold for readability */
 }
@@ -2148,7 +2158,7 @@ footer {
 }
 
 .lucky-box-game h3 {
-    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     color: var(--spring-coral-pink);
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -2157,7 +2167,7 @@ footer {
 }
 
 .lucky-box-game p {
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     color: var(--text-soft);
     margin-bottom: 25px;
 }
@@ -2189,7 +2199,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 12px 0;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     position: relative;
@@ -2229,7 +2239,7 @@ footer {
 
 .quick-inquiry-box h3 {
     color: #333;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     /* User Request: Consistency */
     font-size: 1.6rem;
     margin-bottom: 8px;
@@ -2264,7 +2274,7 @@ footer {
     color: #333;
     transition: all var(--duration-fast) ease;
     box-sizing: border-box;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .inquiry-form select {
@@ -2396,7 +2406,7 @@ footer {
 }
 
 .talisman-text h3 {
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-size: 2rem;
     color: #FFD700;
     writing-mode: vertical-rl;
@@ -2423,7 +2433,7 @@ footer {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
 }
 
 .talisman-desc {
@@ -2524,12 +2534,12 @@ input[type="radio"]:checked+.gender-btn {
 
 /* 4. Font Consistency Updates */
 .wish-header {
-    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     /* Changed from Myeongjo to Gothic */
 }
 
 #wish-input {
-    font-family: 'NanumBarunGothic', sans-serif !important;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
 }
 
 /* FORCE BUTTON ON TOP */
@@ -2650,7 +2660,7 @@ input[type="radio"]:checked+.gender-btn {
 .morning-message {
     margin-top: 50px;
     color: white;
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
     font-size: 1.5rem;
     opacity: 0;
     animation: textFadeIn 0.4s ease-in-out forwards;
@@ -2706,7 +2716,7 @@ input[type="radio"]:checked+.gender-btn {
     border: 3px solid #FFB7B2;
     /* Seal Red */
     color: var(--spring-pink-dark);
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
     padding: 2px 6px;
     border-radius: 4px;
     font-weight: bold;
@@ -2740,7 +2750,7 @@ input[type="radio"]:checked+.gender-btn {
     transition: all var(--duration-fast) ease;
     pointer-events: none;
     z-index: 1000;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     box-shadow: var(--shadow-sm);
 }
 
@@ -3007,7 +3017,7 @@ body {
     padding: 10px 15px;
     border-radius: 15px;
     width: 200px;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-size: 0.9rem;
     color: var(--text-dark);
     box-shadow: var(--shadow-md);
@@ -3614,7 +3624,7 @@ body[data-page-type] .reservation-toast {
     position: relative;
     transform: scale(0.8) translateY(20px);
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Wanted Sans Variable', sans-serif;
     /* Emotional Serif */
     background-image: linear-gradient(#999 0.05em, transparent 0.05em);
     /* Notebook lines */
@@ -4045,7 +4055,7 @@ body[data-page-type] .reservation-toast {
     background: #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all var(--duration-normal) ease;
-    font-family: 'NanumBarunGothic', sans-serif;
+    font-family: 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 .review-search-input:focus {
@@ -6171,5 +6181,584 @@ section.reviews {
     .review-card {
         width: 260px !important;
         padding: 18px !important;
+    }
+}
+
+/* =========================================
+   Premium Aesthetic Enhancements
+   ========================================= */
+
+/* 1. Section Header Typography — Wanted Sans Variable Bold for premium modern feel */
+.section-header h2 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px !important;
+    color: var(--text-dark, #333) !important;
+}
+
+.section-header h3 {
+    letter-spacing: 4px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    opacity: 0.7;
+}
+
+/* 2. Director Section — Premium Name & Philosophy */
+.director-info h3 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 3px !important;
+    color: var(--text-dark, #333) !important;
+    position: relative;
+    padding-bottom: 15px !important;
+}
+
+.director-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, var(--spring-coral-dark, #D42426), transparent);
+}
+
+.philosophy {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-size: 1.15rem !important;
+    line-height: 2 !important;
+    color: var(--text-soft, #555) !important;
+    border-left: 2px solid var(--spring-blossom-pink, #FFB7C5) !important;
+    padding: 15px 0 15px 25px !important;
+    margin-top: 10px;
+    position: relative;
+}
+
+.philosophy::before {
+    content: '\201C';
+    font-family: 'Wanted Sans Variable', sans-serif;
+    font-size: 3rem;
+    color: var(--spring-blossom-pink, #FFB7C5);
+    position: absolute;
+    top: -5px;
+    left: 8px;
+    opacity: 0.5;
+}
+
+/* Director image — premium frame */
+.director-image {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.08),
+        0 5px 15px rgba(255, 183, 197, 0.15) !important;
+}
+
+/* Career list — refined spacing */
+.career-list li {
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+    color: var(--text-soft, #555) !important;
+}
+
+/* 3. Specialty Cards — refined icon circle */
+.card .icon-box {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 183, 197, 0.15), rgba(255, 218, 193, 0.1)) !important;
+}
+
+.card h3 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+/* 4. Process Section — premium step icons */
+.step-icon {
+    width: 90px !important;
+    height: 90px !important;
+    background: linear-gradient(135deg, #FFF5F7, #FFEFD5) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(255, 183, 197, 0.2) !important;
+}
+
+.step-item h4 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+}
+
+.step-arrow {
+    font-size: 1.2rem !important;
+    opacity: 0.4;
+}
+
+/* 5. Footer — premium restructure */
+footer {
+    padding: 50px 0 25px !important;
+    border-top: none !important;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--spring-blossom-pink, #FFB7C5), transparent);
+}
+
+.footer-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px 20px;
+}
+
+.footer-info p {
+    font-size: 0.85rem !important;
+    opacity: 0.6 !important;
+    letter-spacing: 0.5px;
+}
+
+.footer-copyright {
+    margin-top: 20px !important;
+    padding-top: 15px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+    font-size: 0.8rem !important;
+    opacity: 0.4 !important;
+}
+
+/* 6. Blog Section — refined visual */
+.blog-wrapper {
+    border: none !important;
+    background: linear-gradient(135deg, #FFFDF5, #FFF5F7) !important;
+    box-shadow: 0 10px 40px rgba(255, 183, 197, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 60px !important;
+}
+
+.blog-text h2 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 800 !important;
+}
+
+.circle-deco {
+    background: linear-gradient(135deg, rgba(255, 183, 197, 0.08), rgba(255, 218, 193, 0.05)) !important;
+    width: 250px !important;
+    height: 250px !important;
+}
+
+/* 7. Interior section — premium grid */
+.interior-item {
+    border-radius: 12px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 8. Contact section — refined layout */
+.contact h2 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+}
+
+.map-container {
+    border-radius: 12px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 9. BA Gallery — refined card style */
+.ba-card {
+    border-radius: 12px !important;
+    border: none !important;
+}
+
+.ba-desc h4 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+}
+
+/* 10. Quick Menu — refined floating buttons */
+.quick-btn {
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        0 2px 5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 11. Inquiry form — premium styling */
+.quick-inquiry-box h3 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+}
+
+/* Mobile refinements */
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 1.8rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .director-info h3 {
+        font-size: 1.8rem !important;
+        text-align: center;
+    }
+
+    .director-info h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .philosophy::before {
+        display: none;
+    }
+
+    .blog-wrapper {
+        padding: 30px 20px !important;
+    }
+
+    .footer-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+    }
+}
+
+/* =========================================
+   Premium Aesthetic Enhancements — Phase 2
+   ========================================= */
+
+/* 1. Diagnosis Section — refined tabs & container */
+.diagnosis-container {
+    border: none !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04) !important;
+    border-radius: 20px !important;
+}
+
+.diagnosis-tabs {
+    background: linear-gradient(135deg, #FFF8F6, #FFF5F7) !important;
+    border-bottom: none !important;
+    padding: 5px !important;
+    gap: 4px;
+}
+
+.tab-btn {
+    border-radius: 12px !important;
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    border-bottom: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.tab-btn.active {
+    background: var(--spring-blossom-pink, #FFB7C5) !important;
+    color: white !important;
+    box-shadow: 0 2px 10px rgba(255, 183, 197, 0.3) !important;
+    border-bottom: none !important;
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.diag-start h4 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    letter-spacing: 1px !important;
+}
+
+/* 2. Event Cards — softer, more refined */
+.event-item {
+    border-radius: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.event-item:hover {
+    box-shadow: 0 12px 35px rgba(255, 183, 197, 0.2) !important;
+    transform: translateY(-6px) !important;
+}
+
+/* Event scrollbar — spring theme */
+.event-scroll-container::-webkit-scrollbar {
+    height: 4px !important;
+}
+
+.event-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 183, 197, 0.1) !important;
+    border-radius: 10px !important;
+}
+
+.event-scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, var(--spring-blossom-pink, #FFB7C5), var(--spring-coral-pink, #FF9AA2)) !important;
+    border-radius: 10px !important;
+}
+
+/* 3. FAQ — refined typography */
+.faq-item {
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    border-left: 3px solid transparent !important;
+    overflow: hidden;
+}
+
+.faq-item.active {
+    border-left: 3px solid var(--primary-color, #D42426) !important;
+    border-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.faq-question {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.5px !important;
+    padding: 22px 24px !important;
+}
+
+.faq-answer p {
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+    padding: 20px 24px !important;
+    color: var(--text-soft, #555) !important;
+}
+
+/* 4. Ticker Bar — more elegant */
+.ai-ticker-rolling {
+    background: linear-gradient(135deg, #F5FFF7, #FFF5F7) !important;
+    border-bottom: 1px solid rgba(255, 183, 197, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    font-size: 0.9rem !important;
+}
+
+.ticker-item {
+    letter-spacing: 0.3px;
+}
+
+.live-indicator {
+    background-color: var(--spring-coral-pink, #FF9AA2) !important;
+    width: 6px !important;
+    height: 6px !important;
+    box-shadow: 0 0 4px rgba(255, 154, 162, 0.5);
+}
+
+/* 5. Video Section — refined spacing */
+.video-section {
+    padding: 50px 0 20px !important;
+}
+
+.video-section .container {
+    gap: 25px !important;
+}
+
+.video-section video,
+.video-container video {
+    border: none !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
+    border-radius: 14px !important;
+}
+
+/* 6. BA Desc — refined separator */
+.ba-desc {
+    border-top: none !important;
+    padding: 14px 15px !important;
+    position: relative;
+}
+
+.ba-desc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 183, 197, 0.4), transparent);
+}
+
+.ba-desc p {
+    font-size: 0.82rem !important;
+    color: var(--text-soft, #888) !important;
+    letter-spacing: 0.3px;
+}
+
+/* 7. Review Card — body serif for warmth */
+.review-card-body .review-body {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-size: 0.93rem !important;
+    line-height: 1.85 !important;
+}
+
+/* 8. Inquiry Form — refined inputs */
+.inquiry-form input,
+.inquiry-form select {
+    border-radius: 10px !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #FAFAF8 !important;
+    font-size: 0.95rem !important;
+    padding: 15px 18px !important;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus {
+    border-color: var(--spring-blossom-pink, #FFB7C5) !important;
+    box-shadow: 0 0 0 3px rgba(255, 183, 197, 0.1) !important;
+    background: #fff !important;
+}
+
+.inquiry-form button {
+    border-radius: 10px !important;
+    letter-spacing: 1px !important;
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+}
+
+.quick-inquiry-box {
+    border: none !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04) !important;
+    border-radius: 20px !important;
+}
+
+/* 9. Section breathing — more generous vertical rhythm */
+.section {
+    padding: 110px 0 !important;
+}
+
+.section-header {
+    margin-bottom: 65px !important;
+}
+
+/* Keep video section compact */
+.video-section.section {
+    padding: 50px 0 20px !important;
+}
+
+/* Keep footer compact */
+footer {
+    margin-top: 0 !important;
+}
+
+/* 10. Contact Buttons — refined shape */
+.contact-buttons .btn {
+    border-radius: 10px !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.3px;
+}
+
+/* 11. Prediction section — premium cards */
+.prediction-input-box {
+    border-radius: 16px !important;
+    border: none !important;
+}
+
+.prediction-input-box h4 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+.summary-card {
+    border-radius: 14px !important;
+}
+
+.summary-card h5 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 700 !important;
+}
+
+/* 12. Story Modal — refined */
+.story-header h3 {
+    font-family: 'Wanted Sans Variable', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+}
+
+.story-content {
+    border-radius: 16px !important;
+}
+
+/* 13. Scrollbar global — thin & elegant */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Keep BA gallery scrollbar hidden */
+.ba-gallery-grid::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* 14. Subtle section background alternation */
+.section.diagnosis {
+    background: linear-gradient(180deg, #FAFAF8 0%, #FFF8F6 100%) !important;
+}
+
+.section.process {
+    background: linear-gradient(180deg, #fff 0%, #FAFAF8 100%) !important;
+}
+
+/* 15. Selection highlight — premium */
+::selection {
+    background: rgba(255, 183, 197, 0.3) !important;
+    color: inherit !important;
+}
+
+/* Mobile Phase 2 */
+@media (max-width: 768px) {
+    .section {
+        padding: 80px 0 !important;
+    }
+
+    .section-header {
+        margin-bottom: 45px !important;
+    }
+
+    .faq-question {
+        font-size: 0.95rem !important;
+        padding: 18px 16px !important;
+    }
+
+    .ai-ticker-rolling {
+        font-size: 0.8rem !important;
+    }
+
+    .video-section.section {
+        padding: 30px 0 10px !important;
+    }
+
+    .diagnosis-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        font-size: 0.85rem !important;
+        padding: 12px 8px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        font-size: 0.78rem !important;
+        padding: 10px 6px !important;
     }
 }
