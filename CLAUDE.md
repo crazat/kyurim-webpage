@@ -81,6 +81,51 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-28: 종합 최적화 + 안정성 + UX 개선 (7커밋)
+
+#### 성능 최적화
+- **CSS/JS 미니파이**: style.min.css(45KB), spring.min.css(108KB), script.min.js(79KB) — 원본 373KB→232KB (-38%)
+- **이벤트 이미지 19개 PNG→WebP 변환**: 36MB→2MB (-94%), `<picture>` 태그 30곳 적용
+- **profile.gif→WebP**: 5.5MB→1.3MB (-76%), 6페이지 `<picture>` 폴백
+- **Wanted Sans 비동기 로딩**: 렌더 블로킹 제거 (preload+onload 패턴, 6페이지)
+- **DocumentFragment**: 리뷰 카드/FAQ 일괄 DOM 삽입 (리플로우 감소)
+- **FAQ 이벤트 위임**: 항목별 리스너→단일 리스너
+- **스크롤 리스너 통합**: progress bar, reward burst를 addScrollHandler()로
+- **랜딩 크리티컬 CSS 인라인**: 5페이지 FOUC 방지
+- **vercel.json**: HTML 1시간 캐시, manifest 24시간 캐시 헤더 추가
+- **SW 캐시 v3**: .min 파일 참조, 구버전 자동 삭제
+
+#### 디자인 고도화 (기존 봄 테마 유지, 보수적 개선)
+- **스크롤 stagger**: grid-4 카드, process-steps 순차 등장 (100ms 간격)
+- **BA 카드**: border:3px solid white → 1px+부드러운 그림자, 이미지 라운딩, blur-load
+- **리뷰 카드**: 세리프 인용부호 장식, 키워드 배지 봄 테마, 검색 하이라이트(`<mark>`)
+- **프로세스 연결선**: 스텝 사이 핑크 그라데이션 라인 (데스크톱 가로, 모바일 세로)
+- **지도 컨테이너**: border-radius 16px + 호버 효과
+- **CSS 호버 충돌 정리**: style.css↔spring.css 중복 제거, !important 감소
+- **트랜지션 통일**: 하드코딩 타이밍→CSS 변수(--transition) 일괄 적용
+- **CSS 색상 변수화**: #FFB7B2, #FF9AA2, #FFDAC1 → var() 치환 (시즌 전환 용이)
+- **중복 @keyframes 정리**: skeletonShimmer→skeletonShimmerBg 분리
+
+#### 안정성 수정
+- **diet_prediction.js**: 성별 null 체크 + 체중/나이 범위 검증 (0, 음수, 300kg+, 120세+ 차단)
+- **script.js**: downloadCouponBtn null 체크, A/B 테스트 localStorage try-catch
+- **전 페이지 HTTP→HTTPS**: 카카오톡/네이버톡톡 링크 20곳
+- **전화번호 정규식**: 유선번호 지원 (02, 031, 043 등)
+- **phoneInput.parentElement null 체크**
+- **JS 메모리 누수**: 티커 setInterval cleanup, IntersectionObserver 5개 disconnect 추가
+- **프로덕션 console 제거**: A/B 테스트 console.log, 탈리스만 console.error
+- **html2canvas .catch()**: 쿠폰 다운로드 에러 핸들링
+
+#### UX 개선
+- **다이어트 예측 결과**: scrollIntoView 자동 스크롤 (모바일 필수)
+- **탈리스만 모달**: ESC 키 닫기 + 배경 클릭 판정 개선
+- **폼 제출 성공**: alert()→인라인 초록 메시지 (5초 후 자동 제거)
+- **토스트 + 모달 겹침 방지**: 모달 열려 있으면 토스트 숨김
+- **리뷰 캐러셀**: prefers-reduced-motion 대응
+- **모바일 폰트 가독성**: 0.6~0.65rem→0.7~0.75rem (최소 12px 보장)
+- **다이어트 하단바**: highlight-anim 클래스 추가 (다른 4페이지와 통일)
+- **JSON-LD 구조화 데이터**: 5개 랜딩 페이지 MedicalClinic 스키마 추가
+
 ### 2026-03-28: Edge 벚꽃 애니메이션 떨림 수정 + 다이어트 예상 결과 표시 수정
 - **Edge 벚꽃 떨림 수정** (spring.css, style.css, script.js)
   - 원인: `cherryBlossomFall`(rotate) + `windDrift`(translateX) 두 애니메이션이 `transform` 경쟁 + `top` 속성 애니메이션이 매 프레임 레이아웃 재계산 유발
@@ -316,16 +361,16 @@ kyurim-webpage-main/
 
 ## 추후 개선 검토 사항
 ### 높은 우선순위
-- 폼 유효성 검사 (전화번호 형식 검증)
-- 폼 제출 시 로딩 상태 표시
-- SEO: 랜딩 페이지별 고유 메타 데이터
-- 코드 정리: console.log 제거
-
-### 중간 우선순위
-- sitemap.xml, robots.txt 추가
+- JS DOMContentLoaded 9개 통합 (현재 분산)
+- IntersectionObserver 9개 통합 (2-3개로)
 - 리뷰 구조화 데이터 (별점 스키마)
 - JS 파일 분리 (main/common/landing)
+
+### 중간 우선순위
+- !important 440개 감소 (spring.css 셀렉터 특이성 조정)
+- z-index 체계화 (1~999999 산재 → 계층 정리)
 - 모달 포커스 관리
+- CSS 무한 애니메이션 37개 → 뷰포트 밖 일시정지
 
 ### 낮은 우선순위
 - CSS 통합 (spring.css + style.css)
@@ -343,3 +388,13 @@ kyurim-webpage-main/
 - ~~인스타그램 인앱 브라우저 갤러리 버그~~ → 인라인 CSS에 flex-shrink:0 추가
 - ~~Edge 벚꽃 애니메이션 떨림~~ → transform 기반 단일 애니메이션으로 통합
 - ~~다이어트 예상 결과 미표시~~ → 인라인 display:none 제거, CSS 클래스 정상 동작
+- ~~폼 유효성 검사~~ → 전화번호 유선+휴대 지원, 인라인 에러 메시지, 성별/체중 범위 검증
+- ~~폼 제출 로딩 상태~~ → 스피너 + 성공 인라인 메시지 + 3초 후 복구
+- ~~SEO: 랜딩 페이지 메타 데이터~~ → 5개 페이지 JSON-LD MedicalClinic 스키마 추가
+- ~~코드 정리: console.log 제거~~ → A/B 테스트, 탈리스만 디버그 로그 제거
+- ~~sitemap.xml, robots.txt~~ → 이미 존재 확인
+- ~~CSS/JS 미니파이~~ → style.min.css, spring.min.css, script.min.js 생성 및 적용
+- ~~이미지 최적화~~ → 이벤트 이미지 19개 WebP 변환, profile.gif WebP 변환
+- ~~HTTP→HTTPS~~ → 카카오톡/네이버톡톡 전 페이지 전환
+- ~~JS 메모리 누수~~ → 티커 setInterval cleanup, Observer disconnect
+- ~~캐시 정책~~ → vercel.json HTML/manifest 캐시, SW v3 .min 파일 참조
