@@ -470,24 +470,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const progressBar = document.getElementById('progressBar');
     if (progressBar && !CSS.supports('animation-timeline', 'scroll()')) {
-        let ticking = false;
-        const updateProgress = () => {
-            const scrollTop = window.scrollY;
+        addScrollHandler((scrollY) => {
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? (scrollTop / docHeight) : 0;
+            const progress = docHeight > 0 ? (scrollY / docHeight) : 0;
             progressBar.style.transform = `scaleX(${progress})`;
-            ticking = false;
-        };
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateProgress);
-                ticking = true;
-            }
-        }, { passive: true });
-
-        // Initial update
-        updateProgress();
+        });
     }
 
     // =========================================
@@ -560,21 +547,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Trigger once at 80% scroll depth
-    let scrollRewardTicking = false;
-    window.addEventListener('scroll', () => {
-        if (rewardTriggered || scrollRewardTicking) return;
-
-        scrollRewardTicking = true;
-        requestAnimationFrame(() => {
-            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-            if (scrollPercent >= 0.8 && !rewardTriggered) {
-                rewardTriggered = true;
-                createRewardBurst(window.innerWidth / 2, window.innerHeight / 2);
-            }
-            scrollRewardTicking = false;
-        });
-    }, { passive: true });
+    // Trigger once at 80% scroll depth (via unified scroll handler)
+    addScrollHandler((scrollY, scrollPercent) => {
+        if (rewardTriggered) return;
+        if (scrollPercent >= 0.8) {
+            rewardTriggered = true;
+            createRewardBurst(window.innerWidth / 2, window.innerHeight / 2);
+        }
+    });
 
     // Gallery Horizontal Scroll Logic
     const galleryGrid = document.querySelector('.ba-gallery-grid');
@@ -779,6 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const basePath = window.location.pathname.includes('/events/') ? '../../' : '';
         const logoSrc = basePath + 'assets/logo_icon.png';
 
+        const fragment = document.createDocumentFragment();
         reviews.forEach(review => {
             const card = document.createElement('div');
             card.className = 'review-card';
@@ -803,8 +784,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
-            reviewCarousel.appendChild(card);
+            fragment.appendChild(card);
         });
+        reviewCarousel.appendChild(fragment);
     }
 
     if (reviewCarousel) {
@@ -874,6 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const faqContainer = document.querySelector('.faq-container');
     if (faqContainer) {
+        const faqFragment = document.createDocumentFragment();
         faqData.forEach(item => {
             const faqItem = document.createElement('div');
             faqItem.className = 'faq-item';
@@ -886,26 +869,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${item.a}</p>
                 </div>
             `;
-            faqContainer.appendChild(faqItem);
+            faqFragment.appendChild(faqItem);
+        });
+        faqContainer.appendChild(faqFragment);
 
-            // Add click event
-            const question = faqItem.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const isActive = faqItem.classList.contains('active');
+        // Event delegation for FAQ clicks (single listener instead of per-item)
+        faqContainer.addEventListener('click', (e) => {
+            const question = e.target.closest('.faq-question');
+            if (!question) return;
+            const faqItem = question.parentElement;
+            const isActive = faqItem.classList.contains('active');
 
-                // Close all others
-                document.querySelectorAll('.faq-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.faq-answer').style.maxHeight = null;
-                });
-
-                // Toggle current
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                    const answer = faqItem.querySelector('.faq-answer');
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                }
+            // Close all others
+            faqContainer.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.faq-answer').style.maxHeight = null;
             });
+
+            // Toggle current
+            if (!isActive) {
+                faqItem.classList.add('active');
+                const answer = faqItem.querySelector('.faq-answer');
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
         });
     }
 

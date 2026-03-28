@@ -1,5 +1,5 @@
 // Service Worker for 규림한의원 청주점
-const CACHE_NAME = 'kyurim-v1';
+const CACHE_NAME = 'kyurim-v2';
 const OFFLINE_URL = '/offline.html';
 
 // Assets to cache on install

@@ -73,7 +73,8 @@
     </noscript>
 
     <!-- Fonts with display=swap for FOIT prevention -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" />
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css"></noscript>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <!-- Font Awesome - Deferred Loading -->
@@ -477,8 +478,11 @@
             </div>
             <div class="about-content">
                 <div class="director-image">
-                    <img src="assets/profile.gif" alt="한정우 대표원장" style="width: 100%; height: 100%; object-fit: cover;"
-                        loading="lazy">
+                    <picture>
+                        <source srcset="assets/profile.webp" type="image/webp">
+                        <img src="assets/profile.gif" alt="한정우 대표원장" style="width: 100%; height: 100%; object-fit: cover;"
+                            loading="lazy">
+                    </picture>
                 </div>
                 <div class="director-info">
                     <h3>한정우 대표원장</h3>
