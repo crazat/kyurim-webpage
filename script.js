@@ -225,8 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        window.addEventListener('click', function (e) {
-            if (e.target == talismanModal) {
+        // Close on backdrop click (check if click is on modal overlay, not content)
+        talismanModal.addEventListener('click', function (e) {
+            if (e.target === talismanModal) {
+                talismanModal.classList.remove('show');
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && talismanModal.classList.contains('show')) {
                 talismanModal.classList.remove('show');
             }
         });
@@ -1675,8 +1683,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let toastTimeoutId = null;
 
     function showToast() {
-        // Skip if page is hidden
+        // Skip if page is hidden or any modal is open
         if (!isPageVisible) return;
+        if (document.querySelector('.modal.show, .talisman-modal.show, .story-modal.show')) return;
 
         // Remove oldest toast if at limit
         while (activeToasts.length >= MAX_TOASTS) {
@@ -2110,13 +2119,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         submitBtn.style.background = '#03C75A';
                     }
 
-                    // 성공 메시지
-                    alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다. 😊');
+                    // 인라인 성공 메시지 (alert 대신)
+                    let successMsg = form.querySelector('.form-success-msg');
+                    if (!successMsg) {
+                        successMsg = document.createElement('div');
+                        successMsg.className = 'form-success-msg';
+                        successMsg.style.cssText = 'background:#f0fbf4;color:#03C75A;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;margin-top:12px;';
+                        form.appendChild(successMsg);
+                    }
+                    successMsg.textContent = '상담 신청이 완료되었습니다! 빠른 시일 내에 연락드리겠습니다.';
 
                     // 폼 초기화
                     form.reset();
 
-                    // 3초 후 버튼 원복
+                    // 3초 후 버튼 원복, 5초 후 성공 메시지 제거
                     setTimeout(() => {
                         if (submitBtn) {
                             submitBtn.innerHTML = originalBtnHTML;
@@ -2125,6 +2141,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         isSubmitting = false;
                     }, 3000);
+                    setTimeout(() => {
+                        if (successMsg) successMsg.remove();
+                    }, 5000);
                 } else {
                     throw new Error('Server error');
                 }

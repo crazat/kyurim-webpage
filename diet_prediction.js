@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show Result Section
             resultContainer.classList.add('active');
 
+            // Scroll result into view on mobile
+            setTimeout(() => {
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
             // Render Chart
             renderChart(currentWeight, rapidPlan, slowPlan);
 
