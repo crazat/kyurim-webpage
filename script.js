@@ -1541,7 +1541,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 // Add download functionality
-                document.getElementById('downloadCouponBtn').addEventListener('click', () => {
+                const downloadBtn = document.getElementById('downloadCouponBtn');
+                if (downloadBtn) downloadBtn.addEventListener('click', () => {
                     const couponCard = document.getElementById('couponCard');
                     html2canvas(couponCard).then(canvas => {
                         const link = document.createElement('a');
@@ -2005,8 +2006,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Google Apps Script URL (기존 연동된 URL)
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
 
-    // 전화번호 유효성 검사 패턴 (010-0000-0000 또는 01000000000)
-    const phonePattern = /^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/;
+    // 전화번호 유효성 검사 패턴 (휴대폰 + 유선 모두 지원)
+    // 010-1234-5678, 02-123-4567, 043-224-1075 등
+    const phonePattern = /^0\d{1,2}-?\d{3,4}-?\d{4}$/;
 
     forms.forEach(form => {
         const phoneInput = form.querySelector('input[name="연락처"]');
@@ -2060,14 +2062,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 phoneInput.focus();
                 phoneInput.style.borderColor = '#E63946';
                 // Show inline error instead of alert
-                let errMsg = phoneInput.parentElement.querySelector('.phone-error');
-                if (!errMsg) {
-                    errMsg = document.createElement('span');
-                    errMsg.className = 'phone-error';
-                    errMsg.style.cssText = 'color:#E63946;font-size:0.8rem;display:block;margin-top:4px;';
-                    phoneInput.parentElement.appendChild(errMsg);
+                const parentEl = phoneInput.parentElement;
+                if (parentEl) {
+                    let errMsg = parentEl.querySelector('.phone-error');
+                    if (!errMsg) {
+                        errMsg = document.createElement('span');
+                        errMsg.className = 'phone-error';
+                        errMsg.style.cssText = 'color:#E63946;font-size:0.8rem;display:block;margin-top:4px;';
+                        parentEl.appendChild(errMsg);
+                    }
+                    errMsg.textContent = '올바른 전화번호 형식을 입력해주세요. (예: 010-1234-5678)';
                 }
-                errMsg.textContent = '올바른 전화번호 형식을 입력해주세요. (예: 010-1234-5678)';
                 return;
             }
             // Clear any previous phone error
@@ -2609,7 +2614,7 @@ const ABTest = (function() {
         // Assign random variant
         const variant = variants[Math.floor(Math.random() * variants.length)];
         stored[testName] = variant;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch (e) { /* Private browsing */ }
 
         // Track assignment
         trackEvent('ab_test_assigned', { test: testName, variant });
@@ -2619,7 +2624,8 @@ const ABTest = (function() {
 
     function getStoredTests() {
         try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : {};
         } catch {
             return {};
         }

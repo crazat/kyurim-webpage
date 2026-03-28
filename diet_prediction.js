@@ -7,10 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateBtn.addEventListener('click', () => {
             const currentWeight = parseFloat(document.getElementById('currentWeight').value);
             const age = parseInt(document.getElementById('userAge').value);
-            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const genderInput = document.querySelector('input[name="gender"]:checked');
 
-            if (!currentWeight || !age) {
-                alert("체중과 나이를 모두 입력해주세요.");
+            if (!genderInput) {
+                alert("성별을 선택해주세요.");
+                return;
+            }
+            const gender = genderInput.value;
+
+            if (!currentWeight || !age || currentWeight <= 0 || currentWeight > 300 || age <= 0 || age > 120) {
+                alert("올바른 체중과 나이를 입력해주세요.");
                 return;
             }
 
