@@ -230,8 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 talismanModal.classList.remove('show');
             }
         });
-    } else {
-        console.error("Talisman elements not found", { talismanBtn, talismanModal });
     }
 
 
@@ -464,6 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeObserver.disconnect();
         scrollRevealObserver.disconnect();
         counterObserver.disconnect();
+        staggerObserver.disconnect();
     });
 
     // =========================================
@@ -1563,6 +1562,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         link.download = `규림한의원_${finalPrize.name}.png`;
                         link.href = canvas.toDataURL();
                         link.click();
+                    }).catch(() => {
+                        alert('쿠폰 저장에 실패했습니다. 다시 시도해주세요.');
                     });
                 });
             } else {
@@ -1643,8 +1644,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     const reviewContainer = document.querySelector('.review-carousel-container');
-    if (reviewContainer && window.innerWidth <= 768) {
-        let scrollSpeed = 0.8; // Adjust speed as needed
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reviewContainer && window.innerWidth <= 768 && !prefersReducedMotion) {
+        let scrollSpeed = 0.8;
         let isPaused = false;
         let currentScroll = 0;
 
@@ -1983,33 +1985,29 @@ window.addEventListener('scroll', () => {
 
 // --- AI Rolling Ticker Logic (Multi-Instance) ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Select all ticker containers (both top rolling and bottom sticky)
-    // We assume any element with class 'ticker-content' (inside our custom structures) holds the items
     const tickerContainers = document.querySelectorAll('.ai-ticker-content, .ai-ticker-sticky-rolling .ticker-content');
+    const tickerIntervalIds = [];
 
     tickerContainers.forEach(container => {
         const items = container.querySelectorAll('.ticker-item');
-        if (items.length <= 1) return; // No need to rotate if 0 or 1 item
+        if (items.length <= 1) return;
 
         let currentIndex = 0;
 
-        // Function to rotate this specific container
         const rotate = () => {
-            // Hide current
             items[currentIndex].classList.remove('active');
-
-            // Calc next
             currentIndex = (currentIndex + 1) % items.length;
-
-            // Show next
             items[currentIndex].classList.add('active');
         };
 
-        // Start rotation for this container
-        // Randomize start time slightly to prevent "robotic" sync if multiple tickers exist
         const delay = 3000 + Math.random() * 1000;
-        setInterval(rotate, delay);
+        tickerIntervalIds.push(setInterval(rotate, delay));
     });
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        tickerIntervalIds.forEach(id => clearInterval(id));
+    }, { once: true });
 });
 
 // ============================================
@@ -2075,9 +2073,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (phoneInput && !phonePattern.test(phoneInput.value)) {
                 phoneInput.focus();
                 phoneInput.style.borderColor = '#E63946';
-                alert('올바른 전화번호 형식을 입력해주세요.\n예: 010-1234-5678');
+                // Show inline error instead of alert
+                let errMsg = phoneInput.parentElement.querySelector('.phone-error');
+                if (!errMsg) {
+                    errMsg = document.createElement('span');
+                    errMsg.className = 'phone-error';
+                    errMsg.style.cssText = 'color:#E63946;font-size:0.8rem;display:block;margin-top:4px;';
+                    phoneInput.parentElement.appendChild(errMsg);
+                }
+                errMsg.textContent = '올바른 전화번호 형식을 입력해주세요. (예: 010-1234-5678)';
                 return;
             }
+            // Clear any previous phone error
+            const prevErr = phoneInput?.parentElement?.querySelector('.phone-error');
+            if (prevErr) prevErr.textContent = '';
 
             isSubmitting = true;
 
@@ -2646,9 +2655,6 @@ const ABTest = (function() {
 
     // Generic event tracking (can be connected to analytics)
     function trackEvent(eventType, data) {
-        // Console log for debugging
-        console.log(`[AB Test] ${eventType}:`, data);
-
         // Send to Google Analytics if available
         if (typeof gtag !== 'undefined') {
             gtag('event', eventType, data);
@@ -2752,6 +2758,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.5 });
 
     textRevealElements.forEach(el => observer.observe(el));
+    window.addEventListener('beforeunload', () => observer.disconnect(), { once: true });
 })();
 
 // ============================================
@@ -2791,6 +2798,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.5 });
 
     wordRevealElements.forEach(el => observer.observe(el));
+    window.addEventListener('beforeunload', () => observer.disconnect(), { once: true });
 })();
 
 // ============================================
@@ -2816,6 +2824,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     animatedElements.forEach(el => observer.observe(el));
+    window.addEventListener('beforeunload', () => observer.disconnect(), { once: true });
 })();
 
 // ============================================
@@ -2871,6 +2880,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     countUpElements.forEach(el => observer.observe(el));
+    window.addEventListener('beforeunload', () => observer.disconnect(), { once: true });
 })();
 
 // ============================================

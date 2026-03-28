@@ -2012,7 +2012,7 @@ p {
 /* Hero talisman button — ensure visibility on light hero background */
 .hero #open-talisman-btn.btn-outline {
     color: #fff !important;
-    background: linear-gradient(135deg, #FFB7B2, #FF9AA2) !important;
+    background: linear-gradient(135deg, var(--spring-blossom-pink), var(--spring-coral-pink)) !important;
     border-color: transparent !important;
     font-weight: 600;
     padding: 12px 28px;
@@ -2173,7 +2173,7 @@ footer {
 }
 
 .slot-machine-container {
-    background: #FF9AA2;
+    background: var(--spring-coral-pink);
     /* Dark Red Frame */
     border-radius: 15px;
     box-shadow:
@@ -2181,11 +2181,11 @@ footer {
         0 10px 25px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     margin: 0 auto;
-    border: 5px solid #FFDAC1;
+    border: 5px solid var(--spring-peach);
     /* Gold Border */
     padding: 20px;
     position: relative;
-    background-image: linear-gradient(to bottom, #FF9AA2, #FFDAC1);
+    background-image: linear-gradient(to bottom, var(--spring-coral-pink), var(--spring-peach));
 }
 
 /* =========================================
@@ -2207,7 +2207,7 @@ footer {
 }
 
 .closing-banner span {
-    color: #FFDAC1;
+    color: var(--spring-peach);
     /* Gold Accent */
     font-weight: 700;
     margin-right: 5px;
@@ -2289,7 +2289,7 @@ footer {
 .inquiry-form input:focus,
 .inquiry-form select:focus {
     background: #fff;
-    border-color: #FFDAC1;
+    border-color: var(--spring-peach);
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 218, 193, 0.1);
 }
@@ -2382,7 +2382,7 @@ footer {
 }
 
 .talisman-card {
-    background: #FFB7B2;
+    background: var(--spring-blossom-pink);
     /* Red paper */
     width: 200px;
     height: 300px;
@@ -2454,7 +2454,7 @@ footer {
     animation-timing-function: linear !important;
     animation-iteration-count: infinite !important;
     top: -10vh;
-    color: #FFB7B2;
+    color: var(--spring-blossom-pink);
     /* Make the unicode text pink */
     font-size: 1.5rem;
     /* Larger */
@@ -2639,7 +2639,7 @@ input[type="radio"]:checked+.gender-btn {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, #FFB7B2 0%, transparent 50%);
+    background: linear-gradient(to top, var(--spring-blossom-pink) 0%, transparent 50%);
     opacity: 0;
     animation: skyBrighten 0.5s ease-in-out forwards;
 }
@@ -2647,9 +2647,9 @@ input[type="radio"]:checked+.gender-btn {
 .sun {
     width: 100px;
     height: 100px;
-    background: radial-gradient(circle, #FFF 20%, #FFDAC1 100%);
+    background: radial-gradient(circle, #FFF 20%, var(--spring-peach) 100%);
     border-radius: 50%;
-    box-shadow: 0 0 50px #FFB7B2;
+    box-shadow: 0 0 50px var(--spring-blossom-pink);
     position: relative;
     top: 200px;
     animation: sunRise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -2669,7 +2669,7 @@ input[type="radio"]:checked+.gender-btn {
     to {
         top: 0;
         transform: scale(1.5);
-        box-shadow: 0 0 80px #FFDAC1;
+        box-shadow: 0 0 80px var(--spring-peach);
     }
 }
 
@@ -2703,7 +2703,7 @@ input[type="radio"]:checked+.gender-btn {
 /* 10. Selection Highlight (Gold & Red) */
 ::selection {
     background: var(--spring-blossom-pink);
-    color: #FF9AA2;
+    color: var(--spring-coral-pink);
     /* Dark Red */
     text-shadow: none;
 }
@@ -2711,7 +2711,7 @@ input[type="radio"]:checked+.gender-btn {
 /* 11. Footer Seal (Nak-gwan) */
 .footer-seal {
     display: inline-block;
-    border: 3px solid #FFB7B2;
+    border: 3px solid var(--spring-blossom-pink);
     /* Seal Red */
     color: var(--spring-pink-dark);
     font-family: 'Wanted Sans Variable', sans-serif;
@@ -3303,10 +3303,10 @@ body {
 .norigae-knot {
     width: 30px;
     height: 30px;
-    background: #FFB7B2;
+    background: var(--spring-blossom-pink);
     border-radius: 50%;
     margin: 0 auto;
-    border: 2px solid #FFDAC1;
+    border: 2px solid var(--spring-peach);
     position: relative;
 }
 
@@ -3316,7 +3316,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #FFDAC1;
+    color: var(--spring-peach);
     font-size: 0.8rem;
     font-weight: bold;
 }
@@ -3324,7 +3324,7 @@ body {
 .norigae-tassel {
     width: 10px;
     height: 80px;
-    background: linear-gradient(to bottom, #FFB7B2, #FFDAC1);
+    background: linear-gradient(to bottom, var(--spring-blossom-pink), var(--spring-peach));
     margin: -5px auto 0;
     border-radius: 0 0 10px 10px;
     position: relative;
@@ -3655,7 +3655,7 @@ body[data-page-type] .reservation-toast {
     text-align: right;
     margin-top: 30px;
     font-style: italic;
-    color: #FFDAC1;
+    color: var(--spring-peach);
     font-weight: bold;
 }
 
@@ -3859,9 +3859,9 @@ body[data-page-type] .reservation-toast {
 .light {
     width: 10px;
     height: 10px;
-    background: #FF9AA2;
+    background: var(--spring-coral-pink);
     border-radius: 50%;
-    box-shadow: 0 0 5px #FF9AA2;
+    box-shadow: 0 0 5px var(--spring-coral-pink);
     animation: blink 1s infinite alternate;
 }
 
@@ -3942,7 +3942,7 @@ body[data-page-type] .reservation-toast {
 }
 
 .spin-btn {
-    background: linear-gradient(#FF9AA2, #FFB7B2);
+    background: linear-gradient(var(--spring-coral-pink), var(--spring-blossom-pink));
     border: none;
     padding: 15px 40px;
     border-radius: 30px;
@@ -3950,7 +3950,7 @@ body[data-page-type] .reservation-toast {
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 5px 0 #FFDAC1, 0 10px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 0 var(--spring-peach), 0 10px 10px rgba(0, 0, 0, 0.2);
     transition: all var(--duration-fast);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -3958,7 +3958,7 @@ body[data-page-type] .reservation-toast {
 
 .spin-btn:active {
     transform: translateY(5px);
-    box-shadow: 0 0 0 #FFDAC1, inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 var(--spring-peach), inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .spin-btn:disabled {
@@ -4058,7 +4058,7 @@ body[data-page-type] .reservation-toast {
 
 .review-search-input:focus {
     outline: none;
-    border-color: #FFB7B2;
+    border-color: var(--spring-blossom-pink);
     /* Primary Red */
     box-shadow: 0 5px 20px rgba(212, 36, 38, 0.15);
 }
@@ -4093,9 +4093,9 @@ body[data-page-type] .reservation-toast {
 }
 
 .search-tag:hover {
-    background: #FFB7B2;
+    background: var(--spring-blossom-pink);
     color: #fff;
-    border-color: #FFB7B2;
+    border-color: var(--spring-blossom-pink);
 }
 
 .no-results {
@@ -4450,7 +4450,7 @@ h6,
 /* 2. Diet Prediction UI Tuning */
 .summary-card.rapid {
     background: linear-gradient(135deg, #FFFDF5, #FFF0F5) !important;
-    border-color: #FFB7B2 !important;
+    border-color: var(--spring-blossom-pink) !important;
 }
 
 .summary-card.rapid h5::before {
@@ -4458,7 +4458,7 @@ h6,
 }
 
 .summary-card.rapid .badge {
-    background: #FF9AA2 !important;
+    background: var(--spring-coral-pink) !important;
     color: white !important;
 }
 
@@ -4477,13 +4477,13 @@ h6,
 .ba-card:hover {
     box-shadow: 0 12px 25px rgba(255, 154, 162, 0.3) !important;
     transform: translateY(-8px) scale(1.02) !important;
-    border-color: #FF9AA2 !important;
+    border-color: var(--spring-coral-pink) !important;
 }
 
 /* Bouncing leaves/icons inside */
 .card:hover .icon-box i {
     transform: scale(1.2) rotate(10deg) translateY(-5px);
-    color: #FF9AA2 !important;
+    color: var(--spring-coral-pink) !important;
     text-shadow: 0 4px 10px rgba(255, 154, 162, 0.5);
 }
 
@@ -5684,11 +5684,11 @@ button:focus-visible {
 
 /* CTA Button Color Variants */
 .cta-pink {
-    background: linear-gradient(135deg, #FFB7B2, #FF9AA2) !important;
+    background: linear-gradient(135deg, var(--spring-blossom-pink), var(--spring-coral-pink)) !important;
 }
 
 .cta-coral {
-    background: linear-gradient(135deg, #FF9AA2, #FF6B6B) !important;
+    background: linear-gradient(135deg, var(--spring-coral-pink), #FF6B6B) !important;
 }
 
 .cta-gold {
@@ -5702,7 +5702,7 @@ button:focus-visible {
 }
 
 .cta-gradient {
-    background: linear-gradient(135deg, #FF9AA2, #FFB7B2, #FFDAC1) !important;
+    background: linear-gradient(135deg, var(--spring-coral-pink), var(--spring-blossom-pink), var(--spring-peach)) !important;
     background-size: 200% 200% !important;
     animation: gradientShift 3s ease infinite;
 }
@@ -5881,10 +5881,10 @@ textarea:focus::placeholder {
         var(--spring-mint-light) 100%
     );
     background-size: 200% 100%;
-    animation: skeletonShimmer 1.5s ease-in-out infinite;
+    animation: skeletonShimmerBg 1.5s ease-in-out infinite;
 }
 
-@keyframes skeletonShimmer {
+@keyframes skeletonShimmerBg {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
@@ -6481,7 +6481,7 @@ footer::before {
 }
 
 .event-scroll-container::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, var(--spring-blossom-pink, #FFB7C5), var(--spring-coral-pink, #FF9AA2)) !important;
+    background: linear-gradient(90deg, var(--spring-blossom-pink, #FFB7C5), var(--spring-coral-pink, var(--spring-coral-pink))) !important;
     border-radius: 10px !important;
 }
 
@@ -6525,7 +6525,7 @@ footer::before {
 }
 
 .live-indicator {
-    background-color: var(--spring-coral-pink, #FF9AA2) !important;
+    background-color: var(--spring-coral-pink, var(--spring-coral-pink)) !important;
     width: 6px !important;
     height: 6px !important;
     box-shadow: 0 0 4px rgba(255, 154, 162, 0.5);
