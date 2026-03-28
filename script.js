@@ -125,10 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
         snowflake.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
         snowflake.style.left = Math.random() * 100 + 'vw';
 
-        // Adjust duration: Fall takes 8-15s, Shake takes 3-5s
+        // Adjust duration: Fall takes 8-15s
         const fallDuration = isMobile ? Math.random() * 5 + 8 : Math.random() * 7 + 8;
-        const shakeDuration = Math.random() * 2 + 3;
-        snowflake.style.animationDuration = fallDuration + 's, ' + shakeDuration + 's';
+        snowflake.style.animationDuration = fallDuration + 's';
 
         snowflake.style.opacity = Math.random();
 
@@ -137,9 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         snowContainer.appendChild(snowflake);
 
-        // Add random delay to start for both fall and shake
+        // Add random delay to start
         const delay = Math.random() * 5;
-        snowflake.style.animationDelay = delay + 's, ' + delay + 's';
+        snowflake.style.animationDelay = delay + 's';
     }
 
     // --- Spring Floating Decor ---
