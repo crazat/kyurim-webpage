@@ -6742,3 +6742,164 @@ footer {
         padding: 10px 6px !important;
     }
 }
+
+/* ============================================
+   Design Polish — 2026-03-28
+   ============================================ */
+
+/* --- A-1: Enhanced Scroll Stagger --- */
+.grid-4 .card,
+.process-steps .step-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.grid-4.stagger-visible .card,
+.process-steps.stagger-visible .step-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.grid-4.stagger-visible .card:nth-child(1),
+.process-steps.stagger-visible .step-item:nth-child(1) { transition-delay: 0ms; }
+.grid-4.stagger-visible .card:nth-child(2),
+.process-steps.stagger-visible .step-item:nth-child(2) { transition-delay: 100ms; }
+.grid-4.stagger-visible .card:nth-child(3),
+.process-steps.stagger-visible .step-item:nth-child(3) { transition-delay: 200ms; }
+.grid-4.stagger-visible .card:nth-child(4),
+.process-steps.stagger-visible .step-item:nth-child(4) { transition-delay: 300ms; }
+.grid-4.stagger-visible .card:nth-child(5),
+.process-steps.stagger-visible .step-item:nth-child(5) { transition-delay: 400ms; }
+
+/* Also enhance existing fade-in stagger delays */
+.fade-in.visible > *:nth-child(6) { transition-delay: 250ms; }
+.fade-in.visible > *:nth-child(7) { transition-delay: 300ms; }
+.fade-in.visible > *:nth-child(8) { transition-delay: 350ms; }
+
+/* --- A-3: BA Card Image Rounding --- */
+.ba-card img {
+    border-radius: 10px 10px 0 0;
+}
+
+@media (max-width: 768px) {
+    .ba-card img {
+        border-radius: 8px 8px 0 0;
+    }
+}
+
+/* --- A-4: Review Quote Decoration --- */
+.review-body {
+    position: relative;
+    padding-top: 20px;
+}
+
+.review-body::before {
+    content: '\201C';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    font-size: 2.8rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--spring-blossom-pink);
+    opacity: 0.35;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* --- A-5: Keyword Badge Spring Theme --- */
+.keyword-badge {
+    background-color: rgba(255, 183, 178, 0.1) !important;
+    color: var(--spring-pink-dark) !important;
+    border: 1px solid rgba(255, 183, 178, 0.2);
+    transition: background-color var(--duration-fast) ease;
+}
+
+.keyword-badge:hover {
+    background-color: rgba(255, 183, 178, 0.2) !important;
+}
+
+/* --- B-3: Process Step Connecting Lines --- */
+.process-steps {
+    position: relative;
+}
+
+.step-item {
+    position: relative;
+}
+
+@media (min-width: 769px) {
+    .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 40px;
+        right: -24px;
+        width: 28px;
+        height: 2px;
+        background: linear-gradient(90deg,
+            var(--spring-blossom-pink),
+            rgba(255, 183, 178, 0.2));
+        border-radius: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        bottom: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 12px;
+        background: linear-gradient(180deg,
+            var(--spring-blossom-pink),
+            rgba(255, 183, 178, 0.2));
+        border-radius: 1px;
+    }
+}
+
+/* --- B-4: Map Container Upgrade --- */
+.map-container {
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: box-shadow var(--duration-normal) ease;
+}
+
+.map-container:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.map-container img {
+    transition: transform var(--duration-slow) ease;
+}
+
+.map-container:hover img {
+    transform: scale(1.02);
+}
+
+/* --- C-3: BA Gallery Blur-Load Enhancement --- */
+.ba-card.blur-load {
+    background: linear-gradient(135deg, #fdf2f2, #fef9f5);
+}
+
+.ba-card.blur-load img {
+    filter: blur(8px);
+    transition: filter 0.5s ease;
+}
+
+.ba-card.blur-load.loaded img {
+    filter: blur(0);
+}
+
+/* --- Review Search Highlight --- */
+.review-body mark {
+    background-color: rgba(255, 183, 178, 0.35);
+    color: inherit;
+    padding: 1px 2px;
+    border-radius: 2px;
+}

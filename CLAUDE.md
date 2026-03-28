@@ -81,6 +81,18 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-28: Edge 벚꽃 애니메이션 떨림 수정 + 다이어트 예상 결과 표시 수정
+- **Edge 벚꽃 떨림 수정** (spring.css, style.css, script.js)
+  - 원인: `cherryBlossomFall`(rotate) + `windDrift`(translateX) 두 애니메이션이 `transform` 경쟁 + `top` 속성 애니메이션이 매 프레임 레이아웃 재계산 유발
+  - 해결: 두 애니메이션을 하나로 합치고 `top` 대신 `transform: translateY()` 사용 (GPU 가속)
+  - `will-change: transform, opacity` 추가로 브라우저 최적화 힌트
+  - style.css 기본 snowflake도 동일하게 단일 `transform` 기반으로 변경
+  - script.js `animationDuration`/`animationDelay` 단일 값으로 변경 (애니메이션 1개)
+  - 중복된 `@keyframes cherryBlossomFall` 제거
+- **다이어트 예상 결과 표시 수정** (events/diet/index.html)
+  - 원인: 인라인 `style="display:none;"` 이 CSS `.prediction-result.active { display: block; }` 보다 우선순위 높아 결과 영역이 영원히 숨겨짐
+  - 해결: 인라인 style 제거 → CSS의 `.prediction-result { display: none; }` 이 기본 숨김 처리, `.active` 클래스 추가 시 정상 표시
+
 ### 2026-03-06: Phase 2 디자인 개선 + 리뷰 통일 + 갤러리 UX
 - **리뷰 카드 디자인 통일** (spring.css + script.js)
   - 영수증 스타일 제거 → 통일된 깔끔한 카드 디자인
@@ -329,3 +341,5 @@ kyurim-webpage-main/
 - ~~랜딩 페이지 하단 바 통일~~ → 모든 페이지 48px 높이로 통일
 - ~~style.css 스타일 충돌~~ → sticky-bottom-bar 스타일 분리 완료
 - ~~인스타그램 인앱 브라우저 갤러리 버그~~ → 인라인 CSS에 flex-shrink:0 추가
+- ~~Edge 벚꽃 애니메이션 떨림~~ → transform 기반 단일 애니메이션으로 통합
+- ~~다이어트 예상 결과 미표시~~ → 인라인 display:none 제거, CSS 클래스 정상 동작

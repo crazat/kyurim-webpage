@@ -393,6 +393,32 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollRevealObserver.observe(el);
     });
 
+    // Stagger animation for grid containers (.grid-4, .process-steps)
+    const staggerContainers = document.querySelectorAll('.grid-4, .process-steps');
+    const staggerObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('stagger-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    staggerContainers.forEach(el => staggerObserver.observe(el));
+
+    // BA Gallery blur-load enhancement
+    document.querySelectorAll('.ba-card').forEach(card => {
+        const img = card.querySelector('img');
+        if (!img) return;
+        card.classList.add('blur-load');
+        if (img.complete && img.naturalHeight !== 0) {
+            card.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => card.classList.add('loaded'), { once: true });
+            img.addEventListener('error', () => card.classList.add('loaded'), { once: true });
+        }
+    });
+
     // Note: Auto-apply scroll-reveal removed - was causing elements to disappear
     // Use explicit .scroll-reveal class in HTML if animation is needed
 
@@ -820,6 +846,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
 
                 renderReviews(matches);
+
+                // Highlight search term in results
+                if (term && matches.length > 0) {
+                    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`(${escapedTerm})`, 'gi');
+                    document.querySelectorAll('.review-body').forEach(body => {
+                        body.innerHTML = body.innerHTML.replace(regex, '<mark>$1</mark>');
+                    });
+                }
             });
         }
     }
