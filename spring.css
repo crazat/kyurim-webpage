@@ -2457,6 +2457,9 @@ footer {
     will-change: transform, opacity;
 }
 
+.snowflake.petal-v2 { animation-name: petalDrift-2; }
+.snowflake.petal-v3 { animation-name: petalDrift-3; }
+
 /* Variation 1: Gentle right-leaning S-curve */
 @keyframes petalDrift-1 {
     0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }

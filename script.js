@@ -111,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
     const petalCount = isMobile ? 18 : 30;
-    const petalAnimations = ['petalDrift-1', 'petalDrift-2', 'petalDrift-3'];
+    // CSS classes for animation variants (don't use inline animationName — breaks async CSS loading)
+    const petalVariants = ['', 'petal-v2', 'petal-v3'];
 
     if (snowContainer) {
         for (let i = 0; i < petalCount; i++) {
@@ -122,12 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function createPetal() {
         const petal = document.createElement('div');
         petal.classList.add('snowflake');
+
+        // Random animation variant via CSS class (not inline style)
+        const variant = petalVariants[Math.floor(Math.random() * petalVariants.length)];
+        if (variant) petal.classList.add(variant);
+
         const blossoms = ['🌸', '💮', '🌸'];
         petal.innerHTML = blossoms[Math.floor(Math.random() * blossoms.length)];
         petal.style.left = Math.random() * 100 + 'vw';
-
-        // Random animation variation
-        petal.style.animationName = petalAnimations[Math.floor(Math.random() * petalAnimations.length)];
 
         // Duration: 9-18s (slower = more graceful)
         const duration = isMobile ? Math.random() * 5 + 9 : Math.random() * 9 + 9;
