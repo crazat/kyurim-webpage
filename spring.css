@@ -3753,7 +3753,8 @@ body[data-page-type] .reservation-toast {
 /* 22. Mobile Review Carousel (Restored) */
 .review-carousel-container {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     padding: 20px 0;
     scrollbar-width: none;
@@ -3772,6 +3773,19 @@ body[data-page-type] .reservation-toast {
     padding: 0 20px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .review-carousel {
+        animation: none !important;
+    }
+    .review-carousel-container {
+        overflow-x: auto !important;
+        cursor: grab;
+    }
+    .review-carousel-container:active {
+        cursor: grabbing;
+    }
+}
+
 .review-card {
     width: 280px;
     flex-shrink: 0;
@@ -3779,7 +3793,7 @@ body[data-page-type] .reservation-toast {
     border-radius: 12px;
     box-shadow: var(--shadow-md);
     /* Softer shadow */
-    overflow: hidden;
+    overflow: visible;
     scroll-snap-align: center;
     border: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
@@ -6182,7 +6196,7 @@ section.reviews {
     border-radius: 16px !important;
     border: 1px solid rgba(0, 0, 0, 0.06) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-    overflow: hidden;
+    overflow: visible !important;
     display: flex;
     flex-direction: column;
     padding: 24px !important;
@@ -6889,6 +6903,7 @@ footer {
 .review-body {
     position: relative;
     padding-top: 20px;
+    margin-bottom: 14px !important;
 }
 
 .review-body::before {
@@ -6902,6 +6917,10 @@ footer {
     opacity: 0.35;
     line-height: 1;
     pointer-events: none;
+}
+
+.review-keywords {
+    margin-bottom: 14px !important;
 }
 
 /* --- A-5: Keyword Badge Spring Theme --- */

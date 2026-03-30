@@ -1525,6 +1525,27 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
     }
 
+    // Mouse drag scroll for review carousel (PC + reduced-motion)
+    if (reviewContainer && (prefersReducedMotion || window.innerWidth > 768)) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        reviewContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - reviewContainer.offsetLeft;
+            scrollLeft = reviewContainer.scrollLeft;
+        });
+        reviewContainer.addEventListener('mouseleave', () => { isDown = false; });
+        reviewContainer.addEventListener('mouseup', () => { isDown = false; });
+        reviewContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - reviewContainer.offsetLeft;
+            reviewContainer.scrollLeft = scrollLeft - (x - startX);
+        });
+    }
+
     // 8. Real-time Reservation Notification (Social Proof)
     const notificationPageType = document.body.getAttribute('data-page-type') || 'general';
     const names = ['김OO', '이OO', '박OO', '최OO', '정OO', '강OO', '조OO', '윤OO', '장OO', '임OO'];
