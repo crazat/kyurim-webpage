@@ -1560,6 +1560,27 @@ body {
         animation-duration: 14s !important;
         animation-iteration-count: infinite !important;
     }
+
+    /* Scroll reveal elements: show immediately without waiting for observer */
+    .scroll-reveal,
+    .scroll-slide-left,
+    .scroll-slide-right,
+    .scroll-scale,
+    .scroll-rotate,
+    .scroll-blur,
+    .scroll-clip {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        clip-path: none !important;
+    }
+
+    .scroll-reveal-stagger > *,
+    .grid-4 .card,
+    .process-steps .step-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 /* ============================================
@@ -5963,6 +5984,27 @@ textarea:focus::placeholder {
     .snowflake {
         animation-duration: 14s !important;
         animation-iteration-count: infinite !important;
+    }
+
+    /* Scroll reveal elements: show immediately without waiting for observer */
+    .scroll-reveal,
+    .scroll-slide-left,
+    .scroll-slide-right,
+    .scroll-scale,
+    .scroll-rotate,
+    .scroll-blur,
+    .scroll-clip {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        clip-path: none !important;
+    }
+
+    .scroll-reveal-stagger > *,
+    .grid-4 .card,
+    .process-steps .step-item {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
 
