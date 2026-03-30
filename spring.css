@@ -1554,6 +1554,12 @@ body {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+
+    /* Cherry blossom petals: keep falling even with reduced motion */
+    .snowflake {
+        animation-duration: 14s !important;
+        animation-iteration-count: infinite !important;
+    }
 }
 
 /* ============================================
@@ -5951,6 +5957,12 @@ textarea:focus::placeholder {
     .scroll-indicator,
     .hero-scroll-down {
         animation: none !important;
+    }
+
+    /* Cherry blossom petals: keep falling even with reduced motion */
+    .snowflake {
+        animation-duration: 14s !important;
+        animation-iteration-count: infinite !important;
     }
 }
 
