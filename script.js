@@ -1500,6 +1500,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const reviewContainer = document.querySelector('.review-carousel-container');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Auto-scroll for mobile (non-reduced-motion)
     if (reviewContainer && window.innerWidth <= 768 && !prefersReducedMotion) {
         let scrollSpeed = 0.8;
         let isPaused = false;
@@ -1508,8 +1510,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function autoScroll() {
             if (!isPaused) {
                 currentScroll += scrollSpeed;
-                // Infinite loop logic: When we reach the halfway point (end of first set), jump back to 0
-                // We use a small buffer to ensure we don't jump too early
                 if (currentScroll >= reviewContainer.scrollWidth / 2) {
                     currentScroll = 0;
                     reviewContainer.scrollLeft = 0;
@@ -1520,13 +1520,13 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(autoScroll);
         }
 
-        // Pause on interaction
         reviewContainer.addEventListener('touchstart', () => { isPaused = true; });
-        reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
+        reviewContainer.addEventListener('touchend', () => { setTimeout(() => { isPaused = false; }, 3000); });
+        autoScroll();
     }
 
-    // Mouse drag scroll for review carousel (PC + reduced-motion)
-    if (reviewContainer && (prefersReducedMotion || window.innerWidth > 768)) {
+    // Mouse drag scroll for all environments (PC + mobile fallback)
+    if (reviewContainer) {
         let isDown = false;
         let startX;
         let scrollLeft;

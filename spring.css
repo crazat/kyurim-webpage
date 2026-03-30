@@ -3771,19 +3771,16 @@ body[data-page-type] .reservation-toast {
     gap: 15px;
     width: max-content;
     padding: 0 20px;
+    animation: none !important;
+    transform: none !important;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .review-carousel {
-        animation: none !important;
-    }
-    .review-carousel-container {
-        overflow-x: auto !important;
-        cursor: grab;
-    }
-    .review-carousel-container:active {
-        cursor: grabbing;
-    }
+.review-carousel-container {
+    cursor: grab;
+}
+
+.review-carousel-container:active {
+    cursor: grabbing;
 }
 
 .review-card {
@@ -6904,6 +6901,12 @@ footer {
     position: relative;
     padding-top: 20px;
     margin-bottom: 14px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
 }
 
 .review-body::before {
