@@ -3756,14 +3756,26 @@ body[data-page-type] .reservation-toast {
     overflow-x: auto !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
-    padding: 20px 0;
-    scrollbar-width: none;
+    padding: 20px 0 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--spring-blossom-pink) rgba(255, 183, 178, 0.15);
     position: relative;
     background: transparent;
 }
 
 .review-carousel-container::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+    display: block !important;
+}
+
+.review-carousel-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, var(--spring-blossom-pink), var(--spring-peach));
+    border-radius: 6px;
+}
+
+.review-carousel-container::-webkit-scrollbar-track {
+    background: rgba(255, 183, 178, 0.15);
+    border-radius: 6px;
 }
 
 .review-carousel {

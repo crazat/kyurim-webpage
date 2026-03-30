@@ -1501,14 +1501,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewContainer = document.querySelector('.review-carousel-container');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Auto-scroll for mobile (non-reduced-motion)
-    if (reviewContainer && window.innerWidth <= 768 && !prefersReducedMotion) {
-        let scrollSpeed = 0.8;
+    // Auto-scroll for all environments (JS-based, replaces CSS animation)
+    if (reviewContainer && !prefersReducedMotion) {
+        let scrollSpeed = window.innerWidth <= 768 ? 0.8 : 0.5;
         let isPaused = false;
         let currentScroll = 0;
 
         function autoScroll() {
-            if (!isPaused) {
+            if (!isPaused && isPageVisible) {
                 currentScroll += scrollSpeed;
                 if (currentScroll >= reviewContainer.scrollWidth / 2) {
                     currentScroll = 0;
@@ -1520,12 +1520,15 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(autoScroll);
         }
 
+        // Pause on interaction
         reviewContainer.addEventListener('touchstart', () => { isPaused = true; });
         reviewContainer.addEventListener('touchend', () => { setTimeout(() => { isPaused = false; }, 3000); });
+        reviewContainer.addEventListener('mouseenter', () => { isPaused = true; });
+        reviewContainer.addEventListener('mouseleave', () => { isPaused = false; });
         autoScroll();
     }
 
-    // Mouse drag scroll for all environments (PC + mobile fallback)
+    // Mouse drag scroll for all environments
     if (reviewContainer) {
         let isDown = false;
         let startX;
