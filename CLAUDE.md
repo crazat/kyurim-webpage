@@ -81,6 +81,24 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-03-30: 봄꽃 애니메이션 전면 수정 (6커밋)
+- **3중 원인 진단 및 해결**
+  1. `.min.*` 파일이 7커밋 밀린 구버전 → terser/clean-css로 재생성
+  2. Windows "시각 효과→최적 성능" → `prefers-reduced-motion: reduce` → `* { animation-duration: 0s !important }` → JS `setProperty('important')`로 인라인 강제 오버라이드
+  3. 구버전 `opacity: 1 !important`, 중복 키프레임, 단일 S-curve 등 품질 문제
+- **애니메이션 3가지 변형 추가** (spring.css)
+  - `petalDrift-1`: 오른쪽 S-curve 흔들림 + 회전
+  - `petalDrift-2`: 왼쪽 미러 흔들림 + 역회전
+  - `petalDrift-3`: 미세 좌우 흔들림 + 완만한 회전
+  - 각각 `@media (max-width: 768px)` 모바일 버전 (translateX 절반)
+- **CSS 클래스 기반 변형 배정** — `.petal-v2`, `.petal-v3` 클래스로 JS→CSS 간 안전한 전달 (비동기 CSS 로딩과 인라인 animationName 충돌 방지)
+- **opacity: 1 !important 제거** → 페이드인(8%)/페이드아웃(92%) 정상 작동
+- **캐시 버스팅**: 6개 HTML 파일에 `?v=20260330d` 쿼리 파라미터 추가 (vercel.json immutable 캐시 대응)
+- **교훈**
+  - `.min.*` 파일은 소스 변경 시 반드시 재생성 필요
+  - `prefers-reduced-motion: reduce`는 Windows "최적 성능" 설정에서 자동 활성화됨 — `* { animation-duration: 0s !important }` 규칙이 모든 애니메이션을 죽임
+  - 비동기 CSS (`media="print" onload`) 환경에서 JS inline `animationName` 설정 시 CSS 로드 후에도 animation-name이 `none→값`으로 변경되지 않아 브라우저가 애니메이션을 트리거하지 않음 → CSS 클래스로 대체
+
 ### 2026-03-28: 종합 최적화 + 안정성 + UX 개선 (7커밋)
 
 #### 성능 최적화
