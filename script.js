@@ -133,8 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
         petal.style.left = Math.random() * 100 + 'vw';
 
         // Duration: 9-18s (slower = more graceful)
+        // Use setProperty with !important to override prefers-reduced-motion * rule
         const duration = isMobile ? Math.random() * 5 + 9 : Math.random() * 9 + 9;
-        petal.style.animationDuration = duration + 's';
+        petal.style.setProperty('animation-duration', duration + 's', 'important');
+        petal.style.setProperty('animation-iteration-count', 'infinite', 'important');
 
         // Size: 16-28px desktop, 12-20px mobile
         const size = isMobile ? Math.random() * 8 + 12 : Math.random() * 12 + 16;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><style>
+#snow-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999998; overflow:hidden; }
+.snowflake { position:fixed!important; top:-10vh; z-index:999999; pointer-events:none; text-shadow:0 0 3px rgba(255,183,178,.4); animation-timing-function:linear; animation-iteration-count:infinite; font-size:1.3rem; will-change:transform,opacity; }
+@keyframes petalDrift-1 {
+  0%{transform:translateY(0) translateX(0) rotate(0);opacity:0}
+  8%{opacity:1}
+  15%{transform:translateY(16vh) translateX(25px) rotate(45deg)}
+  35%{transform:translateY(38vh) translateX(55px) rotate(120deg)}
+  50%{transform:translateY(55vh) translateX(15px) rotate(180deg)}
+  65%{transform:translateY(72vh) translateX(50px) rotate(250deg)}
+  85%{transform:translateY(93vh) translateX(20px) rotate(330deg)}
+  92%{opacity:1}
+  100%{transform:translateY(112vh) translateX(0) rotate(380deg);opacity:0}
+}
+@keyframes petalDrift-2 {
+  0%{transform:translateY(0) translateX(0) rotate(0);opacity:0}
+  8%{opacity:1}
+  15%{transform:translateY(15vh) translateX(-20px) rotate(-40deg)}
+  50%{transform:translateY(54vh) translateX(-8px) rotate(-175deg)}
+  85%{transform:translateY(94vh) translateX(-15px) rotate(-325deg)}
+  92%{opacity:1}
+  100%{transform:translateY(112vh) translateX(0) rotate(-370deg);opacity:0}
+}
+body { background:#fff5f5; margin:0; font-family:sans-serif; }
+h1 { text-align:center; padding-top:40vh; color:#c77a7c; }
+</style></head><body>
+<div id="snow-container"></div>
+<h1>🌸 Petal Test 🌸</h1>
+<script>
+const c=document.getElementById('snow-container');
+const anims=['petalDrift-1','petalDrift-2'];
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.classList.add('snowflake');
+  p.innerHTML=['🌸','💮'][Math.floor(Math.random()*2)];
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationName=anims[Math.floor(Math.random()*anims.length)];
+  p.style.animationDuration=(Math.random()*8+8)+'s';
+  p.style.fontSize=(Math.random()*12+16)+'px';
+  p.style.animationDelay=(Math.random()*6)+'s';
+  c.appendChild(p);
+}
+document.title='Petals: '+c.children.length;
+</script></body></html>
