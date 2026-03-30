@@ -2442,56 +2442,94 @@ footer {
     margin-top: 10px;
 }
 
-/* Sparkles/Snow - Unify to Rising Animation (Like Champagne Bubbles) */
+/* Cherry Blossom Petal Fall Animation */
 
 .snowflake {
     z-index: 999999 !important;
-    opacity: 1 !important;
     pointer-events: none !important;
-    text-shadow: 0 0 2px rgba(255, 183, 178, 0.5);
-    /* Pink tint */
-    animation-name: cherryBlossomFall !important;
-    animation-timing-function: linear !important;
-    animation-iteration-count: infinite !important;
+    text-shadow: 0 0 3px rgba(255, 183, 178, 0.4);
+    animation-name: petalDrift-1;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     top: -10vh;
     color: var(--spring-blossom-pink);
-    /* Make the unicode text pink */
-    font-size: 1.5rem;
-    /* Larger */
+    font-size: 1.3rem;
     will-change: transform, opacity;
 }
 
-@keyframes cherryBlossomFall {
-    0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0;
+/* Variation 1: Gentle right-leaning S-curve */
+@keyframes petalDrift-1 {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    15%  { transform: translateY(16vh) translateX(25px) rotate(45deg); }
+    35%  { transform: translateY(38vh) translateX(55px) rotate(120deg); }
+    50%  { transform: translateY(55vh) translateX(15px) rotate(180deg); }
+    65%  { transform: translateY(72vh) translateX(50px) rotate(250deg); }
+    85%  { transform: translateY(93vh) translateX(20px) rotate(330deg); }
+    92%  { opacity: 1; }
+    100% { transform: translateY(112vh) translateX(0) rotate(380deg); opacity: 0; }
+}
+
+/* Variation 2: Left-leaning mirror drift */
+@keyframes petalDrift-2 {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    15%  { transform: translateY(15vh) translateX(-20px) rotate(-40deg); }
+    35%  { transform: translateY(36vh) translateX(-50px) rotate(-110deg); }
+    50%  { transform: translateY(54vh) translateX(-8px) rotate(-175deg); }
+    65%  { transform: translateY(73vh) translateX(-45px) rotate(-245deg); }
+    85%  { transform: translateY(94vh) translateX(-15px) rotate(-325deg); }
+    92%  { opacity: 1; }
+    100% { transform: translateY(112vh) translateX(0) rotate(-370deg); opacity: 0; }
+}
+
+/* Variation 3: Tight gentle float, minimal horizontal */
+@keyframes petalDrift-3 {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 1; }
+    20%  { transform: translateY(22vh) translateX(12px) rotate(55deg); }
+    40%  { transform: translateY(44vh) translateX(-8px) rotate(130deg); }
+    55%  { transform: translateY(60vh) translateX(15px) rotate(200deg); }
+    75%  { transform: translateY(82vh) translateX(-5px) rotate(280deg); }
+    90%  { transform: translateY(98vh) translateX(8px) rotate(340deg); opacity: 1; }
+    100% { transform: translateY(112vh) translateX(0) rotate(375deg); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    /* Reduce horizontal drift on mobile */
+    @keyframes petalDrift-1 {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        8%   { opacity: 1; }
+        15%  { transform: translateY(16vh) translateX(12px) rotate(45deg); }
+        35%  { transform: translateY(38vh) translateX(25px) rotate(120deg); }
+        50%  { transform: translateY(55vh) translateX(5px) rotate(180deg); }
+        65%  { transform: translateY(72vh) translateX(22px) rotate(250deg); }
+        85%  { transform: translateY(93vh) translateX(8px) rotate(330deg); }
+        92%  { opacity: 1; }
+        100% { transform: translateY(112vh) translateX(0) rotate(380deg); opacity: 0; }
     }
 
-    10% {
-        transform: translateY(12vh) translateX(30px) rotate(36deg);
-        opacity: 1;
+    @keyframes petalDrift-2 {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        8%   { opacity: 1; }
+        15%  { transform: translateY(15vh) translateX(-10px) rotate(-40deg); }
+        35%  { transform: translateY(36vh) translateX(-22px) rotate(-110deg); }
+        50%  { transform: translateY(54vh) translateX(-3px) rotate(-175deg); }
+        65%  { transform: translateY(73vh) translateX(-20px) rotate(-245deg); }
+        85%  { transform: translateY(94vh) translateX(-6px) rotate(-325deg); }
+        92%  { opacity: 1; }
+        100% { transform: translateY(112vh) translateX(0) rotate(-370deg); opacity: 0; }
     }
 
-    30% {
-        transform: translateY(33vh) translateX(70px) rotate(108deg);
-    }
-
-    50% {
-        transform: translateY(55vh) translateX(10px) rotate(180deg);
-    }
-
-    70% {
-        transform: translateY(77vh) translateX(70px) rotate(252deg);
-    }
-
-    90% {
-        transform: translateY(99vh) translateX(30px) rotate(324deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(112vh) translateX(0) rotate(360deg);
-        opacity: 0;
+    @keyframes petalDrift-3 {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        10%  { opacity: 1; }
+        20%  { transform: translateY(22vh) translateX(6px) rotate(55deg); }
+        40%  { transform: translateY(44vh) translateX(-4px) rotate(130deg); }
+        55%  { transform: translateY(60vh) translateX(8px) rotate(200deg); }
+        75%  { transform: translateY(82vh) translateX(-3px) rotate(280deg); }
+        90%  { transform: translateY(98vh) translateX(4px) rotate(340deg); opacity: 1; }
+        100% { transform: translateY(112vh) translateX(0) rotate(375deg); opacity: 0; }
     }
 }
 
@@ -4324,7 +4362,7 @@ header.hero {
 }
 
 
-/* cherryBlossomFall defined above in snowflake section */
+/* petalDrift keyframes defined above in snowflake section */
 
 /* --- Spring Theme FAB Pastel Colors --- */
 .quick-btn.tel {

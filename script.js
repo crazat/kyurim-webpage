@@ -107,38 +107,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 16), { passive: true }); // ~60fps
 
-    // --- Snowfall Effect ---
+    // --- Cherry Blossom Petal Fall ---
     const snowContainer = document.getElementById('snow-container');
     const isMobile = window.innerWidth <= 768;
-    const snowflakeCount = isMobile ? 15 : 25; // Reduce count on mobile
+    const petalCount = isMobile ? 18 : 30;
+    const petalAnimations = ['petalDrift-1', 'petalDrift-2', 'petalDrift-3'];
 
     if (snowContainer) {
-        for (let i = 0; i < snowflakeCount; i++) {
-            createSnowflake();
+        for (let i = 0; i < petalCount; i++) {
+            createPetal();
         }
     }
 
-    function createSnowflake() {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        const sparkles = ['🌸', '💮', '🌸']; // Cherry blossoms
-        snowflake.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
-        snowflake.style.left = Math.random() * 100 + 'vw';
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('snowflake');
+        const blossoms = ['🌸', '💮', '🌸'];
+        petal.innerHTML = blossoms[Math.floor(Math.random() * blossoms.length)];
+        petal.style.left = Math.random() * 100 + 'vw';
 
-        // Adjust duration: Fall takes 8-15s
-        const fallDuration = isMobile ? Math.random() * 5 + 8 : Math.random() * 7 + 8;
-        snowflake.style.animationDuration = fallDuration + 's';
+        // Random animation variation
+        petal.style.animationName = petalAnimations[Math.floor(Math.random() * petalAnimations.length)];
 
-        snowflake.style.opacity = Math.random();
+        // Duration: 9-18s (slower = more graceful)
+        const duration = isMobile ? Math.random() * 5 + 9 : Math.random() * 9 + 9;
+        petal.style.animationDuration = duration + 's';
 
-        const size = isMobile ? Math.random() * 5 + 8 : Math.random() * 10 + 10; // Smaller on mobile (8-13px vs 10-20px)
-        snowflake.style.fontSize = size + 'px';
+        // Size: 16-28px desktop, 12-20px mobile
+        const size = isMobile ? Math.random() * 8 + 12 : Math.random() * 12 + 16;
+        petal.style.fontSize = size + 'px';
 
-        snowContainer.appendChild(snowflake);
+        // Staggered start: 0-8s
+        petal.style.animationDelay = (Math.random() * 8) + 's';
 
-        // Add random delay to start
-        const delay = Math.random() * 5;
-        snowflake.style.animationDelay = delay + 's';
+        snowContainer.appendChild(petal);
     }
 
     // --- Spring Floating Decor ---

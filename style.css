@@ -225,72 +225,45 @@ ul {
 
 .snowflake {
     position: fixed !important;
-    top: -10px;
+    top: -10vh;
     color: #FFF;
-    font-size: 1em;
+    font-size: 1.2em;
     font-family: Arial, sans-serif;
-    text-shadow: 0 0 5px #000;
     user-select: none;
     z-index: 10000;
-    animation-name: snowflakes-fall;
-    animation-duration: 10s;
+    animation-name: petalDrift-1;
+    animation-duration: 12s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-play-state: running;
     will-change: transform, opacity;
 }
 
-@keyframes snowflakes-fall {
-    0% {
-        transform: translateY(0) translateX(0);
-        opacity: 1;
-    }
-
-    25% {
-        transform: translateY(27vh) translateX(60px);
-    }
-
-    50% {
-        transform: translateY(55vh) translateX(0);
-    }
-
-    75% {
-        transform: translateY(82vh) translateX(60px);
-    }
-
-    100% {
-        transform: translateY(110vh) translateX(0);
-        opacity: 0;
-    }
+/* Fallback keyframe (overridden by spring.css petalDrift variants) */
+@keyframes petalDrift-1 {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    25%  { transform: translateY(27vh) translateX(40px) rotate(90deg); }
+    50%  { transform: translateY(55vh) translateX(5px) rotate(180deg); }
+    75%  { transform: translateY(82vh) translateX(40px) rotate(270deg); }
+    92%  { opacity: 1; }
+    100% { transform: translateY(112vh) translateX(0) rotate(360deg); opacity: 0; }
 }
 
 @media (max-width: 768px) {
     .snowflake {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 
-    @keyframes snowflakes-fall {
-        0% {
-            transform: translateY(0) translateX(0);
-            opacity: 1;
-        }
+    @keyframes petalDrift-1 {
+        0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        8%   { opacity: 1; }
+        25%  { transform: translateY(27vh) translateX(18px) rotate(90deg); }
+        50%  { transform: translateY(55vh) translateX(2px) rotate(180deg); }
+        75%  { transform: translateY(82vh) translateX(18px) rotate(270deg); }
 
-        25% {
-            transform: translateY(27vh) translateX(25px);
-        }
-
-        50% {
-            transform: translateY(55vh) translateX(0);
-        }
-
-        75% {
-            transform: translateY(82vh) translateX(25px);
-        }
-
-        100% {
-            transform: translateY(110vh) translateX(0);
-            opacity: 0;
-        }
+        92%  { opacity: 1; }
+        100% { transform: translateY(112vh) translateX(0) rotate(360deg); opacity: 0; }
     }
 }
 
