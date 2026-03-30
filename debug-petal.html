@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<title>Petal Debug</title>
+<link rel="stylesheet" href="style.min.css?v=20260330b" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="spring.min.css?v=20260330b" media="print" onload="this.media='all'">
+<noscript>
+    <link rel="stylesheet" href="style.min.css?v=20260330b">
+    <link rel="stylesheet" href="spring.min.css?v=20260330b">
+</noscript>
+</head>
+<body style="background:#fff5f5;min-height:100vh;">
+<div id="snow-container"></div>
+<div style="text-align:center;padding-top:30vh;font-family:sans-serif;">
+    <h1 id="status">Loading...</h1>
+    <pre id="log" style="text-align:left;max-width:600px;margin:20px auto;font-size:13px;background:#fff;padding:15px;border-radius:8px;"></pre>
+</div>
+<script>
+const log = (msg) => {
+    document.getElementById('log').textContent += msg + '\n';
+    console.log(msg);
+};
+
+log('1. Script running');
+log('2. snow-container: ' + !!document.getElementById('snow-container'));
+
+// Check if CSS loaded
+const checkCSS = () => {
+    const sheets = Array.from(document.styleSheets);
+    const springCSS = sheets.find(s => s.href && s.href.includes('spring.min'));
+    const styleCSS = sheets.find(s => s.href && s.href.includes('style.min'));
+    log('3. style.min.css loaded: ' + !!styleCSS);
+    log('4. spring.min.css loaded: ' + !!springCSS);
+
+    // Check if keyframes exist
+    let keyframeCount = 0;
+    sheets.forEach(sheet => {
+        try {
+            Array.from(sheet.cssRules || []).forEach(rule => {
+                if (rule.type === CSSRule.KEYFRAMES_RULE && rule.name.startsWith('petal')) {
+                    keyframeCount++;
+                    log('   Found @keyframes: ' + rule.name);
+                }
+            });
+        } catch(e) { /* cross-origin */ }
+    });
+    log('5. petalDrift keyframe count: ' + keyframeCount);
+};
+
+// Create petals manually
+const container = document.getElementById('snow-container');
+log('6. Creating test petals...');
+for (let i = 0; i < 5; i++) {
+    const p = document.createElement('div');
+    p.classList.add('snowflake');
+    if (i % 3 === 1) p.classList.add('petal-v2');
+    if (i % 3 === 2) p.classList.add('petal-v3');
+    p.innerHTML = '🌸';
+    p.style.left = (20 + i * 15) + 'vw';
+    p.style.animationDuration = '8s';
+    p.style.animationDelay = (i * 0.5) + 's';
+    p.style.fontSize = '24px';
+    container.appendChild(p);
+}
+log('7. Petals in DOM: ' + container.children.length);
+
+// Check computed styles
+setTimeout(() => {
+    const petal = container.children[0];
+    if (petal) {
+        const cs = getComputedStyle(petal);
+        log('8. Computed styles of first petal:');
+        log('   position: ' + cs.position);
+        log('   top: ' + cs.top);
+        log('   animation-name: ' + cs.animationName);
+        log('   animation-duration: ' + cs.animationDuration);
+        log('   animation-play-state: ' + cs.animationPlayState);
+        log('   opacity: ' + cs.opacity);
+        log('   display: ' + cs.display);
+        log('   visibility: ' + cs.visibility);
+        log('   transform: ' + cs.transform);
+        log('   left: ' + cs.left);
+        log('   font-size: ' + cs.fontSize);
+    }
+    checkCSS();
+
+    const visible = container.children.length > 0;
+    document.getElementById('status').textContent = visible ? 'Petals created - check below' : 'No petals';
+}, 2000);
+</script>
+</body></html>
