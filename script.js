@@ -1502,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Auto-scroll for all environments (JS-based, replaces CSS animation)
-    if (reviewContainer && !prefersReducedMotion) {
+    if (reviewContainer) {
         let scrollSpeed = window.innerWidth <= 768 ? 0.8 : 0.5;
         let isPaused = false;
         let currentScroll = 0;
