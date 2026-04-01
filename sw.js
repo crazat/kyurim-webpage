@@ -21,6 +21,10 @@ self.addEventListener('install', (event) => {
                 return cache.addAll(PRECACHE_ASSETS);
             })
             .then(() => self.skipWaiting())
+            .catch((error) => {
+                console.error('[SW] Precache failed:', error);
+                return self.skipWaiting();
+            })
     );
 });
 
@@ -99,11 +103,12 @@ async function syncForms() {
 self.addEventListener('push', (event) => {
     if (!event.data) return;
 
-    const data = event.data.json();
+    let data;
+    try { data = event.data.json(); } catch (e) { return; }
     const options = {
         body: data.body || '규림한의원에서 알림이 왔습니다.',
-        icon: '/assets/logo-192.png',
-        badge: '/assets/badge-72.png',
+        icon: '/assets/logo_icon.png',
+        badge: '/assets/logo_icon.png',
         vibrate: [100, 50, 100],
         data: {
             url: data.url || '/'

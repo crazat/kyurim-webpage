@@ -17,6 +17,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="../../assets/logo_icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -898,6 +899,7 @@
             });
         }
     </script>
+    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}</script>
 </body>
 
 </html>

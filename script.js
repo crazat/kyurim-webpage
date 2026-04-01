@@ -812,7 +812,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                     const regex = new RegExp(`(${escapedTerm})`, 'gi');
                     document.querySelectorAll('.review-body').forEach(body => {
-                        body.innerHTML = body.innerHTML.replace(regex, '<mark>$1</mark>');
+                        const text = body.textContent;
+                        body.innerHTML = '';
+                        let lastIndex = 0;
+                        text.replace(regex, (match, p1, offset) => {
+                            if (offset > lastIndex) body.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+                            const mark = document.createElement('mark');
+                            mark.textContent = match;
+                            body.appendChild(mark);
+                            lastIndex = offset + match.length;
+                        });
+                        if (lastIndex < text.length) body.appendChild(document.createTextNode(text.slice(lastIndex)));
                     });
                 }
             });
@@ -1334,18 +1344,23 @@ document.addEventListener('DOMContentLoaded', () => {
             storyImage.src = src;
 
             const data = storyData[filename];
+            const tagEl = document.getElementById('storyTag');
+            const titleEl = document.getElementById('storyTitle');
+            const profileEl = document.getElementById('storyProfile');
+            const descEl = document.getElementById('storyDesc');
+            const resultEl = document.getElementById('storyResult');
             if (data) {
-                document.getElementById('storyTag').innerText = data.tag;
-                document.getElementById('storyTitle').innerText = data.title;
-                document.getElementById('storyProfile').innerText = data.profile;
-                document.getElementById('storyDesc').innerText = data.desc;
-                document.getElementById('storyResult').innerText = data.result;
+                if (tagEl) tagEl.innerText = data.tag;
+                if (titleEl) titleEl.innerText = data.title;
+                if (profileEl) profileEl.innerText = data.profile;
+                if (descEl) descEl.innerText = data.desc;
+                if (resultEl) resultEl.innerText = data.result;
             } else {
-                document.getElementById('storyTag').innerText = "이벤트";
-                document.getElementById('storyTitle').innerText = "진행 중인 이벤트";
-                document.getElementById('storyProfile').innerText = "규림한의원 청주점";
-                document.getElementById('storyDesc').innerText = "지금 바로 상담 신청하고 혜택을 받아보세요!";
-                document.getElementById('storyResult').innerText = "선착순 마감될 수 있습니다.";
+                if (tagEl) tagEl.innerText = "이벤트";
+                if (titleEl) titleEl.innerText = "진행 중인 이벤트";
+                if (profileEl) profileEl.innerText = "규림한의원 청주점";
+                if (descEl) descEl.innerText = "지금 바로 상담 신청하고 혜택을 받아보세요!";
+                if (resultEl) resultEl.innerText = "선착순 마감될 수 있습니다.";
             }
 
             openStoryModal();
@@ -2030,14 +2045,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set up focus trap
         const cleanup = trapFocus(modal);
 
+        // Clean up previous Escape handler if exists
+        if (modal._escapeHandler) {
+            document.removeEventListener('keydown', modal._escapeHandler);
+        }
+        if (modal._focusCleanup) {
+            modal._focusCleanup();
+        }
+
+        // Store cleanup for closeModalWithFocus
+        modal._focusCleanup = cleanup;
+
         // Close on Escape
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 closeModalWithFocus(modal);
-                document.removeEventListener('keydown', handleEscape);
-                if (cleanup) cleanup();
             }
         };
+        modal._escapeHandler = handleEscape;
         document.addEventListener('keydown', handleEscape);
     };
 
@@ -2047,6 +2072,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'none';
         modal.setAttribute('aria-hidden', 'true');
+
+        // Clean up Escape handler and focus trap
+        if (modal._escapeHandler) {
+            document.removeEventListener('keydown', modal._escapeHandler);
+            modal._escapeHandler = null;
+        }
+        if (modal._focusCleanup) {
+            modal._focusCleanup();
+            modal._focusCleanup = null;
+        }
 
         // Restore focus to previously focused element
         if (previousActiveElement && previousActiveElement.focus) {

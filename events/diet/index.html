@@ -17,6 +17,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="../../assets/logo_icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1077,14 +1078,22 @@
 
     <!-- Chart.js loaded only when needed -->
     <script>
-        document.getElementById('calculateDietBtn')?.addEventListener('click', function() {
-            if (!window.Chart) {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-                script.onload = () => document.getElementById('calculateDietBtn').click();
-                document.head.appendChild(script);
-            }
-        }, { once: true });
+        (function() {
+            var btn = document.getElementById('calculateDietBtn');
+            if (!btn) return;
+            var loading = false;
+            btn.addEventListener('click', function(e) {
+                if (window.Chart) return;
+                e.stopImmediatePropagation();
+                if (loading) return;
+                loading = true;
+                var s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+                s.onload = function() { loading = false; btn.click(); };
+                s.onerror = function() { loading = false; alert('차트 라이브러리를 로드할 수 없습니다.'); };
+                document.head.appendChild(s);
+            });
+        })();
     </script>
 
     <!-- Sticky Bottom Bar -->
@@ -1137,7 +1146,7 @@
                 if (isSubmitting) return;
 
                 const phoneInput = form.querySelector('input[name="연락처"]');
-                if (phoneInput.value.length < 10) {
+                if (!phoneInput || phoneInput.value.length < 10) {
                     alert('올바른 연락처를 입력해주세요.');
                     return;
                 }
@@ -1312,6 +1321,7 @@
             navigator.clipboard?.writeText(window.location.href).then(() => alert("링크가 복사되었습니다!"));
         }
     </script>
+    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}</script>
 </body>
 
 </html>

@@ -17,6 +17,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="../../assets/logo_icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,16 +447,16 @@
             </div>
             <div class="event-scroll-container">
                 <div class="event-item">
-                    <img src="../../assets/26%20march%20wedding/긴급구조대%20확정.png" alt="긴급구조대 이벤트" loading="lazy">
+                    <img src="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%20%ED%99%95%EC%A0%95.png" alt="긴급구조대 이벤트" loading="lazy">
                 </div>
                 <div class="event-item">
-                    <img src="../../assets/26%20march%20wedding/긴급구조대%202순위%20.png" alt="긴급구조대 2순위 이벤트" loading="lazy">
+                    <img src="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%202%EC%88%9C%EC%9C%84%20.png" alt="긴급구조대 2순위 이벤트" loading="lazy">
                 </div>
                 <div class="event-item">
-                    <img src="../../assets/26%20march%20wedding/웨딩올킬%20확정.png" alt="웨딩올킬 이벤트" loading="lazy">
+                    <img src="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC%20%ED%99%95%EC%A0%95.png" alt="웨딩올킬 이벤트" loading="lazy">
                 </div>
                 <div class="event-item">
-                    <img src="../../assets/26%20march%20wedding/웨딩올킬2.png" alt="웨딩올킬2 이벤트" loading="lazy">
+                    <img src="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC2.png" alt="웨딩올킬2 이벤트" loading="lazy">
                 </div>
             </div>
         </div>
@@ -919,7 +920,7 @@
                 if (isSubmitting) return;
 
                 const phoneInput = form.querySelector('input[name="연락처"]');
-                if (phoneInput.value.length < 10) {
+                if (!phoneInput || phoneInput.value.length < 10) {
                     alert('올바른 연락처를 입력해주세요.');
                     return;
                 }
@@ -987,6 +988,7 @@
             });
         }
     </script>
+    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}</script>
 </body>
 
 </html>

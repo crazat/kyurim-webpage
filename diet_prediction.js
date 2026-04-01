@@ -5,8 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (calculateBtn) {
         calculateBtn.addEventListener('click', () => {
-            const currentWeight = parseFloat(document.getElementById('currentWeight').value);
-            const age = parseInt(document.getElementById('userAge').value);
+            const weightEl = document.getElementById('currentWeight');
+            const ageEl = document.getElementById('userAge');
+            if (!weightEl || !ageEl) return;
+
+            const currentWeight = parseFloat(weightEl.value);
+            const age = parseInt(ageEl.value, 10);
             const genderInput = document.querySelector('input[name="gender"]:checked');
 
             if (!genderInput) {
@@ -15,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const gender = genderInput.value;
 
-            if (!currentWeight || !age || currentWeight <= 0 || currentWeight > 300 || age <= 0 || age > 120) {
+            if (isNaN(currentWeight) || isNaN(age) || currentWeight <= 0 || currentWeight > 300 || age <= 0 || age > 120) {
                 alert("올바른 체중과 나이를 입력해주세요.");
                 return;
             }
@@ -25,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const slowPlan = calculateSlowPlan(currentWeight, rapidPlan);
 
             // Show Result Section
+            if (!resultContainer) return;
             resultContainer.classList.add('active');
 
             // Scroll result into view on mobile
@@ -81,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderChart(startWeight, rapidData, slowData) {
-        const ctx = document.getElementById('dietChart').getContext('2d');
+        const chartEl = document.getElementById('dietChart');
+        if (!chartEl) return;
+        const ctx = chartEl.getContext('2d');
 
         if (dietChart) {
             dietChart.destroy();
@@ -176,10 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const rapidTotal = (startWeight - rapidData[3]).toFixed(1);
         const slowTotal = (startWeight - slowData[3]).toFixed(1);
 
-        document.getElementById('rapidTotalLoss').innerText = `-${rapidTotal}kg`;
-        document.getElementById('slowTotalLoss').innerText = `-${slowTotal}kg`;
+        const rTotalEl = document.getElementById('rapidTotalLoss');
+        const sTotalEl = document.getElementById('slowTotalLoss');
+        const rFinalEl = document.getElementById('rapidFinalWeight');
+        if (rTotalEl) rTotalEl.innerText = `-${rapidTotal}kg`;
+        if (sTotalEl) sTotalEl.innerText = `-${slowTotal}kg`;
 
-        document.getElementById('rapidFinalWeight').innerText = `${rapidData[3].toFixed(1)}kg`;
-        document.getElementById('slowFinalWeight').innerText = `${slowData[3].toFixed(1)}kg`;
+        if (rFinalEl) rFinalEl.innerText = `${rapidData[3].toFixed(1)}kg`;
+        const sFinalEl = document.getElementById('slowFinalWeight');
+        if (sFinalEl) sFinalEl.innerText = `${slowData[3].toFixed(1)}kg`;
     }
 });

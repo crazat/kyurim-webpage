@@ -17,6 +17,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="../../assets/logo_icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1049,7 +1050,7 @@
 
                 // Basic Validation
                 const phoneInput = form.querySelector('input[name="연락처"]');
-                if (phoneInput.value.length < 10) {
+                if (!phoneInput || phoneInput.value.length < 10) {
                     alert('올바른 연락처를 입력해주세요.');
                     return;
                 }
@@ -1121,6 +1122,7 @@
             });
         }
     </script>
+    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}</script>
 </body>
 
 </html>

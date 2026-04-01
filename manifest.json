@@ -11,13 +11,13 @@
   "lang": "ko",
   "icons": [
     {
-      "src": "/assets/logo-192.png",
+      "src": "/assets/logo_icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/logo-512.png",
+      "src": "/assets/logo_icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -29,13 +29,13 @@
       "name": "전화 상담",
       "short_name": "전화",
       "url": "tel:043-236-2275",
-      "icons": [{ "src": "/assets/icon-phone.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/assets/logo_icon.png", "sizes": "96x96" }]
     },
     {
       "name": "카카오 상담",
       "short_name": "카카오",
-      "url": "http://pf.kakao.com/_SRxkPn/chat",
-      "icons": [{ "src": "/assets/icon-kakao.png", "sizes": "96x96" }]
+      "url": "https://pf.kakao.com/_SRxkPn/chat",
+      "icons": [{ "src": "/assets/logo_icon.png", "sizes": "96x96" }]
     }
   ]
 }

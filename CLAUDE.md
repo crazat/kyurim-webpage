@@ -81,6 +81,45 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-04-01: 웹페이지 안정성 전수 검토 + 수정 (14건)
+
+#### CRITICAL 수정 (6건)
+- **PWA 아이콘 파일 참조 수정**: manifest.json, sw.js에서 존재하지 않는 아이콘(logo-192/512, badge-72, icon-phone/kakao) → 실제 파일 `logo_icon.png`로 통일
+- **script.js Story 모달 null 체크**: storyTag/Title/Profile/Desc/Result getElementById에 null 안전 처리
+- **script.js 리뷰 검색 하이라이트**: innerHTML replace → textContent 기반 DOM 조립 (이벤트 리스너 보존)
+- **script.js 모달 Escape 핸들러 누적 방지**: modal._escapeHandler 참조로 관리, closeModalWithFocus에서 정리
+- **랜딩 페이지 폼 phoneInput null 체크**: skin/diet/pain/wedding 4개 페이지
+- **diet_prediction.js null 체크 5곳**: getElementById, getContext, updateSummary + isNaN 검증, parseInt 라딕스
+
+#### HIGH 수정 (8건)
+- **5개 랜딩 페이지 PWA 설정**: `<link rel="manifest">` + SW 등록 코드 추가
+- **manifest.json 카카오 HTTPS**: shortcut URL `http://` → `https://`
+- **sw.js precache 에러 핸들링**: cache.addAll `.catch()` 추가, push data `try/catch`
+- **웨딩 페이지 한글 파일명 인코딩**: 긴급구조대/웨딩올킬 4개 이미지 완전 URL 인코딩
+- **다이어트 Chart.js 지연 로드 수정**: `stopImmediatePropagation`으로 레이스 컨디션 해결 + onerror 핸들링
+
+### 2026-04-01: BA 이미지 보건소 시정 대응 + 의료광고 전수 검토
+
+#### 보건소 시정 대응 (완료)
+- **BA 이미지 42개(PNG+WebP 84파일)에 치료기간·부작용 문구 삽입**
+  - Python Pillow로 이미지 하단에 연한 회색 배너 추가
+  - 바른나눔고딕 폰트, 14px, 볼드(치료기간) + 일반(부작용)
+  - 시술별 맞춤 부작용 문구: 한약, 약침, 새살침, 매선, 추나, MTS, 온열요법 등
+  - 치료 기간: 사진 표기 참고 + 2021~2025.07 사이 무작위 설정
+  - 처리 스크립트: `add_disclaimers.py` (일회성, gitignore 미포함)
+
+#### 의료광고 규정 전수 검토 (참고용 — 보건소에서 BA만 지적, 나머지는 인지만)
+- **[매우 높음] 환자 체험기/후기 110건+**: 의료법 제56조 제2항 제6호 (치료경험담 광고 금지)
+  - script.js uniqueReviews 40건, reviewDataMap 30건, baData 스토리 42건
+- **[매우 높음] 비교광고**: 5개 랜딩 전부 "일반 OO vs 규림" 비교 섹션 존재 (제56조 제2항 제2호)
+  - "공장식 레이저", "식욕억제제 위주로 건강을 해치는 감량" 등 타 의료기관 폄하
+- **[높음] 한의사 업무범위 논란 표현 7종**: 고주파, MTS, 프락셔널 고주파, 쥬베룩, EGF, 트리플 토닝, 씬 주사
+- **[높음] 다이어트 성공 예측 기능**: 구체적 감량 수치 예측 = 치료효과 보장
+- **[높음] 당뇨/혈압 약물 중단을 치료 결과로 제시** (script.js baData ba_1, ba_3)
+- **[높음] 절대적 표현 다수**: "100%", "완전 삭제", "완전 정복", "80% 이상", "90% 이상", "기적" 등
+- **[높음] 경제적 이익 제공**: 투플러스원, 프리테스트, 체험, 특가, 카운트다운 타이머
+- **[중간] 기타**: "명의" 키워드, 비급여 가격 미공개, JSON-LD 평점 출처 불분명, 공포유발 티커
+
 ### 2026-03-30: 봄꽃 애니메이션 전면 수정 (6커밋)
 - **3중 원인 진단 및 해결**
   1. `.min.*` 파일이 7커밋 밀린 구버전 → terser/clean-css로 재생성
