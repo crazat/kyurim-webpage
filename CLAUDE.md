@@ -81,6 +81,85 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-04-25: 코드 품질 전수 감사 + 잠복 버그 4종 수정 (4커밋)
+
+세션 진입 트리거: 사용자가 "메인 홈페이지에서 다이어트 예측 로직이 작동
+안한다"고 보고. 조사 결과 로직 자체는 정상이나 입력 폼 컨테이너가
+화면에 보이지 않아 사용자가 클릭할 수 없는 상태였음.
+
+#### 1️⃣ `.scroll-reveal` 클래스 충돌 (커밋 b0a460c)
+- **증상**: 다이어트 예측 폼 + 메인 페이지의 모든 `.scroll-reveal` 요소가
+  `opacity: 0`으로 영구 비표시. 사용자에게는 "기능이 작동 안 한다"로 보임.
+- **원인**: `spring.css`에 `.scroll-reveal` 정의가 두 군데 존재.
+  - L587(정식): `.scroll-reveal.revealed { opacity: 1 }`
+  - L3500(중복, "Premium Fade-Up"): `.scroll-reveal { opacity: 0 !important }`
+    + `.scroll-reveal.scroll-reveal-active { opacity: 1 !important }`
+  - JS는 `revealed` 클래스를 추가하지만, 후행 정의의 `!important`가
+    정식 규칙을 덮어 element가 영구 투명.
+- **수정**: 중복 블록 삭제 + 재발 방지용 NOTE 주석. 캐시 버스팅
+  `?v=20260330j` → `?v=20260425a`. 6개 HTML 일괄 갱신.
+
+#### 2️⃣ SW 캐시 정합성 + 폼 타임아웃 + 죽은 옵저버 (커밋 729df2c)
+- **SW 캐시 미스**: `sw.js`의 `PRECACHE_ASSETS`는 `/style.min.css`를
+  쿼리 없이 캐싱하지만 HTML은 `?v=20260425a`로 요청 → 항상 cache miss.
+  `cacheKeyFor()` 헬퍼 추가로 `?v=` 쿼리를 정규화한 키로 매칭/저장.
+  `CACHE_NAME` 'kyurim-v3' → 'kyurim-v20260425b'로 갱신 (구 캐시 청소).
+- **폼 fetch 타임아웃 부재**: 5개 랜딩의 상담 폼 fetch에 timeout 없음.
+  Google Apps Script 응답이 지연되면 "전송 중..." 영구 고착. 광고로
+  들어온 사용자의 핵심 액션이라 영향 큼. `AbortController` + 8초
+  타임아웃 + `.finally()`로 복구 통합.
+- **5개 랜딩 인라인 옵저버 dead code**: 인라인 IntersectionObserver가
+  `scroll-reveal-active` 클래스를 추가하지만 위 ① 수정으로 매칭 CSS
+  제거됨 → 무동작. `script.min.js`의 옵저버가 `revealed`로 정상 처리.
+  복붙된 dead 코드 5곳 일괄 제거.
+- **talisman 모달 backdrop click 중복 핸들러**: `script.js:236`과
+  `~L2100`(modal-focus 시스템)에서 동일 backdrop click 핸들러 중복
+  등록 → 외부 클릭 시 두 경로가 모두 닫기 시도. `closeModalWithFocus`
+  를 사용하는 후자만 남기고 전자 제거. ESC 핸들러는 talisman이
+  `openModalWithFocus`를 거치지 않으므로 그대로 유지.
+
+#### 3️⃣ body 페이지 폼 핸들러 추가 (커밋 4b2222e)
+- 체형비대칭 랜딩의 상담 폼이 다른 4개 페이지와 달리 JS 제출 핸들러
+  자체가 없어 submit 시 현재 URL로 GET 리다이렉트만 발생, 데이터가
+  어디에도 전송되지 않던 버그. 다른 페이지와 동일 패턴 + 8초 타임아웃
+  적용. 기존 4페이지의 fetch 타임아웃 작업과 동일한 코드 형태로 통일.
+
+#### 4️⃣ spring.css `.ba-card` 6→2개 정의 통합 (커밋 a9850a6)
+- 동일 셀렉터 6개가 L127, L256, L725, L3810, L3855, L6468에 산재.
+  최종 cascade 결과만 보면 동작하지만 유지보수 시 어느 줄을 고쳐야
+  할지 추적 불가. (방금 `.scroll-reveal`과 동일 패턴이 또 발생할
+  잠재적 핫스팟이었음.)
+- **시행착오**: 처음엔 6개를 1개로 통합했으나, 라이브 컴퓨티드
+  스타일 검증에서 `border` 회귀 발견. 원인은 spring.css L4519의
+  multi-target rule(`.card, .ba-card, .review-card, .step-item, ...`)
+  이 `border: 1px solid !important`로 덮어씀 → 원래는 L6470의
+  `border: none !important`가 그것을 다시 무력화하는 cascade였음.
+- **해결**: 베이스 속성은 L135 통합 블록, `border-radius`/`border`
+  override만 L6460에 별도 분리(L4519보다 뒤에 와야 cascade 승리).
+  주석으로 위치 의존성 명시. 최종 computed style은 변경 없음.
+- **삭제된 dead 정의**: box-shadow / transition / 3D perspective 등은
+  L4519에 의해 cascade 상 가려져 실효성 없던 정의들.
+
+#### 부수
+- **검증 방법**: Vercel 라이브 사이트에서 `getComputedStyle()`로
+  before/after 비교. 특히 `.ba-card` 통합 후 9개 속성이 모두 baseline
+  과 일치하는지 확인.
+- **성능 변화**: spring.min.css 112KB → 110KB (약 2KB 감소,
+  중복 정의 제거 효과).
+- **min 파일 재생성**: terser(script.min.js), clean-css-cli(spring.min.css)
+  npx로 실행. node_modules에는 sharp만 있으므로 향후에도 동일 패턴.
+
+#### 교훈
+- 동일 셀렉터의 중복 정의는 *cascade가 우연히 맞으면* 동작하지만
+  순서·`!important` 조합이 어긋나는 순간 사일런트 비표시 버그가 됨.
+  `.scroll-reveal`과 `.ba-card`가 같은 패턴의 다른 사례.
+- CSS 통합/리팩터 시 grep만으로는 부족. 브라우저에서 실제
+  `getComputedStyle()`로 baseline 측정 → 변경 → 재측정으로 회귀
+  여부 확인 필요. 라이브에서 검증된 baseline 없이 합치면 위험.
+- SW의 `caches.match()`는 query string을 포함한 정확 매칭. 캐시
+  버스팅 쿼리(`?v=...`)와 함께 쓰려면 키 정규화가 필수. 그렇지 않으면
+  precache가 사실상 무용지물.
+
 ### 2026-04-01: 웹페이지 안정성 전수 검토 + 수정 (14건)
 
 #### CRITICAL 수정 (6건)
@@ -418,20 +497,31 @@ kyurim-webpage-main/
 
 ## 추후 개선 검토 사항
 ### 높은 우선순위
-- JS DOMContentLoaded 9개 통합 (현재 분산)
-- IntersectionObserver 9개 통합 (2-3개로)
 - 리뷰 구조화 데이터 (별점 스키마)
 - JS 파일 분리 (main/common/landing)
+- Chart.js 동적 import (메인 페이지에서 다이어트 예측 영역 진입 시에만 로드)
+- 폼 라벨 접근성 (`<label for="...">` 추가, 5개 랜딩)
 
 ### 중간 우선순위
-- !important 440개 감소 (spring.css 셀렉터 특이성 조정)
-- z-index 체계화 (1~999999 산재 → 계층 정리)
-- 모달 포커스 관리
+- !important 잔존 사용 점진 감소 (spring.css 셀렉터 특이성 조정).
+  `.scroll-reveal` / `.ba-card` 사례처럼 동일 셀렉터 중복 + !important 조합은
+  사일런트 비표시 버그로 이어지므로 grep 검사를 정기적으로 권장.
+- z-index 체계화 (1~999999 산재 → 계층 정리, 명백한 충돌 쌍은 미발견 상태)
+- 모달 포커스 관리 (talisman은 `openModalWithFocus`를 거치지 않아 별도 ESC
+  핸들러 유지 중 — `openModalWithFocus`로 일원화하면 ESC 핸들러도 자동 처리)
 - CSS 무한 애니메이션 37개 → 뷰포트 밖 일시정지
+- FontAwesome 풀 번들(~70KB) → 사용 아이콘만 추출
+- JSON-LD `sameAs` 페이지별 블로그 URL 분리 (현재 모두 메인 계정만 가리킴)
 
 ### 낮은 우선순위
-- CSS 통합 (spring.css + style.css)
+- CSS 통합 (spring.css + style.css). 단, `.ba-card` 사례에서 보듯 두 파일에
+  동일 셀렉터가 흩어져 있어 통합 시 cascade 회귀 위험 큼. 라이브
+  `getComputedStyle()` baseline 측정 동반 권장.
 - 4개 랜딩 페이지 템플릿화 (중복 코드 제거)
+- DOMContentLoaded 8개 → 1개 통합. 검토 결과 순수 조직 리팩터로
+  사용자 영향 없음. 각 블록이 별도 IIFE에 스코프되어 통합 시 변수명
+  충돌 위험. 실질 버그였던 talisman 중복 핸들러는 2026-04-25 외과적
+  수정으로 처리 완료.
 
 ### ✅ 완료된 항목
 - ~~접근성: 색상 대비 개선~~ → WCAG AA 준수 완료
@@ -455,3 +545,13 @@ kyurim-webpage-main/
 - ~~HTTP→HTTPS~~ → 카카오톡/네이버톡톡 전 페이지 전환
 - ~~JS 메모리 누수~~ → 티커 setInterval cleanup, Observer disconnect
 - ~~캐시 정책~~ → vercel.json HTML/manifest 캐시, SW v3 .min 파일 참조
+- ~~`.scroll-reveal` 사일런트 비표시 버그~~ (2026-04-25) → 중복 정의 제거,
+  다이어트 예측 폼 정상 노출
+- ~~SW 캐시 미스 (precache 무용)~~ (2026-04-25) → `cacheKeyFor()` 쿼리
+  정규화 + `CACHE_NAME` 동기 버전 갱신
+- ~~5개 랜딩 폼 fetch 타임아웃 부재~~ (2026-04-25) → AbortController 8s
+- ~~body 페이지 폼 핸들러 누락~~ (2026-04-25) → 다른 4페이지와 동일 패턴
+- ~~5개 랜딩 dead 인라인 스크롤 옵저버~~ (2026-04-25) → 일괄 제거
+- ~~talisman 모달 backdrop click 중복 핸들러~~ (2026-04-25) → 중복 제거
+- ~~spring.css `.ba-card` 6개 중복 정의~~ (2026-04-25) → 2개로 통합
+  (베이스 + border 오버라이드, cascade 결과 동일 보존)
