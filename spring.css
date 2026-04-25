@@ -3496,21 +3496,10 @@ body {
     animation: norigaeSway 2s ease-in-out infinite alternate;
 }
 
-/* 3. Scroll Reveal Animations (Premium Fade-Up) */
-.scroll-reveal {
-    opacity: 0 !important;
-    /* Force invisibility initially */
-    transform: translateY(50px);
-    /* Larger movement (30px -> 50px) */
-    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-    /* Slower, smoother easing */
-    will-change: opacity, transform;
-}
-
-.scroll-reveal.scroll-reveal-active {
-    opacity: 1 !important;
-    transform: translateY(0);
-}
+/* NOTE: Do not redefine .scroll-reveal here. The canonical rule (~line 587) uses
+   `.revealed`, which is the class script.js adds. A second definition keyed on
+   `.scroll-reveal-active` with opacity:0!important previously hid the entire
+   diet-prediction container and every other reveal element. */
 
 .delay-100 {
     transition-delay: 0.1s;
