@@ -26,11 +26,11 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <!-- Full CSS (Non-blocking) -->
-    <link rel="stylesheet" href="../../style.min.css?v=20260425a" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="../../spring.min.css?v=20260425a" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../style.min.css?v=20260425b" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../spring.min.css?v=20260425b" media="print" onload="this.media='all'">
     <noscript>
-        <link rel="stylesheet" href="../../style.min.css?v=20260425a">
-        <link rel="stylesheet" href="../../spring.min.css?v=20260425a">
+        <link rel="stylesheet" href="../../style.min.css?v=20260425b">
+        <link rel="stylesheet" href="../../spring.min.css?v=20260425b">
     </noscript>
 
     <!-- Fonts -->
@@ -952,7 +952,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
     <script src="../../skin_mbti.js" defer></script>
     <script src="../../diagnosis.js" defer></script>
-    <script src="../../script.min.js?v=20260425a" defer></script>
+    <script src="../../script.min.js?v=20260425b" defer></script>
 
     <!-- Failsafe Script for Talisman -->
     <script>
@@ -1063,24 +1063,24 @@
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
                 btn.disabled = true;
 
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(form), signal: controller.signal })
                     .then(response => {
+                        clearTimeout(timeoutId);
                         if (!response.ok) throw new Error('Server error');
                         alert('✨ 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
                         form.reset();
-                        btn.innerHTML = originalText;
-                        btn.disabled = false;
-                        isSubmitting = false;
                     })
                     .catch(error => {
-                        console.error('Error!', error.message);
-                        // Fallback for demo mode (if URL is invalid)
-                        if (scriptURL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-                            alert('✨ (데모) 신청 완료되었습니다.\n*실제 작동하려면 구글 스크립트 URL을 설정해주세요.');
-                            form.reset();
-                        } else {
-                            alert('일시적인 오류가 발생했습니다.\n전화(043-224-1075)로 문의해주세요.');
-                        }
+                        clearTimeout(timeoutId);
+                        const msg = error.name === 'AbortError'
+                            ? '서버 응답이 지연되고 있습니다.\n전화(043-224-1075)로 문의해주세요.'
+                            : '일시적인 오류가 발생했습니다.\n전화(043-224-1075)로 문의해주세요.';
+                        alert(msg);
+                    })
+                    .finally(() => {
                         btn.innerHTML = originalText;
                         btn.disabled = false;
                         isSubmitting = false;
@@ -1089,28 +1089,7 @@
         }
     </script>
 
-    <!-- Scroll Animation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('scroll-reveal-active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            const elements = document.querySelectorAll('.scroll-reveal');
-            elements.forEach(el => observer.observe(el));
-        });
-    </script>
+    <!-- Scroll reveal handled by script.min.js (adds .revealed class). -->
     <!-- Removed duplicate script.js -->
     <script>
         function copyAddress() {

@@ -1,8 +1,10 @@
 // Service Worker for 규림한의원 청주점
-const CACHE_NAME = 'kyurim-v3';
+// Bump CACHE_NAME whenever the precached payload should be invalidated.
+const CACHE_NAME = 'kyurim-v20260425b';
 const OFFLINE_URL = '/offline.html';
 
-// Assets to cache on install
+// Assets to cache on install. Listed without the `?v=` query so the
+// fetch handler can match versioned and unversioned requests alike.
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
@@ -11,6 +13,15 @@ const PRECACHE_ASSETS = [
     '/script.min.js',
     '/offline.html'
 ];
+
+// HTML cache-busts assets via `?v=...`. Strip that param when matching the
+// cache so the precached `/style.min.css` answers `/style.min.css?v=xxx`.
+function cacheKeyFor(request) {
+    const url = new URL(request.url);
+    if (!url.searchParams.has('v')) return request;
+    url.searchParams.delete('v');
+    return new Request(url.href, { method: request.method, headers: request.headers });
+}
 
 // Install event - precache assets
 self.addEventListener('install', (event) => {
@@ -51,33 +62,32 @@ self.addEventListener('fetch', (event) => {
     // Skip external requests
     if (!event.request.url.startsWith(self.location.origin)) return;
 
+    const matchKey = cacheKeyFor(event.request);
+
     event.respondWith(
-        caches.match(event.request)
+        caches.match(matchKey)
             .then((cachedResponse) => {
                 if (cachedResponse) {
-                    // Return cached version
                     return cachedResponse;
                 }
 
-                // Fetch from network
                 return fetch(event.request)
                     .then((response) => {
-                        // Don't cache non-successful responses
                         if (!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
                         }
 
-                        // Cache the fetched response
+                        // Store under the normalized key so future versioned
+                        // requests for the same asset hit the cache.
                         const responseToCache = response.clone();
                         caches.open(CACHE_NAME)
                             .then((cache) => {
-                                cache.put(event.request, responseToCache);
+                                cache.put(matchKey, responseToCache);
                             });
 
                         return response;
                     })
                     .catch(() => {
-                        // Return offline page for navigation requests
                         if (event.request.mode === 'navigate') {
                             return caches.match(OFFLINE_URL);
                         }

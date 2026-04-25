@@ -232,14 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Close on backdrop click (check if click is on modal overlay, not content)
-        talismanModal.addEventListener('click', function (e) {
-            if (e.target === talismanModal) {
-                talismanModal.classList.remove('show');
-            }
-        });
+        // Backdrop click handled by the modal focus system (~line 2100) which
+        // also restores the previously focused element. Avoid duplicating it.
 
-        // Close on Escape key
+        // Escape closes the modal. The modal-focus system only attaches its
+        // Escape handler when openModalWithFocus() is used; talisman opens via
+        // classList toggle, so we need our own listener here.
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && talismanModal.classList.contains('show')) {
                 talismanModal.classList.remove('show');
