@@ -1,6 +1,6 @@
 // Service Worker for 규림한의원 청주점
 // Bump CACHE_NAME whenever the precached payload should be invalidated.
-const CACHE_NAME = 'kyurim-v20260425b';
+const CACHE_NAME = 'kyurim-v20260425c';
 const OFFLINE_URL = '/offline.html';
 
 // Assets to cache on install. Listed without the `?v=` query so the

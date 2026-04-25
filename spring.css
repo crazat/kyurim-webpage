@@ -124,19 +124,46 @@ video {
 }
 
 /* BA Card (Before/After) Glassmorphism */
+/* ============================================
+   .ba-card — CONSOLIDATED base rule
+   Merged from former duplicate `.ba-card` blocks that were scattered
+   across the file (~L256, L725, L3810, L3855, L6468). Each property
+   below uses the value that previously won the cascade. Pseudo-class
+   variants (.ba-card:hover, ::after, ::before, :focus, .active, etc.)
+   stay where they were defined; do not duplicate base properties below.
+   ============================================ */
 .ba-card {
+    /* Surface (was L127) */
     background: rgba(255, 255, 255, 0.9) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+
+    /* CSS variables consumed by hover transforms / spotlight overlay
+       (was L725-728 + L3865-3867) */
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --x: 50%;
+    --y: 50%;
+    --spotlight-opacity: 0;
+    transform-style: preserve-3d;
+
+    /* Position + Safari overflow fix for ::after scan effect
+       (was L3810-3820 / L3855-3862) */
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+
+    /* NOTE: border / border-radius / box-shadow / transition for `.ba-card`
+       are deliberately NOT defined here. A multi-target rule at ~L4519
+       (`.card, .ba-card, .review-card, .step-item, ...`) sets them with
+       !important; placing the same properties here would be overridden
+       by that later rule. The "refined" border override remains at the
+       end of this file (originally L6468) to win over L4519's border. */
 }
 
-.ba-card:hover {
-    border-color: rgba(255, 183, 178, 0.6) !important;
-    box-shadow:
-        0 15px 35px rgba(181, 88, 92, 0.2),
-        0 5px 15px rgba(0, 0, 0, 0.08);
-}
+/* `.ba-card:hover` is defined in several later blocks; the !important
+   shadow at ~L4557 wins. The original tiny shadow block here was
+   shadowed by those rules and was removed during consolidation. */
 
 /* Modal Glassmorphism */
 .modal-content,
@@ -253,15 +280,8 @@ video {
 }
 
 /* BA Card enhanced shadows */
-.ba-card {
-    box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.04),
-        0 4px 8px rgba(0, 0, 0, 0.04),
-        0 8px 16px rgba(0, 0, 0, 0.06),
-        0 16px 32px rgba(0, 0, 0, 0.06) !important;
-    transition: all var(--duration-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-}
-
+/* `.ba-card` base shadow + transition consolidated into the canonical
+   block (~L127). Pseudo-class rules below remain. */
 .ba-card:hover {
     box-shadow:
         0 4px 8px rgba(181, 88, 92, 0.08),
@@ -722,13 +742,9 @@ button:disabled,
 }
 
 /* 3D tilt effect for BA cards */
-.ba-card {
-    --tilt-x: 0deg;
-    --tilt-y: 0deg;
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-    transition: transform 0.15s ease-out, box-shadow 0.4s ease !important;
-}
+/* `.ba-card` base 3D tilt vars consolidated into the canonical block
+   (~L127). The perspective transform here was already overridden later
+   by `transform: translateZ(0)` and never applied in practice. */
 
 /* Image inside card */
 .ba-card img {
@@ -3807,22 +3823,8 @@ body[data-page-type] .reservation-toast {
 }
 
 /* 23. Treatment Case Descriptions & Scan Effect */
-.ba-card {
-    position: relative;
-    overflow: hidden;
-    /* Necessary for the scan effect */
-    border-radius: 12px;
-    /* Ensure radius clips the effect */
-    transform: translateZ(0);
-    /* Fix for Safari overflow bug */
-    box-shadow: var(--shadow-md);
-    transition: transform var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
-}
-
-.ba-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
+/* Base `.ba-card` properties consolidated into the canonical block
+   (~L127). The pseudo-element scan effect below stays here. */
 
 /* Scan (Shimmer) Effect */
 .ba-card::after {
@@ -3852,21 +3854,8 @@ body[data-page-type] .reservation-toast {
 }
 
 /* Spotlight Effect (Magnifying Glass) */
-.ba-card {
-    /* Existing properties (merged) */
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    transform: translateZ(0);
-    box-shadow: var(--shadow-md);
-    transition: transform var(--duration-normal) ease, box-shadow var(--duration-normal) ease;
-
-    /* For Spotlight */
-    --x: 50%;
-    --y: 50%;
-    --spotlight-opacity: 0;
-}
-
+/* Base `.ba-card` properties + spotlight CSS variables consolidated
+   into the canonical block (~L127). The ::before overlay stays here. */
 .ba-card::before {
     content: '';
     position: absolute;
@@ -6464,7 +6453,10 @@ footer::before {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* 9. BA Gallery — refined card style */
+/* 9. BA Gallery — refined card style.
+   This block MUST stay after the multi-target `.card, .ba-card, ...` rule
+   (~L4519) so its !important border wins over the 1px coral border that
+   rule sets. Moving it earlier in the file regresses the no-border look. */
 .ba-card {
     border-radius: 12px !important;
     border: none !important;
