@@ -81,7 +81,43 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
-### 2026-04-25: 코드 품질 전수 감사 + 잠복 버그 4종 수정 (4커밋)
+### 2026-04-27 ~ 04-28: 트래킹 도입 + Core Web Vitals 1단계 최적화 (3커밋)
+
+세션 진입 트리거: marketing_bot 쪽에서 자사 inbound 측정 인프라(GSC / Clarity / PageSpeed Insights / Naver Search Advisor)를 붙이는 작업과, PSI 측정 결과 wedding 페이지 CLS 0.80(Critical) 발견.
+
+#### 1️⃣ Microsoft Clarity + GSC + Naver 검증 메타 (커밋 31f8735)
+- **Clarity**: 8개 HTML(index, board, offline, events/{body,diet,pain,skin,wedding}/index)에 프로젝트 `wi91qfvc2f` 추적 스니펫 삽입.
+  - 한프리딕트(`wi8cl6x1gk`)와 별도 프로젝트로 분리. 두 비즈니스 데이터 섞이지 않도록 marketing_bot `secrets.json`에서도 `CLARITY_*`(규림) / `HANPREDICT_CLARITY_*`(한프리딕트) 접두어로 분리.
+- **Search Console verification**: `index.html` `<head>`에 `google-site-verification` meta 추가 → URL prefix `https://kyurim-webpage.vercel.app` 인증 완료.
+- **Naver Search Advisor verification**: `naver-site-verification` meta 추가 → 사이트 등록 + 색인 1-2주 대기.
+- 8개 HTML 모두 동일한 Clarity 스니펫이 들어가지만 검증 meta는 메인 `index.html`에만(루트 도메인 검증).
+
+#### 2️⃣ 이미지 dimensions + 이벤트 배너 WebP (커밋 94cb462, codex)
+- **트리거**: PSI 측정에서 wedding CLS 0.80 (Critical), 메인 0.27 (Poor). LCP는 모바일 16-50초로 별개 이슈.
+- **dimensions 일괄 주입**: 7개 활성 HTML의 모든 `<img>` (281개)에 실제 이미지 크기를 측정해 `width`/`height` 속성 추가. `<picture>` 내부 `<img>`도 모두 포함.
+- **LCP 후보 가속**: 각 페이지 first BA 이미지에 `loading="eager"` + `fetchpriority="high"` + `decoding="async"`. wedding은 `ba_diet_wedding`, diet는 `ba_1` 등.
+- **이벤트 배너 `<picture>` 전환**: wedding의 `event-scroll-container` 배너 4장(긴급구조대 확정 PNG는 7MB) → `<picture><source srcset="*.webp">` 적용. 이미 `assets/26 march wedding/*.webp`는 변환돼 있었지만 `<img src=".png">`가 그대로였던 누락 케이스.
+- **PSI 모바일 측정 결과 (2026-04-28 재측정)**:
+  | 페이지 | LCP | INP | CLS (이전 → 이후) |
+  |---|---:|---:|---|
+  | / (메인) | 19.8s | 531ms | 0.27 → 0.117 |
+  | /events/diet | 15.8s | 160ms | — → 0.017 |
+  | /events/skin | 16.6s | 169ms | — → 0.008 |
+  | /events/body | 15.9s | 265ms | — → 0.007 |
+  | /events/pain | 15.6s | — | — → 0.008 |
+  | **/events/wedding** | 8.9s | 339ms | **0.80 → 0.006** |
+  - **결론**: CLS 전 페이지 Good 진입 (특히 wedding 99% 감소). LCP는 별도 이슈로 잔존 — autoplay video 4개 동시 로드가 진짜 원인 추정.
+
+#### 3️⃣ 1월 이벤트 잔여 자산 + 죽은 이미지 링크 제거 (커밋 03a0baf)
+- **죽은 링크 발견**: codex 커밋 직후 git status에 `26 jan event/` 폴더(14 PNG)와 `event play/` 폴더(6 MP4)가 working tree에서 미커밋 삭제 상태로 남아 있음. origin/main에는 여전히 존재해 vercel은 정상이지만 정리 필요.
+- **HTML 죽은 참조 5건 제거**:
+  - `index.html`: `26 jan event/3 6년 1월 피부이벤트 최종.png`, `26 jan event/4 26년 1월 색소 이벤트.png` (이벤트 캐러셀 중간에 끼어 있던 항목)
+  - `events/skin/index.html`: 동일한 2건 (꼬리 위치)
+  - `events/pain/index.html`: `12 ... 안면비대칭 체형교정` + `13 ... 프리미엄 기프트` 2건이 Special Events 섹션의 전부였어서 **섹션 통째 제거**
+- **폴더 삭제 커밋**: `26 jan event/` 14파일 + `event play/` 6파일 일괄 git rm. 루트 mp4 5개는 `events/pain/index.html`에서 여전히 참조 중이라 보존.
+- **`event play/` 영상은 어디서 참조됐었나**: 모두 `*.backup.html`(역사 보존용, 라우팅 미연결)에만 남아있어 active HTML 영향 0.
+
+
 
 세션 진입 트리거: 사용자가 "메인 홈페이지에서 다이어트 예측 로직이 작동
 안한다"고 보고. 조사 결과 로직 자체는 정상이나 입력 폼 컨테이너가
@@ -426,19 +462,24 @@ kyurim-webpage-main/
 
 ## 영상 파일 목록
 
-### 루트 폴더
+### 루트 폴더 (활성 — `events/pain/index.html`이 `26년 1월 안면비대칭 이벤트 영상.mp4` 참조)
 - `26년 1월 하이엔드 피부공학 영상 3.mp4`
 - `1월 윤곽각술 이벤트 최종.mp4`
 - `26년 브라이덜 이벤트 영상.mp4`
 - `26년 1월 안면비대칭 이벤트 영상.mp4`
 - `5 26년 1월 하이틴 겨울방학 이벤트 영상.mp4`
 
-### event play/ 폴더
+### `event play/` 폴더 — 2026-04-28 삭제 (커밋 03a0baf)
+모든 mp4가 `*.backup.html`에서만 참조돼 active HTML 영향 없음. 삭제된 파일 6개:
 - `10 26년 1월 브라이덜 이벤트 영상 4.mp4`
 - `1월 비대칭 교정 영상.mp4`
 - `26년 1월 투플러스원 이벤트 영상 확정.mp4`
 - `26년 1월 투플러스원 이벤트 영상 확정0.mp4`
 - `급찐급빠 이벤트.mp4`
+- `스킨부스터 이벤트 영상.mp4`
+
+### `26 jan event/` 폴더 — 2026-04-28 삭제 (커밋 03a0baf)
+1월 이벤트 배너 PNG 14개. `26 march {diet,skin,body,wedding}/` 시리즈로 대체됨. active HTML 죽은 참조 5건도 같은 커밋에서 정리.
 
 ## CSS 변수 (spring.css 테마)
 ```css
