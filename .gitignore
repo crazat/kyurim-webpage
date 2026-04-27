@@ -17,3 +17,4 @@ Thumbs.db
 
 # Legacy/temp folders
 legacy/
+*.bak_clarity
