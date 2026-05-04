@@ -107,211 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 16), { passive: true }); // ~60fps
 
-    // --- Cherry Blossom Petal Fall ---
-    const snowContainer = document.getElementById('snow-container');
-    const isMobile = window.innerWidth <= 768;
-    const petalCount = isMobile ? 18 : 30;
-    // CSS classes for animation variants (don't use inline animationName — breaks async CSS loading)
-    const petalVariants = ['', 'petal-v2', 'petal-v3'];
-
-    if (snowContainer) {
-        for (let i = 0; i < petalCount; i++) {
-            createPetal();
-        }
-    }
-
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.classList.add('snowflake');
-
-        // Random animation variant via CSS class (not inline style)
-        const variant = petalVariants[Math.floor(Math.random() * petalVariants.length)];
-        if (variant) petal.classList.add(variant);
-
-        const blossoms = ['🌸', '💮', '🌸'];
-        petal.innerHTML = blossoms[Math.floor(Math.random() * blossoms.length)];
-        petal.style.left = Math.random() * 100 + 'vw';
-
-        // Duration: 9-18s (slower = more graceful)
-        // Use setProperty with !important to override prefers-reduced-motion * rule
-        const duration = isMobile ? Math.random() * 5 + 9 : Math.random() * 9 + 9;
-        petal.style.setProperty('animation-duration', duration + 's', 'important');
-        petal.style.setProperty('animation-iteration-count', 'infinite', 'important');
-
-        // Size: 16-28px desktop, 12-20px mobile
-        const size = isMobile ? Math.random() * 8 + 12 : Math.random() * 12 + 16;
-        petal.style.fontSize = size + 'px';
-
-        // Staggered start: 0-8s
-        petal.style.animationDelay = (Math.random() * 8) + 's';
-
-        snowContainer.appendChild(petal);
-    }
-
-    // --- Spring Floating Decor ---
-    function createFloatingDecor() {
-        const decorContainer = document.getElementById('snow-container'); // Reuse container
-        if (!decorContainer) return;
-
-        // User Request: Spring cherry blossoms
-        const items = ['🌸', '🌺', '🍃'];
-        const item = document.createElement('div');
-        item.classList.add('floating-item');
-
-        const content = items[Math.floor(Math.random() * items.length)];
-        item.innerText = content;
-
-        // Special styling for Spring
-
-        item.style.fontFamily = "'Great Vibes', cursive";
-        item.style.fontWeight = 'bold';
-        item.style.color = '#D4AF37'; // Gold
-        item.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
-
-        // Random Position
-        item.style.left = Math.random() * 90 + 5 + 'vw'; // 5% to 95%
-
-        // Random Size
-        const size = Math.random() * 20 + 30; // 30px to 50px
-        item.style.fontSize = size + 'px';
-
-        // Random Duration
-        const duration = Math.random() * 10 + 20; // 20-30s (Very Slow)
-        item.style.animationDuration = duration + 's';
-
-        // Random Delay
-        item.style.animationDelay = Math.random() * 15 + 's';
-
-        decorContainer.appendChild(item);
-    }
-
-    // Create a few floating items (Reduced count)
-    // for (let i = 0; i < 3; i++) {
-    //    createFloatingDecor();
-    // }
-
-    // --- 1. Wish Lantern Logic ---
-    // (Wish Lantern Logic Removed)
-
-    function createCustomLantern(text) {
-        const decorContainer = document.getElementById('snow-container');
-        if (!decorContainer) return;
-
-        const item = document.createElement('div');
-        item.classList.add('floating-item');
-        item.innerText = '🏮 ' + text;
-        item.style.fontFamily = "'NanumBarunGothic', sans-serif";
-        item.style.fontSize = '20px'; // Smaller text for wish
-        item.style.color = '#FFF';
-        item.style.textShadow = '0 0 5px #D4AF37';
-        item.style.whiteSpace = 'nowrap';
-
-        // Start from bottom center-ish or random
-        item.style.left = Math.random() * 80 + 10 + 'vw';
-        item.style.animationDuration = '20s'; // Slow rise
-        item.style.animationDelay = '0s'; // Immediate
-
-        decorContainer.appendChild(item);
-    }
-
-    // --- 4. Talisman Modal Logic (Prioritized) ---
-    const talismanBtn = document.getElementById('open-talisman-btn');
-    const talismanModal = document.getElementById('talisman-modal');
-    const closeTalisman = document.getElementById('close-talisman');
-
-    if (talismanBtn && talismanModal) {
-        talismanBtn.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent default link behavior if any
-            talismanModal.style.display = ''; // Clear inline block
-            talismanModal.classList.add('show');
-        });
-
-        if (closeTalisman) {
-            closeTalisman.addEventListener('click', function () {
-                talismanModal.classList.remove('show');
-            });
-        }
-
-        // Backdrop click handled by the modal focus system (~line 2100) which
-        // also restores the previously focused element. Avoid duplicating it.
-
-        // Escape closes the modal. The modal-focus system only attaches its
-        // Escape handler when openModalWithFocus() is used; talisman opens via
-        // classList toggle, so we need our own listener here.
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && talismanModal.classList.contains('show')) {
-                talismanModal.classList.remove('show');
-            }
-        });
-    }
-
-
-
-
-    // Initialize
-    window.onload = function () {
-        // startCountdown(); // Assuming this function exists elsewhere
-        // renderCalendar(); // If calendar exists
-        // Initial floating decor is already created above, so no need to call createFloatingDecor() here.
-    };
-
-    // --- 2. Spring Petal Mouse Trail (with Element Pool) ---
-    const petalPool = [];
-    const MAX_PETALS = 50;
-    let activePetals = 0;
-
-    function getPetalFromPool() {
-        if (petalPool.length > 0) {
-            return petalPool.pop();
-        }
-        const dust = document.createElement('div');
-        dust.classList.add('petal-dust');
-        return dust;
-    }
-
-    function returnPetalToPool(dust) {
-        activePetals--;
-        if (petalPool.length < MAX_PETALS) {
-            dust.style.opacity = '0';
-            petalPool.push(dust);
-        } else {
-            dust.remove();
-        }
-    }
-
-    document.addEventListener('mousemove', function (e) {
-        // Skip if page is hidden or too many active petals
-        if (!isPageVisible || activePetals >= MAX_PETALS) return;
-        if (Math.random() > 0.4) return; // Throttle creation (40% chance)
-
-        const dust = getPetalFromPool();
-        dust.style.left = e.clientX + 'px';
-        dust.style.top = e.clientY + 'px';
-        dust.style.opacity = '0.8';
-
-        // Random spring color variation (Pinks, whites)
-        const colors = ['#FFB7B2', '#FFDAC1', '#FF9AA2', '#FFF', '#FFE4E1'];
-        dust.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-        // Random small rotation
-        dust.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`;
-
-        if (!dust.parentElement) {
-            document.body.appendChild(dust);
-        }
-        activePetals++;
-
-        setTimeout(() => {
-            returnPetalToPool(dust);
-        }, 800); // Return after animation
-    });
-
-    // Cleanup petal pool on unload
-    registerCleanup(() => {
-        petalPool.forEach(p => p.remove());
-        petalPool.length = 0;
-    });
-
+    // [Phase 4 cleanup] Removed: Cherry Blossom Petal Fall, Spring Floating Decor,
+    // Wish/Custom Lantern, Talisman Modal Logic, Spring Petal Mouse Trail.
+    // LUXE 디자인은 #snow-container/#talisman-modal/.fortune-cookie-widget를
+    // summer-luxe.css에서 display:none 처리하지만, 생성 코드 자체는 제거.
 
     // --- Original Functionality ---
 
@@ -1393,17 +1192,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Spring Event Countdown Logic
+    // 5. Summer LUXE Event Countdown Logic
     const countdownContainer = document.getElementById('countdown');
     if (countdownContainer) {
-        const targetDate = new Date('April 30, 2026 23:59:59').getTime(); // End of Spring Event
+        const targetDate = new Date('August 31, 2026 23:59:59').getTime(); // End of Summer LUXE Event
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
             if (distance < 0) {
-                countdownContainer.innerHTML = "<h3>따뜻한 봄날 되세요!</h3>";
+                countdownContainer.innerHTML = "<h3>여름의 우아함을 함께 하세요</h3>";
                 if (countdownIntervalId) {
                     clearInterval(countdownIntervalId);
                     countdownIntervalId = null;
@@ -1565,87 +1364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Global Talisman Function (Outside DOMContentLoaded)
-window.openTalismanModal = function () {
-    const modal = document.getElementById('talisman-modal');
-    if (modal) {
-        modal.style.display = 'block';
-        modal.style.zIndex = '20000';
-    } else {
-        alert('팝업을 불러올 수 없습니다. 페이지를 새로고침 해주세요.');
-    }
-}
-
-// --- New Year Special Features JS ---
-
-
-
-// 3. Fortune Cookie Logic
-const fortuneWidget = document.getElementById('fortune-cookie-widget');
-const fortuneMessage = document.getElementById('fortune-message');
-const fortuneText = document.getElementById('fortune-text');
-const fortuneIcon = document.getElementById('fortune-icon');
-const fortuneClose = document.getElementById('fortune-close');
-
-if (fortuneWidget && fortuneMessage && fortuneText && fortuneIcon) {
-    const fortunes = [
-        "2026년, 당신의 모든 꿈이 이루어질 것입니다.",
-        "생각지도 못한 행운이 찾아올 예정입니다!",
-        "건강과 재물, 두 마리 토끼를 잡는 한 해가 됩니다.",
-        "오랫동안 바라던 소식이 곧 들려옵니다.",
-        "주변 사람들에게 사랑받는 행복한 한 해가 될 거예요.",
-        "조금만 더 노력하면 큰 결실을 맺습니다.",
-        "귀인을 만나 새로운 기회가 열립니다.",
-        "걱정하지 마세요, 모든 것이 잘 풀릴 것입니다.",
-        "올해는 당신이 주인공입니다. 자신감을 가지세요!",
-        "작은 기쁨들이 모여 큰 행복을 만드는 해입니다."
-    ];
-
-    let isCracked = false;
-
-    // Close Button Handling
-    if (fortuneClose) {
-        fortuneClose.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent widget click
-            fortuneMessage.classList.remove('show');
-
-            // Reset to closed cookie state
-            setTimeout(() => {
-                fortuneIcon.innerText = "🥠";
-                isCracked = false;
-            }, 300); // Wait for bubble transition
-        });
-    }
-
-    fortuneWidget.addEventListener('click', () => {
-        // If message is pending close or already shown, restart
-
-        if (isCracked) {
-            // New fortune
-            fortuneMessage.classList.remove('show');
-            setTimeout(() => {
-                const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-                fortuneText.innerText = randomFortune; // Update text span only
-                fortuneMessage.classList.add('show');
-            }, 200);
-            return;
-        }
-
-        // Crack Effect
-        fortuneIcon.style.transform = "scale(1.2) rotate(10deg)";
-        setTimeout(() => {
-            fortuneIcon.innerText = "🍪"; // Change to open cookie
-            fortuneIcon.style.transform = "scale(1) rotate(0deg)";
-
-            // Show Message
-            const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-            fortuneText.innerText = randomFortune; // Update text span only
-            fortuneMessage.classList.add('show');
-
-            isCracked = true;
-        }, 100);
-    });
-}
+// [Phase 4 cleanup] Removed: Global openTalismanModal(), Fortune Cookie Logic.
 
 
 // 6. Director's Letter Logic (with duplicate prevention)
@@ -1697,7 +1416,7 @@ document.addEventListener('click', (e) => {
                     <h3>${content.title}</h3>
                     <p>${content.body}</p>
                     <div class="letter-stamp">
-                        대표원장 한정우 드림 🖋️
+                        — 大 院 長 한정우 드림
                     </div>
                 </div>
             </div>
@@ -2097,15 +1816,10 @@ document.addEventListener('DOMContentLoaded', () => {
             storyClose.addEventListener('click', () => closeModalWithFocus(storyModal));
         }
 
-        // Talisman Modal close button
-        const talismanModal = document.getElementById('talisman-modal');
-        const talismanClose = talismanModal ? talismanModal.querySelector('.close-btn, .modal-close') : null;
-        if (talismanClose) {
-            talismanClose.addEventListener('click', () => closeModalWithFocus(talismanModal));
-        }
+        // [Phase 4 cleanup] Removed talisman modal close + backdrop handlers.
 
         // Click outside to close
-        [storyModal, talismanModal].forEach(modal => {
+        [storyModal].forEach(modal => {
             if (!modal) return;
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {

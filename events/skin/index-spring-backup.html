@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no, address=no, email=no"> <!-- Prevent auto-linking -->
-    <meta name="color-scheme" content="light">
-    <title>규림한의원 청주점 | 웨딩 클리닉</title>
-    <meta name="description" content="청주 규림한의원 웨딩 클리닉. D-Day 완벽 준비, 드레스 라인부터 피부 광채까지. 신부를 위한 맞춤 프로그램.">
+    <title>규림한의원 청주점 | 피부 클리닉</title>
+    <meta name="description" content="청주 규림한의원 피부 클리닉. 여드름, 흉터, 리프팅, 스킨부스터. 피부 본연의 재생력을 깨우는 1:1 맞춤 치료.">
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="규림한의원 청주점 | 웨딩 클리닉">
-    <meta property="og:description" content="D-Day 완벽 준비, 드레스 라인부터 피부 광채까지. 신부를 위한 맞춤 프로그램.">
+    <meta property="og:title" content="규림한의원 청주점 | 피부 클리닉">
+    <meta property="og:description" content="여드름, 흉터, 리프팅, 스킨부스터. 피부 본연의 재생력을 깨우는 1:1 맞춤 치료.">
     <meta property="og:image" content="../../assets/interior_1.jpg">
-    <meta property="og:url" content="https://kyurim-webpage.vercel.app/events/wedding">
+    <meta property="og:url" content="https://kyurim-webpage.vercel.app/events/skin">
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
@@ -26,16 +25,12 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <!-- Non-blocking CSS (async load) -->
+    <!-- Full CSS (Non-blocking) -->
     <link rel="stylesheet" href="../../style.min.css?v=20260425c" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="../../spring.min.css?v=20260425c" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="../../summer-luxe.css?v=20260504g" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="../../summer-luxe-events.css?v=20260504g" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="../../style.min.css?v=20260425c">
         <link rel="stylesheet" href="../../spring.min.css?v=20260425c">
-        <link rel="stylesheet" href="../../summer-luxe.css?v=20260504g">
-        <link rel="stylesheet" href="../../summer-luxe-events.css?v=20260504g">
     </noscript>
 
     <!-- Fonts -->
@@ -50,9 +45,6 @@
         /* Critical Rendering CSS */
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Wanted Sans Variable',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#333;background:#FFFDF5;line-height:1.6;overflow-x:hidden}
-        .skip-link{position:absolute;top:-100px;left:50%;transform:translateX(-50%);background:#0A1F2E;color:#FAFAF7;padding:12px 24px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;z-index:100000;transition:top .25s;border:1px solid #C9A876}
-        .skip-link:focus{top:0;outline:none}
-        .gallery-dots,.gallery-dots.many-dots,[class*="gallery-dots"]{display:none!important}
         .skeleton{background:#e0e0e0;border-radius:8px;overflow:hidden;position:relative}
         .skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:shimmer 1.5s infinite}
         @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -124,9 +116,9 @@
             text-shadow: 0 0 1px #dbae00;
         }
 
-        /* Adjust footer padding for 48px bottom bar */
+        /* Adjust footer padding for 56px bottom bar */
         footer {
-            padding-bottom: 58px !important;
+            padding-bottom: 66px !important;
         }
 
         /* Ensure images are visible immediately */
@@ -196,7 +188,7 @@
 
 </head>
 
-<body data-page-type="wedding">
+<body data-page-type="skin">
     <!-- Skip Navigation -->
     <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
 
@@ -205,8 +197,14 @@
         <div class="scroll-progress-bar" id="progressBar"></div>
     </div>
 
+    <!-- CRO 1. Closing Soon Banner (Redesigned) -->
+    <!-- CRO 1. Closing Soon Banner REMOVED -->
+    <!-- 1. Sunrise Opening Animation REMOVED for Landing Page -->
+
     <!-- Snow/Sparkle Container -->
     <div id="snow-container"></div>
+
+    <!-- Event Modal REMOVED -->
 
     <!-- Rich Spring Letter Modal -->
     <div id="talisman-modal" class="modal">
@@ -218,8 +216,9 @@
             <div style="text-align: center; margin-bottom: 20px;">
                 <h2
                     style="color: #FF9AA2; font-family: 'Great Vibes', 'Wanted Sans Variable', sans-serif; font-size: 2.2rem; margin-bottom: 5px; font-weight: bold;">
-                    💒 웨딩 축복 편지 💒</h2>
-                <p style="color: #888; font-size: 1.05rem; letter-spacing: 0.5px; margin-top: 5px;">인생에서 가장 빛나는 날을 위해 준비하세요.</p>
+                    🌸 봄꽃편지 🌸</h2>
+                <p style="color: #888; font-size: 1.05rem; letter-spacing: 0.5px; margin-top: 5px;">올 봄, 당신의 일상에 벚꽃길만
+                    가득하길 바랍니다.</p>
             </div>
 
             <div class="talisman-card"
@@ -228,14 +227,13 @@
                     style="background: #FFFDF5; border-radius: 8px; border: 1px dashed #FF9AA2; padding: 25px 20px; writing-mode: horizontal-tb; flex-direction: column;">
                     <h3
                         style="color: #FF9AA2; font-size: 1.4rem; margin-bottom: 15px; text-align: center; border-bottom: 1px solid #FFDAC1; padding-bottom: 10px; width: 100%; writing-mode: horizontal-tb; letter-spacing: 0;">
-                        가장 아름다운 신부</h3>
+                        피부 속광, 봄을 입다</h3>
                     <p
                         style="font-size: 1.05rem; line-height: 1.8; color: #555; text-align: center; margin-bottom: 15px; word-break: keep-all; display: block;">
-                        결혼식 날, 모든 시선이 당신에게<br>
-                        집중되는 그 순간을 위해,<br><br>
-                        드레스 라인부터 피부 광채까지<br>
-                        완벽하게 준비된 신부가 되도록<br>
-                        규림이 함께하겠습니다.
+                        봄 햇살에 반짝이는 잎새처럼,<br>
+                        고객님의 피부도 화사하게 피어나길 바랍니다.<br><br>
+                        숨겨진 맑고 고운 투명함을 찾아<br>
+                        규림이 아름다운 일상을 선물해드릴게요.
                     </p>
                     <div class="seal"
                         style="margin: 0 auto; border-color: #FF9AA2; color: #FF9AA2; background: transparent; writing-mode: horizontal-tb;">
@@ -244,14 +242,16 @@
             </div>
 
             <div style="background: rgba(226, 240, 203, 0.4); padding: 15px; border-radius: 8px; text-align: center;">
-                <p style="color: #6B8E23; font-weight: bold; margin-bottom: 5px; font-size: 1.1rem;">💐 웨딩 준비 팁 💐</p>
-                <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">D-30부터 시작하는 집중 관리로<br>최상의 컨디션을 만들어보세요!</p>
+                <p style="color: #6B8E23; font-weight: bold; margin-bottom: 5px; font-size: 1.1rem;">🌿 봄맞이 스킨케어 팁 🌿
+                </p>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.5;">봄철 미세먼지와 자외선 차단에 유의하시고<br>충분한 피부 보습으로 화사함을
+                    유지하세요!</p>
             </div>
 
             <button class="btn"
                 style="margin-top: 20px; width: 100%; background: linear-gradient(135deg, #FF9AA2, #FFB7B2); border: none; padding: 15px; font-size: 1.1rem; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; box-shadow: 0 4px 10px rgba(255,154,162,0.3);"
-                onclick="document.getElementById('close-talisman').click(); window.location.href='#quick-inquiry';">💒
-                웨딩 프로그램 신청</button>
+                onclick="document.getElementById('close-talisman').click(); window.location.href='#quick-inquiry';">🌸
+                특가 스킨케어 신청</button>
         </div>
     </div>
 
@@ -281,6 +281,7 @@
         </div>
     </nav>
 
+    
 
     <!-- Main Content Anchor -->
     <div id="main-content"></div>
@@ -294,125 +295,194 @@
                 <div class="line"></div>
                 <p class="subtitle">규림한의원의 놀라운 변화를 확인하세요.</p>
             </div>
-
             <!-- Image Gallery -->
             <div class="gallery-wrapper">
                 <button class="scroll-btn prev" aria-label="이전 치료 사례 보기"><i
                         class="fa-solid fa-chevron-left"></i></button>
                 <div class="ba-gallery-grid">
-                    <!-- 1. 웨딩 다이어트 -->
+                    <!-- Prioritized Saesalchim Cases -->
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_diet_wedding.webp" type="image/webp">
-  <img src="../../assets/ba_diet_wedding.png" alt="웨딩 다이어트 전후" loading="eager" width="1024" height="1084" fetchpriority="high" decoding="async">
+  <source srcset="../../assets/ba_6.webp" type="image/webp">
+  <img src="../../assets/ba_6.png" alt="치료 사례 6" loading="lazy" width="571" height="1096">
 </picture>
                         <div class="ba-desc">
-                            <h4>D-30 웨딩 라인 관리</h4>
-                            <p>급속 감량 + 드레스 라인</p>
-                        </div>
-                    </div>
-                    <!-- 2. 숨은 등살 & 브라 라인 -->
-                    <div class="ba-card skeleton">
-                        <picture>
-  <source srcset="../../assets/ba_diet_back_fat.webp" type="image/webp">
-  <img src="../../assets/ba_diet_back_fat.png" alt="등살 전후" loading="lazy" width="1024" height="1105">
-</picture>
-                        <div class="ba-desc">
-                            <h4>숨은 등살 & 브라 라인</h4>
-                            <p>심부 온열 + 해독 다이어트</p>
-                        </div>
-                    </div>
-                    <!-- 3. 러브핸들 & 뱃살 삭제 -->
-                    <div class="ba-card skeleton">
-                        <picture>
-  <source srcset="../../assets/ba_diet_side_flank.webp" type="image/webp">
-  <img src="../../assets/ba_diet_side_flank.png" alt="옆구리 전후" loading="lazy" width="1024" height="1105">
-</picture>
-                        <div class="ba-desc">
-                            <h4>러브핸들 & 뱃살 삭제</h4>
-                            <p>라인 매선 + 체형 교정</p>
-                        </div>
-                    </div>
-                    <!-- 4. 하체 비만(승마살) 탈출 -->
-                    <div class="ba-card skeleton">
-                        <picture>
-  <source srcset="../../assets/ba_diet_thigh_k.webp" type="image/webp">
-  <img src="../../assets/ba_diet_thigh_k.png" alt="하체 비만 전후" loading="lazy" width="1024" height="1105">
-</picture>
-                        <div class="ba-desc">
-                            <h4>하체 비만(승마살) 탈출</h4>
-                            <p>지방분해 약침 + 순환 한약</p>
-                        </div>
-                    </div>
-                    <!-- 나머지 사례들 -->
-                    <div class="ba-card skeleton">
-                        <picture>
-  <source srcset="../../assets/ba_diet_arm_k.webp" type="image/webp">
-  <img src="../../assets/ba_diet_arm_k.png" alt="팔뚝살 전후" loading="lazy" width="1024" height="1084">
-</picture>
-                        <div class="ba-desc">
-                            <h4>팔뚝살/브라라인 정리</h4>
-                            <p>산삼 비만 약침 10회</p>
+                            <h4>복합 흉터 치료 (여성)</h4>
+                            <p>새살침 코라테라피 + 쥬베룩</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_1.webp" type="image/webp">
-  <img src="../../assets/ba_1.png" alt="치료 사례 1" loading="lazy" width="571" height="1096">
+  <source srcset="../../assets/ba_7.webp" type="image/webp">
+  <img src="../../assets/ba_7.png" alt="치료 사례 7" loading="lazy" width="686" height="1105">
 </picture>
                         <div class="ba-desc">
-                            <h4>대사질환/고도비만 극복</h4>
-                            <p>6개월 -20kg (당뇨/혈압 개선)</p>
+                            <h4>난치성 흉터 재생 (여성)</h4>
+                            <p>MTS + 고주파 + 재생 앰플</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_2.webp" type="image/webp">
-  <img src="../../assets/ba_2.png" alt="치료 사례 2" loading="lazy" width="571" height="1096">
+  <source srcset="../../assets/ba_8.webp" type="image/webp">
+  <img src="../../assets/ba_8.png" alt="치료 사례 8" loading="lazy" width="571" height="1096">
 </picture>
                         <div class="ba-desc">
-                            <h4>셀룰라이트/탄력 개선</h4>
-                            <p>지방분해 + 콜라겐 매선</p>
+                            <h4>붉은 자국 & 흉터 (여성)</h4>
+                            <p>약침 치료 + 천연 필링</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_3.webp" type="image/webp">
-  <img src="../../assets/ba_3.png" alt="치료 사례 3" loading="lazy" width="571" height="1096">
+  <source srcset="../../assets/ba_9.webp" type="image/webp">
+  <img src="../../assets/ba_9.png" alt="치료 사례 9" loading="lazy" width="571" height="1096">
 </picture>
                         <div class="ba-desc">
-                            <h4>갱년기 나잇살 관리</h4>
-                            <p>호르몬 밸런스 + 순환 한약</p>
+                            <h4>남성 심부 흉터 치료</h4>
+                            <p>새살침 + 고농도 성장인자(EGF)</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_diet_new_1.webp" type="image/webp">
-  <img src="../../assets/ba_diet_new_1.png" alt="다이어트 치료 전후" loading="lazy" width="1024" height="1105">
+  <source srcset="../../assets/ba_10.webp" type="image/webp">
+  <img src="../../assets/ba_10.png" alt="치료 사례 10" loading="lazy" width="571" height="1096">
 </picture>
                         <div class="ba-desc">
-                            <h4>고도비만 집중 감량</h4>
-                            <p>3개월 -15kg (체지방 위주)</p>
+                            <h4>박스형 흉터 개선 (남성)</h4>
+                            <p>새살침 + 프락셔널 고주파</p>
+                        </div>
+                    </div>
+
+                    <!-- Existing Cases -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_new_1.webp" type="image/webp">
+  <img src="../../assets/ba_skin_new_1.png" alt="여드름 치료 전후" loading="lazy" width="1024" height="1105">
+</picture>
+                        <div class="ba-desc">
+                            <h4>여드름 흉터/붉은기 개선</h4>
+                            <p>새살침 5회 + 진정 관리</p>
+                        </div>
+                    </div>
+                    <!-- New Anti-aging Cases -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_lifting_k.webp" type="image/webp">
+  <img src="../../assets/ba_skin_lifting_k.png" alt="턱선 리프팅 전후" loading="lazy" width="1024" height="1084">
+</picture>
+                        <div class="ba-desc">
+                            <h4>무너진 턱선/불독살 리프팅</h4>
+                            <p>매선 40샷 + 정안침</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_diet_full_k.webp" type="image/webp">
-  <img src="../../assets/ba_diet_full_k.png" alt="전신 감량 전후" loading="lazy" width="1024" height="1084">
+  <source srcset="../../assets/ba_skin_wrinkle_k.webp" type="image/webp">
+  <img src="../../assets/ba_skin_wrinkle_k.png" alt="팔자주름 개선 전후" loading="lazy" width="1024" height="1105">
 </picture>
                         <div class="ba-desc">
-                            <h4>전신 대사 다이어트</h4>
-                            <p>4개월 -22kg (요요 방지)</p>
+                            <h4>깊은 팔자주름 귀족침</h4>
+                            <p>귀족 약침 + 채움 매선</p>
                         </div>
                     </div>
                     <div class="ba-card skeleton">
                         <picture>
-  <source srcset="../../assets/ba_diet_add_1.webp" type="image/webp">
-  <img src="../../assets/ba_diet_add_1.png" alt="산후 다이어트 전후" loading="lazy" width="1024" height="1084">
+  <source srcset="../../assets/ba_skin_neck_k.webp" type="image/webp">
+  <img src="../../assets/ba_skin_neck_k.png" alt="목주름 개선 전후" loading="lazy" width="1024" height="1105">
 </picture>
                         <div class="ba-desc">
-                            <h4>산후 비만/붓기 관리</h4>
-                            <p>산후 보약 + 체형 교정</p>
+                            <h4>가로 목주름/탄력 개선</h4>
+                            <p>목 주름 침 + 재생 앰플</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_glow_k.webp" type="image/webp">
+  <img src="../../assets/ba_skin_glow_k.png" alt="피부 탄력 개선 전후" loading="lazy" width="1024" height="1084">
+</picture>
+                        <div class="ba-desc">
+                            <h4>속건조 해결 물광 리프팅</h4>
+                            <p>물광 약침 + 고주파 관리</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_eye_k.webp" type="image/webp">
+  <img src="../../assets/ba_skin_eye_k.png" alt="눈가 주름 개선 전후" loading="lazy" width="1024" height="1105">
+</picture>
+                        <div class="ba-desc">
+                            <h4>눈가 주름/눈밑 지방 개선</h4>
+                            <p>아이 매선 + 콜라겐 재생</p>
+                        </div>
+                    </div>
+                    <!-- Additional 5 Cases (Generated) -->
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_add_1.webp" type="image/webp">
+  <img src="../../assets/ba_skin_add_1.png" alt="기미 잡티 치료 전후" loading="lazy" width="1024" height="1105">
+</picture>
+                        <div class="ba-desc">
+                            <h4>기미/잡티/색소 삭제</h4>
+                            <p>트리플 토닝 + 미백 약침</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_add_2.webp" type="image/webp">
+  <img src="../../assets/ba_skin_add_2.png" alt="패인 흉터 치료 전후" loading="lazy" width="1024" height="1084">
+</picture>
+                        <div class="ba-desc">
+                            <h4>깊게 패인 흉터(아이스픽)</h4>
+                            <p>새살침 집중 케어</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_add_3.webp" type="image/webp">
+  <img src="../../assets/ba_skin_add_3.png" alt="안면홍조 치료 전후" loading="lazy" width="1024" height="1084">
+</picture>
+                        <div class="ba-desc">
+                            <h4>안면홍조 & 열감 개선</h4>
+                            <p>냉각 재생 + 청열 약침</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_add_4.webp" type="image/webp">
+  <img src="../../assets/ba_skin_add_4.png" alt="민감성 피부 치료 전후" loading="lazy" width="1024" height="1084">
+</picture>
+                        <div class="ba-desc">
+                            <h4>민감성/뒤집어진 피부</h4>
+                            <p>장벽 강화 + 진정 관리</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_add_5.webp" type="image/webp">
+  <img src="../../assets/ba_skin_add_5.png" alt="이중턱 치료 전후" loading="lazy" width="1024" height="1105">
+</picture>
+                        <div class="ba-desc">
+                            <h4>이중턱/턱밑살 삭제</h4>
+                            <p>윤곽 약침 + 브이 매선</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_hair_female.webp" type="image/webp">
+  <img src="../../assets/ba_skin_hair_female.png" alt="여성 탈모 치료 전후" loading="lazy" width="571" height="1096">
+</picture>
+                        <div class="ba-desc">
+                            <h4>여성 탈모 정수리 밀도 보강</h4>
+                            <p>두피 약침 + 발모 한약</p>
+                        </div>
+                    </div>
+                    <div class="ba-card skeleton">
+                        <picture>
+  <source srcset="../../assets/ba_skin_hair_male.webp" type="image/webp">
+  <img src="../../assets/ba_skin_hair_male.png" alt="남성 탈모 치료 전후" loading="lazy" width="580" height="937">
+</picture>
+                        <div class="ba-desc">
+                            <h4>남성 M자 탈모 치료</h4>
+                            <p>약침 10회 + 생활 습관 교정</p>
                         </div>
                     </div>
                 </div>
@@ -421,59 +491,60 @@
             </div>
 
             <div class="ba-action">
-                <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-outline">
+                <a href="https://blog.naver.com/crazat7" target="_blank" class="btn btn-outline">
                     더 많은 치료 사례 보러가기 (블로그) <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Video Section (Wedding) - 모든 비디오 즉시 로드 -->
+    <!-- Video Section (Skin) - 모든 비디오 즉시 로드 -->
     <section class="section video-section" style="padding: 40px 0 0 0;">
         <div class="container"
             style="text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center;">
             <video autoplay muted loop playsinline preload="auto"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20wedding/ComfyUI_00246_.mp4" type="video/mp4">
+                <source src="../../assets/26%20march%20skin/ComfyUI_00210_.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20wedding/ComfyUI_00249_.mp4" type="video/mp4">
+                <source src="../../assets/26%20march%20skin/ComfyUI_00191_.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20wedding/ComfyUI_00255_.mp4" type="video/mp4">
+                <source src="../../assets/26%20march%20skin/ComfyUI_00195_.mp4" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline preload="none"
                 style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <source src="../../assets/26%20march%20wedding/ComfyUI_00260_.mp4" type="video/mp4">
+                <source src="../../assets/26%20march%20skin/ComfyUI_00207_.mp4" type="video/mp4">
             </video>
         </div>
     </section>
 
+<!-- Hero Section -->
     <!-- Hero Section REMOVED -->
 
-    <!-- Moved Events Section -->
-    <section id="events" class="section events scroll-reveal">
+    <!-- Event Section (Skin Only) -->
+    <section id="skin-events" class="section scroll-reveal">
         <div class="container">
             <div class="section-header">
                 <h3>Special Events</h3>
-                <h2>진행 중인 웨딩 이벤트</h2>
+                <h2>진행 중인 피부 이벤트</h2>
                 <div class="line"></div>
-                <p class="subtitle">규림한의원 청주점만의 특별한 웨딩 혜택.</p>
-            </div>
+                <p class="subtitle">규림한의원 청주점만의 특별한 피부 혜택.</p>
+                </div>
             <div class="event-scroll-container">
                 <div class="event-item">
-                    <picture><source srcset="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%20%ED%99%95%EC%A0%95.webp" type="image/webp"><img src="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%20%ED%99%95%EC%A0%95.png" alt="긴급구조대 이벤트" loading="lazy" width="1536" height="2752"></picture>
+                    <picture><source srcset="../../assets/26 march skin/새살채움프리테스트 확정.webp" type="image/webp"><img src="../../assets/26 march skin/새살채움프리테스트 확정.png" alt="새살채움 프리테스트" loading="lazy" width="768" height="1376"></picture>
                 </div>
                 <div class="event-item">
-                    <picture><source srcset="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%202%EC%88%9C%EC%9C%84%20.webp" type="image/webp"><img src="../../assets/26%20march%20wedding/%EA%B8%B4%EA%B8%89%EA%B5%AC%EC%A1%B0%EB%8C%80%202%EC%88%9C%EC%9C%84%20.png" alt="긴급구조대 2순위 이벤트" loading="lazy" width="768" height="1376"></picture>
+                    <picture><source srcset="../../assets/26 march skin/여드름관리 체험 확정.webp" type="image/webp"><img src="../../assets/26 march skin/여드름관리 체험 확정.png" alt="여드름관리 체험" loading="lazy" width="768" height="1376"></picture>
                 </div>
                 <div class="event-item">
-                    <picture><source srcset="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC%20%ED%99%95%EC%A0%95.webp" type="image/webp"><img src="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC%20%ED%99%95%EC%A0%95.png" alt="웨딩올킬 이벤트" loading="lazy" width="768" height="1376"></picture>
+                    <picture><source srcset="../../assets/26 march skin/4주 포토샵 확정.webp" type="image/webp"><img src="../../assets/26 march skin/4주 포토샵 확정.png" alt="4주 포토샵" loading="lazy" width="768" height="1376"></picture>
                 </div>
                 <div class="event-item">
-                    <picture><source srcset="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC2.webp" type="image/webp"><img src="../../assets/26%20march%20wedding/%EC%9B%A8%EB%94%A9%EC%98%AC%ED%82%AC2.png" alt="웨딩올킬2 이벤트" loading="lazy" width="768" height="1376"></picture>
+                    <picture><source srcset="../../assets/26 march skin/흉터 모공 하이엔드 확정.webp" type="image/webp"><img src="../../assets/26 march skin/흉터 모공 하이엔드 확정.png" alt="흉터 모공 하이엔드" loading="lazy" width="768" height="1376"></picture>
                 </div>
             </div>
         </div>
@@ -483,29 +554,29 @@
     <section class="section comparison-section">
         <div class="container">
             <div class="section-header">
-                <h3>Why Kyurim Wedding?</h3>
-                <h2>왜 규림 웨딩 클리닉인가요?</h2>
+                <h3>Why Kyurim?</h3>
+                <h2>왜 규림한의원인가요?</h2>
                 <div class="line"></div>
-                <p class="subtitle">인생에서 가장 빛나는 날을 위한 완벽 준비.</p>
+                <p class="subtitle">같은 피부 고민이라도 결과가 다른 이유</p>
             </div>
             <div class="comparison-container">
                 <!-- Competitor -->
                 <div class="comparison-card competitor">
-                    <h3>일반 웨딩케어</h3>
+                    <h3>일반 공장형 클리닉</h3>
                     <ul class="comparison-list">
-                        <li><strong>단순 체중 감량</strong><br>무리한 다이어트로 피부 트러블 발생</li>
-                        <li><strong>획일적 관리</strong><br>개인 체형과 드레스 라인 고려 부족</li>
-                        <li><strong>짧은 효과</strong><br>결혼식 직후 요요 현상 발생</li>
+                        <li><strong>기계적 상담</strong><br>실장 위주의 빠른 상담과 티켓팅 유도</li>
+                        <li><strong>획일화된 시술</strong><br>개인 피부 특성 고려 없는 공장식 레이저</li>
+                        <li><strong>겉만 치료</strong><br>일시적인 증상 완화에 그치는 경우가 많음</li>
                     </ul>
                 </div>
                 <!-- Kyurim -->
                 <div class="comparison-card kyurim">
-                    <div class="badge">BRIDAL SIGNATURE</div>
+                    <div class="badge">PREMIUM CARE</div>
                     <h3>규림한의원 청주점</h3>
                     <ul class="comparison-list">
-                        <li><strong>토탈 브라이덜 케어</strong><br>체형 + 피부 + 컨디션 동시 관리</li>
-                        <li><strong>드레스 라인 맞춤</strong><br>등/팔뚝/턱선 등 노출 부위 집중 케어</li>
-                        <li><strong>D-Day 컨디션 최적화</strong><br>붓기 제로 + 피부 광채 + 최상의 컨디션</li>
+                        <li><strong>원장님 1:1 정밀 진단</strong><br>피부 타입, 체질, 생활 습관까지 심층 분석</li>
+                        <li><strong>맞춤형 복합 치료</strong><br>피부 겉은 물론 속(내부)의 문제까지 동시 해결</li>
+                        <li><strong>근본적 개선</strong><br>재발을 방지하고 피부 본연의 자생력 강화</li>
                     </ul>
                 </div>
             </div>
@@ -513,13 +584,13 @@
     </section>
 
     <!-- CRO 4. Quick Inquiry Form (Redesigned & Google Connected) -->
-    <section id="quick-inquiry" class="quick-inquiry-section scroll-reveal">
+    <section class="quick-inquiry-section scroll-reveal">
         <div class="quick-inquiry-box">
-            <h3>💒 간편 무료상담 신청</h3>
+            <h3> 간편 무료상담 신청</h3>
             <p>연락처를 남겨주시면 상담원이<br>친절하게 안내해드립니다.</p>
 
             <form name="submit-to-google-sheet" class="inquiry-form">
-                <input type="hidden" name="페이지" value="웨딩">
+                <input type="hidden" name="페이지" value="피부">
                 <input type="text" name="성함" placeholder="성함 (선택)" maxlength="10">
                 <input type="tel" name="연락처" placeholder="010-1234-5678" required>
                 <button type="submit">
@@ -528,6 +599,10 @@
             </form>
         </div>
     </section>
+
+
+    <!-- Event Section (Skin Only) -->
+
 
     <!-- Director Section -->
     <section id="about" class="section about">
@@ -551,9 +626,7 @@
                         <li>경희대학교 한의과대학 한의학석사</li>
                         <li>한방비만학회 정회원</li>
                         <li>대한한의임상피부과학회 정회원</li>
-                        <li>대한스포츠한의학회 정회원</li>
-                        <li>응용근신경학회 정회원</li>
-                        <li>척추신경추나의학회 정규과정 및 심화과정 수료</li>
+                        <li>대한통합레이저의학회 정회원</li>
                         <li>(주) 한프리딕트 대표 엔지니어 (AI 스타트업)</li>
                         <li>AI 경진대회 우승자 (2025)</li>
                     </ul>
@@ -566,7 +639,7 @@
         </div>
     </section>
 
-    <!-- Specialties Section (Focused on Wedding) -->
+    <!-- Specialties Section (Focused on Skin) -->
     <section id="specialties" class="section specialties">
         <div class="container">
             <div class="section-header">
@@ -577,14 +650,33 @@
             <div class="grid-4">
                 <div class="card" style="grid-column: span 4; max-width: 400px; margin: 0 auto;">
                     <div class="icon-box">
-                        <i class="fa-solid fa-ring"></i>
+                        <i class="fa-solid fa-spa"></i>
                     </div>
-                    <h3>웨딩 클리닉</h3>
-                    <p>드레스 라인 + 피부 광채 + 컨디션 관리<br>D-Day를 위한 토탈 브라이덜 케어</p>
+                    <h3>피부 (미용/질환)</h3>
+                    <p>여드름, 흉터, 리프팅 등<br>피부 본연의 재생력을 깨우는 치료</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Self-Diagnosis Section (Skin Default) -->
+
+    <!-- Skin MBTI Section -->
+    <section id="skin-mbti" class="section skin-mbti" style="background-color: #fdfbf7;">
+        <div class="container">
+            <div class="section-header">
+                <h3>Skin MBTI</h3>
+                <h2>피부 MBTI 자가진단</h2>
+                <div class="line"></div>
+                <p class="subtitle">내 피부 성격은? 1분 만에 확인해보세요.</p>
+            </div>
+            <div id="skin-mbti-container">
+                <!-- Content injected by skin_mbti.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Diet Prediction Section REMOVED -->
 
     <!-- Treatment Process Section -->
     <section id="process" class="section process">
@@ -605,25 +697,25 @@
                 <div class="step-item fade-in delay-1">
                     <div class="step-icon"><i class="fa-solid fa-scale-balanced"></i></div>
                     <h4>02. 검사</h4>
-                    <p>인바디, 체형 분석 등<br>정밀 검사 진행</p>
-                </div>
+                    <p>피부 진단기 측정<br>및 정밀 분석</p>
+                    </div>
                 <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                 <div class="step-item fade-in delay-2">
                     <div class="step-icon"><i class="fa-solid fa-user-doctor"></i></div>
                     <h4>03. 원장님 상담</h4>
-                    <p>D-Day 일정 기반<br>1:1 심층 상담</p>
+                    <p>검사 결과 기반<br>1:1 심층 상담</p>
                 </div>
                 <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                 <div class="step-item fade-in delay-3">
                     <div class="step-icon"><i class="fa-solid fa-bed-pulse"></i></div>
                     <h4>04. 맞춤 치료</h4>
-                    <p>체형+피부+컨디션<br>토탈 브라이덜 케어</p>
+                    <p>피부 타입에 맞는<br>최적의 치료 시행</p>
                 </div>
                 <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                 <div class="step-item fade-in delay-4">
                     <div class="step-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
-                    <h4>05. D-Day 관리</h4>
-                    <p>결혼식 직전 최종<br>붓기 제거 + 광채 케어</p>
+                    <h4>05. 사후 관리</h4>
+                    <p>치료 후 경과 확인<br>및 홈케어 코칭</p>
                 </div>
             </div>
         </div>
@@ -633,9 +725,9 @@
     <section class="letter-section scroll-reveal">
         <div class="container">
             <div class="letter-trigger-card">
-                <div class="letter-icon">💌</div>
+                <div class="letter-icon"></div>
                 <h3 style="font-size:1.2rem; font-weight:bold; margin-bottom:5px;">원장님이 보내는 비밀 편지</h3>
-                <p style="color:#666; font-size:0.9rem;">결혼을 앞둔 당신께 꼭 드리고 싶은 말씀이 있습니다.<br>터치해서 확인해보세요.</p>
+                <p style="color:#666; font-size:0.9rem;">피부 고민으로 지친 당신께 드리고 싶은 진심입니다.<br>터치해서 확인해보세요.</p>
             </div>
         </div>
     </section>
@@ -647,8 +739,8 @@
                 <h3>Real Reviews</h3>
                 <h2>생생 치료 후기</h2>
                 <div class="line"></div>
-                <p class="subtitle">규림한의원과 함께 건강한 아름다움을 찾은 분들의 이야기입니다.</p>
-            </div>
+                <p class="subtitle">규림한의원과 함께 맑은 피부를 되찾은 분들의 이야기입니다.</p>
+                </div>
             <div class="review-carousel-container">
                 <div class="review-carousel">
                     <!-- Reviews will be injected via JS -->
@@ -684,7 +776,7 @@
   <source srcset="../../assets/interior_3.webp" type="image/webp">
   <img src="../../assets/interior_3.jpg" alt="병원 내부 3" loading="lazy" width="682" height="1024">
 </picture>
-                </div>
+                    </div>
                 <div class="interior-item">
                     <picture>
   <source srcset="../../assets/interior_4.webp" type="image/webp">
@@ -712,7 +804,7 @@
                     <h3>Kyurim's Story</h3>
                     <h2>규림한의원 공식 블로그</h2>
                     <p>한정우 원장의 진료 일기, 건강 정보, 그리고 병원 소식을<br>블로그에서 가장 먼저 만나보세요.</p>
-                    <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary">
+                    <a href="https://blog.naver.com/crazat7" target="_blank" class="btn btn-primary">
                         <i class="fa-solid fa-n"></i> 블로그 방문하기
                     </a>
                 </div>
@@ -741,6 +833,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Fortune Cookie Widget REMOVED -->
 
     <!-- Contact Section -->
     <section id="contact" class="section contact">
@@ -782,7 +876,7 @@
                             style="background-color: #E1306C; border-color: #E1306C; color: white;">
                             <i class="fa-brands fa-instagram"></i> 인스타그램
                         </a>
-                        <a href="https://blog.naver.com/eliteacu" target="_blank" class="btn btn-primary"
+                        <a href="https://blog.naver.com/crazat7" target="_blank" class="btn btn-primary"
                             style="background-color: #2DB400; border-color: #2DB400; color: white;">
                             <i class="fa-solid fa-blog"></i> 블로그 바로가기
                         </a>
@@ -857,8 +951,9 @@
         </div>
     </div>
 
+    <!-- Performance: Removed Chart.js (unused), html2canvas deferred -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../../skin_mbti.js" defer></script>
     <script src="../../diagnosis.js" defer></script>
     <script src="../../script.min.js?v=20260425c" defer></script>
 
@@ -868,22 +963,57 @@
             var modal = document.getElementById('talisman-modal');
             if (modal) {
                 modal.style.display = 'block';
-                modal.style.opacity = '1';
-                modal.classList.add('show');
-                modal.style.zIndex = '2147483647';
+                modal.style.opacity = '1'; /* Force Visibility */
+                modal.classList.add('show'); /* Add show class just in case */
+                modal.style.zIndex = '2147483647'; // Max Z-Index
             } else {
                 alert('Talisman Modal Not Found in DOM');
             }
         };
 
+        // Also re-attach event listener just in case
         document.addEventListener('DOMContentLoaded', function () {
             var btn = document.getElementById('open-talisman-btn');
             if (btn) {
                 btn.onclick = window.openTalismanModal;
-                btn.setAttribute('data-tooltip', '💒 행복한 결혼 준비하세요!');
+                btn.setAttribute('data-tooltip', ' 따뜻한 봄날 되세요!'); // Add Tooltip dynamically
             }
         });
     </script>
+    <!-- Removed duplicate skin_mbti.js -->
+
+    <!-- AI Sticky Rolling Ticker (Skin Page) -->
+    <div class="ai-ticker-sticky-rolling">
+        <div class="ticker-container-inner">
+            <div class="ticker-content">
+                <div class="ticker-item active"><span class="live-indicator"></span><strong>[흉터복원]</strong> "프락셀 10번보다
+                    <strong>'새살침'</strong> 1번이 낫습니다. 흉터, 깎지 말고 살이 차오르게 하세요."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[여드름]</strong> "약 먹을 때만 잠잠한가요? 일시적
+                    억제가 아닌 <strong>'체질 개선'</strong>으로 재발을 끊어야 합니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[동안리프팅]</strong> "당기기만 하면 부자연스럽습니다.
+                    <strong>'매선'</strong>으로 속을 채워 자연스런 볼륨을 만드세요."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[안면홍조]</strong> "화장으로 가려도 붉은 기는
+                    그대로? 상열하한 <strong>'열 밸런스'</strong>를 맞춰야 잡힙니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[등/가슴]</strong> "보이지 않는 곳이라고 방치하나요?
+                    <strong>'약초필링'</strong>으로 매끈한 바디 피부를 완성하세요."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[자국케어]</strong> "붉고 검은 여드름 자국, 시간이
+                    약이 아닙니다. <strong>'색소 침착'</strong> 남기 전에 지우세요."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[모공축소]</strong> "늘어진 모공, 쪼인다고 될까요?
+                    탄력 섬유를 재생시켜 <strong>'쫀쫀하게'</strong> 만듭니다."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[신부관리]</strong> "생애 가장 빛나는 날, 자극은
+                    NO. 속부터 맑게 빛나는 <strong>'물광 한방 케어'</strong>."</div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[아토피]</strong> "스테로이드의 굴레에서 벗어나세요.
+                    <strong>'면역력'</strong>을 높여 스스로 이겨내는 힘을 기릅니다."
+                </div>
+                <div class="ticker-item"><span class="live-indicator"></span><strong>[스킨부스터]</strong> "아픈 주사는 그만. 내 피부에
+                    꼭 맞는 영양분만 <strong>'진피층까지'</strong> 직접 전달합니다."</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Sticky Bottom Bar -->
     <div class="sticky-bottom-bar">
         <a href="tel:043-224-1075" class="sticky-btn call highlight-anim">
@@ -906,24 +1036,9 @@
         </a>
     </div>
 
-    <!-- AI Sticky Rolling Ticker (Wedding Page) -->
-    <div class="ai-ticker-sticky-rolling">
-        <div class="ticker-container-inner">
-            <div class="ticker-content">
-                <div class="ticker-item active"><span class="live-indicator"></span><strong>[드레스핏]</strong> "드레스 입을 때 삐져나오는 등살/팔뚝, <strong>'D-30 집중 케어'</strong>로 완벽한 라인을 만드세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[피부광채]</strong> "결혼식 날 조명 아래 빛나는 피부, <strong>'물광 약침'</strong>으로 신부 광채를 완성하세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[턱선정리]</strong> "웨딩 사진에서 가장 중요한 건 V라인. <strong>'윤곽 매선'</strong>으로 갸름한 턱선을 잡으세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[붓기제로]</strong> "결혼식 아침 얼굴이 퉁퉁? <strong>'D-Day 붓기 케어'</strong>로 최상의 컨디션을 유지하세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[토탈케어]</strong> "체형+피부+컨디션 동시 관리! 규림만의 <strong>'브라이덜 토탈 패키지'</strong>를 경험하세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[급속감량]</strong> "결혼식이 코앞? <strong>'3주 급속 프로그램'</strong>으로 드레스 사이즈를 줄이세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[셀프웨딩]</strong> "야외 촬영도 걱정 없이! <strong>'지속력 높은 피부 관리'</strong>로 하루 종일 빛나세요."</div>
-                <div class="ticker-item"><span class="live-indicator"></span><strong>[신랑케어]</strong> "신부만? 신랑도 함께! <strong>'커플 패키지'</strong>로 둘 다 완벽하게 준비하세요."</div>
-            </div>
-        </div>
-    </div>
-
     <!-- CRO Scripts (Google Sheets Integration) -->
     <script>
+        // 1. Google Sheets Submission Logic
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
         const form = document.forms['submit-to-google-sheet'];
 
@@ -936,6 +1051,7 @@
                 // 중복 제출 방지
                 if (isSubmitting) return;
 
+                // Basic Validation
                 const phoneInput = form.querySelector('input[name="연락처"]');
                 if (!phoneInput || phoneInput.value.length < 10) {
                     alert('올바른 연락처를 입력해주세요.');
@@ -943,6 +1059,8 @@
                 }
 
                 isSubmitting = true;
+
+                // Show Loading
                 const btn = form.querySelector('button');
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
@@ -955,7 +1073,7 @@
                     .then(response => {
                         clearTimeout(timeoutId);
                         if (!response.ok) throw new Error('Server error');
-                        alert('💒 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
+                        alert('✨ 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
                         form.reset();
                     })
                     .catch(error => {
@@ -975,6 +1093,7 @@
     </script>
 
     <!-- Scroll reveal handled by script.min.js (adds .revealed class). -->
+    <!-- Removed duplicate script.js -->
     <script>
         function copyAddress() {
             const address = "충청북도 청주시 상당구 상당로 81번길 36, 5층";

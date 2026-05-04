@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>규림한의원 · Summer LUXE Review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFAF7;--bone:#F1EDE5;--ink:#0A1F2E;--ink-soft:#4A5560;
+  --champ:#C9A876;--champ-dark:#B8945A;--hair:rgba(10,31,46,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'Pretendard',-apple-system,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Cormorant Garamond',serif}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:48px 32px}
+
+/* nav */
+.nav{display:flex;justify-content:space-between;align-items:center;padding-bottom:32px;border-bottom:1px solid var(--hair)}
+.brand{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:.16em;text-transform:uppercase}
+.brand small{display:block;font-family:'Pretendard',sans-serif;font-weight:300;font-size:11px;letter-spacing:.4em;color:var(--champ-dark);margin-top:6px}
+.meta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft)}
+
+/* header */
+.header{padding:80px 0 64px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;border-bottom:1px solid var(--hair)}
+.eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:.18em;color:var(--champ-dark);margin-bottom:18px}
+.h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,96px);line-height:1.05;letter-spacing:-.01em;font-weight:300}
+.h1 em{font-style:italic;color:var(--champ-dark)}
+.lede{font-size:14px;line-height:1.7;color:var(--ink-soft);max-width:380px}
+
+/* section */
+section{padding:80px 0;border-bottom:1px solid var(--hair)}
+.s-head{display:grid;grid-template-columns:120px 1fr;gap:48px;align-items:start;margin-bottom:48px}
+.s-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:32px;color:var(--champ-dark)}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1.1;font-weight:300;margin-bottom:12px}
+.s-sub{font-size:13px;line-height:1.7;color:var(--ink-soft);max-width:560px}
+
+/* compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.frame{border:1px solid var(--hair);background:#fff;overflow:hidden}
+.frame-head{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hair);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.frame-head .tag{font-family:'Cormorant Garamond',serif;font-style:italic;text-transform:none;letter-spacing:0;color:var(--champ-dark);font-size:13px}
+.frame iframe{width:100%;height:540px;border:0;display:block;background:var(--paper)}
+
+/* cards grid */
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+@media(max-width:960px){.cards{grid-template-columns:repeat(2,1fr)}}
+.card{border:1px solid var(--hair);background:#fff;display:flex;flex-direction:column}
+.card-frame{aspect-ratio:9/16;overflow:hidden;border-bottom:1px solid var(--hair);background:var(--paper);position:relative}
+.card-frame iframe{width:200%;height:200%;border:0;transform:scale(.5);transform-origin:0 0;pointer-events:none}
+.card-body{padding:18px 20px}
+.card-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--champ-dark);margin-bottom:6px}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.2;margin-bottom:6px}
+.card-link{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.card-link::after{content:'→';font-family:'Cormorant Garamond',serif;font-style:italic}
+.card-link:hover{color:var(--champ-dark)}
+.card a.card-cover{position:absolute;inset:0;z-index:2}
+
+/* spec */
+.spec{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.spec-item{border-top:1px solid var(--hair);padding-top:20px}
+.spec-key{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--champ-dark);margin-bottom:8px}
+.spec-val{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;font-weight:300}
+.spec-note{font-size:11px;color:var(--ink-soft);margin-top:6px;letter-spacing:.04em}
+
+/* swatch row */
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.sw{display:flex;flex-direction:column;gap:10px}
+.sw-chip{aspect-ratio:1;border:1px solid var(--hair)}
+.sw-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--ink)}
+.sw-hex{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-soft);letter-spacing:.04em}
+
+/* changelog */
+.log{display:grid;grid-template-columns:80px 200px 1fr;gap:24px;padding:24px 0;border-top:1px solid var(--hair);align-items:start}
+.log:last-child{border-bottom:1px solid var(--hair)}
+.log-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--champ-dark)}
+.log-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.log-body{font-size:13px;line-height:1.7;color:var(--ink-soft)}
+
+/* footer */
+footer{padding:80px 0 60px;text-align:center}
+.foot-mark{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:.4em;margin-bottom:18px}
+.foot-line{width:60px;height:1px;background:var(--champ);margin:0 auto 18px}
+.foot-meta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft)}
+
+@media(max-width:760px){
+  .header{grid-template-columns:1fr;gap:32px}
+  .compare{grid-template-columns:1fr}
+  .s-head{grid-template-columns:1fr;gap:16px}
+  .spec{grid-template-columns:repeat(2,1fr)}
+  .swatches{grid-template-columns:repeat(3,1fr)}
+  .log{grid-template-columns:1fr;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<nav class="nav">
+  <div class="brand">KYURIM<small>SUMMER · LUXE · 2026</small></div>
+  <div class="meta">Internal Review · v1.0</div>
+</nav>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Seasonal Rebrand · Spring → Summer</div>
+    <h1 class="h1">An <em>editorial</em><br>summer in <em>champagne</em>.</h1>
+  </div>
+  <p class="lede">규림한의원 청주점이 봄의 화사함을 지나, 잔잔한 잉크와 샴페인 골드의 여름을 입었습니다. 이 페이지는 운영 적용 전 마지막 검수입니다.</p>
+</header>
+
+<!-- 01 spec -->
+<section>
+  <div class="s-head">
+    <div class="s-num serif">01</div>
+    <div>
+      <div class="s-title">The Edition</div>
+      <div class="s-sub">7-phase reformatting. 2026 Spring Awakening의 모든 봄 자산을 정리하고, 메인 페이지와 5개 이벤트 랜딩을 LUXE 시스템으로 통일했습니다.</div>
+    </div>
+  </div>
+  <div class="spec">
+    <div class="spec-item">
+      <div class="spec-key">Pages restyled</div>
+      <div class="spec-val">06</div>
+      <div class="spec-note">main + 5 landings</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-key">Phases shipped</div>
+      <div class="spec-val">07</div>
+      <div class="spec-note">backup → review</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-key">Spring artifacts removed</div>
+      <div class="spec-val">12+</div>
+      <div class="spec-note">JS blocks · CSS · 이모지</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-key">BA photos</div>
+      <div class="spec-val">100%</div>
+      <div class="spec-note">color untouched · 의료광고법</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 palette -->
+<section>
+  <div class="s-head">
+    <div class="s-num serif">02</div>
+    <div>
+      <div class="s-title">Palette</div>
+      <div class="s-sub">Champagne(액센트) · Ink Navy(텍스트) · Paper(배경)의 3-key 시스템. 봄 핑크 5종(#FF9AA2 / #FFB7B2 / #FFB7C5 / #FFDAC1 / #FFE4E1)을 모두 폐기.</div>
+    </div>
+  </div>
+  <div class="swatches">
+    <div class="sw"><div class="sw-chip" style="background:#FAFAF7"></div><div class="sw-name">Paper</div><div class="sw-hex">#FAFAF7</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#F1EDE5"></div><div class="sw-name">Bone</div><div class="sw-hex">#F1EDE5</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#C9A876"></div><div class="sw-name">Champagne</div><div class="sw-hex">#C9A876</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#B8945A"></div><div class="sw-name">Champagne · Dk</div><div class="sw-hex">#B8945A</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#4A5560"></div><div class="sw-name">Ink · Soft</div><div class="sw-hex">#4A5560</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#0A1F2E"></div><div class="sw-name">Ink</div><div class="sw-hex">#0A1F2E</div></div>
+  </div>
+</section>
+
+<!-- 03 before/after -->
+<section>
+  <div class="s-head">
+    <div class="s-num serif">03</div>
+    <div>
+      <div class="s-title">Before · After</div>
+      <div class="s-sub">메인 페이지 비교. 좌측은 보존된 Spring Awakening 백업, 우측은 운영 적용된 Summer LUXE.</div>
+    </div>
+  </div>
+  <div class="compare">
+    <div class="frame">
+      <div class="frame-head"><span>Before</span><span class="tag">Spring Awakening · 2026</span></div>
+      <iframe src="index-spring-backup.html" loading="lazy" title="Spring backup"></iframe>
+    </div>
+    <div class="frame">
+      <div class="frame-head"><span>After</span><span class="tag">Summer LUXE · 2026</span></div>
+      <iframe src="index.html" loading="lazy" title="Summer LUXE"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- 04 landings -->
+<section>
+  <div class="s-head">
+    <div class="s-num serif">04</div>
+    <div>
+      <div class="s-title">Landing Series</div>
+      <div class="s-sub">Diet · Skin · Body · Pain · Wedding — 5개 랜딩 페이지 모두 LUXE 토큰으로 통일. 비디오 섹션 제거 후 정적 이미지로 정돈.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <article class="card">
+      <div class="card-frame"><iframe src="events/diet/index.html" loading="lazy"></iframe><a class="card-cover" href="events/diet/index.html" target="_blank" aria-label="Diet"></a></div>
+      <div class="card-body">
+        <div class="card-num">N° 01</div>
+        <div class="card-title">Diet</div>
+        <a class="card-link" href="events/diet/index.html" target="_blank">View</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-frame"><iframe src="events/skin/index.html" loading="lazy"></iframe><a class="card-cover" href="events/skin/index.html" target="_blank" aria-label="Skin"></a></div>
+      <div class="card-body">
+        <div class="card-num">N° 02</div>
+        <div class="card-title">Skin</div>
+        <a class="card-link" href="events/skin/index.html" target="_blank">View</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-frame"><iframe src="events/body/index.html" loading="lazy"></iframe><a class="card-cover" href="events/body/index.html" target="_blank" aria-label="Body"></a></div>
+      <div class="card-body">
+        <div class="card-num">N° 03</div>
+        <div class="card-title">Body</div>
+        <a class="card-link" href="events/body/index.html" target="_blank">View</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-frame"><iframe src="events/pain/index.html" loading="lazy"></iframe><a class="card-cover" href="events/pain/index.html" target="_blank" aria-label="Pain"></a></div>
+      <div class="card-body">
+        <div class="card-num">N° 04</div>
+        <div class="card-title">Pain</div>
+        <a class="card-link" href="events/pain/index.html" target="_blank">View</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-frame"><iframe src="events/wedding/index.html" loading="lazy"></iframe><a class="card-cover" href="events/wedding/index.html" target="_blank" aria-label="Wedding"></a></div>
+      <div class="card-body">
+        <div class="card-num">N° 05</div>
+        <div class="card-title">Wedding</div>
+        <a class="card-link" href="events/wedding/index.html" target="_blank">View</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 05 changelog -->
+<section>
+  <div class="s-head">
+    <div class="s-num serif">05</div>
+    <div>
+      <div class="s-title">Changelog</div>
+      <div class="s-sub">7-phase 작업 이력. 봄 자산은 <span class="serif" style="font-style:italic">index-spring-backup.html</span>에 보존되어 있어 언제든 복구 가능합니다.</div>
+    </div>
+  </div>
+  <div>
+    <div class="log"><div class="log-num">00</div><div class="log-tag">Backup</div><div class="log-body"><span class="serif" style="font-style:italic">spring.css</span>, <span class="serif" style="font-style:italic">script.js</span> 보존, 봄 마크업을 <span class="serif" style="font-style:italic">index-spring-backup.html</span>로 분리.</div></div>
+    <div class="log"><div class="log-num">01</div><div class="log-tag">Imagery</div><div class="log-body">인테리어/히어로 이미지에만 듀오톤 (mix-blend-mode: luminosity). BA 임상사진은 색감 보정 없이 원본 유지 — 의료광고법 준수.</div></div>
+    <div class="log"><div class="log-num">02</div><div class="log-tag">Type · CSS</div><div class="log-body">Cormorant Garamond + Pretendard + JetBrains Mono 로드. <span class="serif" style="font-style:italic">summer-luxe.css</span> · <span class="serif" style="font-style:italic">summer-luxe-events.css</span> 운영 정리.</div></div>
+    <div class="log"><div class="log-num">03</div><div class="log-tag">Main</div><div class="log-body">Hero 비대칭 그리드 · 숫자 인덱스 서비스 카드 · 4분할 hairline stats · 언더라인 인풋 폼 · 모노그램 KO 푸터.</div></div>
+    <div class="log"><div class="log-num">04</div><div class="log-tag">JS · prune</div><div class="log-body">벚꽃 낙하 · 봄 마우스 트레일 · talisman 모달(중복 2개) · fortune cookie · spring countdown 메시지 — 모두 제거. letter-stamp <span class="serif" style="font-style:italic">大 院 長</span> 한자 모노그램으로 교체.</div></div>
+    <div class="log"><div class="log-num">05</div><div class="log-tag">Landings</div><div class="log-body">5개 페이지 인라인 critical CSS의 봄 색상 토큰 일괄 치환. 누락된 ComfyUI mp4 비디오 섹션 제거. <span class="serif" style="font-style:italic">storyImage</span> placeholder 추가.</div></div>
+    <div class="log"><div class="log-num">06</div><div class="log-tag">Copy</div><div class="log-body">"봄맞이 ~ 팁" 박스 → "여름 ~ 가이드"로 톤 정렬. 🌸/🌿/🥠/🖋️ 등 봄 이모지 제거. failsafe 스크립트의 봄 카피 5건 정리.</div></div>
+    <div class="log"><div class="log-num">07</div><div class="log-tag">Review</div><div class="log-body">본 검수 페이지 + <span class="serif" style="font-style:italic">CLAUDE.md</span> 작성. 변경사항 추적 가능.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-mark">韓 · 規 · 林</div>
+  <div class="foot-line"></div>
+  <div class="foot-meta">규림한의원 청주점 · Summer LUXE Edition · 2026</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -18,3 +18,13 @@ Thumbs.db
 # Legacy/temp folders
 legacy/
 *.bak_clarity
+
+# Claude Code metadata
+.claude/
+
+# Design handoff bundle (extracted locally, not for prod)
+kyurim-webpage/
+kyurim-webpage.zip
+
+# One-off processing scripts
+add_disclaimers.py

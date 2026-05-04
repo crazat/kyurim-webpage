@@ -81,6 +81,214 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-05-04: LUXE 톤 정밀 폴리싱 + 5 랜딩 복구 + 사용자 보고 4건 픽스
+
+#### 디자인 톤 재정렬 — Korean Editorial Apothecary
+세션 진입 트리거: 사용자가 "랜딩이랑 메인이 정리 안 된 느낌" 보고 →
+`/frontend-design:frontend-design` 스킬로 LUXE를 한 단계 끌어올림.
+
+**`summer-luxe.css` 전면 재작성** (단순 LUXE 토큰 → 모노그래프지 감각):
+- **PLATE 카운터** — 모든 `.luxe-section` 우상단에 자동 "PLATE · 02"...
+  CSS `counter-reset/increment` + `::before { content: 'PLATE · ' counter() }`
+- **한자 텍스처** — 히어로 좌하단 "韓 · 醫 · 規林" 모노그램,
+  about 섹션 vertical "Director's Note · 院長手記" caption
+- **이탤릭 리듬** — Cormorant italic + teal accent (`.accent`, `em`)
+- **숫자 활자** — `font-variant-numeric: tabular-nums oldstyle-nums`로
+  통계/가격 클래시컬 표기
+- **Hairline 건축** — 1px 챔페인/잉크 hair lines을 섹션 구조의 주축으로
+- **Service hover** — 아이콘 45° 회전, 챔페인 그라디언트 배경
+- **Process rail** — 5개 step 위 다이아몬드 마커
+- **B/A card** — 호버시 더블 보더 + transform translateY(-3px)
+- **Form** — 액자 안의 액자(12px inset border) + 챔페인 focus
+- **Footer** — 상단 황금 그라디언트 hairline rail
+- `:root { color-scheme: light only }` — Chrome auto-dark 차단
+
+**`summer-luxe-events.css` 강화** (5 랜딩 오버레이):
+- 인라인 critical CSS의 그라디언트/그림자/rounded `!important`로 제압
+- Section header에 mono eyebrow + Cormorant 한글 + 챔페인 hairline
+- B/A 카드 hairline-only, hover 시 잉크 윤곽
+- 버튼 모두 사각형, 그라디언트 제거
+- Sticky 하단바: 잉크 rail + Kakao yellow / Naver green 아이콘 보존
+- Form underline-only + italic placeholder + 챔페인 focus
+- Diet MBTI 퀴즈 LUXE 사각형
+- 가로 스크롤바 챔페인 thumb + faint ink track
+
+#### Phase 5 리커버리 (wholesale 교체 → CSS 오버레이로 전환)
+- **문제**: 디자인 번들의 `kyurim-webpage/site/events/{x}/index.html`이
+  hero/B/A 섹션 OPENING 태그 없이 CLOSING만 있어 마크업 자체가 깨짐 →
+  Phase 5 wholesale 복사 후 hero가 통째 누락된 페이지가 됨
+- **해결**: 5 랜딩 모두 Phase 0의 `*-spring-backup.html`로 복원 →
+  `spring.min.css` 다시 로드 + LUXE 오버레이로 톤만 입힘 (원래 의도였음)
+- **부수**: `spring.min.css`가 빠지면서 깨졌던 것들 동시 복원:
+  - `.ai-ticker-sticky-rolling` `position:fixed; top:0` (뒤에 강제 `!important`)
+  - `.director-image` 0×0 → `flex:1 1 280px; min-height:480px; aspect-ratio:464/688`
+  - `.interior-grid` 그리드 레이아웃
+  - profile.gif / interior_*.jpg lazy 로드 정상화
+
+#### 사용자 보고 4건 (이번 세션)
+1. **"본문으로 건너뛰기" 노출** (WCAG skip-link이 화면에 보임)
+   - 원인: 인라인 critical CSS에 `.skip-link` 숨김 룰 부재 → 비동기 CSS 로딩 사이 노출
+   - 해결: 5 랜딩 인라인 critical CSS에 `position:absolute;top:-100px` 1줄
+2. **횡스크롤 핑크 잔재**
+   - 해결: events 오버레이에 챔페인 thumb + ink hair track 강제 적용
+3. **프로필/인테리어 사진 누락**
+   - 해결: spring.min.css 복원 + 명시적 sizing 추가
+4. **마지막 페이지에 티커 나열** (fixed 위치 잃고 본문 흐름으로 떨어짐)
+   - 해결: events 오버레이에 `position:fixed!important; top:0!important`
+
+#### 핑크 갤러리 점 (.gallery-dot) 특이 사례
+- spring.min.css의 `.gallery-dot.active { background: var(--primary-color, #d42426) }`
+  (no !important)을 외부 CSS의 `!important`로 못 이김
+- cssRules에 내 룰이 안 잡힘 — 캐스케이드 레이어 또는 브라우저 확장
+  (Chrome force-dark 등) 의심
+- **최종 해결**: 인라인 critical CSS에 `display:none!important`로 점 자체 숨김
+  (BA 카드의 가로 스크롤바 + "1 / N" 카운터 칩이 이미 위치 표시 → 점은 중복 UX)
+
+#### 제품 데이터 정정
+- 개원년도 2018 → **2016** 정정 (메인 hero stats, brand-sub, footer, 마키 5건)
+- 한방 진료 경력 8YR → **10YR** (CARE stat)
+
+#### 변경 파일 (운영)
+- `index.html` (메인 LUXE 폴리싱 + 2016 정정)
+- `events/{diet,skin,body,pain,wedding}/index.html` (spring 백업 복원 + LUXE 오버레이 링크 + 인라인 skip-link/gallery-dots 숨김)
+- `summer-luxe.css` (전면 재작성, 약 770줄)
+- `summer-luxe-events.css` (전면 재작성, 약 750줄)
+- `manifest.json` (theme #FF9AA2 → #0A1F2E, bg #FFFDF5 → #FAFAF7)
+- `CLAUDE.md` (본 절 추가)
+
+### 2026-05-03: Spring → Summer LUXE 시즌 리브랜딩 (Phase 0~7)
+
+세션 진입 트리거: 사용자가 Anthropic Claude Design 번들(`kyurim-webpage.zip`,
+33MB tar.gz로 내려받음 → `.claude/design.tar`로 압축 해제)을 풀어두고
+"단계별 점진 적용"을 요청. 디자인 번들의 `kyurim-webpage/site/`에 이미
+완성된 LUXE 마크업/CSS/cleaned script.js/5개 랜딩이 들어 있었음. 작업은
+프로덕션 배선(트래킹·인증·SW·폼)을 보존하면서 LUXE를 운영 위치로 옮기는
+머지 작업.
+
+#### 디자인 시스템 (Summer LUXE)
+- 컬러: `--luxe-paper #FAFAF7` · `--luxe-bone #F2EEE5` · `--luxe-ink #0A1F2E`
+  · `--luxe-ink-soft #2E4A5C` · `--luxe-champagne #C9A876` ·
+  `--luxe-champagne-dark #A88955` · `--luxe-teal #006A7F`
+- 폐기 컬러: `#FF9AA2` / `#FFB7B2` / `#FFB7C5` / `#FFDAC1` / `#FFE4E1` 5종 (벚꽃 핑크)
+- 타이포: 영문/숫자 **Cormorant Garamond** (Display, italic 강조) · 국문
+  **Pretendard** · 단조 데이터 **JetBrains Mono** · 한자 모노그램 (韓 · 大院長)
+- 키 시그니처: 1px hairline · 숫자 인덱스 (N° 01) · 코너 미터
+
+#### Phase 0 — Spring 자산 백업 (커밋 예정)
+- `index.html` → `index-spring-backup.html` (75 KB)
+- 5개 랜딩 → `events/{x}/index-spring-backup.html`
+- `script.js` → `script-spring-backup.js` (137 KB)
+- `spring.css`는 이미 별도 파일이라 그대로 보존
+- 기존 `*.backup.html`(2026-03 시점 스냅샷)과 구분되는 시점 백업
+
+#### Phase 1 — 듀오톤 (인테리어/히어로 한정, 톤다운)
+디자인의 `summer-luxe.css`에 이미 baked-in:
+- `.luxe-hero-figure img`: `mix-blend-mode: luminosity` + 진한 teal→ink 그라디언트 multiply
+- `.luxe-gallery-card::before`: 55%→85% 짙은 블루 multiply
+**사용자 피드백 후 톤다운**:
+- 히어로: `mix-blend-mode: luminosity` 제거 + grayscale 0.2→0.08, 오버레이를
+  rgba(58,138,158,0.18→0.32)의 일반 알파(`mix-blend-mode` 없음)로 약화
+- 갤러리: `rgba(58,138,158,0.14→0.28)` 일반 알파, multiply 제거 (3배 약함)
+- BA 임상사진은 의료광고법 준수로 색감 보정 없이 원본 유지
+
+#### Phase 2 — `summer-luxe.css` 운영 위치 배치
+- `kyurim-webpage/site/summer-luxe.css` (785줄, 28KB) → `/summer-luxe.css`
+- `kyurim-webpage/site/summer-luxe-events.css` (356줄, 11KB) → `/summer-luxe-events.css`
+
+#### Phase 3 — 메인 `index.html` LUXE 마크업 재작성 (1419줄 → 883줄)
+**LUXE 섹션 구성**: nav · 비대칭 hero(디렉터 portrait) · 院長 인용 · 4분할
+hairline stats · 숫자 인덱스 서비스 4개(N° 01~04) · 5단계 process ·
+6장 BA cases · marquee · 4장 인테리어 갤러리 · FAQ 5개 · inquiry form ·
+contact · 한자 모노그램 footer · sticky CTA.
+
+**프로덕션 배선 보존**:
+- GSC + Naver site verification meta
+- Apple-touch-icon
+- 풍부한 JSON-LD MedicalClinic (`aggregateRating` 4.9/127, 2 review samples)
+- Microsoft Clarity 스니펫 (`wi91qfvc2f`)
+- Service Worker 등록 블록
+
+**폼 핸들러 강화** — LUXE 디자인의 `alert()`-only 핸들러 → 프로덕션 패턴:
+- 기존 Google Apps Script 엔드포인트로 POST (`/macros/s/AKfycbzqi91...`)
+- 한국식 필드명 ("성함" / "연락처" / "관심분야" / "메시지")
+- 휴대+유선 정규식 검증
+- `AbortController` 8초 타임아웃 + `.finally()`로 복구
+- 인라인 상태 메시지 (alert 미사용)
+
+**기타**:
+- 서비스 카드 링크 `events/diet.html` → `events/diet/index.html` (4건)
+- LUXE 14개 자산(director/interior/BA k-시리즈 6장/지도) 모두 `assets/`에 존재
+- `manifest.json` 동기화: theme_color `#FF9AA2` → `#0A1F2E`,
+  background `#FFFDF5` → `#FAFAF7`
+- 메인 페이지에서 `style.min.css` / `spring.min.css` / `script.min.js` /
+  `chart.js` / `diet_prediction.js` / `diagnosis.js` 로드 모두 제거 — LUXE는
+  `summer-luxe.css` 단독 + 인라인 스크립트로 자족
+- 다이어트 예측 차트, story modal, review search/carousel, 봄꽃편지 모달,
+  fortune cookie, 봄 critical CSS, snow container, scroll progress bar 등
+  메인에서 모두 빠짐 (5개 랜딩에서는 일부 다른 형태로 존재)
+
+#### Phase 4 — `script.js` 봄 전용 코드 외과 제거 (2758 → 2472줄)
+9개 블록 surgical 제거:
+1. L110~149 Cherry Blossom Petal Fall (snowflake `🌸💮`)
+2. L151~215 Spring Floating Decor + Wish/Custom Lantern
+3. L217~246 Talisman Modal Logic (open btn + ESC handler)
+4. L258~313 Spring Petal Mouse Trail + cleanup
+5. L1396 Spring Event Countdown — `April 30, 2026` → `August 31, 2026`
+6. L1406 카피 "따뜻한 봄날 되세요!" → "여름의 우아함을 함께 하세요"
+7. L1568~1577 Global `window.openTalismanModal`
+8. L1583~1648 Fortune Cookie Logic
+9. L1700 letter-stamp `🖋️` → `— 大 院 長 한정우 드림`
+10. L2100~2115 modal-focus 시스템의 talisman 핸들러 (storyModal만 남김)
+
+전체 `[Phase 4 cleanup]` 주석으로 제거 위치 표시. 5개 랜딩이 같은
+`script.js`를 공유하지만 LUXE 디자인이 `#snow-container` / `#talisman-modal`
+/ `.fortune-cookie-widget`을 `summer-luxe.css`에서 `display:none` 처리하므로
+요소가 남아있어도 무동작. Phase 5에서 마크업 자체도 빠짐.
+
+#### Phase 5 — 5개 랜딩 LUXE 적용 (wholesale 교체 + 트래킹 주입)
+- `kyurim-webpage/site/events/{diet,skin,body,pain,wedding}/index.html` →
+  `events/{x}/index.html` 직접 복사
+- 디자인 번들의 LUXE 랜딩이 이미 다음을 갖추고 있어 추가 작업 최소:
+  - Google Apps Script 폼 POST (동일 endpoint)
+  - `AbortController` 타임아웃
+  - SW 등록 (compact한 1줄 버전)
+- **유일한 추가 주입**: Microsoft Clarity 스니펫 5개 페이지 모두에 head 삽입
+- 프로덕션 줄 수 변동: diet 1332→1085, skin 1109→1027, body 943→858,
+  pain 1300→1257, wedding 983→923
+
+#### Phase 6 — 카피 톤 / 봄 이모지
+Phase 3~5에서 마크업 wholesale 교체로 사실상 자동 정리됨. grep 검증:
+활성 파일(`index.html`, `events/*/index.html`, `script.js`, `summer-luxe*.css`)
+에 봄 잔재 0건. `summer-luxe-events.css`에 `/* "봄꽃편지" hero block removed
+at HTML level */` 주석 1건만 남음 (의도적 문서화).
+
+#### Phase 7 — `review.html` 운영 경로 + 본 문서
+- `review.html` iframe `kyurim-webpage/site/...` → `` (root-relative).
+  이제 운영 파일을 직접 보여줌:
+  - Before: `index-spring-backup.html` (Phase 0 백업)
+  - After: `index.html` (LUXE 메인)
+  - 5 cards: `events/{x}/index.html` (LUXE 랜딩)
+- 본 절을 CLAUDE.md에 추가
+
+#### 알려진 잔재 (의도적, Phase 8 후속 검토 권장)
+- `spring.css` / `spring.min.css` / `style.min.css` / `script.min.js` —
+  legacy, 어떤 활성 페이지도 로드하지 않음. 삭제는 Phase 8 별도 정리 권장
+  (혹시 다른 곳에서 참조될 수 있어 grep 검증 동반 필요)
+- `script.js`의 LUXE-적용 후에도 남아있는 코드:
+  diet prediction, story modal, review carousel/search, MBTI quiz —
+  메인 LUXE에선 더 이상 호출되지 않지만 5개 랜딩 일부에서 사용 가능성. 잔존.
+- `assets/26 march {diet,skin,body,wedding}/` — LUXE 랜딩에서 그대로 재사용.
+  벚꽃 컷팅 일부 이미지(`컷팅이벤트 최종.png`)는 후속 교체 권장.
+- `kyurim-webpage/` 디렉터리 — 디자인 번들 압축 해제분. 운영에 불필요하나
+  `review.html`이 더 이상 참조하지 않으므로 안전하게 삭제 가능
+
+#### 검증 체크리스트
+- [ ] 라이브에서 `/index.html` 시각 검증 (Cormorant Garamond 로딩, 디렉터
+      이미지 듀오톤 강도, BA 6장 노출, 폼 POST 성공)
+- [ ] 5개 랜딩 시각 검증 (특히 인스타 광고 link인 wedding/diet)
+- [ ] PSI 재측정 (LCP/INP/CLS — 봄 자산 제거로 개선 기대)
+- [ ] 카운트다운 종료일 (현재 2026-08-31)
+
 ### 2026-04-27 ~ 04-28: 트래킹 도입 + Core Web Vitals 1단계 최적화 (3커밋)
 
 세션 진입 트리거: marketing_bot 쪽에서 자사 inbound 측정 인프라(GSC / Clarity / PageSpeed Insights / Naver Search Advisor)를 붙이는 작업과, PSI 측정 결과 wedding 페이지 CLS 0.80(Critical) 발견.

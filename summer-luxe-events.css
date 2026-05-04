@@ -1,0 +1,922 @@
+/* ============================================================
+   SUMMER LUXE — Events Overlay v3.0 · Korean Editorial Apothecary
+   --------------------------------------------------------------
+   The 5 landing pages still carry spring-era markup + inline
+   critical CSS (gradients, shadows, rounded corners, brand greens).
+   This overlay is a strong, surgical reset that lifts those
+   pages to the LUXE editorial tone while preserving brand
+   recognition (Kakao yellow, Naver green) where users expect it.
+   summer-luxe.css must load first — tokens come from there.
+   ============================================================ */
+
+/* ============ SKIP LINK (WCAG 2.4.1) ============
+   Hidden off-screen by default; revealed on keyboard focus only. */
+.skip-link {
+    position: absolute !important;
+    top: -100px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    padding: 12px 24px !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--luxe-champagne) !important;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    z-index: 100000 !important;
+    transition: top 0.25s var(--luxe-ease) !important;
+    text-decoration: none !important;
+}
+.skip-link:focus {
+    top: 0 !important;
+    outline: none !important;
+}
+
+/* ============ HARD RESET — strip residual decoration ============ */
+body {
+    font-family: var(--sans), 'Pretendard', -apple-system, sans-serif !important;
+    background: var(--luxe-paper) !important;
+    color: var(--luxe-ink) !important;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "kern", "liga", "calt";
+}
+
+/* Hide all spring/seasonal artifacts */
+#talisman-modal,
+.fortune-cookie-widget,
+.ai-ticker-rolling,
+#countdown,
+.scroll-progress-container,
+.snowflake,
+#snow-container,
+.spring-decor,
+.cherry-blossom,
+.floating-item,
+.petal-dust,
+.scroll-reveal-active,
+.letter-modal { display: none !important; }
+
+/* Ticker row at top — neutralize to a quiet rail */
+.ai-ticker-sticky-rolling {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--luxe-champagne) !important;
+}
+.ai-ticker-sticky-rolling .ticker-content {
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    color: rgba(250,250,247,0.92) !important;
+    text-transform: uppercase;
+}
+.live-indicator {
+    background: var(--luxe-champagne) !important;
+    box-shadow: none !important;
+}
+
+/* Scroll progress — solid champagne hairline (no gradient) */
+.scroll-progress-bar {
+    background: var(--luxe-champagne) !important;
+}
+
+/* ============ NAVBAR (logo bar) ============ */
+.navbar {
+    background: rgba(250,250,247,0.94) !important;
+    backdrop-filter: blur(14px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+    border-bottom: 1px solid var(--luxe-hair) !important;
+    box-shadow: none !important;
+}
+.navbar .container { padding: 14px 24px; }
+.navbar .logo img { filter: grayscale(0.18) contrast(1.04); max-height: 40px; }
+
+/* ============ SECTION HEADER REWRITE ============ */
+.section {
+    background: var(--luxe-paper);
+    padding: clamp(80px, 10vh, 128px) 0;
+    position: relative;
+}
+.section.before-after,
+.section.diagnosis,
+.section.process,
+.section.faq,
+.section.specialties,
+.section.interior { background: var(--luxe-bone); }
+.section.events,
+.section.reviews,
+.section.about,
+.section.comparison-section { background: var(--luxe-paper); }
+.section.contact-section,
+.section.contact { background: var(--luxe-paper); }
+
+.section-header {
+    text-align: center !important;
+    margin-bottom: clamp(48px, 7vh, 80px) !important;
+    position: relative;
+    max-width: 920px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.section-header h3 {
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.28em !important;
+    text-transform: uppercase !important;
+    color: var(--luxe-champagne-dark) !important;
+    margin-bottom: 22px !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--luxe-champagne-dark) !important;
+}
+.section-header h2 {
+    font-family: var(--serif) !important;
+    font-weight: 300 !important;
+    font-size: clamp(32px, 4.8vw, 64px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.018em !important;
+    color: var(--luxe-ink) !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--luxe-ink) !important;
+    margin-bottom: 12px !important;
+    font-feature-settings: "kern", "dlig", "ss01";
+}
+.section-header .line {
+    width: 56px !important;
+    height: 1px !important;
+    background: var(--luxe-champagne) !important;
+    margin: 22px auto !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.section-header .subtitle,
+.section-header p {
+    font-family: var(--sans) !important;
+    color: var(--luxe-ink-soft) !important;
+    font-size: 15px !important;
+    font-style: normal !important;
+    line-height: 1.85 !important;
+    letter-spacing: 0.005em !important;
+    max-width: 56ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============ B/A CARDS ============ */
+.ba-gallery-grid {
+    gap: 18px !important;
+    padding: 12px 0 24px !important;
+}
+.ba-card {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    min-width: clamp(264px, 28vw, 380px) !important;
+    transition: all 0.5s var(--luxe-ease) !important;
+    position: relative;
+}
+.ba-card::before {
+    content: ''; position: absolute;
+    top: -1px; left: -1px; right: -1px; bottom: -1px;
+    border: 1px solid var(--luxe-ink);
+    opacity: 0; transition: opacity 0.4s var(--luxe-ease);
+    pointer-events: none;
+}
+.ba-card:hover { transform: translateY(-3px) !important; border-color: var(--luxe-hair) !important; }
+.ba-card:hover::before { opacity: 1; }
+.ba-card img {
+    filter: grayscale(0.12) contrast(1.04);
+    border-radius: 0 !important;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.ba-desc {
+    padding: 22px 22px 24px !important;
+    background: var(--luxe-white) !important;
+    border-top: 1px solid var(--luxe-hair);
+    text-align: left !important;
+}
+.ba-desc h4 {
+    font-family: var(--serif) !important;
+    font-size: 19px !important;
+    font-weight: 400 !important;
+    color: var(--luxe-ink) !important;
+    margin-bottom: 8px !important;
+    letter-spacing: -0.005em !important;
+}
+.ba-desc p {
+    font-family: var(--mono) !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.22em !important;
+    color: var(--luxe-ink-muted) !important;
+    text-transform: uppercase !important;
+    line-height: 1.7 !important;
+}
+
+/* gallery scroll buttons — make them hairline, not circles */
+.scroll-btn {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    color: var(--luxe-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 44px !important;
+    height: 44px !important;
+    transition: all 0.4s var(--luxe-ease) !important;
+}
+.scroll-btn:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-color: var(--luxe-ink) !important;
+    transform: translateY(-50%) !important;
+}
+.scroll-btn i { color: inherit !important; }
+
+/* ============ EVENT CARDS ============ */
+.event-scroll-container {
+    gap: 18px !important;
+    padding: 12px 0 24px !important;
+}
+.event-item,
+.event-card,
+.events-card,
+.events .card {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    transition: all 0.5s var(--luxe-ease) !important;
+}
+.event-item:hover,
+.event-card:hover { border-color: var(--luxe-champagne) !important; transform: translateY(-3px); }
+.event-item picture, .event-item img,
+.event-card picture, .event-card img {
+    border-radius: 0 !important;
+    display: block;
+    width: 100%;
+}
+.event-card h3,
+.event-card h4 {
+    font-family: var(--serif) !important;
+    font-weight: 400 !important;
+    color: var(--luxe-ink) !important;
+    letter-spacing: -0.01em !important;
+}
+.event-card .price,
+.event-card .badge,
+.event-badge {
+    font-family: var(--mono) !important;
+    color: var(--luxe-champagne-dark) !important;
+    background: transparent !important;
+    border: 1px solid var(--luxe-champagne) !important;
+    border-radius: 0 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    font-size: 10px !important;
+    padding: 5px 10px !important;
+    box-shadow: none !important;
+}
+
+/* ============ BUTTONS — strict LUXE tone ============ */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.cta-btn,
+.ba-action .btn {
+    border-radius: 0 !important;
+    font-family: var(--sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    padding: 17px 32px !important;
+    transition: all 0.5s var(--luxe-ease) !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+.btn-primary,
+.cta-btn {
+    background: var(--luxe-champagne) !important;
+    color: var(--luxe-ink) !important;
+    border-color: var(--luxe-champagne) !important;
+}
+.btn-primary:hover,
+.cta-btn:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-color: var(--luxe-ink) !important;
+}
+.btn-secondary,
+.btn-outline {
+    background: transparent !important;
+    color: var(--luxe-ink) !important;
+    border-color: var(--luxe-ink) !important;
+}
+.btn-secondary:hover,
+.btn-outline:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+}
+
+/* ============ STICKY BOTTOM BAR ============
+   Dark ink rail. Kakao/Naver brand colors retained on icons only
+   for recognition. */
+.sticky-bottom-bar {
+    background: rgba(10,31,46,0.97) !important;
+    border-top: 1px solid var(--luxe-champagne) !important;
+    box-shadow: none !important;
+    height: 56px !important;
+    backdrop-filter: blur(10px);
+}
+.sticky-btn {
+    color: rgba(250,250,247,0.85) !important;
+    font-family: var(--mono) !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    border-right: 1px solid rgba(250,250,247,0.10) !important;
+    background: transparent !important;
+    transition: background 0.4s var(--luxe-ease) !important;
+}
+.sticky-btn:hover { background: rgba(201,168,118,0.16) !important; }
+.sticky-btn:last-child { border-right: none !important; }
+.sticky-btn i {
+    font-size: 15px !important;
+    margin-bottom: 4px !important;
+    line-height: 1 !important;
+    display: block !important;
+}
+/* keep brand icon colors recognizable */
+.sticky-btn.call i { color: var(--luxe-champagne) !important; }
+.sticky-btn.kakao i { color: #FEE500 !important; text-shadow: none !important; }
+.sticky-btn.talk i { color: #03C75A !important; }
+.sticky-btn.reserve {
+    background: var(--luxe-champagne) !important;
+    color: var(--luxe-ink) !important;
+}
+.sticky-btn.reserve i { color: var(--luxe-ink) !important; }
+
+/* ============ FAQ ============ */
+.faq-item,
+.faq-question {
+    border-radius: 0 !important;
+    background: transparent !important;
+    border-bottom: 1px solid var(--luxe-hair) !important;
+    box-shadow: none !important;
+    padding: 24px 0 !important;
+    cursor: pointer;
+    transition: padding-left 0.4s var(--luxe-ease);
+}
+.faq-item:hover { padding-left: 12px !important; }
+.faq-item:first-child { border-top: 1px solid var(--luxe-hair); }
+.faq-item h3,
+.faq-question h3,
+.faq-q,
+.faq-question {
+    font-family: var(--serif) !important;
+    font-weight: 400 !important;
+    font-size: clamp(19px, 2vw, 22px) !important;
+    color: var(--luxe-ink) !important;
+    letter-spacing: -0.005em !important;
+    line-height: 1.4 !important;
+}
+.faq-answer,
+.faq-a,
+.faq-item p {
+    font-family: var(--sans) !important;
+    color: var(--luxe-ink-soft) !important;
+    line-height: 1.85 !important;
+    font-size: 14.5px !important;
+}
+
+/* ============ REVIEWS ============ */
+.review-card,
+.reviews .card {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 28px 24px !important;
+    transition: border-color 0.4s var(--luxe-ease) !important;
+}
+.review-card:hover { border-color: var(--luxe-ink) !important; }
+.review-card .text,
+.review-card .review-content,
+.review-card p {
+    font-family: var(--serif) !important;
+    font-style: italic !important;
+    font-size: 17px !important;
+    line-height: 1.75 !important;
+    color: var(--luxe-ink) !important;
+    letter-spacing: -0.005em;
+}
+.review-card .author,
+.review-card .review-author {
+    font-family: var(--mono) !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.20em !important;
+    text-transform: uppercase !important;
+    color: var(--luxe-ink-muted) !important;
+}
+.review-card .stars,
+.review-card .rating {
+    color: var(--luxe-champagne-dark) !important;
+}
+.review-card .keyword,
+.review-card .badge {
+    background: var(--luxe-bone) !important;
+    color: var(--luxe-ink) !important;
+    border: 1px solid var(--luxe-hair) !important;
+    border-radius: 0 !important;
+    font-family: var(--mono) !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    padding: 3px 8px !important;
+}
+
+/* ============ ABOUT (원장님) — sizing + LUXE frame ============ */
+.about-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: clamp(28px, 4vw, 56px) !important;
+    flex-wrap: wrap;
+}
+.director-image,
+.about-img,
+.director-img {
+    flex: 1 1 280px !important;
+    min-width: 240px !important;
+    min-height: 480px !important;
+    aspect-ratio: 464 / 688;
+    border-radius: 0 !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    background: var(--luxe-bone) !important;
+    position: relative;
+}
+.director-image picture,
+.director-image img,
+.about-img img,
+.director-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    filter: grayscale(0.10) contrast(1.04);
+}
+.director-info {
+    flex: 1 1 320px !important;
+    min-width: 280px !important;
+}
+.about-text h2,
+.about-text h3,
+.about h2,
+.about h3 {
+    font-family: var(--serif) !important;
+    font-weight: 300 !important;
+    color: var(--luxe-ink) !important;
+    letter-spacing: -0.015em !important;
+}
+.about-text p,
+.about p {
+    font-family: var(--sans) !important;
+    color: var(--luxe-ink-soft) !important;
+    line-height: 1.85 !important;
+}
+
+/* ============ INTERIOR ============ */
+.interior-grid,
+.interior-images {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+    gap: 16px !important;
+}
+.interior-grid img,
+.interior img,
+.interior-images img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4/5;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    filter: grayscale(0.16) contrast(1.04);
+    border: 1px solid var(--luxe-hair);
+}
+
+/* ============ GALLERY DOTS — hide entirely ============
+   Pink dots from spring.css couldn't be styled cleanly via cascade
+   (cssRules-locked layer somewhere). The horizontal scrollbar +
+   the "1 / N" counter chip already communicate position; the dots
+   were redundant UX. Remove. */
+html body .gallery-dots,
+html body .gallery-pagination,
+html body .scroll-progress-dots,
+html body [class*="gallery-dots"],
+html body [class*="indicator-dots"] {
+    display: none !important;
+}
+
+/* ============ DIET MBTI quiz (diet landing only) ============ */
+#pastLifeTest {
+    background: var(--luxe-bone) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.answer-btn {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: var(--luxe-ink) !important;
+    font-family: var(--sans) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.005em !important;
+    transition: all 0.4s var(--luxe-ease) !important;
+}
+.answer-btn:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-color: var(--luxe-ink) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+.bad-habit-badge {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-champagne) !important;
+    border-radius: 0 !important;
+    font-family: var(--mono) !important;
+    letter-spacing: 0.18em !important;
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    padding: 6px 14px !important;
+    font-weight: 500 !important;
+}
+.progress-bar-container {
+    background: var(--luxe-hair) !important;
+    border-radius: 0 !important;
+    height: 2px !important;
+}
+.progress-bar {
+    background: var(--luxe-champagne) !important;
+    border-radius: 0 !important;
+}
+.result-character-box {
+    background: var(--luxe-paper) !important;
+    border: 1px solid var(--luxe-champagne) !important;
+    box-shadow: none !important;
+    animation: none !important;
+}
+
+/* ============ Prescription badge ("處方") ============ */
+.prescription-box {
+    background: var(--luxe-bone) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+}
+.prescription-box::before {
+    content: '處方' !important;
+    background: var(--luxe-champagne) !important;
+    color: var(--luxe-ink) !important;
+    border-radius: 0 !important;
+    font-family: var(--serif) !important;
+    font-weight: 400 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.16em !important;
+    padding: 4px 12px !important;
+    top: -14px !important;
+    left: 24px !important;
+}
+
+/* ============ FOOTER ============ */
+footer {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-top: 1px solid var(--luxe-champagne) !important;
+    padding: clamp(72px, 10vh, 96px) clamp(20px, 5vw, 64px) 48px !important;
+    box-shadow: none !important;
+}
+footer h2, footer h3, footer h4 {
+    color: var(--luxe-paper) !important;
+    font-family: var(--serif) !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.005em !important;
+}
+footer a {
+    color: var(--luxe-champagne) !important;
+    transition: color 0.4s var(--luxe-ease);
+}
+footer a:hover { color: var(--luxe-paper) !important; }
+footer p, footer .info {
+    color: rgba(250,250,247,0.78) !important;
+    font-family: var(--sans) !important;
+    line-height: 1.85 !important;
+}
+
+/* ============ FORM ============ */
+form input[type="text"],
+form input[type="tel"],
+form input[type="email"],
+form select,
+form textarea,
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+    border-radius: 0 !important;
+    border: none !important;
+    border-bottom: 1px solid var(--luxe-hair-strong) !important;
+    background: transparent !important;
+    padding: 10px 0 14px !important;
+    font-family: var(--serif) !important;
+    font-size: 19px !important;
+    font-weight: 300 !important;
+    color: var(--luxe-ink) !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: border-color 0.4s var(--luxe-ease) !important;
+    width: 100% !important;
+}
+form input:focus,
+form select:focus,
+form textarea:focus,
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+    border-bottom-color: var(--luxe-champagne) !important;
+}
+form input::placeholder,
+form textarea::placeholder {
+    color: var(--luxe-ink-muted) !important;
+    font-style: italic !important;
+}
+form button[type="submit"],
+.inquiry-form button[type="submit"] {
+    background: var(--luxe-champagne) !important;
+    color: var(--luxe-ink) !important;
+    border: 1px solid var(--luxe-champagne) !important;
+    border-radius: 0 !important;
+    font-family: var(--sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    padding: 17px 36px !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    transition: all 0.5s var(--luxe-ease) !important;
+}
+form button[type="submit"]:hover,
+.inquiry-form button[type="submit"]:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-color: var(--luxe-ink) !important;
+}
+
+/* ============ FONT AWESOME ICON COLOR ============ */
+.fa-solid, .fa-regular, .fa-brands {
+    color: var(--luxe-champagne-dark);
+}
+/* preserve brand colors where users expect them */
+.btn-kakao .fa-comment,
+.btn-kakao i { color: #3C1E1E !important; }
+.btn-kakao { background: #FEE500 !important; color: #3C1E1E !important; border-color: #FEE500 !important; }
+.btn-kakao:hover { background: var(--luxe-ink) !important; color: #FEE500 !important; border-color: var(--luxe-ink) !important; }
+
+.btn-naver { background: #03C75A !important; color: var(--luxe-paper) !important; border-color: #03C75A !important; }
+.btn-naver:hover { background: var(--luxe-ink) !important; color: #03C75A !important; border-color: var(--luxe-ink) !important; }
+.btn-naver i { color: var(--luxe-paper) !important; }
+
+.btn-instagram,
+.btn-blog,
+.btn-map {
+    background: var(--luxe-paper) !important;
+    color: var(--luxe-ink) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+}
+.btn-instagram:hover,
+.btn-blog:hover,
+.btn-map:hover {
+    background: var(--luxe-ink) !important;
+    color: var(--luxe-paper) !important;
+    border-color: var(--luxe-ink) !important;
+}
+
+/* ============ BRAND COLOR OVERRIDES — neutralize spring pinks ============ */
+[style*="color: #FF9AA2"],
+[style*="color:#FF9AA2"],
+[style*="color: #FFB7C5"],
+[style*="color:#FFB7C5"],
+[style*="color: #FFB7B2"],
+[style*="color:#FFB7B2"],
+[style*="color: #D42426"],
+[style*="color:#D42426"] {
+    color: var(--luxe-champagne-dark) !important;
+}
+[style*="background: #FF9AA2"],
+[style*="background:#FF9AA2"],
+[style*="background-color: #FF9AA2"],
+[style*="background-color:#FF9AA2"],
+[style*="background: linear-gradient"][style*="FF"] {
+    background: var(--luxe-champagne) !important;
+    background-image: none !important;
+}
+[style*="border-color: #FF9AA2"],
+[style*="border-color:#FF9AA2"] {
+    border-color: var(--luxe-champagne) !important;
+}
+
+/* override any remaining pink gradient text */
+h1[style*="gradient"],
+h2[style*="gradient"],
+h3[style*="gradient"] {
+    background: none !important;
+    background-image: none !important;
+    -webkit-text-fill-color: var(--luxe-ink) !important;
+    color: var(--luxe-ink) !important;
+}
+
+/* ============ COMPARISON TABLES ============ */
+.comparison-table,
+.comparison-section table {
+    background: var(--luxe-white) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.comparison-table th,
+.comparison-table td {
+    border: 1px solid var(--luxe-hair) !important;
+    padding: 18px 20px !important;
+    font-family: var(--sans) !important;
+    color: var(--luxe-ink) !important;
+}
+.comparison-table th {
+    background: var(--luxe-bone) !important;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.20em !important;
+    text-transform: uppercase !important;
+    color: var(--luxe-champagne-dark) !important;
+    font-weight: 500 !important;
+}
+
+/* ============ STORY MODAL ============ */
+.story-modal,
+.modal-content {
+    background: var(--luxe-paper) !important;
+    border: 1px solid var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 24px 60px rgba(10,31,46,0.18) !important;
+}
+
+/* ============ MISC RESETS ============ */
+.section .container { max-width: 1320px; padding: 0 clamp(20px, 5vw, 40px); }
+.video-section video {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--luxe-hair-strong);
+}
+
+/* selection */
+::selection { background: var(--luxe-ink); color: var(--luxe-paper); }
+
+/* focus visible */
+:focus-visible {
+    outline: 2px solid var(--luxe-champagne);
+    outline-offset: 3px;
+}
+
+/* ============ SCROLLBARS — strip spring pink ============ */
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(10,31,46,0.32) transparent !important;
+}
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+    background: transparent !important;
+}
+::-webkit-scrollbar-track {
+    background: var(--luxe-bone) !important;
+    border-radius: 0 !important;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--luxe-hair-strong) !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--luxe-ink) !important;
+}
+::-webkit-scrollbar-corner {
+    background: transparent !important;
+}
+
+/* horizontal carousels — narrower hairline rail */
+.ba-gallery-grid::-webkit-scrollbar,
+.event-scroll-container::-webkit-scrollbar,
+.review-carousel-container::-webkit-scrollbar {
+    height: 4px !important;
+    background: transparent !important;
+}
+.ba-gallery-grid::-webkit-scrollbar-track,
+.event-scroll-container::-webkit-scrollbar-track,
+.review-carousel-container::-webkit-scrollbar-track {
+    background: rgba(10,31,46,0.06) !important;
+    border-radius: 0 !important;
+}
+.ba-gallery-grid::-webkit-scrollbar-thumb,
+.event-scroll-container::-webkit-scrollbar-thumb,
+.review-carousel-container::-webkit-scrollbar-thumb {
+    background: var(--luxe-champagne) !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+.ba-gallery-grid,
+.event-scroll-container,
+.review-carousel-container {
+    scrollbar-color: var(--luxe-champagne) rgba(10,31,46,0.06) !important;
+}
+
+/* ============ KILL spring pink backgrounds + gradients ============ */
+section,
+.section,
+.hero-content,
+.hero-bg,
+.about,
+.about-bg,
+.specialties,
+.specialties-bg,
+.diagnosis-bg,
+.process-bg,
+.cta-section,
+.events-section,
+.review-section,
+.contact-section {
+    background-image: none !important;
+}
+[style*="background:#FFE4E1"],
+[style*="background-color:#FFE4E1"],
+[style*="background: #FFE4E1"],
+[style*="background-color: #FFE4E1"],
+[style*="background:#FFB7C5"],
+[style*="background:#FFB7B2"],
+[style*="background:#FFDAC1"],
+[style*="background:#FFFAF7"],
+[style*="background:#FFFDF5"],
+[style*="background-color:#FFFDF5"],
+[style*="background: #FFFDF5"] {
+    background: var(--luxe-paper) !important;
+    background-image: none !important;
+}
+
+/* fortune cookie / spring artifacts inside the body */
+.cherry-blossom,
+.snowflake,
+#snow-container,
+.floating-item,
+.petal-dust,
+.spring-decor,
+.scroll-progress-container { display: none !important; }
+
+/* ============ TICKER POSITIONING (preserve fixed-top on landings) ============ */
+.ai-ticker-sticky-rolling,
+.ai-ticker-sticky {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important;
+}
+
+/* MBTI / diet-prediction "내 전생 확인하기" CTA button — strict LUXE */
+.test-screen .cta-btn,
+.test-screen button,
+.test-result button,
+.test-quiz button.next,
+.diet-prediction button {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+/* ============ FALLBACK PADDING for sticky bar ============ */
+body { padding-bottom: 56px; }
+@media (min-width: 901px) { body { padding-bottom: 0; } }
