@@ -156,6 +156,36 @@ kyurim-webpage-main/
 - `manifest.json` (theme #FF9AA2 → #0A1F2E, bg #FFFDF5 → #FAFAF7)
 - `CLAUDE.md` (본 절 추가)
 
+#### 배포 후 추가 라운드 (사용자 보고 → 푸시 d07fae7, 6a3f0e0)
+**라운드 1 — `d07fae7`**: 인테리어 사진 누락
+- 5 랜딩 `interior_1~5.jpg` 25장의 `loading="lazy"` 일괄 제거 → 즉시 로드
+- 원인: lazy intersection observer가 일부 환경(인스타 인앱/슬로우 네트워크)에서
+  늦게 발화 → 사용자에게 빈 자리/회색 노출
+
+**라운드 2 — `6a3f0e0`**: 4건 동시 처리
+1. **이벤트 배너 깨짐** — `event-scroll-container`의 8장(컷팅/블라우스핏/
+   긴급구조대/웨딩올킬 등)에 lazy 잔존 → 제거
+2. **치료사례(BA) 카드 사진 안 뜸** — `ba_1~3` 골드 프로모션 카드 + `ba_diet_*_k`
+   임상 사진 lazy 제거. (모든 BA 이미지엔 2026-04-01 작업으로 이미 하단
+   "치료 기간: 20XX년 X월 ~ XX월 (X개월) / 한약 복용 시... 부작용..." disclaimer
+   삽입돼 있음. 첫 3장은 골드 인포그래픽, 4번째부터 순수 임상 사진.)
+3. **"왜 규림 다이어트?" 비교 카드 봄 빨강 보더** — `.comparison-card.kyurim`이
+   style.css L2314에서 `border:2px solid var(--primary-color)` (#D42426 spring red)
+   + `box-shadow: rgba(212,36,38,0.15)` 사용 → events 오버레이에서 champagne
+   hairline + LUXE 토큰으로 강제 치환. h3 색, li::before 색, .badge bg/border-radius
+   모두 정렬.
+4. **물결치는 spring wave divider** — spring.css L483-560에 SVG 인라인 wave 5종
+   (`.section-wave-top::before`, `.section-wave-bottom::after`,
+   `.specialties::after`, `.before-after::before`, `.section-diagonal::before`)
+   모두 hide. LUXE는 hairline 직선만 사용.
+
+**잔여 lazy** (의도적 보존): `profile.gif`, `naver_map.png` — 페이지 하단
+section이라 늦게 로드돼도 OK.
+
+**알려진 의사결정 (사용자 확인 대기)**:
+- BA 카드 첫 3장 (`ba_1/2/3.webp` 골드 프로모션) vs 임상 사진 일관성 — 톤은 다르지만
+  사용자가 결정. 옵션 (a) 현상 유지 (b) 임상 사진(`ba_diet_new_1`...)부터 시작.
+
 ### 2026-05-03: Spring → Summer LUXE 시즌 리브랜딩 (Phase 0~7)
 
 세션 진입 트리거: 사용자가 Anthropic Claude Design 번들(`kyurim-webpage.zip`,
