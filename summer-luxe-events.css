@@ -917,6 +917,77 @@ section,
     background-image: none !important;
 }
 
+/* ============ KILL spring wave dividers ============
+   spring.css L483-560에서 SVG wave 배경을 섹션 위/아래에 띄우는 효과.
+   LUXE 톤은 hairline 직선만 쓰므로 모두 제거. */
+.section-wave-top::before,
+.section-wave-bottom::after,
+.specialties::after,
+.before-after::before,
+.section-diagonal::before,
+.section-wave-top,
+.section-wave-bottom {
+    background-image: none !important;
+    background: none !important;
+    display: none !important;
+    content: none !important;
+}
+.specialties,
+.before-after,
+.interior,
+.reviews-section,
+.blog-section {
+    /* clear wave decoration but keep position:relative for content layout */
+}
+
+/* ============ COMPARISON CARDS — kyurim 핑크 보더 → champagne ============ */
+html body .comparison-card {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    background: var(--luxe-white) !important;
+}
+html body .comparison-card.competitor {
+    border: 1px solid var(--luxe-hair) !important;
+    background: var(--luxe-bone) !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+html body .comparison-card.kyurim {
+    border: 1px solid var(--luxe-champagne) !important;
+    background: var(--luxe-paper) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+html body .comparison-card h3 {
+    font-family: var(--serif) !important;
+    font-weight: 400 !important;
+    color: var(--luxe-ink) !important;
+    letter-spacing: -0.01em !important;
+}
+html body .comparison-card.kyurim h3 {
+    color: var(--luxe-champagne-dark) !important;
+    font-weight: 400 !important;
+}
+html body .comparison-list li {
+    border-bottom-color: var(--luxe-hair) !important;
+}
+html body .comparison-card.kyurim .comparison-list li::before {
+    color: var(--luxe-champagne-dark) !important;
+}
+html body .comparison-card.kyurim .badge {
+    background: var(--luxe-champagne) !important;
+    color: var(--luxe-ink) !important;
+    border-radius: 0 !important;
+    font-family: var(--mono) !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    padding: 6px 16px !important;
+    box-shadow: none !important;
+}
+
 /* ============ FALLBACK PADDING for sticky bar ============ */
 body { padding-bottom: 56px; }
 @media (min-width: 901px) { body { padding-bottom: 0; } }
