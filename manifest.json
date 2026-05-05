@@ -28,13 +28,13 @@
     {
       "name": "전화 상담",
       "short_name": "전화",
-      "url": "tel:043-236-2275",
+      "url": "tel:043-224-1075",
       "icons": [{ "src": "/assets/logo_icon.png", "sizes": "96x96" }]
     },
     {
       "name": "카카오 상담",
       "short_name": "카카오",
-      "url": "https://pf.kakao.com/_SRxkPn/chat",
+      "url": "https://pf.kakao.com/_DxewtT/chat",
       "icons": [{ "src": "/assets/logo_icon.png", "sizes": "96x96" }]
     }
   ]

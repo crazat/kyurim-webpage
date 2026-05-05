@@ -581,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Initial loop render (x2 for visual scroll if needed, but for search we typically show match list)
-        // Ideally search should show ALL matches, not looped. 
+        // Ideally search should show ALL matches, not looped.
         // For default view, we can loop. For search, no loop.
         renderReviews([...filteredReviews, ...filteredReviews]);
 
@@ -1448,31 +1448,6 @@ document.addEventListener('click', (e) => {
         document.addEventListener('keydown', handleEsc);
     }
 });
-
-// Fireworks with duplicate prevention
-let fireworksActive = false;
-let fireworksIntervalId = null;
-
-function triggerBigFireworks() {
-    // Prevent duplicate fireworks
-    if (fireworksActive) return;
-    fireworksActive = true;
-
-    // Intense burst
-    fireworksIntervalId = setInterval(() => {
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * (window.innerHeight * 0.8); // Top 80%
-        createSparkle(x, y, ['#FFD700', '#E63946', '#FFFFFF', '#00FF00', '#FFA500'], 2.0); // Bigger scale
-    }, 50); // Faster interval (50ms)
-
-    setTimeout(() => {
-        if (fireworksIntervalId) {
-            clearInterval(fireworksIntervalId);
-            fireworksIntervalId = null;
-        }
-        fireworksActive = false;
-    }, 4000); // 4 seconds duration
-}
 
 // 7. Norigae Scroll Physics (Throttled)
 const norigaeTassel = document.querySelector('.norigae-tassel');

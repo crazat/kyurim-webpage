@@ -765,10 +765,10 @@
                             style="background-color: #FEE500; border-color: #FEE500; color: #3C1E1E;">
                             <i class="fa-solid fa-comment"></i> 카카오톡 문의하기
                         </a>
-                        <a href="https://talk.naver.com/ct/w4y1te?frm=mnmb#nafullscreen" target="_blank"
+                        <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fbooking%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180" target="_blank"
                             class="btn btn-primary"
                             style="background-color: #03C75A; border-color: #03C75A; color: white;">
-                            <i class="fa-solid fa-comments"></i> 네이버 톡톡 문의
+                            <i class="fa-solid fa-comments"></i> 네이버 예약 문의
                         </a>
                         <a href="https://www.instagram.com/kyurimcj1075/" target="_blank" class="btn btn-primary"
                             style="background-color: #E1306C; border-color: #E1306C; color: white;">
@@ -852,7 +852,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="../../diagnosis.js" defer></script>
-    <script src="../../script.min.js?v=20260425c" defer></script>
+    <script src="../../script.min.js?v=20260505a" defer></script>
 
     <!-- Failsafe Script for Talisman -->
     <script>
@@ -887,9 +887,9 @@
             <i class="fa-solid fa-comment"></i>
             <span>카톡문의</span>
         </a>
-        <a href="https://talk.naver.com/w4y1te?frm=mnmb&frm=nmb_detail" target="_blank" class="sticky-btn talk">
+        <a href="https://map.naver.com/p/entry/place/37885828?placePath=%252Fbooking%253Fentry%253Dplt&searchType=place&lng=127.4881999&lat=36.6357180" target="_blank" class="sticky-btn talk">
             <i class="fa-solid fa-comments"></i>
-            <span>네이버톡톡</span>
+            <span>네이버예약</span>
         </a>
         <a href="https://map.naver.com/p/entry/place/37885828?lng=127.4881999&lat=36.6357180&placePath=%2Fbooking%3FbookingRedirectUrl%3Dhttps%3A%2F%2Fm.booking.naver.com%2Fbooking%2F13%2Fbizes%2F188566%3Ftheme%3Dplace%26entry%3Dpll%26lang%3Dko%26entry%3Dpll&area=pll&c=15.00,0,0,0,dh"
             target="_blank" class="sticky-btn reserve">
@@ -913,58 +913,6 @@
             </div>
         </div>
     </div>
-
-    <!-- CRO Scripts (Google Sheets Integration) -->
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzqi91kECbIuw8PTK0LygMYsy2D4uyQi272PEDIhgepeN3RHCwjbrqfYfeebAdhGoD_/exec';
-        const form = document.forms['submit-to-google-sheet'];
-
-        if (form) {
-            let isSubmitting = false;
-
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-
-                // 중복 제출 방지
-                if (isSubmitting) return;
-
-                const phoneInput = form.querySelector('input[name="연락처"]');
-                if (!phoneInput || phoneInput.value.length < 10) {
-                    alert('올바른 연락처를 입력해주세요.');
-                    return;
-                }
-
-                isSubmitting = true;
-                const btn = form.querySelector('button');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
-                btn.disabled = true;
-
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 8000);
-
-                fetch(scriptURL, { method: 'POST', body: new FormData(form), signal: controller.signal })
-                    .then(response => {
-                        clearTimeout(timeoutId);
-                        if (!response.ok) throw new Error('Server error');
-                        alert('💒 상담 신청이 완료되었습니다!\n담당자가 확인 후 빠르게 연락드리겠습니다.');
-                        form.reset();
-                    })
-                    .catch(error => {
-                        clearTimeout(timeoutId);
-                        const msg = error.name === 'AbortError'
-                            ? '서버 응답이 지연되고 있습니다.\n전화(043-224-1075)로 문의해주세요.'
-                            : '일시적인 오류가 발생했습니다.\n전화(043-224-1075)로 문의해주세요.';
-                        alert(msg);
-                    })
-                    .finally(() => {
-                        btn.innerHTML = originalText;
-                        btn.disabled = false;
-                        isSubmitting = false;
-                    });
-            });
-        }
-    </script>
 
     <!-- Scroll reveal handled by script.min.js (adds .revealed class). -->
     <script>

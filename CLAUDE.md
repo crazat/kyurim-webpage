@@ -81,6 +81,43 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-05-05: 안정성 심층 검토 후 운영 수정
+
+#### 핵심 수정
+- **상담 폼 중복 제출 제거**: 5개 이벤트 페이지와 `*-spring-backup.html`의
+  인라인 Google Sheets 제출 스크립트를 삭제하고 `script.min.js` 공용 핸들러만
+  사용하도록 단일화. Playwright 제출 검증 결과 Google Script 요청 2회 → 1회.
+- **`script.min.js` 재생성**: `script.js` 기준으로 terser 재빌드. 이전 min 파일에
+  남아 있던 봄 전용 petal/talisman/mouse trail 코드와 미사용 fireworks 코드를 제거.
+- **Service Worker 캐시 갱신**: `CACHE_NAME`을 `kyurim-v20260505a`로 올리고,
+  `?v=` 쿼리를 캐시 키에서 제거하지 않도록 수정. 새 `script.min.js?v=20260505a`
+  배포가 기존 캐시에 가로막히지 않게 처리.
+- **깨진 외부/로컬 링크 수정**:
+  - `board.html`의 404 Nanum Barun Gothic CDN → Pretendard CDN
+  - `board.html`, `offline.html` favicon 명시
+  - `index-spring-backup.html`의 없는 `assets/logo-192.png` → `assets/logo_icon.png`
+  - 404가 나는 Naver Talk 링크 → 네이버 예약 지도 링크
+- **연락처/PWA shortcut 정합성**: `manifest.json`, `offline.html`의
+  `043-236-2275`와 구 Kakao 채널 URL을 운영값 `043-224-1075`,
+  `https://pf.kakao.com/_DxewtT/chat`로 통일.
+
+#### 변경 파일
+- `script.js`, `script.min.js`, `sw.js`
+- `manifest.json`, `offline.html`, `board.html`, `index-spring-backup.html`
+- `events/{body,diet,pain,skin,wedding}/index.html`
+- `events/{body,diet,pain,skin,wedding}/index-spring-backup.html`
+
+#### 검증
+- `node --check`: `script.js`, `script.min.js`, `sw.js`, `diagnosis.js`,
+  `diet_prediction.js`, `skin_mbti.js` 통과
+- JSON parse: `manifest.json`, `vercel.json` 통과
+- 추적 HTML/CSS/JS 정적 검사: 로컬 리소스 누락 0, 중복 ID 0,
+  인라인 스크립트 오류 0, JSON-LD 오류 0
+- 외부 URL 24개 확인: 깨진 링크 0
+- Playwright smoke: `/`, 5개 이벤트 페이지, `board.html`, `offline.html`
+  콘솔 오류/페이지 오류/로컬 404 없음
+- Service Worker 등록 확인: `kyurim-v20260505a`
+
 ### 2026-05-04: LUXE 톤 정밀 폴리싱 + 5 랜딩 복구 + 사용자 보고 4건 픽스
 
 #### 디자인 톤 재정렬 — Korean Editorial Apothecary

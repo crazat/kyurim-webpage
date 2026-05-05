@@ -1,26 +1,24 @@
 // Service Worker for 규림한의원 청주점
 // Bump CACHE_NAME whenever the precached payload should be invalidated.
-const CACHE_NAME = 'kyurim-v20260425c';
+const CACHE_NAME = 'kyurim-v20260505a';
 const OFFLINE_URL = '/offline.html';
 
-// Assets to cache on install. Listed without the `?v=` query so the
-// fetch handler can match versioned and unversioned requests alike.
+// Assets to cache on install. Version query params are preserved so cache
+// busting remains deterministic across service worker releases.
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
-    '/style.min.css',
-    '/spring.min.css',
-    '/script.min.js',
+    '/summer-luxe.css?v=20260504b',
+    '/style.min.css?v=20260425c',
+    '/spring.min.css?v=20260425c',
+    '/summer-luxe-events.css?v=20260504h',
+    '/script.min.js?v=20260505a',
     '/offline.html'
 ];
 
-// HTML cache-busts assets via `?v=...`. Strip that param when matching the
-// cache so the precached `/style.min.css` answers `/style.min.css?v=xxx`.
+// Keep query params in cache keys so HTML `?v=` cache-busting actually works.
 function cacheKeyFor(request) {
-    const url = new URL(request.url);
-    if (!url.searchParams.has('v')) return request;
-    url.searchParams.delete('v');
-    return new Request(url.href, { method: request.method, headers: request.headers });
+    return request;
 }
 
 // Install event - precache assets
