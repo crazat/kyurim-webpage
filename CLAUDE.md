@@ -81,6 +81,37 @@ kyurim-webpage-main/
 
 ## 최근 작업 이력
 
+### 2026-05-06: 코드 안정성 심층 리뷰 후 캐시/배포 안정화
+
+#### 핵심 수정
+- **Service Worker 전략 재정렬**: HTML precache를 제거하고 페이지 요청은 network-first,
+  정적 자산은 cache-first로 분리. `CACHE_NAME`은 `kyurim-v20260506b`로 갱신.
+- **캐시 헤더 정리**: `sw.js`는 `max-age=0, must-revalidate`로 분리하고,
+  운영 JS/CSS/asset만 immutable 캐시 대상으로 유지.
+- **JS 버전 쿼리 정합성**: `script.min.js`, `diagnosis.js`, `diet_prediction.js`,
+  `skin_mbti.js` 로드 URL을 `?v=20260506b`로 맞춰 immutable 캐시 stale 위험 제거.
+- **빌드 재현성 확보**: `terser` devDependency와 `package-lock.json`을 추가하고
+  `npm run build`, `npm test` 스크립트 도입.
+- **폼 실패 처리 보강**: 메인 문의 폼이 HTTP 4xx/5xx 응답을 성공으로 표시하지 않도록
+  `response.ok` 검사를 추가.
+- **외부 리소스/링크 보안**: CDN 리소스 버전 고정 및 가능한 항목에 SRI/crossorigin 적용.
+  외부 `target="_blank"` 링크에 `rel="noopener noreferrer"` 추가.
+- **백업 HTML 배포 제외**: 추적 중이던 `index-spring-backup.html` 및
+  `events/*/index-spring-backup.html`을 Git 인덱스에서 제거하고 `*backup*.html` ignore 추가.
+
+#### 변경 파일
+- `.gitignore`, `package.json`, `package-lock.json`, `vercel.json`, `sw.js`
+- `script.js`, `script.min.js`
+- `index.html`, `board.html`
+- `events/{body,diet,pain,skin,wedding}/index.html`
+
+#### 검증
+- `npm test` 통과
+- `npm audit` 취약점 0건
+- 활성 HTML 인라인 JS 파싱 통과
+- 활성 페이지 로컬 리소스 참조 누락 0
+- 활성 페이지의 이전 `script.min.js?v=20260505a` 및 unversioned helper JS 참조 0
+
 ### 2026-05-05: 안정성 심층 검토 후 운영 수정
 
 #### 핵심 수정

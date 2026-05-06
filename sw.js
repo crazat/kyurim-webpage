@@ -1,24 +1,67 @@
 // Service Worker for 규림한의원 청주점
 // Bump CACHE_NAME whenever the precached payload should be invalidated.
-const CACHE_NAME = 'kyurim-v20260505a';
+const CACHE_NAME = 'kyurim-v20260506b';
 const OFFLINE_URL = '/offline.html';
 
-// Assets to cache on install. Version query params are preserved so cache
-// busting remains deterministic across service worker releases.
+// Static assets to cache on install. HTML is handled with a network-first
+// strategy so content updates are not trapped behind an old service worker.
 const PRECACHE_ASSETS = [
-    '/',
-    '/index.html',
     '/summer-luxe.css?v=20260504b',
     '/style.min.css?v=20260425c',
     '/spring.min.css?v=20260425c',
     '/summer-luxe-events.css?v=20260504h',
-    '/script.min.js?v=20260505a',
+    '/script.min.js?v=20260506b',
     '/offline.html'
 ];
 
 // Keep query params in cache keys so HTML `?v=` cache-busting actually works.
 function cacheKeyFor(request) {
     return request;
+}
+
+function shouldCacheResponse(response) {
+    return response && response.status === 200 && response.type === 'basic';
+}
+
+async function putInCache(request, response) {
+    if (!shouldCacheResponse(response)) return;
+
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(cacheKeyFor(request), response.clone());
+}
+
+async function cacheFirst(request) {
+    const matchKey = cacheKeyFor(request);
+    const cachedResponse = await caches.match(matchKey);
+    if (cachedResponse) return cachedResponse;
+
+    try {
+        const response = await fetch(request);
+        await putInCache(request, response);
+        return response;
+    } catch (error) {
+        return Response.error();
+    }
+}
+
+async function networkFirst(request) {
+    const matchKey = cacheKeyFor(request);
+
+    try {
+        const response = await fetch(request);
+        await putInCache(request, response);
+        return response;
+    } catch (error) {
+        const cachedResponse = await caches.match(matchKey);
+        if (cachedResponse) return cachedResponse;
+
+        if (request.mode === 'navigate') {
+            const offlineResponse = await caches.match(OFFLINE_URL);
+            if (offlineResponse) return offlineResponse;
+        }
+
+        return Response.error();
+    }
 }
 
 // Install event - precache assets
@@ -52,7 +95,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network-first for pages, cache-first for static assets.
 self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
@@ -60,38 +103,14 @@ self.addEventListener('fetch', (event) => {
     // Skip external requests
     if (!event.request.url.startsWith(self.location.origin)) return;
 
-    const matchKey = cacheKeyFor(event.request);
+    const acceptHeader = event.request.headers.get('accept') || '';
+    const acceptsHtml = acceptHeader.includes('text/html');
+    if (event.request.mode === 'navigate' || acceptsHtml) {
+        event.respondWith(networkFirst(event.request));
+        return;
+    }
 
-    event.respondWith(
-        caches.match(matchKey)
-            .then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-
-                return fetch(event.request)
-                    .then((response) => {
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-
-                        // Store under the normalized key so future versioned
-                        // requests for the same asset hit the cache.
-                        const responseToCache = response.clone();
-                        caches.open(CACHE_NAME)
-                            .then((cache) => {
-                                cache.put(matchKey, responseToCache);
-                            });
-
-                        return response;
-                    })
-                    .catch(() => {
-                        if (event.request.mode === 'navigate') {
-                            return caches.match(OFFLINE_URL);
-                        }
-                    });
-            })
-    );
+    event.respondWith(cacheFirst(event.request));
 });
 
 // Background sync for form submissions

@@ -42,8 +42,8 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap"></noscript>
 
     <!-- Pretendard (async) -->
-    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" integrity="sha384-uGEvnSEpW2nM9xJFsrxrwakwrk9QdDTQIBJh0hVMu90OaVyMAMpAK1rIn0/Kh1/k" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" integrity="sha384-uGEvnSEpW2nM9xJFsrxrwakwrk9QdDTQIBJh0hVMu90OaVyMAMpAK1rIn0/Kh1/k" crossorigin="anonymous"></noscript>
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="summer-luxe.css?v=20260504b">
@@ -838,7 +838,10 @@
                 method: 'POST',
                 body: new FormData(form),
                 signal: ctrl.signal
-            }).then(function () {
+            }).then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Server error');
+                }
                 setStatus('— 문의가 접수되었습니다. 빠르게 연락드리겠습니다 —', '#006A7F');
                 form.reset();
             }).catch(function () {

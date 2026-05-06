@@ -1,10 +1,10 @@
 # Backups
 *.backup.html
+*backup*.html
 assets_original_backup/
 
 # Node
 node_modules/
-package-lock.json
 
 # Scripts (development only)
 optimize-images.js

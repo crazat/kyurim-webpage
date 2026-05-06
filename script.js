@@ -1599,13 +1599,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
             }
 
+            let timeoutId;
+
             try {
                 const formData = new FormData(form);
                 formData.append('제출시간', new Date().toLocaleString('ko-KR'));
 
                 // Timeout을 위한 AbortController
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10초 타임아웃
+                timeoutId = setTimeout(() => controller.abort(), 10000); // 10초 타임아웃
 
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
@@ -1675,6 +1677,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     isSubmitting = false;
                 }, 2000);
+            } finally {
+                if (timeoutId) clearTimeout(timeoutId);
             }
         });
     });

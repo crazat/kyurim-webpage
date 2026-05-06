@@ -1,5 +1,14 @@
 {
+  "scripts": {
+    "build": "npm run build:js",
+    "build:js": "terser script.js --compress --mangle --output script.min.js",
+    "check": "node --check script.js && node --check script.min.js && node --check diagnosis.js && node --check diet_prediction.js && node --check skin_mbti.js && node --check sw.js",
+    "test": "npm run check"
+  },
   "dependencies": {
     "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "terser": "^5.43.1"
   }
 }
