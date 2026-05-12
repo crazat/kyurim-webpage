@@ -639,6 +639,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove Diet Cost Question for non-diet pages
         faqData = faqData.filter(item => !item.q.includes("다이어트 한약 비용"));
     }
+    if (pageType === 'body' || pageType === 'asymmetry') {
+        faqData = [
+            { q: "청주 안면비대칭 교정은 어떤 부분을 함께 보나요?", a: "얼굴 중심선, 턱선, 입꼬리 차이뿐 아니라 턱관절, 경추, 어깨, 골반 균형을 함께 확인합니다. 얼굴만 따로 보지 않고 반복되는 불균형의 시작점을 찾는 방식으로 상담합니다." },
+            { q: "얼굴비대칭과 턱관절 증상이 같이 있으면 상담 가능한가요?", a: "네. 입을 벌릴 때 소리가 나거나 턱 주변 긴장, 씹는 습관 차이, 목·어깨 뻐근함이 함께 있다면 안면비대칭 상담에서 턱관절과 경추 연결성을 같이 확인합니다." },
+            { q: "체형교정이나 골반교정도 같이 봐야 하나요?", a: "어깨 높이 차이, 골반 틀어짐, 거북목, 한쪽으로 기대는 습관이 있으면 얼굴비대칭과 함께 체형 균형을 점검하는 것이 도움이 됩니다. 개인 상태에 따라 필요한 범위만 안내합니다." },
+            { q: "안면비대칭 교정 기간은 얼마나 걸리나요?", a: "기간은 비대칭 원인, 생활 습관, 턱관절 상태, 체형 불균형 정도에 따라 달라집니다. 첫 상담에서 현재 상태를 확인한 뒤 예상 관리 방향과 내원 간격을 안내합니다." },
+            ...faqData
+        ];
+    }
 
     const faqContainer = document.querySelector('.faq-container');
     if (faqContainer) {

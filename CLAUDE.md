@@ -1,5 +1,24 @@
 # CLAUDE.md - 규림한의원 청주점 웹사이트
 
+## 2026-05-12: Body Landing SEO Upgrade for Face Asymmetry
+
+### Context
+- Priority query cluster: `청주 안면비대칭`, `청주 안면비대칭 교정`, `청주 안면비대칭 한의원`, `청주 얼굴비대칭`, `청주 턱관절 교정`, and `청주 체형교정`.
+- Competitive gap from the marketing bot spot check: 로랑 and 데이릴 are ahead on Naver Place for core asymmetry terms, and 데이릴 is the only Place result for `청주 안면비대칭 교정`.
+- Keep `/events/body/` as the canonical local landing for asymmetry/body correction work: `https://kyurim-webpage.vercel.app/events/body/`.
+
+### Changes Made
+- `events/body/index.html` now has an exact-intent SEO title, description, keywords, canonical URL, Open Graph/Twitter metadata, expanded `MedicalClinic` JSON-LD, and `FAQPage` JSON-LD.
+- Added a visible first-screen intent block with the H1 `청주 안면비대칭 교정 한의원`, copy for jaw/TMJ, cervical/shoulder/pelvis balance, and CTA anchors into diagnosis, process, inquiry, and contact sections.
+- Added an intent cluster section covering asymmetry correction, face/jaw asymmetry, TMJ/cervical balance, and body/pelvis correction. This section is for search relevance and user scanning, not decorative content.
+- `script.js` now injects body/asymmetry-specific FAQ items before generic FAQ entries. Regenerate `script.min.js` with `npm run build` after editing `script.js`.
+- `sitemap.xml` sets `/events/body/` to `lastmod` 2026-05-12 and priority 1.0.
+
+### Verification
+- `npm run build`
+- `npm test`
+- Confirmed presence of title, keywords, canonical, `FAQPage`, H1, and `intent-cluster` in `events/body/index.html`.
+
 ## 프로젝트 개요
 - **사이트**: 규림한의원 청주점 공식 웹사이트
 - **배포 URL**: https://kyurim-webpage.vercel.app/
