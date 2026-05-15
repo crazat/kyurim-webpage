@@ -1,5 +1,274 @@
 # CLAUDE.md - 규림한의원 청주점 웹사이트
 
+## 2026-05-15 외부 검토 반영 — 나머지 후속 작업 (#3~#8 일괄)
+
+### Context
+사용자 결정 "나머지 모두 진행해줘". 직전 세션에서 처리한 #1(봄톤 카피
+제거) + #2(과격 표현 순화)에 이어, 외부 검토자가 제시한 잔여 6개 항목을
+일괄 적용.
+
+### 적용 내역
+
+**#5. 메인 Why Kyurim 섹션 신설** — `index.html`
+- about → stats → **why (신규)** → services 흐름. `bg-bone`으로 stats(paper)와
+  services(paper) 사이에 톤 대비를 만들고, 3카드 grid 패턴.
+- 카드 1: "증상보다 흐름을 봅니다" — 다이어트·피부·통증의 공통 기반(몸의 리듬·회복력)
+- 카드 2: "원장 직접 상담을 중심으로" — 1:1 진료 강조
+- 카드 3: "지속 가능한 회복을 지향합니다" — 단기 숫자 vs 다시 무너지지 않는 몸
+- 각 카드에 `index-num` (N° 01/02/03) + h3 + p (italic teal accent로 핵심 단어 강조)
+- 섹션 헤딩: "규림이 *다르게* 보는 세 가지"
+
+**#7. FAQ 5건 → 8건 확장** — `index.html`
+- 추가 3건 (검토자 권장 기반):
+  - Q.02 "한의 다이어트는 식욕억제제 처방과 어떻게 다른가요?" → 체질·식욕 패턴·대사 함께
+  - Q.04 "피부 치료는 몇 회 정도 받아야 하나요?" → 상태·고민에 따른 차이, 주기적 관리
+  - Q.06 "사고 직후 통증이 없어도 진료를 받아야 하나요?" → 지연 통증 + 초기 점검
+- 순서 재정렬 (검색 의도 그룹화): Q.01 다이어트 → Q.02 vs 식욕억제제 →
+  Q.03 매선 → Q.04 피부 회차 → Q.05 자보 → Q.06 지연통증 → Q.07 주차 → Q.08 예약
+
+**#6. CTA 문구 통일** — 5 랜딩
+- sticky bar 4버튼 라벨 일관:
+  - call: 무료상담 → **전화 상담**
+  - kakao: 변경 없음
+  - talk (네이버 booking 링크): 네이버예약 → **지도 보기** (실제 링크 유형과 정확히 매칭)
+  - reserve: 간편예약 → **네이버 예약**
+- inquiry 섹션 헤딩: "🌸/💒 간편 무료상담 신청" → **상담 문의** (이모지 + 광고체 제거)
+
+**#4. 전생 테스트 톤 조정** — `events/diet`
+- h4 "전생(前生) 테스트" → **"나의 다이어트 유형 체크"**
+- 본문 "당신의 맥을 짚어보니... 범상치 않은 전생의 기운... 나의 비만,
+  혹시 전생의 업보일까요?" → "체중이 잘 늘어나는 패턴은 사람마다 다릅니다.
+  식욕형 · 부종형 · 대사저하형 · 스트레스형 중 내 몸의 경향을 가볍게 확인해보세요."
+- 버튼 "내 전생 확인하기" → "내 유형 확인하기"
+- 로딩 "맥진(脈診) 중입니다... 당신의 전생 기억을 읽어내는 중..." → "유형을
+  분석 중입니다... 응답을 바탕으로 다이어트 유형을 정리하고 있습니다."
+- 결과 badge "전생 유형" → "다이어트 유형"
+- 결과 카드 "규림 전생 처방전" → "규림 추천 관리 방향"
+- 결과 CTA "현생 구제 신청하기 (상담)" → "내 상태 상담받기"
+- JS 결과 카피 "당신의 전생은..." → "당신의 다이어트 유형은..."
+- **재미 요소 보존, 톤만 신뢰도 방향으로 조정** (퀴즈 흐름과 4가지 페르소나
+  데이터 자체는 유지). 검토자 권장 정확히 반영.
+
+**#8. 원장 소개 재작성 — AI 이력 ↔ 진료 방식 연결** — 5 랜딩
+- 각 랜딩 `#about` 섹션의 `<ul class="career-list">` 직후, `<p class="philosophy">`
+  직전에 `<p class="practice-note">` 1줄 추가:
+  - **diet**: "체중 숫자만 보지 않고 식욕 패턴·대사 상태·유지 가능성을 함께 살핍니다."
+  - **skin**: "피부의 표면 증상뿐 아니라 반복되는 원인과 회복 흐름까지 함께 살핍니다."
+  - **body**: "체형의 균형과 자세 패턴, 일상의 움직임까지 구조적으로 살핍니다."
+  - **pain**: "통증의 양상과 움직임, 회복 흐름과 생활 습관까지 함께 살핍니다."
+  - **wedding**: "결혼식까지의 일정과 컨디션을 일상 흐름과 함께 설계합니다."
+- 공통 prefix: "한의학적 진료 경험과 데이터 기반 사고를 함께 활용해, "
+- AI 이력(한프리딕트·AI 경진대회 우승)을 자랑이 아닌 진료 태도로 번역.
+
+**#3. 통증 페이지 BA 정리 — 44장 → 13장** — `events/pain`
+- 제거: `<!-- [SKIN] Cases -->`(6장) + `<!-- [DIET] Cases -->`(7장) +
+  `<!-- [Pending / Placeholders] -->`(4장) + 두 번째 `<!-- [SKIN] Cases -->`(13장)
+  = **총 25장 피부·다이어트·페이스 케이스 통째 제거**
+- 유지: 프로모셔널 10장(`ba_1`~`ba_10` 광고 배너성, 5 랜딩 공통) + `<!-- [BODY] Cases -->`
+  3장(전신 비대칭 교정 / 턱관절 & 안면비대칭 / 거북목 & 라운드숄더)
+- 자산 한계상 통증·교통사고 전용 BA가 3장이라 검토자 권장 "8~10장 통증 중심"에는
+  미달. 신규 통증 BA 자산 확보 후 후속 보강 권장.
+- "복붙 랜딩" 인상 → 통증·체형 중심 정렬.
+
+### 검증
+- `npm test` 통과
+- 잔재 sweep grep 4종 모두 **0건**:
+  - 봄톤 (`봄꽃편지|가뿐한 봄|상쾌한 봄나들이|봄맞이|봄을 입다|봄날 되세요`)
+  - 과격 표현 (` 삭제</| 완전 정복| 완전 삭제|100% 돌아옵니다|살이 안 찌는 체질로 바꿉|기적적으로`)
+  - 광고체 CTA (`간편 무료상담|간편예약|<span>무료상담</span>|<span>네이버예약</span>`)
+  - 전생/업보 (`전생|업보|범상치 않은`)
+
+### 변경 파일
+- `index.html` (Why Kyurim 신설 + FAQ 5→8)
+- `events/diet/index.html` (전생 테스트 톤 조정 + CTA + 원장 소개)
+- `events/skin/index.html` (CTA + 원장 소개)
+- `events/body/index.html` (CTA + 원장 소개)
+- `events/pain/index.html` (BA 25장 제거 + CTA + 원장 소개)
+- `events/wedding/index.html` (CTA + 원장 소개)
+- `CLAUDE.md` (본 절)
+
+### 의도적으로 안 한 것
+- **각 랜딩 hero 카피 재작성** — 검토자가 제시한 "가벼워지는 몸, 흐트러지지
+  않는 일상" 같은 LUXE 톤 hero copy. 카피라이팅 비중 크고 영역별 맥락 검토
+  필요. **별도 작업 권장** (Phase 8 랜딩 LUXE 네이티브 재작성과 함께).
+- **메인 디자인 장식 줄이기 (Maison/Plate/Atelier/MMXXVI)** — 1·2·3차
+  폴리싱에서 사용자가 직접 다듬은 LUXE 핵심 톤. 외부 검토자의 "과잉"
+  평가와 사용자 의도 차이. 변경 없음.
+- **BA 전후사진 추가 disclaimer 보강** — 2026-04-01 작업에서 84장 이미지
+  하단에 시술별 부작용 + 치료 기간 disclaimer가 이미 삽입됨. 추가 텍스트
+  배너는 시각 노이즈 우려, 보류.
+- **신규 통증 BA 자산 확보** — pain 페이지 통증 케이스가 3장으로 부족.
+  현장에서 새 자산 촬영·동의 확보 후 추가 권장.
+
+### 알려진 위험
+- pain BA 13장 중 명백한 통증·교통사고 카드는 3장 (`ba_body_1/2/3`). 나머지
+  10장은 진료과목 비특정 promotional 카드(`ba_1`~`ba_10`). 통증 중심
+  콘텐츠 비중 약함 — 새 자산 확보 전까지는 한계.
+- `<!-- [BODY] Cases -->` 주석이 pain 페이지에 남았는데, body 페이지에서
+  사용하는 자산을 통증 컨텐츠로 활용한 것이라 주석 자체는 자산 추적에
+  도움. 유지.
+
+## 2026-05-15 외부 검토 반영: 봄톤 카피 제거 + 의료광고 표현 순화 (#1+#2)
+
+### Context
+외부 검토자가 "메인은 LUXE Summer 톤인데 5 랜딩은 봄 이벤트 톤" 불일치
+지적. grep 검증 결과 — Phase 5에서 CSS만 LUXE으로 입혔고 본문 카피
+(특히 `talisman-modal` "🌸 봄꽃편지 🌸") + BA 카드 헤딩의 의료광고 위험
+표현은 그대로 남아있었음. CSS hide(`#talisman-modal { display: none }`)는
+스크래퍼·AT·SEO 봇에 그대로 노출됨.
+
+사용자 결정: 검토자가 제시한 우선순위 #1(봄톤 제거) + #2(과격 표현 순화)
+일괄 적용. 통증 페이지 BA 정리(#3)와 전생 테스트(#4), 메인 Why Kyurim
+섹션(#5) 이하는 후속 결정 사안으로 분리.
+
+### 적용 — Talisman modal 5개 페이지 일괄 마크업 삭제
+- `events/diet/index.html` L279~320 (봄꽃편지 / 가뿐한 봄, 새로운 나)
+- `events/skin/index.html` L217~264 (🌸 봄꽃편지 🌸 / 피부 속광, 봄을 입다)
+- `events/pain/index.html` L217~265 (🌸 봄꽃편지 🌸 / 상쾌한 봄나들이)
+- `events/body/index.html` L307~355 (🌸 봄꽃편지 🌸 / 아름다운 봄의 실루엣)
+- `events/wedding/index.html` L211~256 (💒 웨딩 축복 편지 💒 — spring legacy 패턴
+  동일하고 "완벽하게 준비된 신부" 절대 표현 포함이라 함께 제거)
+
+각 페이지에서 talisman 핸들러 JS의 `data-tooltip: ' 따뜻한 봄날 되세요!'`
+부분도 동시 삭제 (4 페이지 — diet는 이미 별도 정리됨).
+
+### 적용 — 의료광고 위험 표현 순화
+
+| 변경 전 | 변경 후 | 위치 |
+|---|---|---|
+| 기미/잡티/색소 삭제 | 기미·잡티·색소 고민 관리 | pain L393, skin L432 |
+| 이중턱/턱밑살 삭제 | 이중턱·턱밑살 라인 관리 | pain L433, skin L472 |
+| 여드름 완전 정복 | 반복되는 여드름 관리 | pain L560 |
+| 볼륨 채움 + 주름 삭제 | 볼륨 보강 · 주름 관리 | pain L580 |
+| 투턱(이중턱) 완전 삭제 | 투턱·이중턱 라인 관리 | pain L679 |
+| 러브핸들 & 뱃살 삭제 | 러브핸들 · 복부 라인 관리 | wedding L287 + 코멘트 L280 |
+| 굶어서 뺀 살은 100% 돌아옵니다. 규림은 '살이 안 찌는 체질'로 바꿉니다. | 굶는 다이어트는 요요로 이어지기 쉽습니다. 규림은 체질·생활 패턴을 함께 살펴 유지에 도움을 드립니다. | diet L1104 ticker |
+
+### 검증
+- `npm test` 통과
+- grep `봄꽃편지|가뿐한 봄|상쾌한 봄나들이|봄맞이|봄을 입다|봄날 되세요|벚꽃길만|봄꽃` → **0건**
+- grep ` 삭제</| 완전 정복| 완전 삭제|100% 돌아옵니다|살이 안 찌는 체질로 바꿉` → **0건**
+
+### 변경 파일
+- `events/diet/index.html` (talisman modal + ticker)
+- `events/skin/index.html` (talisman + 색소·이중턱 BA 카드 + tooltip JS)
+- `events/pain/index.html` (talisman + 5개 BA 카피 + tooltip JS)
+- `events/body/index.html` (talisman + tooltip JS)
+- `events/wedding/index.html` (talisman + 러브핸들 BA 카피)
+- `CLAUDE.md` (본 절)
+
+### 의도적으로 안 한 것 — 후속 결정 사안
+- **#3. 통증 페이지 BA 정리** — pain BA 카드 44장 (body 6·diet 16·skin 19·
+  wedding 12 대비 압도적). 피부·다이어트 케이스가 통증 랜딩에 섞여
+  "복붙 랜딩" 느낌. **카피 순화만으로는 페이지 의도 불일치 해소 안 됨** —
+  통증/교통사고 중심 8~10장으로 압축 + 헤딩 재분류가 필요. 별도 결정 후 적용.
+- **#4. 전생 테스트 톤 조정** — `events/diet` L723~769 "맥을 짚어보니...
+  범상치 않은 전생의 기운". 사용자 호불호 영역, 메인 LUXE와 톤 충돌 가능성.
+  유지/순화/제거 결정 필요.
+- **#5. 메인 "Why Kyurim" 섹션 신설** — 전환 설계 강화. 검토자가 권장한
+  3카드(체질-생활/원장 중심/지속 가능한 변화). 카피라이팅 비중 큼.
+- **#6~#8. CTA 통일, FAQ 보강, 원장 소개 재작성** — 콘텐츠 작업, 검토 후 처리.
+
+### 알려진 위험
+- talisman modal 삭제로 `window.openTalismanModal` 함수가 호출되는 곳이
+  남아있다면 console error. spring.js의 botton trigger도 함께 제거됨을
+  확인. 만일 잔존 reference 발견 시 별도 정리.
+- 5 페이지 본문 카피는 LUXE CSS overlay + 순화된 BA 헤딩으로 정렬됐지만,
+  히어로 카피("규림한의원 청주점 다이어트" 등)는 여전히 spring 시대 톤
+  중심. 메인 "가뿐한 여름의 결" 같은 LUXE 톤과 완전 정렬을 위해선 #5~#8
+  콘텐츠 작업이 추후 필요.
+
+## 2026-05-15 3차 폴리싱: 잠재 버그성 5건 + 미감 3건 (ultrathink)
+
+### Context
+사용자 재요청 "디자인 측면에서 아주 혁신적으로 바꾸기 보다는 폴리싱하는
+디자인 ultrathink 검토". 1·2차에서 31+8건 적용된 LUXE 시스템 위에 3차로
+파볼 가치 있는 후보 8건을 추출 후 T1+T2+T3 전부 적용.
+
+핵심 발견: 1·2차는 시각 톤(타이포·컬러·텍스처) 중심이었고, 3차는 **상호작용
+견고성(모바일 hover·anchor jump·접근성·stagger 마크업 의존성)** 중심.
+
+### 3차 적용 내역 — `summer-luxe.css`
+
+**A1. `@media (hover: none)` — 모바일 카드 hover stuck 차단**
+- 증상: iOS Safari/Android Chrome에서 BA·이벤트·리뷰·갤러리 카드를 탭하면
+  `:hover` 상태가 stuck → 카드가 `translateY(-5px)` 떠 있는 채로 정지.
+  Services row의 padding-left 시프트, quote-mark 회전, FAQ padding 시프트,
+  hero figure scale, map grayscale 등 모든 호버 효과 동일 패턴.
+- 해결: `@media (hover: none)` 블록 1개에서 위 모든 hover state를 base
+  스타일로 되돌림. brand recognition(champagne 색조)은 보존.
+
+**A2. `scroll-margin-top` 부재 → fixed nav가 anchor 점프 컷오프**
+- `.luxe-section { scroll-margin-top: clamp(64px, 10vh, 96px) }` 추가.
+  hero는 0으로 override.
+
+**A4. Hero-grid stagger 0 (의도 미작동) 수정**
+- 원인: `nth-of-type`은 같은 태그 기준. `.luxe-hero-grid > div`(좌) +
+  `> figure`(우) 둘 다 `:nth-of-type(1)` → stagger 0.
+- 해결: nth-of-type 1~8번 룰 8개를 `transition-delay: calc(var(--stagger-i, 0) * 80ms)`
+  단일 룰로 교체. `index.html` IO observer 콜백에서 sibling-index 계산
+  (`Math.min(sIdx, 8)`로 cap, 부모 바뀔 때마다 0으로 리셋) 후 인라인
+  `--stagger-i` 부여. 마크업 변경 없이 모든 컨테이너에서 자동 작동.
+
+**A5. Form input `color-scheme: light`**
+- `:root`의 `color-scheme: light only`만으론 일부 브라우저에서 native form
+  컨트롤이 ua-shadow 통해 자동 dark 반전 가능. `.luxe-field input/select/textarea` +
+  글로벌 `input,select,textarea { color-scheme: light }` 2중 안전장치.
+
+**B1. `text-wrap: balance` — h1~h4 헤딩**
+- 한국어 다단 헤딩 줄바꿈 균형. Chrome 114+ / Safari 17.5+ / Firefox 121+,
+  미지원 환경 폴백 그대로.
+
+**B2. `text-wrap: pretty` — 본문 p**
+- widow/orphan 감소.
+
+**B3. Footer 닫는 hairline — `.luxe-footer::after`**
+- 상단 황금 그라디언트 rail과 대구를 이루는 더 옅은(rgba 0.32) 하단
+  hair line. 폭은 50%로 짧게(상단 80% vs 하단 50%) — monograph "마지막
+  페이지" sealing 감각.
+
+### 3차 적용 내역 — `summer-luxe-events.css`
+- `.section { scroll-margin-top: clamp(80px, 12vh, 120px) }` — 5 랜딩은
+  fixed ticker + navbar 합산 높이가 더 크므로 메인보다 마진 ↑.
+- `.section-header h2 { text-wrap: balance }`, `.section p { text-wrap: pretty }`.
+- `@media (hover: none)` 블록 — `.ba-card`, `.event-card`, `.review-card`,
+  `.scroll-btn`, `.faq-item`, `.answer-btn` 호버 효과 무효화 (5 랜딩 동기화).
+
+### 3차 적용 내역 — `index.html`
+
+**A3. FAQ ARIA + 키보드 접근성**
+- 5개 `.luxe-faq-item` 전부에 `role="button" tabindex="0" aria-expanded="false"` 추가.
+- JS 핸들러를 `click + keydown(Enter|Space)` + `aria-expanded` 동기화로 확장.
+  토글 시 `nowOpen ? 'true' : 'false'` 부여.
+
+**A4 JS — IO observer stagger 인덱싱**
+- `lastParent`/`sIdx` 변수로 부모 단위 인덱스 추적. 부모 바뀔 때마다 0
+  리셋, 인덱스를 8로 cap (12장 carousel 마지막 카드가 1초+ trail 되지 않게).
+
+### 변경 파일 (3차)
+- `summer-luxe.css` (+55줄 −9줄)
+- `summer-luxe-events.css` (+27줄)
+- `index.html` (FAQ 5건 ARIA + JS 2 블록 확장)
+- `CLAUDE.md` (본 절)
+
+### 의도적으로 안 한 것 (3차)
+- **Hero `<br>` 손대기** — 마크업 변경 비용 vs 효과, 보존.
+- **Pretendard variable 폰트 전환** — SRI 해시 재발급 필요, 효과 미세.
+- **Cormorant optical sizing** — static font라 효과 무. 보류.
+- **Korean PLATE 라벨 변형** (`編 · 02`) — 호불호 사용자 결정 영역.
+- **`:has()` 활용 폴리싱** — 큰 이득 없음.
+- **랜딩 FAQ ARIA** — spring 마크업 + `script.min.js` 핸들러 경유라 별도
+  검토 필요. 메인만 처리, 랜딩은 Phase 8 일괄 정리 후보.
+
+### 알려진 위험 (3차)
+- `text-wrap: balance`는 비동기 layout. 매우 긴 헤딩(20+ 문자)에 적용 시
+  drag-resize 중 jitter 가능성 있지만 LUXE 헤딩은 모두 짧아 안전.
+- `--stagger-i`가 `Math.min(sIdx, 8)`로 cap되어 한 컨테이너 9번째 자식부터
+  delay 640ms 고정. 의도된 단순화(2차 결정과 동일).
+- `@media (hover: none)` 분기는 `pointer: fine` 디바이스(데스크톱)에는
+  영향 없음. iPad는 hover 지원 모드와 미지원 모드를 OS가 전환 가능 — 일부
+  iPad 사용자에게 hover 효과가 미작동할 수 있으나, 터치 stuck보다 안전.
+
 ## 2026-05-15 2차 폴리싱: Second-order 이슈 + 미적용 sublety 처리
 
 ### Context

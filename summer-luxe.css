@@ -87,6 +87,10 @@ h1 { font-size: clamp(48px, 7.5vw, 112px); line-height: 1.02; letter-spacing: -0
 h2 { font-size: clamp(36px, 5.2vw, 76px); line-height: 1.06; }
 h3 { font-size: clamp(28px, 3.6vw, 48px); }
 h4 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.25; }
+/* Editorial line-breaking — balance headings so multi-line titles split evenly
+   ("이번 계절의 / 혜택" instead of awkward widow). Falls back gracefully where
+   unsupported (Chrome 114+ / Safari 17.5+ / Firefox 121+). */
+h1, h2, h3, h4 { text-wrap: balance; }
 
 /* Hangul typography matching — soften negative letter-spacing for CJK; English keeps the tight LUXE rhythm.
    Also drop heading weight to 200 inside .luxe-section/.luxe-hero so Noto Serif KR hangul matches
@@ -116,6 +120,7 @@ p {
     font-size: 15px;
     line-height: 1.85;
     font-feature-settings: "kern", "liga", "onum";
+    text-wrap: pretty;   /* reduces widows / orphans in body copy */
 }
 
 em, .italic {
@@ -181,7 +186,11 @@ em, .italic {
     padding: clamp(96px, 11vh, 168px) clamp(24px, 5vw, 72px);
     position: relative;
     counter-increment: section;
+    /* Fixed nav (80px → 60px shrunk) would otherwise crop the PLATE counter
+       + first card when jumping to in-page anchors. */
+    scroll-margin-top: clamp(64px, 10vh, 96px);
 }
+.luxe-hero { scroll-margin-top: 0; }
 /* Monograph paper grain — extremely subtle SVG fractal noise.
    No extra HTTP request. Background-color from the token; grain layered on top. */
 .luxe-section.bg-paper {
@@ -827,7 +836,9 @@ em, .italic {
     color: var(--luxe-ink); outline: none;
     transition: border-color 0.4s var(--luxe-ease);
     font-feature-settings: "onum";
+    color-scheme: light;   /* prevent iOS Dark Mode from reverting native form controls */
 }
+input, select, textarea { color-scheme: light; }   /* global safeguard outside .luxe-field */
 .luxe-field input::placeholder,
 .luxe-field textarea::placeholder {
     color: var(--luxe-ink-muted); font-style: italic;
@@ -965,6 +976,17 @@ em, .italic {
         var(--luxe-hair-gold-strong) 50%,
         var(--luxe-champagne) 82%,
         transparent 100%);
+}
+/* Closing hair line — monograph "last page" sealing. Subtler than the opening
+   rail (no gradient stop highlighting middle) so the footer feels bookended,
+   not stacked. */
+.luxe-footer::after {
+    content: '';
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    width: clamp(40%, 50%, 720px);
+    height: 1px;
+    background: rgba(201,168,118,0.32);
+    pointer-events: none;
 }
 .luxe-footer-inner { max-width: 1320px; margin: 0 auto; }
 .luxe-footer-grid {
@@ -1106,22 +1128,17 @@ em, .italic {
 .luxe-fade {
     opacity: 0; transform: translateY(20px);
     transition: opacity 0.9s var(--luxe-ease), transform 0.9s var(--luxe-ease);
+    transition-delay: calc(var(--stagger-i, 0) * 80ms);
     will-change: opacity, transform;   /* GPU layer pre-allocation for smoother reveal */
 }
 .luxe-fade.visible {
     opacity: 1; transform: none;
     will-change: auto;                 /* release GPU layer after reveal to save memory */
 }
-
-/* Stagger — when multiple .luxe-fade share a parent, give each a successive ~90ms delay. */
-.luxe-fade.visible:nth-of-type(1) { transition-delay: 0ms; }
-.luxe-fade.visible:nth-of-type(2) { transition-delay: 80ms; }
-.luxe-fade.visible:nth-of-type(3) { transition-delay: 160ms; }
-.luxe-fade.visible:nth-of-type(4) { transition-delay: 240ms; }
-.luxe-fade.visible:nth-of-type(5) { transition-delay: 320ms; }
-.luxe-fade.visible:nth-of-type(6) { transition-delay: 400ms; }
-.luxe-fade.visible:nth-of-type(7) { transition-delay: 480ms; }
-.luxe-fade.visible:nth-of-type(8) { transition-delay: 560ms; }
+/* Stagger — JS sets --stagger-i per sibling index in the IO observer setup,
+   resetting to 0 on each new parent. nth-of-type was brittle (hero-grid div+figure
+   both matched :nth-of-type(1) → simultaneous reveal). The calc() pattern is
+   markup-agnostic and works for any number of siblings. */
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1131,6 +1148,52 @@ em, .italic {
         transition-delay: 0ms !important;
     }
     .luxe-fade { opacity: 1; transform: none; }
+}
+
+/* ============ TOUCH DEVICES — neutralize sticky :hover state ============
+   iOS Safari / Android Chrome keep :hover applied after a tap until the next
+   tap on something else. Cards would otherwise stay floated up (-5px) and
+   shadow-elevated indefinitely. Disable transform/shadow lift + double-border
+   reveal for non-hover devices. Brand recognition is preserved (champagne
+   stays present on icons/borders). */
+@media (hover: none) {
+    .luxe-ba-card:hover,
+    .luxe-event-card:hover,
+    .luxe-review-card:hover,
+    .luxe-gallery-card:hover {
+        transform: none;
+        box-shadow: var(--luxe-shadow-card);
+    }
+    .luxe-ba-card:hover::before,
+    .luxe-event-card:hover::before,
+    .luxe-review-card:hover::before { opacity: 0; }
+    .luxe-gallery-card:hover img { transform: none; }
+    .luxe-gallery-card:hover::before { opacity: 1; }
+    .luxe-gallery-card:hover::after { border-color: transparent; }
+    .luxe-services-row:hover {
+        background: transparent;
+        padding-left: 0;
+    }
+    .luxe-services-row:hover .luxe-services-icon {
+        background: transparent;
+        color: var(--luxe-champagne-dark);
+        border-color: var(--luxe-hair-gold);
+        transform: none;
+    }
+    .luxe-services-row:hover .luxe-services-icon svg { transform: none; }
+    .luxe-quote-grid:hover .luxe-quote-mark {
+        background: var(--luxe-paper);
+        color: var(--luxe-ink);
+        border-color: var(--luxe-hair-gold);
+        transform: none;
+    }
+    .luxe-faq-item:hover { padding-left: 0; }
+    .luxe-info-row:hover { background: transparent; padding-left: 0; }
+    .luxe-hero-figure:hover img { transform: none; }
+    .luxe-map-wrap:hover img { filter: grayscale(0.45) contrast(1.04); }
+    .luxe-process-step:hover { background: transparent; }
+    .luxe-process-step:hover::before { transform: rotate(45deg); background: var(--luxe-paper); }
+    .luxe-stats-cell:hover { background: transparent; }
 }
 
 /* ============ SUPPRESS LEGACY SPRING ARTIFACTS ============ */

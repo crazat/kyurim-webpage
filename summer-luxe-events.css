@@ -100,6 +100,9 @@ body {
     background: var(--luxe-paper);
     padding: clamp(80px, 10vh, 128px) 0;
     position: relative;
+    /* Match LUXE main: fixed ticker + navbar would otherwise crop section headers
+       on in-page anchor jumps. */
+    scroll-margin-top: clamp(80px, 12vh, 120px);
 }
 .section.before-after,
 .section.diagnosis,
@@ -144,7 +147,10 @@ body {
     -webkit-text-fill-color: var(--luxe-ink) !important;
     margin-bottom: 12px !important;
     font-feature-settings: "kern", "dlig", "ss01";
+    text-wrap: balance;
 }
+/* Body copy widow reduction across landings */
+.section p, .section-header .subtitle { text-wrap: pretty; }
 /* Hangul tracking softening — applies to all hangul headings in landings so spring-era
    markup gets the same polish as the main page's :lang(ko) rule. */
 .section-header h2:lang(ko),
@@ -1013,3 +1019,31 @@ html body .comparison-card.kyurim .badge {
 /* ============ FALLBACK PADDING for sticky bar ============ */
 body { padding-bottom: 56px; }
 @media (min-width: 901px) { body { padding-bottom: 0; } }
+
+/* ============ TOUCH DEVICES — neutralize sticky :hover state ============
+   Mirror of main page's @media (hover: none) guard. iOS Safari / Android
+   Chrome keep :hover after a tap; spring-era card markup with translateY hover
+   would otherwise stay floated up on landings too. */
+@media (hover: none) {
+    .ba-card:hover,
+    .event-item:hover,
+    .event-card:hover,
+    .review-card:hover {
+        transform: none !important;
+        box-shadow: var(--luxe-shadow-card) !important;
+        border-color: var(--luxe-hair) !important;
+    }
+    .ba-card:hover::before { opacity: 0 !important; }
+    .scroll-btn:hover {
+        background: var(--luxe-white) !important;
+        color: var(--luxe-ink) !important;
+        border-color: var(--luxe-hair-strong) !important;
+        transform: translateY(-50%) !important;
+    }
+    .faq-item:hover { padding-left: 0 !important; }
+    .answer-btn:hover {
+        background: var(--luxe-white) !important;
+        color: var(--luxe-ink) !important;
+        border-color: var(--luxe-hair-strong) !important;
+    }
+}
