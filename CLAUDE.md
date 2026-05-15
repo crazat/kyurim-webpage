@@ -1,5 +1,81 @@
 # CLAUDE.md - 규림한의원 청주점 웹사이트
 
+## 2026-05-15: 메인 LUXE에 빠진 컨텐츠 8섹션 복원 (전량 복원, LUXE 톤 유지)
+
+### Context
+- 사용자가 "최근 디자인에 예전 홈페이지에 있었던 컨텐츠들이 많이 빠졌는데
+  특히 메인 홈페이지에서 좀 확인해주겠어?"라고 보고.
+- 비교 결과 1419줄(`index-spring-backup.html`) → 887줄(`index.html`)로 축소되며
+  이벤트 캐러셀, 자가진단, 다이어트 예측, 리뷰 검색/캐러셀, 인테리어 5번째 사진,
+  공식 블로그 진입, BA Story 모달이 모두 빠진 상태였음.
+- 사용자가 "1 (전량 복원, LUXE 톤 유지)" 선택.
+
+### 결정사항 (이번 세션에서 사용자가 확정)
+1. **카운트다운 컨셉은 폐기** — "만료일 필요 없잖아 그 컨셉은 버렸어".
+   향후 어떤 형태로도 카운트다운(`#countdown`, 이벤트 마감 타이머 등)을 다시
+   제안하지 말 것. `summer-luxe.css`의 `#countdown { display: none !important }`
+   suppress 룰 그대로 유지.
+2. **BA Story 모달은 보건소 컨펌 완료** — 환자 사연 노출 가능. 2026-04-01
+   의료광고 전수 검토 시점의 "[매우 높음] 환자 체험기/후기 110건+" 우려는
+   본 컨펌으로 해소됨. 단, 사연에 시술 효과·부작용 disclaimer를 함께
+   노출하는 것은 유지.
+
+### 복원된 섹션 (메인 페이지 흐름 순)
+| # | 섹션 ID | 배경 | 비고 |
+|---|---|---|---|
+| HERO | (기존) | paper | 변경 없음 |
+| **N° 01** | `#events` | paper | 15장 picture/WebP 캐러셀, 각 카드 hover 시 ink 더블 보더, label "N° 01 · Diet" 형식 |
+| **About** | `#about` | bone | 기존 |
+| **Stats** | (기존) | paper | SCOPE 04 → 05 |
+| **Services** | `#services` | paper | 4 → **5 카드**. N° 03에 "안면비대칭 · 체형교정" 신규 삽입, `/events/body/`로 링크. 헤더 "네 가지의 결" → "다섯 가지의 결" |
+| **Process** | (기존) | bone | 기존 |
+| **N° 05** | `#diagnosis` | paper | 4탭(다이어트/피부/비대칭/체형), `diagnosis.js` 재사용 + LUXE CSS 오버라이드 (`.diagnosis-tabs`, `.diag-*`, `.btn-primary/outline` 모두 LUXE 톤으로 변환) |
+| **N° 06** | `#diet-prediction` | bone | 성별 라디오 + 키/체중/나이 + Chart.js 차트 + 급속/완속 결과 카드 (`.luxe-predict-card` LUXE 톤) |
+| **Cases** | `#cases` | paper | 6장 BA + **click 시 Story 모달** (data-story 키) |
+| **Reviews** | `#reviews` | bone | 인라인 24개 후기 + 키워드 검색(200ms debounce, `<mark>` 하이라이트, XSS escape) |
+| **Marquee** | (champagne) | — | 기존 |
+| **Interior** | `#interior` | paper | 4장 → **5장** (`interior_5.webp` 추가), 그리드 `repeat(4,1fr)` → `repeat(5,1fr)` (반응형 5/3/2-up) |
+| **Blog** | `#blog` | paper | `blog.naver.com/crazat` 진입 카드, 韓 한자 비주얼 + champagne hairline |
+| **FAQ** | `#faq` | bone | 기존 |
+| **Inquiry** | `#inquiry` | paper | 기존 |
+| **Contact** | `#contact` | bone | 기존 |
+
+### BA Story 모달 (보건소 컨펌 후 복원)
+- 6개 사연 인라인 데이터 (`diet_full`, `skin_lifting`, `diet_side`, `skin_glow`,
+  `diet_back`, `skin_neck`). `script.js`의 `storyData`에서 발췌 후 LUXE 톤에
+  맞게 카피 정돈 (절대적 표현 "기적", "20kg", "당뇨 약물 중단" 같은 강한
+  claim은 톤다운).
+- 모달 마크업은 sticky CTA 직후, 외부 script 로드 직전 위치.
+- 이미지 + 텍스트 2컬럼 LUXE 카드, hairline 더블 보더, champagne 액센트.
+- 사연 본문 하단에 한 줄짜리 disclaimer 박스 (시술 효과·부작용 + 개인차).
+- 접근성: `role="dialog"` + `aria-modal` + ESC 닫기 + backdrop click 닫기 +
+  마지막 포커스 복원 + BA 카드 `tabindex="0"` + Enter/Space 키보드 트리거.
+
+### 신규 외부 의존성
+- **Chart.js 4.4.1** (jsdelivr CDN, `defer`) — 다이어트 예측 차트
+- **Font Awesome 6.5.1** (cdnjs, async + SRI sha512) — `diagnosis.js`의
+  `<i class="fa-solid fa-clipboard-check">` 등 아이콘. 메인에만 로드.
+- **diet_prediction.js**, **diagnosis.js** — 기존 파일 그대로 재사용
+
+### 의도적으로 안 한 것
+- **`script.min.js` 전체 로드 회피** — `form[name="submit-to-google-sheet"]`
+  핸들러가 중복 등록되어 LUXE 인라인 제출 핸들러와 충돌. 대신 리뷰 데이터는
+  24개로 큐레이팅해서 인라인.
+- **카운트다운 미복원** (사용자 결정).
+- **두 번째(중간) 빠른 상담 폼** — 단일 `#inquiry` 폼 유지로 중복 회피.
+
+### 변경 파일
+- `index.html` — 887줄 → 1502줄 (+615)
+- `summer-luxe.css` — 1061줄 → 1612줄 (+551, 신규 섹션 9종 + Story 모달 스타일)
+- `CLAUDE.md` — 본 절 추가
+- 메모리: `feedback-countdown-dropped`, `project-ba-story-cleared` 신규 저장
+
+### 검증
+- `npm test` (= `npm run check`) 통과
+- HTML: 16/16 sections, 48/48 unique IDs, 9 inline JS blocks 전부 syntax OK
+- JSON-LD parse OK
+- 로컬 리소스 79개 + 신규 인테리어 5번째 모두 resolve
+
 ## 2026-05-12: Body Landing SEO Upgrade for Face Asymmetry
 
 ### Context

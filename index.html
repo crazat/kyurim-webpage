@@ -46,7 +46,11 @@
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" integrity="sha384-uGEvnSEpW2nM9xJFsrxrwakwrk9QdDTQIBJh0hVMu90OaVyMAMpAK1rIn0/Kh1/k" crossorigin="anonymous"></noscript>
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="summer-luxe.css?v=20260504b">
+    <link rel="stylesheet" href="summer-luxe.css?v=20260515a">
+
+    <!-- Font Awesome (async) — diagnosis icons + review stars -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
 
     <!-- JSON-LD: Rich Local Business + Reviews (preserved from production) -->
     <script type="application/ld+json">
@@ -148,10 +152,11 @@
 
         <nav aria-label="주 메뉴">
             <ul class="luxe-nav-links">
-                <li><a href="#about">진료철학</a></li>
+                <li><a href="#events">이벤트</a></li>
                 <li><a href="#services">진료과목</a></li>
-                <li><a href="#process">진료과정</a></li>
+                <li><a href="#diagnosis">자가진단</a></li>
                 <li><a href="#cases">치료사례</a></li>
+                <li><a href="#reviews">후기</a></li>
                 <li><a href="#interior">공간</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">오시는 길</a></li>
@@ -168,11 +173,14 @@
 
 <aside class="luxe-mobile-menu" id="mobileMenu" aria-hidden="true">
     <ul>
-        <li><a href="#about">진료철학</a></li>
+        <li><a href="#events">이벤트</a></li>
         <li><a href="#services">진료과목</a></li>
-        <li><a href="#process">진료과정</a></li>
+        <li><a href="#diagnosis">자가진단</a></li>
+        <li><a href="#diet-prediction">다이어트 예측</a></li>
         <li><a href="#cases">치료사례</a></li>
+        <li><a href="#reviews">후기</a></li>
         <li><a href="#interior">공간</a></li>
+        <li><a href="#blog">블로그</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">오시는 길</a></li>
         <li style="padding-top:24px"><a href="tel:043-224-1075" style="font-style:italic;color:#A88955">043 — 224 — 1075</a></li>
@@ -219,6 +227,158 @@
             <img src="assets/director.webp" alt="규림한의원 한정우 원장" loading="eager" fetchpriority="high">
             <span class="luxe-hero-fig-cap">Cheongju · Sangdang-gu</span>
         </figure>
+    </div>
+</section>
+
+<!-- ============ EVENTS CAROUSEL ============ -->
+<section id="events" class="luxe-section bg-paper">
+    <div class="luxe-container">
+        <div class="luxe-section-head">
+            <div class="row">
+                <span class="hairline gold long"></span>
+                <span class="eyebrow">Special Editions · 진행 중인 이벤트</span>
+            </div>
+            <h2>이번 계절의 <em>혜택</em></h2>
+            <p>규림한의원 청주점에서 진행 중인 이번 시즌의 특별 프로그램입니다. 옆으로 밀어 살펴봐 주세요.</p>
+        </div>
+
+        <div class="luxe-events-track" aria-label="진행 중인 이벤트">
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 01 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/벚꽃컷팅이벤트 최종.webp" type="image/webp">
+                        <img src="assets/26 march diet/벚꽃컷팅이벤트 최종.png" alt="컷팅 이벤트" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/skin/index.html" class="luxe-event-card">
+                <span class="label">N° 02 · Skin</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march skin/새살채움프리테스트 확정.webp" type="image/webp">
+                        <img src="assets/26 march skin/새살채움프리테스트 확정.png" alt="새살채움 프리테스트" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/body/index.html" class="luxe-event-card">
+                <span class="label">N° 03 · Body</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march body/비대칭 체험 최종.webp" type="image/webp">
+                        <img src="assets/26 march body/비대칭 체험 최종.png" alt="비대칭 체험" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 04 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/블라우스핏 최종.webp" type="image/webp">
+                        <img src="assets/26 march diet/블라우스핏 최종.png" alt="블라우스핏" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/skin/index.html" class="luxe-event-card">
+                <span class="label">N° 05 · Skin</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march skin/여드름관리 체험 확정.webp" type="image/webp">
+                        <img src="assets/26 march skin/여드름관리 체험 확정.png" alt="여드름관리 체험" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 06 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/산후 3일 확정.webp" type="image/webp">
+                        <img src="assets/26 march diet/산후 3일 확정.png" alt="산후 3일" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/skin/index.html" class="luxe-event-card">
+                <span class="label">N° 07 · Skin</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march skin/4주 포토샵 확정.webp" type="image/webp">
+                        <img src="assets/26 march skin/4주 포토샵 확정.png" alt="4주 포토샵" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 08 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/투플러스원최종.webp" type="image/webp">
+                        <img src="assets/26 march diet/투플러스원최종.png" alt="투플러스원 이벤트" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/body/index.html" class="luxe-event-card">
+                <span class="label">N° 09 · Body</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march body/4주 비대칭 최종.webp" type="image/webp">
+                        <img src="assets/26 march body/4주 비대칭 최종.png" alt="4주 비대칭" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 10 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/복부 리마스터 4주 확정.webp" type="image/webp">
+                        <img src="assets/26 march diet/복부 리마스터 4주 확정.png" alt="복부 리마스터 4주" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/skin/index.html" class="luxe-event-card">
+                <span class="label">N° 11 · Skin</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march skin/흉터 모공 하이엔드 확정.webp" type="image/webp">
+                        <img src="assets/26 march skin/흉터 모공 하이엔드 확정.png" alt="흉터 모공 하이엔드" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/wedding/index.html" class="luxe-event-card">
+                <span class="label">N° 12 · Wedding</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march wedding/긴급구조대 확정.webp" type="image/webp">
+                        <img src="assets/26 march wedding/긴급구조대 확정.png" alt="긴급구조대" width="1536" height="2752">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/wedding/index.html" class="luxe-event-card">
+                <span class="label">N° 13 · Wedding</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march wedding/웨딩올킬 확정.webp" type="image/webp">
+                        <img src="assets/26 march wedding/웨딩올킬 확정.png" alt="웨딩올킬" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/diet/index.html" class="luxe-event-card">
+                <span class="label">N° 14 · Diet</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march diet/12주 최종 확정.webp" type="image/webp">
+                        <img src="assets/26 march diet/12주 최종 확정.png" alt="12주 최종" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+            <a href="events/body/index.html" class="luxe-event-card">
+                <span class="label">N° 15 · Body</span>
+                <div class="img-wrap">
+                    <picture>
+                        <source srcset="assets/26 march body/비대칭정규 최종.webp" type="image/webp">
+                        <img src="assets/26 march body/비대칭정규 최종.png" alt="비대칭 정규" width="768" height="1376">
+                    </picture>
+                </div>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -271,7 +431,7 @@
             </div>
             <div class="luxe-stats-cell">
                 <div class="luxe-stats-key">SCOPE</div>
-                <div class="luxe-stats-num">04</div>
+                <div class="luxe-stats-num">05</div>
                 <div class="luxe-stats-label">전문 진료 영역</div>
             </div>
         </div>
@@ -286,8 +446,8 @@
                 <span class="hairline gold long"></span>
                 <span class="eyebrow">Services · 진료 과목</span>
             </div>
-            <h2>네 가지의 결,<br><em>하나의 정성</em></h2>
-            <p>다이어트, 피부, 통증, 교통사고 — 각기 다른 영역이지만 진료의 마음가짐은 하나입니다.</p>
+            <h2>다섯 가지의 결,<br><em>하나의 정성</em></h2>
+            <p>다이어트, 피부, 안면비대칭·체형교정, 통증, 교통사고 — 각기 다른 영역이지만 진료의 마음가짐은 하나입니다.</p>
         </div>
 
         <div>
@@ -334,6 +494,26 @@
                     <span class="index-num">N° 03</span>
                     <div class="luxe-services-icon" aria-hidden="true">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <circle cx="12" cy="8" r="3"/>
+                            <path d="M6 21c0-4 3-7 6-7s6 3 6 7"/>
+                            <path d="M9 14h6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <h3>안면비대칭 · 체형교정 <span class="en">Asymmetry · Posture</span></h3>
+                    <p>턱·골반·척추의 정렬을 회복해 얼굴 좌우, 어깨선, 골반까지 — 몸 전체의 균형을 다시 맞춥니다.</p>
+                </div>
+                <div style="text-align:right">
+                    <a href="events/body/index.html" class="luxe-link">상세보기 →</a>
+                </div>
+            </div>
+
+            <div class="luxe-services-row">
+                <div>
+                    <span class="index-num">N° 04</span>
+                    <div class="luxe-services-icon" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <path d="M5 12h14M5 8h14M5 16h14"/>
                         </svg>
                     </div>
@@ -349,7 +529,7 @@
 
             <div class="luxe-services-row">
                 <div>
-                    <span class="index-num">N° 04</span>
+                    <span class="index-num">N° 05</span>
                     <div class="luxe-services-icon" aria-hidden="true">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <rect x="4" y="7" width="16" height="10" rx="1"/>
@@ -410,6 +590,100 @@
     </div>
 </section>
 
+<!-- ============ SELF-DIAGNOSIS ============ -->
+<section id="diagnosis" class="luxe-section bg-paper">
+    <div class="luxe-container">
+        <div class="luxe-section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+            <div class="row" style="justify-content:center">
+                <span class="hairline gold long"></span>
+                <span class="eyebrow">Self-Check · 자가진단</span>
+            </div>
+            <h2 style="margin-left:auto;margin-right:auto">나의 건강 유형 <em>찾기</em></h2>
+            <p style="margin-left:auto;margin-right:auto">짧은 문답으로 결의 방향을 가늠해 봅니다. 정확한 진단과 처방은 내원 상담을 통해 이어집니다.</p>
+        </div>
+
+        <div class="luxe-diagnosis-wrap">
+            <div class="diagnosis-tabs">
+                <button class="tab-btn active" data-type="diet">Diet · 다이어트</button>
+                <button class="tab-btn" data-type="skin">Skin · 피부</button>
+                <button class="tab-btn" data-type="asymmetry">Asymmetry · 비대칭</button>
+                <button class="tab-btn" data-type="body">Body · 체형</button>
+            </div>
+            <div id="diagnosis-screen" class="diagnosis-content"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DIET PREDICTION ============ -->
+<section id="diet-prediction" class="luxe-section bg-bone">
+    <div class="luxe-container">
+        <div class="luxe-section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+            <div class="row" style="justify-content:center">
+                <span class="hairline gold long"></span>
+                <span class="eyebrow">Forecast · 다이어트 성공 예측</span>
+            </div>
+            <h2 style="margin-left:auto;margin-right:auto">3개월 후의 <em>나</em></h2>
+            <p style="margin-left:auto;margin-right:auto">간단한 입력만으로 급속·완속 두 가지 시나리오의 예상 감량을 가늠해 봅니다. 결과는 참고용이며 개인차가 있습니다.</p>
+        </div>
+
+        <div class="luxe-predict-wrap">
+            <div class="luxe-predict-form">
+                <div class="luxe-predict-gender" role="radiogroup" aria-label="성별">
+                    <span class="label">Sex · 성별</span>
+                    <label class="opt">
+                        <input type="radio" name="gender" id="gender-female" value="female" checked>
+                        <span>여성</span>
+                    </label>
+                    <label class="opt">
+                        <input type="radio" name="gender" id="gender-male" value="male">
+                        <span>남성</span>
+                    </label>
+                </div>
+
+                <div class="luxe-predict-row">
+                    <div class="luxe-field" style="margin-bottom:0">
+                        <label for="userHeight">키 · Height (cm)</label>
+                        <input type="number" id="userHeight" placeholder="160" min="100" max="250" inputmode="numeric">
+                    </div>
+                    <div class="luxe-field" style="margin-bottom:0">
+                        <label for="currentWeight">체중 · Weight (kg)</label>
+                        <input type="number" id="currentWeight" placeholder="60" min="20" max="300" inputmode="numeric">
+                    </div>
+                    <div class="luxe-field" style="margin-bottom:0">
+                        <label for="userAge">나이 · Age</label>
+                        <input type="number" id="userAge" placeholder="30" min="10" max="120" inputmode="numeric">
+                    </div>
+                </div>
+
+                <button id="calculateDietBtn" type="button">예상 결과 보기</button>
+            </div>
+
+            <div id="dietResult" class="prediction-result">
+                <h4>3개월 예상 시나리오</h4>
+                <div class="luxe-predict-chart">
+                    <canvas id="dietChart"></canvas>
+                </div>
+                <div class="luxe-predict-summary">
+                    <div class="luxe-predict-card">
+                        <div class="eyebrow">Intensive · 급속 감량</div>
+                        <div class="num" id="rapidTotalLoss">-00kg</div>
+                        <div class="sub">3개월 예상 체중 · <strong id="rapidFinalWeight">00kg</strong></div>
+                    </div>
+                    <div class="luxe-predict-card">
+                        <div class="eyebrow">Gradual · 완속 감량</div>
+                        <div class="num" id="slowTotalLoss">-00kg</div>
+                        <div class="sub">3개월 예상 체중 · <strong id="slowFinalWeight">00kg</strong></div>
+                    </div>
+                </div>
+                <p class="luxe-predict-disclaimer">
+                    ※ 결과는 개인 체질·생활 습관에 따라 차이가 있을 수 있습니다.<br>
+                    정확한 처방은 내원 상담을 통해 맞춤 설계됩니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ============ B/A CASES ============ -->
 <section id="cases" class="luxe-section bg-paper">
     <div class="luxe-container">
@@ -425,48 +699,70 @@
         </div>
 
         <div class="luxe-ba-grid">
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="diet_full" tabindex="0" role="button" aria-label="전신 다이어트 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_diet_full_k.webp" alt="다이어트 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>전신 다이어트</h4>
                     <p>Case 001 · 12 weeks · ƒ 30s</p>
                 </div>
             </article>
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="skin_lifting" tabindex="0" role="button" aria-label="안면 리프팅 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_skin_lifting_k.webp" alt="안면 리프팅 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>안면 리프팅</h4>
                     <p>Case 002 · 8 weeks · ƒ 40s</p>
                 </div>
             </article>
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="diet_side" tabindex="0" role="button" aria-label="복부 라인 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_diet_side_k.webp" alt="복부 다이어트 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>복부 라인</h4>
                     <p>Case 003 · 10 weeks · ƒ 30s</p>
                 </div>
             </article>
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="skin_glow" tabindex="0" role="button" aria-label="피부 톤 회복 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_skin_glow_k.webp" alt="피부 톤 개선 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>피부 톤 회복</h4>
                     <p>Case 004 · 6 weeks · ƒ 20s</p>
                 </div>
             </article>
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="diet_back" tabindex="0" role="button" aria-label="등 라인 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_diet_back_k.webp" alt="등 라인 다이어트 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>등 라인 정리</h4>
                     <p>Case 005 · 12 weeks · ƒ 30s</p>
                 </div>
             </article>
-            <article class="luxe-ba-card">
+            <article class="luxe-ba-card" data-story="skin_neck" tabindex="0" role="button" aria-label="목·턱선 케어 사례 자세히 보기">
                 <div class="img-wrap"><img src="assets/ba_skin_neck_k.webp" alt="목 주름 개선 전후" loading="lazy"></div>
                 <div class="meta">
                     <h4>목·턱선 케어</h4>
                     <p>Case 006 · 8 weeks · ƒ 40s</p>
                 </div>
             </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ REVIEWS — search + carousel ============ -->
+<section id="reviews" class="luxe-section bg-bone">
+    <div class="luxe-container">
+        <div class="luxe-section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+            <div class="row" style="justify-content:center">
+                <span class="hairline gold long"></span>
+                <span class="eyebrow">Real Reviews · 생생 치료 후기</span>
+            </div>
+            <h2 style="margin-left:auto;margin-right:auto">함께한 분들의 <em>이야기</em></h2>
+            <p style="margin-left:auto;margin-right:auto">네이버·카카오에 직접 남겨주신 후기입니다. 키워드로 검색해 보실 수 있습니다.</p>
+        </div>
+
+        <div class="luxe-review-search">
+            <input type="text" id="reviewSearchInput" placeholder="키워드 검색 — 예: 뱃살 · 웨딩 · 비대칭" aria-label="후기 검색">
+        </div>
+
+        <div class="luxe-review-track" id="reviewTrack" aria-live="polite">
+            <!-- Injected by JS -->
         </div>
     </div>
 </section>
@@ -501,7 +797,7 @@
                 <span class="hairline gold long"></span>
                 <span class="eyebrow">Space · 우리의 공간</span>
             </div>
-            <h2>고요한 결의 <em>네 장면</em></h2>
+            <h2>고요한 결의 <em>다섯 장면</em></h2>
         </div>
 
         <div class="luxe-gallery-grid">
@@ -525,6 +821,32 @@
                 <img src="assets/interior_4.webp" alt="규림한의원 시술실" loading="lazy">
                 <figcaption class="cap"><em>The Treatment</em></figcaption>
             </figure>
+            <figure class="luxe-gallery-card">
+                <span class="label">FRAME 05</span>
+                <img src="assets/interior_5.webp" alt="규림한의원 공간 디테일" loading="lazy">
+                <figcaption class="cap"><em>The Detail</em></figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section id="blog" class="luxe-section bg-paper">
+    <div class="luxe-container">
+        <div class="luxe-blog-card">
+            <div>
+                <div class="key">Kyurim's Story · 規林手記</div>
+                <h3>공식 블로그에서<br><em>이야기를</em></h3>
+                <p>한정우 원장이 직접 쓰는 진료 일기, 한방 건강 정보, 그리고 병원 소식. 평소 궁금했던 작은 결까지 블로그에서 가장 먼저 만나보세요.</p>
+                <a href="https://blog.naver.com/crazat" target="_blank" rel="noopener noreferrer" class="luxe-btn gold">
+                    블로그 둘러보기 →
+                </a>
+            </div>
+
+            <div class="luxe-blog-visual" aria-hidden="true">
+                <span class="tag">Director's Note · 院長手記</span>
+                <span class="frame"></span>
+            </div>
         </div>
     </div>
 </section>
@@ -869,6 +1191,247 @@
         el.classList.add('luxe-fade');
         io.observe(el);
     });
+})();
+</script>
+
+<!-- ============ BA STORY MODAL — 보건소 컨펌 완료 (2026-05-15) ============ -->
+<div class="luxe-story-modal" id="storyModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle" aria-hidden="true">
+    <div class="luxe-story-card">
+        <button type="button" class="luxe-story-close" id="storyClose" aria-label="닫기"></button>
+        <div class="luxe-story-grid">
+            <figure class="luxe-story-figure">
+                <img id="storyImage" src="" alt="">
+            </figure>
+            <div class="luxe-story-text">
+                <span class="luxe-story-tag" id="storyTag"></span>
+                <h3 class="luxe-story-title" id="storyTitle"></h3>
+                <div class="luxe-story-profile" id="storyProfile"></div>
+                <div class="luxe-story-desc" id="storyDesc"></div>
+                <div class="luxe-story-result" id="storyResult"></div>
+                <div class="luxe-story-disclaimer">
+                    ※ 시술 효과 및 부작용은 개인의 체질·생활 습관에 따라 차이가 있을 수 있습니다.<br>
+                    ※ 사연은 실제 진료 사례를 바탕으로 작성되었으며, 정확한 처방은 1:1 상담을 통해 설계됩니다.
+                </div>
+                <div class="luxe-story-cta">
+                    <a href="https://pf.kakao.com/_DxewtT/chat" target="_blank" rel="noopener noreferrer">
+                        카카오톡 상담 →
+                    </a>
+                    <a href="tel:043-224-1075" class="outline">
+                        전화 · 043-224-1075
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+    var stories = {
+        diet_full: {
+            tag: '다이어트',
+            title: '고도비만 전신 감량',
+            profile: '20대 여성 · 취준생 · 12주',
+            desc: '불규칙한 식습관으로 체중이 80kg대까지 늘어나 자존감이 바닥이었습니다. 혼자 굶는 다이어트는 매번 실패하고 요요만 반복했습니다.\n\n식욕을 조절하고 대사를 정상화하는 1:1 맞춤 한약을 처방하고, 정기적인 인바디 체크로 멘탈까지 관리해드렸습니다.',
+            result: '4개월 만에 22kg 감량 후 목표하던 기업에 취업까지 성공하셨습니다.',
+            img: 'assets/ba_diet_full_k.webp'
+        },
+        skin_lifting: {
+            tag: '동안 리프팅',
+            title: '무너진 턱선 & 불독살',
+            profile: '50대 여성 · 주부 · 8주',
+            desc: '나이가 들면서 턱선이 무너지고 입가 옆에 불독살이 심술보처럼 내려와 인상이 강해 보이는 것이 고민이셨습니다. 수술은 무서워하셔서 비수술 요법을 원하셨습니다.\n\n녹는 실(매선)을 근막층(SMAS)까지 자입하여 처진 피부를 당겨 올리고, 콜라겐 생성을 유도하여 탄력을 채웠습니다.',
+            result: '턱 라인이 정리되고 불독살이 옅어져 한층 부드러운 인상을 되찾으셨습니다.',
+            img: 'assets/ba_skin_lifting_k.webp'
+        },
+        diet_side: {
+            tag: '체형 교정',
+            title: '러브핸들 & 허리 라인',
+            profile: '30대 여성 · 필라테스 강사 · 10주',
+            desc: '운동을 업으로 하시지만 옆구리 쪽 군살은 아무리 운동해도 빠지지 않아 내원하셨습니다.\n\n라인을 잡아주는 매선 시술로 탄력을 주고, 국소 부위 지방을 분해하여 균형 잡힌 허리 라인을 함께 만들어 갔습니다.',
+            result: '옆구리 라인이 정돈되어 옷 핏이 한결 자연스러워지셨습니다.',
+            img: 'assets/ba_diet_side_k.webp'
+        },
+        skin_glow: {
+            tag: '피부 탄력',
+            title: '속건조 해결 & 물광 피부',
+            profile: '30대 여성 · 예비신부 · 6주',
+            desc: '결혼식을 앞두고 피부가 푸석하고 화장이 자꾸 들떠서 고민이셨습니다. 샵 관리를 받아도 그때뿐이고 속당김이 해결되지 않았습니다.\n\n피부 진피층에 수분을 공급하는 물광 약침과 피부 재생 주기를 앞당기는 정안침 치료로 속부터 차오르는 광채를 만들었습니다.',
+            result: '세안 후에도 당김 없이 촉촉하고 은은한 윤광이 도는 결로 결혼식을 맞이하셨습니다.',
+            img: 'assets/ba_skin_glow_k.webp'
+        },
+        diet_back: {
+            tag: '부분 비만',
+            title: '숨은 등살 & 옆구리',
+            profile: '50대 여성 · 자영업 · 12주',
+            desc: '속옷 위아래로 삐져나오는 군살 때문에 옷태가 나지 않아 속상해하셨습니다. 갱년기 후 찐 살이라 잘 빠지지 않았습니다.\n\n체온을 높여 지방 연소를 돕는 심부 온열 요법과 림프 순환을 돕는 해독 프로그램을 진행했습니다.',
+            result: '등 라인이 정돈되어 뒷모습이 한층 깔끔해지셨습니다.',
+            img: 'assets/ba_diet_back_k.webp'
+        },
+        skin_neck: {
+            tag: '주름 개선',
+            title: '가로 목주름 케어',
+            profile: '30대 여성 · 직장인 · 8주',
+            desc: '스마트폰 사용으로 인한 잘못된 자세로 젊은 나이임에도 깊은 가로 목주름이 자리 잡았습니다. 목걸이를 하기도 꺼려졌습니다.\n\n목 근육의 긴장을 풀어주고, 주름진 부위에 재생 앰플을 침투시키는 MTS 시술과 콜라겐 매선 시술을 병행했습니다.',
+            result: '목주름이 옅어지고 목 피부의 탄력이 좋아져 목선이 한결 길어 보입니다.',
+            img: 'assets/ba_skin_neck_k.webp'
+        }
+    };
+
+    var modal = document.getElementById('storyModal');
+    if (!modal) return;
+    var closeBtn = document.getElementById('storyClose');
+    var imgEl = document.getElementById('storyImage');
+    var tagEl = document.getElementById('storyTag');
+    var titleEl = document.getElementById('storyTitle');
+    var profileEl = document.getElementById('storyProfile');
+    var descEl = document.getElementById('storyDesc');
+    var resultEl = document.getElementById('storyResult');
+    var lastFocus = null;
+
+    function open(key) {
+        var data = stories[key];
+        if (!data) return;
+        lastFocus = document.activeElement;
+        imgEl.src = data.img;
+        imgEl.alt = data.title + ' 치료 사례';
+        tagEl.textContent = data.tag;
+        titleEl.textContent = data.title;
+        profileEl.textContent = data.profile;
+        descEl.textContent = data.desc;
+        resultEl.textContent = data.result;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('story-open');
+        setTimeout(function () { closeBtn.focus(); }, 50);
+    }
+    function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('story-open');
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    document.querySelectorAll('.luxe-ba-card[data-story]').forEach(function (card) {
+        card.addEventListener('click', function () { open(card.getAttribute('data-story')); });
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                open(card.getAttribute('data-story'));
+            }
+        });
+    });
+    closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) close();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+})();
+</script>
+
+<!-- ============ RESTORED SECTIONS — external scripts ============ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<script src="diet_prediction.js?v=20260515a" defer></script>
+<script src="diagnosis.js?v=20260515a" defer></script>
+
+<!-- ============ REVIEWS — inline curated dataset + LUXE renderer ============ -->
+<script>
+(function () {
+    'use strict';
+    var reviews = [
+        { cat: 'diet',      tx: '다이어트 3개월', body: '3개월 동안 12kg 감량 성공했어요! 요요 없이 유지 중입니다. 원장님이 식단까지 꼼꼼하게 봐주셔서 포기할 수 없었어요.', who: '김OO님', when: '2025.11.28', stars: 5, kw: ['친절해요','꼼꼼해요','효과좋아요'] },
+        { cat: 'diet',      tx: '다이어트 1개월', body: '한 달 만에 5kg 빠졌어요. 한약이 쓰지 않고 먹기 편해서 좋았습니다. 목표 체중까지 화이팅!', who: '이OO님', when: '2025.11.15', stars: 5, kw: ['상담이자세해요','시설이깔끔해요'] },
+        { cat: 'diet',      tx: '산후 다이어트', body: '출산 후 안 빠지던 살이 규림 한약 먹고 쏙 빠졌어요. 붓기도 같이 빠져서 몸이 너무 가벼워요.', who: '최OO님', when: '2025.10.12', stars: 5, kw: ['붓기완화','건강해졌어요'] },
+        { cat: 'diet',      tx: '웨딩 다이어트', body: '결혼식 앞두고 급하게 관리받았는데, 드레스 라인이 달라졌어요. 예쁘게 결혼식 잘 마쳤습니다.', who: '장OO님', when: '2025.07.18', stars: 5, kw: ['예신필수','라인정리'] },
+        { cat: 'diet',      tx: '갱년기 다이어트', body: '나이 들면서 뱃살이 안 빠졌는데, 규림에서 관리받고 허리라인을 되찾았습니다.', who: '임OO님', when: '2025.07.01', stars: 5, kw: ['뱃살타파','젊어졌어요'] },
+        { cat: 'diet',      tx: '급찐급빠 다이어트', body: '휴가 다녀와서 급하게 찐 살, 2주 프로그램으로 정리했습니다. 역시 관리는 규림이네요.', who: '정OO님', when: '2025.09.25', stars: 5, kw: ['빠른효과','친절해요'] },
+        { cat: 'asymmetry', tx: '안면비대칭 교정', body: '사진 찍을 때마다 스트레스였는데, 교정 후 얼굴 라인이 정말 달라졌어요. 친구들이 살 빠졌냐고 물어봐요!', who: '서OO님', when: '2025.11.20', stars: 5, kw: ['얼굴축소','비대칭교정'] },
+        { cat: 'asymmetry', tx: '안면비대칭 교정', body: '턱 관절 소리도 줄어들고 얼굴 중심선이 맞아가는 게 보입니다. 꾸준히 치료받길 잘했어요.', who: '신OO님', when: '2025.11.05', stars: 5, kw: ['턱관절','통증완화'] },
+        { cat: 'asymmetry', tx: '안면비대칭/턱관절', body: '입 벌릴 때마다 딱딱 소리가 났는데 교정 치료 받고 편해졌습니다. 얼굴 비대칭도 많이 좋아졌어요.', who: '권OO님', when: '2025.10.25', stars: 5, kw: ['신기해요','편안해요'] },
+        { cat: 'asymmetry', tx: '안면비대칭 교정', body: '수술 없이 교정만으로 이렇게 달라질 수 있다니 놀라워요. 거울 보는 게 즐거워졌습니다.', who: '황OO님', when: '2025.10.08', stars: 5, kw: ['비수술','자연스러움'] },
+        { cat: 'asymmetry', tx: '턱관절 장애', body: '턱이 아파서 밥 먹기도 힘들었는데, 치료 몇 번 만에 통증이 사라졌어요.', who: '안OO님', when: '2025.09.15', stars: 5, kw: ['통증치료','만족'] },
+        { cat: 'asymmetry', tx: '안면비대칭/체형', body: '얼굴뿐만 아니라 골반이랑 척추까지 같이 교정해주셔서 몸 전체가 바르게 된 느낌입니다.', who: '류OO님', when: '2025.08.12', stars: 5, kw: ['전신교정','바른자세'] },
+        { cat: 'skin',      tx: '여드름 흉터', body: '피부과 많이 다녀봤지만 여기만큼 꼼꼼한 곳은 처음이에요. 흉터가 눈에 띄게 옅어져서 화장할 맛이 납니다.', who: '문OO님', when: '2025.11.25', stars: 5, kw: ['꼼꼼해요','피부재생'] },
+        { cat: 'skin',      tx: '피부 리프팅', body: '매선 시술 받았는데 즉각적으로 리프팅되는 게 보여서 신기했어요. 통증도 생각보다 적었습니다.', who: '양OO님', when: '2025.11.10', stars: 5, kw: ['동안시술','즉각효과'] },
+        { cat: 'skin',      tx: '성인 여드름', body: '재발하는 여드름 때문에 고민이었는데, 속부터 치료하니 확실히 좋아지네요. 피부 톤도 맑아졌어요.', who: '손OO님', when: '2025.10.20', stars: 5, kw: ['근본치료','피부미인'] },
+        { cat: 'skin',      tx: '신부 관리', body: '결혼식 앞두고 피부 관리 받았는데, 화장이 너무 잘 먹어서 칭찬 많이 들었어요.', who: '심OO님', when: '2025.06.18', stars: 5, kw: ['웨딩케어','물광피부'] },
+        { cat: 'skin',      tx: '안면홍조', body: '얼굴이 항상 붉어서 스트레스였는데, 한약 먹고 침 맞으니 열감이 많이 내려갔어요.', who: '백OO님', when: '2025.08.25', stars: 4, kw: ['홍조개선','열감해소'] },
+        { cat: 'skin',      tx: '피부 탄력', body: '나이 들면서 피부가 처져서 고민이었는데, 정안침 맞고 탱탱해진 기분이에요.', who: '허OO님', when: '2025.08.08', stars: 5, kw: ['탄력개선','동안침'] },
+        { cat: 'pain',      tx: '목/어깨 통증', body: '직장인이라 거북목이 심했는데, 침 치료랑 추나 받고 많이 좋아졌습니다. 두통도 사라졌어요.', who: '노OO님', when: '2025.11.22', stars: 5, kw: ['거북목','시원해요'] },
+        { cat: 'pain',      tx: '교통사고 후유증', body: '사고 후 목이랑 허리가 계속 아팠는데, 추나 치료 받고 씻은 듯이 나았습니다.', who: '하OO님', when: '2025.11.08', stars: 5, kw: ['교통사고','야간진료'] },
+        { cat: 'pain',      tx: '허리 디스크', body: '허리가 너무 아파서 걷기도 힘들었는데, 약침 맞고 많이 호전되었습니다. 원장님 정말 친절하세요.', who: '곽OO님', when: '2025.10.15', stars: 5, kw: ['디스크치료','친절왕'] },
+        { cat: 'pain',      tx: '무릎 통증', body: '계단 오르내리기 힘들었는데, 봉침 맞고 많이 부드러워졌어요. 등산도 다시 다닙니다.', who: '차OO님', when: '2025.09.05', stars: 5, kw: ['봉침효과','관절튼튼'] },
+        { cat: 'other',     tx: '공진단 처방', body: '부모님 선물로 드렸는데 너무 좋아하시네요. 아침마다 개운하시다고 합니다.', who: '우OO님', when: '2025.05.08', stars: 5, kw: ['효도선물','피로회복'] },
+        { cat: 'other',     tx: '수험생 보약', body: '고3 아들 체력이 떨어져서 지어줬는데, 집중력이 좋아진 것 같다고 하네요.', who: '구OO님', when: '2025.04.20', stars: 5, kw: ['수험생','집중력'] }
+    ];
+
+    var track = document.getElementById('reviewTrack');
+    var searchEl = document.getElementById('reviewSearchInput');
+    if (!track) return;
+
+    function star(n) {
+        var s = '';
+        for (var i = 0; i < n; i++) s += '★';
+        return s;
+    }
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, function (c) {
+            return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+        });
+    }
+    function highlight(text, kw) {
+        var escaped = escapeHtml(text);
+        if (!kw) return escaped;
+        var re = new RegExp('(' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+        return escaped.replace(re, '<mark>$1</mark>');
+    }
+    function render(list, kw) {
+        track.innerHTML = '';
+        if (!list.length) {
+            track.innerHTML = '<div class="luxe-review-noresult">검색 결과가 없습니다 — 다른 키워드로 시도해 주세요.</div>';
+            return;
+        }
+        var frag = document.createDocumentFragment();
+        list.forEach(function (r) {
+            var card = document.createElement('article');
+            card.className = 'luxe-review-card';
+            card.innerHTML =
+                '<div class="stars">' + star(r.stars) + '</div>' +
+                '<div class="body">"' + highlight(r.body, kw) + '"</div>' +
+                '<div class="keywords">' + r.kw.map(function (k) { return '<span>#' + escapeHtml(k) + '</span>'; }).join('') + '</div>' +
+                '<div class="meta">' +
+                    '<span class="who">' + escapeHtml(r.who) + ' · ' + escapeHtml(r.tx) + '</span>' +
+                    '<span class="when">' + escapeHtml(r.when) + '</span>' +
+                '</div>';
+            frag.appendChild(card);
+        });
+        track.appendChild(frag);
+    }
+
+    // Initial render — duplicate once for visual fullness when not searching
+    render(reviews.concat(reviews), '');
+
+    if (searchEl) {
+        var debounce;
+        searchEl.addEventListener('input', function () {
+            clearTimeout(debounce);
+            debounce = setTimeout(function () {
+                var q = searchEl.value.trim();
+                if (!q) {
+                    render(reviews.concat(reviews), '');
+                    return;
+                }
+                var ql = q.toLowerCase();
+                var matches = reviews.filter(function (r) {
+                    return (r.body + ' ' + r.tx + ' ' + r.who + ' ' + r.kw.join(' ')).toLowerCase().indexOf(ql) !== -1;
+                });
+                render(matches, q);
+            }, 200);
+        });
+    }
 })();
 </script>
 
