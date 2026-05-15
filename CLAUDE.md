@@ -1,5 +1,176 @@
 # CLAUDE.md - 규림한의원 청주점 웹사이트
 
+## 2026-05-15 2차 폴리싱: Second-order 이슈 + 미적용 sublety 처리
+
+### Context
+사용자 재요청 ("ultrathink"). 1차 31개 적용 후 부각된 second-order 이슈와
+1차에서 놓친 sublety를 더 깊이 파봄. 핵심 발견:
+
+1. **Dead `@font-face` 트릭** — 1차에서 unicode-range로 Noto Serif KR Light을
+   `local()`만으로 분기. Google Fonts URL에는 weight 200 미요청 → 사실상
+   대부분 사용자에게서 작동 안 함. **실제 동작하는 방식으로 교체**.
+2. **Stagger 성능 부담** — `.luxe-fade` 30+ 요소에 transition. `will-change`
+   없이 첫 reveal 시 GPU 레이어 즉석 생성 → jank 가능성.
+3. **Bone grain이 paper와 시각적으로 동일** — 1차에서 둘 다 cool teal-blue 톤
+   alpha 차이만. monograph 종이 다양성 부족.
+4. **Marquee 시각 무게 불일치** — 카드들이 elevation 폴리싱으로 떠오른 후
+   marquee의 36px padding이 더 무거워 보임.
+5. **Events overlay `:lang(ko)` 미적용** — 1차에서 main만 한글 spacing 분기.
+   5 랜딩의 `.section-header h2`는 `letter-spacing: -0.018em !important`
+   강제로 한글에도 빡빡한 트래킹.
+
+### 2차 적용 내역 — `summer-luxe.css`
+
+**A. 폰트 / 한글 weight 실제 작동화**
+- Dead `@font-face` 블록 제거 (local-only src로 99% 사용자에게 무효).
+- `index.html` Google Fonts URL에 `Noto Serif KR:wght@200;300;400;500` 추가.
+- `.luxe-hero h1:lang(ko), .luxe-section h1~h4:lang(ko), .luxe-hero-display:lang(ko),
+   .luxe-quote-body:lang(ko)`에 `font-weight: 200`. LUXE markup 안에서만 적용되어
+  랜딩의 Pretendard 헤딩(별도 폰트)엔 영향 없음.
+
+**B. 성능 — will-change**
+- `.luxe-fade { will-change: opacity, transform }`, `.visible { will-change: auto }`.
+  reveal 전엔 GPU 레이어 사전 할당, reveal 후엔 메모리 해제.
+
+**C. Stagger 확장 + 타이밍 미세 조정**
+- `nth-of-type` 6 → 8까지 확장 (BA cards 12장의 horizontal 진입 대응).
+- 간격 90ms → 80ms (덜 늘어지게).
+
+**D. Bone grain 따뜻한 톤 분기**
+- paper grain (cool teal-blue): `RGB 0.04 / 0.12 / 0.18 @ alpha 0.06`
+- bone grain (warm champagne): `RGB 0.20 / 0.16 / 0.10 @ alpha 0.06`, baseFrequency
+  0.85 → 0.78 (조금 더 큰 grain). 두 톤이 가시적으로 구분됨.
+
+**E. Marquee 라이트 톤다운**
+- padding `36px → 28px`, gap `64 → 56`, italic font clamp `22-36 → 18-30`,
+  dot size `8→7px`, opacity `0.45→0.42`. 정체성은 유지하되 시각 무게 ↓.
+
+**F. Quote-mark 호버 동작**
+- transition을 `all 0.6s` → 속성별 분리 (background/color/border 0.5s + transform 0.6s).
+- hover 시 `transform: rotate(8deg) scale(1.06)` 추가 — 색반전+미세 회전·확대로
+  monograph stamp 느낌.
+
+**G. Carousel scroll-snap padding**
+- `.luxe-ba-grid, .luxe-events-track, .luxe-review-track`에 `scroll-padding-inline:
+  clamp(24px, 5vw, 72px)` 추가. 첫/끝 카드가 viewport 가장자리에서 살짝 떨어진
+  곳에 snap → 의도적 여백.
+
+**H. Dead font fallback 정리**
+- `--sans` 체인에서 `'Wanted Sans Variable'` 제거 (로드 안 됨).
+- 대신 `-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic'`
+  추가 — Pretendard 미로드 시 OS 한글 fallback.
+
+### 2차 적용 내역 — `summer-luxe-events.css`
+- 5 랜딩의 `.section-header h2:lang(ko), .section h2/h3:lang(ko), .about h2/h3:lang(ko)`에
+  `letter-spacing: -0.005em !important; word-spacing: 0.02em`. 한글 헤딩 트래킹
+  완화를 랜딩에도 확장.
+
+### 2차 적용 내역 — `index.html`
+- Google Fonts URL에 `Noto Serif KR weight 200` 추가 (preload + noscript 양쪽).
+
+### 변경 파일 (2차)
+- `summer-luxe.css` (+18줄 −20줄, 순증 미미 — dead @font-face 제거 효과)
+- `summer-luxe-events.css` (+11줄)
+- `index.html` (Google Fonts URL 1줄 수정)
+
+### 검증
+- `npm test` 통과
+- 폴리싱 마커 grep 7건 모두 발견 (will-change, scroll-padding-inline,
+  font-weight: 200, rotate(8deg))
+
+### 의도적으로 안 한 것 (2차)
+- **Korean PLATE label** (예: `編 · 02`, `章 · 02`) — 호불호 영역, 사용자 의향 확인 필요.
+- **Modal `aria-hidden` JS 동기화** — 1차에서 `visibility` 전환으로 시각/AT
+  대부분 동작하지만, 정합성 위해 JS가 open 시 `aria-hidden=false`로 토글해야 함.
+  CSS 영역 밖, 별도 작업으로 분리.
+- **Hero `<br>` 처리** — 한글 모바일에서 어색할 가능성 있으나 마크업 손대지
+  않고 line-height만으론 한계. 보존.
+- **Section 사이 hairline divider** — PLATE 카운터가 이미 챕터 마커 역할. 추가
+  divider는 오버킬.
+- **`Wanted Sans Variable`** — 메인에서만 정리, events overlay 폰트 체인은 안 건드림.
+
+### 알려진 위험 (2차)
+- `font-weight: 200` 적용은 Google Fonts 로드 이후 가능. 첫 로드 시 swap
+  타이밍에서 한순간 weight 300 → 200으로 시각 변화 가능. 무시할 수준이지만
+  flash 보고되면 `font-display: optional`로 전환 검토.
+- Bone grain 색조 변경으로 bone 섹션 시각 톤이 살짝 따뜻해짐. 두드러지면
+  alpha 0.06 → 0.04로 추가 약화.
+
+## 2026-05-15 추가 폴리싱: LUXE 시스템 정밀 튜닝 (혁신 X, 다듬기 O)
+
+### Context
+사용자 요청: "디자인 측면에서 아주 혁신적으로 바꾸기 보다는 폴리싱하는 디자인
+ultrathink 검토". Korean Editorial Apothecary 톤은 이미 단단히 잡혀 있어
+큰 골격은 보존하고 외과적 폴리싱 항목만 추출 → 31개 항목 정리 후
+**T1+T2+T3 전부 적용** 결정.
+
+### 적용 내역 — `summer-luxe.css`
+
+**A. 타이포 / 컬러 토큰**
+- `--luxe-ink-muted` `#6E8694 → #5A6F7C` (WCAG AA 4.7:1 on paper, 작은 mono 텍스트용)
+- `--luxe-champagne-dark` `#A88955 → #9A7C49` (WCAG AA 5.0:1, eyebrow 액센트)
+- 한글 letter-spacing 분기 — `:lang(ko) h1~h4`에 `-0.005em` + `word-spacing: 0.02em`.
+  영문 Cormorant는 기존 `-0.018 ~ -0.028em` 유지.
+- Noto Serif KR weight 매칭 — `@font-face` + `unicode-range`로 한글 영역만 별도 패밀리
+  분기. Cormorant 300과 시각 무게 균형.
+- `::selection` champagne-pale로 변경, ink 섹션은 champagne 분기.
+
+**B. 모션 / 호버**
+- 카드 hover (BA/event/review) — `translateY(-3px) → -5px`,
+  `transition all 0.5s → transform 0.4s + box-shadow 0.4s`,
+  새 토큰 `--luxe-shadow-card / --luxe-shadow-card-hover` 추가.
+- `.luxe-services-icon svg` transition 명시 (hover off 즉시 복귀 방지).
+- `.luxe-fade` translateY `28px → 20px`, duration `1s → 0.9s`.
+- **Stagger fade-in** — `:nth-of-type(1..6)`에 transition-delay 0/90/180/270/360/450ms.
+  `index.html` IntersectionObserver 셀렉터를 services-row / stats-cell / 카드들 /
+  faq-item / process-step까지 확장.
+- 모달 close 애니메이션 — `display` 토글 → `visibility + opacity` transition.
+
+**C. 레이아웃**
+- `.luxe-section` padding max `144px → 168px`.
+- `.luxe-stats-num` 모바일 floor `48px → 56px`, vw `7.5 → 12`.
+- `.luxe-hero-fig-side` `< 1200px`에서 hide (좁은 데스크톱 충돌 방지).
+- PLATE 카운터 `.bg-ink` 분기 → champagne 톤.
+
+**D. 시각 텍스처**
+- **Paper/bone grain** — `.bg-paper`, `.bg-bone`에 SVG fractalNoise 6%/5% opacity
+  데이터 URI 180×180 tile. 외부 요청 없음.
+- Footer hairline gradient stops — 평평한 20-80 → 18/50/82 다층.
+- `--luxe-hair-gold-strong` 활용처 1개 확보 (footer 중앙).
+
+**E. 액센트 / 접근성**
+- **Teal 액센트** — `.luxe-faq-item.open`에 `inset 2px 0 0 var(--luxe-teal)`.
+- `:focus-visible` ink 섹션 분기 — outline을 paper로 전환.
+- `prefers-reduced-motion`에 `transition-delay: 0ms` 추가.
+
+### 적용 내역 — `summer-luxe-events.css`
+- `.ba-card`, `.event-card`, `.review-card` 카드 elevation 폴리싱 동기화
+  (그림자 토큰 + `-5px` + 0.4s 분할 transition). 5 랜딩에서도 메인과 동일 hover 감각.
+
+### 의도적으로 안 한 것
+- **Hero `<br>` 정리** — 마크업 변경 비용 vs 효과 균형상 보존.
+- **드롭캡 / custom cursor** — 한글 호환성·인앱브라우저 우려.
+- **Marquee 톤다운** — 의도된 시각 정지점일 수 있어 보존.
+- **spring.css / .min 자산 삭제** — 5 랜딩이 spring 마크업 + LUXE overlay 구조라 필수.
+  Phase 8(랜딩 LUXE 네이티브 재작성) 시 일괄 정리.
+- **font-feature-settings 통합** — cascade 결과 일관, 리스크 대비 이득 작음.
+
+### 변경 파일
+- `summer-luxe.css` (+61줄)
+- `summer-luxe-events.css` (+5줄)
+- `index.html` (IntersectionObserver 셀렉터 확장 1곳)
+
+### 검증
+- `npm test` 통과
+- CSS 추가는 모두 기존 토큰/구조 활용, 새 의존성 없음
+
+### 알려진 위험 (라이브 시각 검증 권장)
+- 한글 letter-spacing 분기는 `<html lang="ko">` 기준 글로벌 적용. 영문 액센트
+  클래스는 명시 분리되지만 일반 영문 본문은 한글 spacing 적용.
+- Grain texture가 큰 paper 섹션에서 패턴이 인지될 가능성 — 두드러지면
+  baseFrequency `0.85 → 1.2` + opacity `0.06 → 0.04`로 약화.
+- Stagger 6번째까지만 staged, 6+ 자식은 동시 등장 (BA cards 12장 등 의도된 단순화).
+
 ## 2026-05-15 마무리: "한방" → "한의" 전수 교체 (운영 카피 표기 통일)
 
 ### Context

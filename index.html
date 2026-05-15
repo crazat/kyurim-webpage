@@ -38,8 +38,8 @@
     <link rel="preload" href="assets/director.webp" as="image" fetchpriority="high">
 
     <!-- Fonts: Cormorant Garamond + JetBrains Mono + Noto Serif KR (async) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@200;300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@200;300;400;500&display=swap"></noscript>
 
     <!-- Pretendard (async) -->
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" integrity="sha384-uGEvnSEpW2nM9xJFsrxrwakwrk9QdDTQIBJh0hVMu90OaVyMAMpAK1rIn0/Kh1/k" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
@@ -1231,7 +1231,11 @@
             }
         });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.luxe-section, .luxe-hero-grid > *').forEach(function (el) {
+    document.querySelectorAll(
+        '.luxe-section, .luxe-hero-grid > *, .luxe-services-row, .luxe-stats-cell, ' +
+        '.luxe-ba-card, .luxe-event-card, .luxe-gallery-card, .luxe-review-card, ' +
+        '.luxe-faq-item, .luxe-process-step'
+    ).forEach(function (el) {
         el.classList.add('luxe-fade');
         io.observe(el);
     });

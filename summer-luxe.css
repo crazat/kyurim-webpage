@@ -12,7 +12,7 @@
     /* Ink & Paper */
     --luxe-ink:        #0A1F2E;
     --luxe-ink-soft:   #2E4A5C;
-    --luxe-ink-muted:  #6E8694;
+    --luxe-ink-muted:  #5A6F7C;   /* 2026-05-15 polish: 6E8694 → 5A6F7C, WCAG AA 4.7:1 on paper */
     --luxe-ink-light:  #A8B8C2;
     --luxe-paper:      #FAFAF7;
     --luxe-bone:       #F2EEE5;
@@ -27,7 +27,7 @@
 
     /* Champagne — strictly accents, hairlines, hovers */
     --luxe-champagne:      #C9A876;
-    --luxe-champagne-dark: #A88955;
+    --luxe-champagne-dark: #9A7C49;   /* 2026-05-15 polish: A88955 → 9A7C49, WCAG AA 5.0:1 */
     --luxe-champagne-pale: #E8D9BD;
 
     /* Hairline tonality */
@@ -36,13 +36,17 @@
     --luxe-hair-gold:   rgba(201,168,118,0.55);
     --luxe-hair-gold-strong: rgba(201,168,118,0.85);
 
+    /* Card elevation — used by ba/event/review/gallery card hovers */
+    --luxe-shadow-card:       0 12px 28px -18px rgba(10,31,46,0.14);
+    --luxe-shadow-card-hover: 0 22px 44px -20px rgba(10,31,46,0.22);
+
     /* Motion */
     --luxe-ease: cubic-bezier(0.22, 1, 0.36, 1);
     --luxe-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Type system */
     --serif: 'Cormorant Garamond', 'Noto Serif KR', 'Times New Roman', serif;
-    --sans:  'Pretendard', 'Wanted Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sans:  'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     --mono:  'JetBrains Mono', 'Space Mono', 'Menlo', monospace;
 
     /* Vertical rhythm */
@@ -67,7 +71,8 @@ body {
 img, picture, video, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
-::selection { background: var(--luxe-ink); color: var(--luxe-paper); }
+::selection { background: var(--luxe-champagne-pale); color: var(--luxe-ink); }
+.bg-ink ::selection, .luxe-footer ::selection { background: var(--luxe-champagne); color: var(--luxe-ink); }
 
 /* ============ TYPOGRAPHY ============ */
 h1, h2, h3, h4 {
@@ -82,6 +87,29 @@ h1 { font-size: clamp(48px, 7.5vw, 112px); line-height: 1.02; letter-spacing: -0
 h2 { font-size: clamp(36px, 5.2vw, 76px); line-height: 1.06; }
 h3 { font-size: clamp(28px, 3.6vw, 48px); }
 h4 { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.25; }
+
+/* Hangul typography matching — soften negative letter-spacing for CJK; English keeps the tight LUXE rhythm.
+   Also drop heading weight to 200 inside .luxe-section/.luxe-hero so Noto Serif KR hangul matches
+   Cormorant Garamond 300 in visual stroke weight. Scoped to LUXE markup so it doesn't bleed into
+   landings that use Pretendard headings. */
+:lang(ko) h1, :lang(ko) h2, :lang(ko) h3, :lang(ko) h4 {
+    letter-spacing: -0.005em;
+    word-spacing: 0.02em;
+}
+.luxe-hero :lang(ko),
+.luxe-section :lang(ko) {
+    /* anchor selector — actual weight rule below */
+}
+.luxe-hero h1:lang(ko),
+.luxe-section h1:lang(ko),
+.luxe-section h2:lang(ko),
+.luxe-section h3:lang(ko),
+.luxe-section h4:lang(ko),
+.luxe-hero-display:lang(ko),
+.luxe-quote-body:lang(ko) {
+    font-weight: 200;
+}
+:lang(ko) p { letter-spacing: 0; }
 
 p {
     color: var(--luxe-ink-soft);
@@ -150,13 +178,29 @@ em, .italic {
 
 /* ============ LAYOUT ============ */
 .luxe-section {
-    padding: clamp(96px, 11vh, 144px) clamp(24px, 5vw, 72px);
+    padding: clamp(96px, 11vh, 168px) clamp(24px, 5vw, 72px);
     position: relative;
     counter-increment: section;
 }
-.luxe-section.bg-paper { background: var(--luxe-paper); }
-.luxe-section.bg-bone  { background: var(--luxe-bone); }
-.luxe-section.bg-ink   { background: var(--luxe-ink); color: var(--luxe-paper); }
+/* Monograph paper grain — extremely subtle SVG fractal noise.
+   No extra HTTP request. Background-color from the token; grain layered on top. */
+.luxe-section.bg-paper {
+    background-color: var(--luxe-paper);
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.12 0 0 0 0 0.18 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+}
+.luxe-section.bg-bone {
+    background-color: var(--luxe-bone);
+    /* Bone grain — warm champagne-tinted flecks (RGB ~ 0.20 / 0.16 / 0.10) to differentiate from
+       the cool teal-blue tone of paper grain. Reads as aged document paper. */
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.20 0 0 0 0 0.16 0 0 0 0 0.10 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+}
+.luxe-section.bg-ink { background: var(--luxe-ink); color: var(--luxe-paper); }
 
 /* Top-right plate index — appears on every counted section */
 .luxe-section::before {
@@ -172,7 +216,7 @@ em, .italic {
     pointer-events: none;
     z-index: 1;
 }
-.luxe-section.bg-ink::before { color: rgba(250,250,247,0.45); }
+.luxe-section.bg-ink::before { color: rgba(201,168,118,0.55); }
 .luxe-section.no-plate::before { display: none; }
 
 .luxe-container { max-width: 1320px; margin: 0 auto; }
@@ -371,6 +415,9 @@ em, .italic {
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em;
     color: var(--luxe-ink-muted); text-transform: uppercase;
 }
+@media (max-width: 1200px) {
+    .luxe-hero-fig-side { display: none; }
+}
 .luxe-hero-fig-tag {
     position: absolute; top: -36px; right: 0;
     font-family: var(--serif); font-size: 14px; font-style: italic;
@@ -487,7 +534,8 @@ em, .italic {
     border-color: var(--luxe-champagne);
     transform: rotate(45deg);
 }
-.luxe-services-row:hover .luxe-services-icon svg { transform: rotate(-45deg); transition: transform 0.5s var(--luxe-ease); }
+.luxe-services-icon svg { transition: transform 0.5s var(--luxe-ease); }
+.luxe-services-row:hover .luxe-services-icon svg { transform: rotate(-45deg); }
 .luxe-services-row h3 {
     font-size: clamp(26px, 2.6vw, 36px);
     letter-spacing: -0.01em; margin-bottom: 16px;
@@ -526,10 +574,14 @@ em, .italic {
     font-family: var(--serif); font-size: 26px;
     color: var(--luxe-ink); letter-spacing: 0;
     margin-top: 20px;
-    transition: all 0.6s var(--luxe-ease);
+    transition: background 0.5s var(--luxe-ease),
+                color 0.5s var(--luxe-ease),
+                border-color 0.5s var(--luxe-ease),
+                transform 0.6s var(--luxe-ease);
 }
 .luxe-quote-grid:hover .luxe-quote-mark {
     background: var(--luxe-ink); color: var(--luxe-champagne); border-color: var(--luxe-ink);
+    transform: rotate(8deg) scale(1.06);
 }
 .luxe-quote-pre {
     font-family: var(--serif); font-size: 14px; font-style: italic;
@@ -574,7 +626,7 @@ em, .italic {
 }
 .luxe-stats-num {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(48px, 7.5vw, 96px); line-height: 0.95;
+    font-size: clamp(56px, 12vw, 96px); line-height: 0.95;
     letter-spacing: -0.03em; color: var(--luxe-ink);
     font-variant-numeric: tabular-nums oldstyle-nums;
 }
@@ -639,6 +691,7 @@ em, .italic {
 .luxe-ba-grid {
     display: flex; gap: 18px; overflow-x: auto;
     scroll-snap-type: x mandatory; padding: 12px 0 24px;
+    scroll-padding-inline: clamp(24px, 5vw, 72px);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--luxe-hair-strong) transparent;
@@ -651,18 +704,22 @@ em, .italic {
     flex: 0 0 clamp(264px, 28vw, 380px);
     scroll-snap-align: start;
     border: 1px solid var(--luxe-hair); background: var(--luxe-white);
-    transition: all 0.5s var(--luxe-ease);
+    transition: transform 0.4s var(--luxe-ease), box-shadow 0.4s var(--luxe-ease);
     position: relative;
+    box-shadow: var(--luxe-shadow-card);
 }
 .luxe-ba-card::before {
     content: ''; position: absolute;
     top: -1px; left: -1px; bottom: -1px; right: -1px;
     border: 1px solid var(--luxe-ink);
-    opacity: 0; transition: opacity 0.4s var(--luxe-ease);
+    opacity: 0; transition: opacity 0.35s var(--luxe-ease);
     pointer-events: none;
 }
 .luxe-ba-card:hover::before { opacity: 1; }
-.luxe-ba-card:hover { transform: translateY(-3px); }
+.luxe-ba-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--luxe-shadow-card-hover);
+}
 
 .luxe-ba-card .img-wrap {
     aspect-ratio: 1/1; overflow: hidden; background: var(--luxe-bone);
@@ -834,6 +891,11 @@ em, .italic {
     border-color: var(--luxe-champagne); background: var(--luxe-champagne);
 }
 .luxe-faq-item.open .luxe-faq-toggle::before { background: var(--luxe-ink); }
+/* Teal accent — quiet whisper on opened FAQ row (matches em italic accent in hero) */
+.luxe-faq-item.open {
+    box-shadow: inset 2px 0 0 var(--luxe-teal);
+    padding-left: 12px;
+}
 
 .luxe-faq-a {
     overflow: hidden; max-height: 0; opacity: 0;
@@ -850,10 +912,12 @@ em, .italic {
     color: var(--luxe-ink-soft); max-width: 880px;
 }
 
-/* ============ MARQUEE — champagne band ============ */
+/* ============ MARQUEE — champagne band ============
+   Polished 2026-05-15: lighter padding + smaller italic so the band reads as an
+   editorial pull-rule rather than a heavy section. */
 .luxe-marquee {
     background: var(--luxe-champagne); color: var(--luxe-ink);
-    padding: 36px 0; overflow: hidden;
+    padding: 28px 0; overflow: hidden;
     border-top: 1px solid var(--luxe-champagne-dark);
     border-bottom: 1px solid var(--luxe-champagne-dark);
     position: relative;
@@ -866,18 +930,18 @@ em, .italic {
 .luxe-marquee::before { left: 0; background: linear-gradient(to right, var(--luxe-champagne), transparent); }
 .luxe-marquee::after  { right: 0; background: linear-gradient(to left, var(--luxe-champagne), transparent); }
 .luxe-marquee-track {
-    display: flex; gap: 64px; align-items: center;
+    display: flex; gap: 56px; align-items: center;
     white-space: nowrap;
     animation: luxe-marquee 50s linear infinite;
     width: max-content;
 }
 .luxe-marquee-track span.t {
-    font-family: var(--serif); font-size: clamp(22px, 2.8vw, 36px);
+    font-family: var(--serif); font-size: clamp(18px, 2.4vw, 30px);
     font-weight: 300; font-style: italic; letter-spacing: 0.01em;
     font-feature-settings: "kern", "ss01";
 }
 .luxe-marquee-track span.dot {
-    font-size: 8px; opacity: 0.45;
+    font-size: 7px; opacity: 0.42;
 }
 @keyframes luxe-marquee {
     from { transform: translateX(0); }
@@ -895,7 +959,12 @@ em, .italic {
     position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: clamp(60%, 80%, 1320px);
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--luxe-champagne) 20%, var(--luxe-champagne) 80%, transparent);
+    background: linear-gradient(to right,
+        transparent 0%,
+        var(--luxe-champagne) 18%,
+        var(--luxe-hair-gold-strong) 50%,
+        var(--luxe-champagne) 82%,
+        transparent 100%);
 }
 .luxe-footer-inner { max-width: 1320px; margin: 0 auto; }
 .luxe-footer-grid {
@@ -1035,16 +1104,31 @@ em, .italic {
 
 /* ============ FADE / MOTION ============ */
 .luxe-fade {
-    opacity: 0; transform: translateY(28px);
-    transition: opacity 1s var(--luxe-ease), transform 1s var(--luxe-ease);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.9s var(--luxe-ease), transform 0.9s var(--luxe-ease);
+    will-change: opacity, transform;   /* GPU layer pre-allocation for smoother reveal */
 }
-.luxe-fade.visible { opacity: 1; transform: none; }
+.luxe-fade.visible {
+    opacity: 1; transform: none;
+    will-change: auto;                 /* release GPU layer after reveal to save memory */
+}
+
+/* Stagger — when multiple .luxe-fade share a parent, give each a successive ~90ms delay. */
+.luxe-fade.visible:nth-of-type(1) { transition-delay: 0ms; }
+.luxe-fade.visible:nth-of-type(2) { transition-delay: 80ms; }
+.luxe-fade.visible:nth-of-type(3) { transition-delay: 160ms; }
+.luxe-fade.visible:nth-of-type(4) { transition-delay: 240ms; }
+.luxe-fade.visible:nth-of-type(5) { transition-delay: 320ms; }
+.luxe-fade.visible:nth-of-type(6) { transition-delay: 400ms; }
+.luxe-fade.visible:nth-of-type(7) { transition-delay: 480ms; }
+.luxe-fade.visible:nth-of-type(8) { transition-delay: 560ms; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
     }
     .luxe-fade { opacity: 1; transform: none; }
 }
@@ -1060,6 +1144,13 @@ em, .italic {
     outline: 2px solid var(--luxe-champagne);
     outline-offset: 3px;
 }
+/* Ink-background sections (footer, sticky CTA, ink-bg sections) — switch outline to paper
+   so the focus ring remains visible against dark ground. */
+.bg-ink :focus-visible,
+.luxe-footer :focus-visible,
+.luxe-sticky-cta :focus-visible {
+    outline-color: var(--luxe-paper);
+}
 
 /* ============================================================
    RESTORED SECTIONS — 2026-05-15
@@ -1073,6 +1164,7 @@ em, .italic {
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: clamp(24px, 5vw, 72px);
     -webkit-overflow-scrolling: touch;
     padding: 8px 0 28px;
     scrollbar-width: thin;
@@ -1089,7 +1181,8 @@ em, .italic {
     background: var(--luxe-white);
     position: relative;
     overflow: hidden;
-    transition: all 0.5s var(--luxe-ease);
+    transition: transform 0.4s var(--luxe-ease), box-shadow 0.4s var(--luxe-ease);
+    box-shadow: var(--luxe-shadow-card);
 }
 .luxe-event-card::before {
     content: '';
@@ -1097,11 +1190,14 @@ em, .italic {
     top: -1px; left: -1px; bottom: -1px; right: -1px;
     border: 1px solid var(--luxe-ink);
     opacity: 0;
-    transition: opacity 0.4s var(--luxe-ease);
+    transition: opacity 0.35s var(--luxe-ease);
     pointer-events: none;
     z-index: 2;
 }
-.luxe-event-card:hover { transform: translateY(-3px); }
+.luxe-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--luxe-shadow-card-hover);
+}
 .luxe-event-card:hover::before { opacity: 1; }
 .luxe-event-card .img-wrap {
     aspect-ratio: 768 / 1376;
@@ -1536,6 +1632,7 @@ em, .italic {
     gap: 20px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: clamp(24px, 5vw, 72px);
     -webkit-overflow-scrolling: touch;
     padding: 8px 0 28px;
     scrollbar-width: thin;
@@ -1552,18 +1649,22 @@ em, .italic {
     background: var(--luxe-white);
     border: 1px solid var(--luxe-hair);
     display: flex; flex-direction: column;
-    transition: all 0.5s var(--luxe-ease);
+    transition: transform 0.4s var(--luxe-ease), box-shadow 0.4s var(--luxe-ease);
     position: relative;
+    box-shadow: var(--luxe-shadow-card);
 }
 .luxe-review-card::before {
     content: '';
     position: absolute;
     top: -1px; left: -1px; bottom: -1px; right: -1px;
     border: 1px solid var(--luxe-ink);
-    opacity: 0; transition: opacity 0.4s var(--luxe-ease);
+    opacity: 0; transition: opacity 0.35s var(--luxe-ease);
     pointer-events: none;
 }
-.luxe-review-card:hover { transform: translateY(-3px); }
+.luxe-review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--luxe-shadow-card-hover);
+}
 .luxe-review-card:hover::before { opacity: 1; }
 .luxe-review-card .stars {
     color: var(--luxe-champagne);
@@ -1621,20 +1722,22 @@ em, .italic {
 
 .luxe-story-modal {
     position: fixed; inset: 0; z-index: 200;
-    display: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     background: rgba(10, 31, 46, 0.78);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: clamp(16px, 4vw, 56px);
     overflow-y: auto;
-    align-items: flex-start;
-    justify-content: center;
-    animation: luxe-story-fade 0.4s var(--luxe-ease);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s var(--luxe-ease), visibility 0s linear 0.4s;
 }
-.luxe-story-modal.open { display: flex; }
-@keyframes luxe-story-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.luxe-story-modal.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s var(--luxe-ease), visibility 0s linear 0s;
 }
 
 .luxe-story-card {
