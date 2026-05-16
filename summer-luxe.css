@@ -211,22 +211,8 @@ em, .italic {
 }
 .luxe-section.bg-ink { background: var(--luxe-ink); color: var(--luxe-paper); }
 
-/* Top-right plate index — appears on every counted section */
-.luxe-section::before {
-    content: 'PLATE · ' counter(section, decimal-leading-zero);
-    position: absolute;
-    top: clamp(28px, 4vh, 48px);
-    right: clamp(24px, 5vw, 72px);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.30em;
-    color: var(--luxe-ink-muted);
-    text-transform: uppercase;
-    pointer-events: none;
-    z-index: 1;
-}
-.luxe-section.bg-ink::before { color: rgba(201,168,118,0.55); }
-.luxe-section.no-plate::before { display: none; }
+/* PLATE counter retired 2026-05-16 — too magazine-y, low info value. */
+.luxe-section::before { content: none; }
 
 .luxe-container { max-width: 1320px; margin: 0 auto; }
 
@@ -248,7 +234,6 @@ em, .italic {
     .luxe-grid-4 > * + * { border-left: none; }
     .luxe-grid-4 > *:nth-child(odd)  { border-right: 1px solid var(--luxe-hair); }
     .luxe-grid-4 > *:nth-child(n+3)  { border-top: 1px solid var(--luxe-hair); }
-    .luxe-section::before { font-size: 9px; }
 }
 
 /* ============ NAV — masthead ============ */
@@ -336,14 +321,7 @@ em, .italic {
     min-height: 92vh;
     display: flex; align-items: center;
 }
-.luxe-hero::before {
-    content: 'PLATE · 01 — Cover';
-    position: absolute;
-    top: clamp(96px, 12vh, 128px);
-    right: clamp(24px, 5vw, 72px);
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.30em;
-    color: var(--luxe-ink-muted); text-transform: uppercase;
-}
+/* Hero PLATE · 01 — Cover retired 2026-05-16. */
 .luxe-hero::after {
     content: '韓 · 醫 · 規林';
     position: absolute;

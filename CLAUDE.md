@@ -1,5 +1,171 @@
 # CLAUDE.md - 규림한의원 청주점 웹사이트
 
+## 2026-05-16: krcj LUXE Enhancement Layer 적용 + 잡지 톤 작은 글씨 정리
+
+### Context
+같은 날 2단계 작업.
+
+**1단계 — krcj.zip Enhancement Layer 드롭인**
+`~/Downloads/krcj.zip` (57KB, Anthropic Claude Design 산출물)을 풀어보니
+`design_handoff_kyurim_luxe_enhancement/` 번들. README에 명시: "production-ready
+vanilla code designed to be dropped directly into the existing kyurim-webpage
+repository as-is. Hand this layer to a developer and it ships."
+
+순수 시각 보강 레이어 — Apple/Hermès 미니멀 럭셔리 폴리싱. 카피·콘텐츠·
+JSON-LD·meta 0건 변경. 메인 + 5 랜딩에 2 태그씩 주입만으로 끝나는 구조.
+
+**2단계 — 잡지 컨셉 작은 글씨 정리**
+사용자 보고 "현재 잡지 컨셉으로 작은 글씨들 너무 많은거 쓸데 없는 것들은
+좀 빼주겠어? 전수 검토해줘". 사용자가 4개 옵션 다 선택 (강한 정리).
+
+### 1단계 — Enhancement Layer 적용
+
+**파일 드롭인** (`summer-luxe-enhance.{css,js}` 레포 루트):
+- `summer-luxe-enhance.css` 87KB — 5 패치(P1 atelier framing, P2 editorial
+  table polish, P3 monograph ornaments, P4 refinement micro-polish,
+  P5 interior + a11y + print)
+- `summer-luxe-enhance.js` 23KB — `(function () { 'use strict'; ... })()`
+  vanilla, `window.__enhLoaded` 가드, 19개 `init*()` 함수
+
+**6개 HTML에 2 태그씩 주입**:
+- `index.html` (메인): sync link + defer script, `summer-luxe.css` 다음
+- `events/{diet,skin,body,pain,wedding}/index.html`: async print→all + noscript
+  fallback + defer script, `summer-luxe-events.css` 블록 다음
+
+**주요 기능** (README inventory 기준):
+- Top scroll progress hairline (1px champagne)
+- Right-edge section progress dots
+- Page-load curtain (1.7s 후 자동 제거)
+- Stats count-up (cubic-out)
+- Process timeline rail draw on view
+- 4-corner markers + outer hairline (모든 핵심 이미지)
+- Section transition sigil (paper↔bone seam diamond)
+- About 韓 mark breathing ring (8s pulse)
+- Hero compass-mark + 30s sigil rotation
+- Magnetic CTA (cursor pull on `.luxe-btn.gold`)
+- Champagne cursor follower ring (desktop 1100+, hover-capable)
+- H2 line-clip slide reveal
+- Card 3D tilt (max 3°, perspective 900)
+- Return-to-top button (1200px trigger)
+- Hero parallax (img translateY)
+- Image fade-in on load
+- Custom select chevron + form focus underline
+- Mobile burger → X transform
+- Print stylesheet (@media print)
+- `prefers-reduced-motion` 전체 0.001ms
+- `@media (hover: none)` 모바일 hover 효과 off
+
+**의존성 추가 0건** (vanilla, no fonts, no images).
+
+### 2단계 — 잡지 컨셉 작은 글씨 전수 정리
+
+**사용자 선택 4개 (multiSelect)**:
+1. PLATE 카운터 (모든 섹션 우상단)
+2. Edition/MMXXVI 라인 (Hero + Footer)
+3. Director's Note·院長手記 / 規林手記 같은 한자 부제
+4. N°/STEP 카드 인덱스 (Why·Services·Process)
+
+**메인 `index.html` 마크업 정리**:
+
+| # | 항목 | 위치 | 처리 |
+|---|---|---|---|
+| 1 | PLATE 카운터 `PLATE · 01~N°` | 모든 luxe-section + Hero | `summer-luxe.css` 룰 무효화 (`content: none`) |
+| 2 | Hero eyebrow `N° 07 · Summer Edition · MMXXVI` | Hero | 마크업 삭제 |
+| 3 | Footer `Quiet Body, Clear Mind — Summer LUXE Edition · N° 07` | Footer rail | 마크업 삭제 |
+| 4 | Footer `© MMXXVI` 라틴숫자 | Footer rail | `© 2026 규림한의원 청주점`으로 정상화 |
+| 5 | About vertical `Director's Note · 院長手記` | About 인용문 옆 | 마크업 삭제 |
+| 6 | Blog key `Kyurim's Story · 規林手記` | Blog 좌측 | 마크업 삭제 |
+| 7 | Blog visual tag `Director's Note · 院長手記` | Blog 우측 visual | 마크업 삭제 |
+| 8 | Why 카드 N° 인덱스 (3개) | Why 카드 상단 | 마크업 삭제 |
+| 9 | Services 행 N° 인덱스 (5개) | Services 5행 첫 칼럼 | 마크업 삭제 |
+| 10 | Process 스텝 STEP 인덱스 (5개) | Process 5스텝 | 마크업 삭제 |
+
+총 **13 N°/STEP + 6 한자/모노 부제 + PLATE 시스템** 일괄 정리.
+
+**`summer-luxe.css` 변경**:
+- `.luxe-section::before` PLATE 카운터 룰 (16줄) → `content: none` (2줄)
+- `.luxe-hero::before` PLATE · 01 — Cover 룰 (8줄) → 주석 1줄
+- @media (max-width:900px) 내 `.luxe-section::before` font-size 룰 redundant 삭제
+
+**보존한 것 (정보 가치 또는 LUXE 핵심 정체성)**:
+- Hero 좌하단 大 한자 모노그램 `韓 · 醫 · 規林` (one-shot 대표 ornament)
+- About 섹션 大 `韓` quote mark (breathing ring 동반)
+- Contact 한자 키 `住·時·通·駐·近 · Address/Hours/Contact/Parking/Locale`
+  (정보 카테고리 라벨)
+- Stats 키 `EST./CARE/PROTOCOL/SCOPE` (4셀 분류)
+- Hero signature `Dir. 한정우 院長 · Licensed Korean Medicine Doctor`
+  (의사 신원 정보)
+- Marquee 16개 italic 라벨 (브랜드 정체성)
+- FAQ/Services eyebrow `… · 자주 묻는 질문` 등 영문+한글 섹션 식별자
+  (기능적)
+- enhance 레이어 전체 (scroll progress, section dots, to-top 등)
+
+**5 랜딩**: spring 마크업 + LUXE overlay 구조라 PLATE/MMXXVI/N° 등 LUXE
+모노그래프 장식 자체가 없음. sweep grep 잔재 0건. 손댈 곳 없음.
+
+### 캐시 일관성
+
+CSS 변경 후 브라우저 검증에서 디스크 캐시가 OLD content 서빙 → ?v= bump 필요.
+- `summer-luxe.css?v=20260515a` → `?v=20260516i` (index.html)
+- `sw.js` `CACHE_NAME` `kyurim-v20260506b` → `kyurim-v20260516i`
+- `sw.js` `PRECACHE_ASSETS`에 `summer-luxe-enhance.css/.js` 2개 추가
+  (어제까지 README "no other code changes" 원칙으로 보류했었지만,
+  이번 CACHE_NAME bump 김에 SW precache 동기화)
+
+### 검증
+
+**1단계 (enhance 적용)**:
+- 메인 + diet 랜딩 둘 다 `window.__enhLoaded=true`
+- CSS 로드 (메인 sync / 랜딩 async print→all)
+- DOM 주입 발견: scroll progress, curtain(1.7s 자동 제거), section dots
+  (메인 15 / diet 14), to-top button
+- 스크롤 동작: progress width 업데이트, to-top `.enh-visible` 추가,
+  section reveal `.enh-section-in` 점진 적용, stats count-up 4/4 cell,
+  process rail draw-in, h2 11개 line-clip wrap
+- 콘솔 에러 0건, 404 0건
+
+**2단계 (작은 글씨 정리, fresh SW unregister 후)**:
+- `plateSections: []` 모든 luxe-section PLATE 죽음
+- `heroPlate: "none"` Hero PLATE · 01 사라짐
+- `indexNumCount: 0` N°/STEP 13개 사라짐
+- `heroEyebrowVisible: false` MMXXVI 사라짐
+- `quoteSide: 0`, `blogKey: false`, `blogTag: false` 한자 부제 3곳 사라짐
+- `footerLines: ["© 2026 규림한의원 청주점 · All Rights Reserved"]`
+- 핵심 정체성 보존: heroMonogramPreserved (`韓 · 醫 · 規林`),
+  contactKeysPreserved (5), statsKeysPreserved (4), marqueeLabelsPreserved
+  (16), aboutQuoteMarkPreserved, faqEyebrowPreserved, heroSignaturePreserved
+- diet 랜딩: `hasOldLuxeArtifacts: false`, `platePresent: false`
+
+### 변경 파일
+
+- `summer-luxe-enhance.css` (신규, 87KB)
+- `summer-luxe-enhance.js` (신규, 23KB)
+- `index.html` (enhance 태그 주입 + 잡지 톤 마크업 정리 + CSS 버전 bump)
+- `events/{diet,skin,body,pain,wedding}/index.html` (enhance 태그 주입)
+- `summer-luxe.css` (PLATE 룰 2곳 무효화/제거)
+- `sw.js` (CACHE_NAME bump + 새 enhance 파일 precache 추가)
+
+### 의도적으로 안 한 것
+
+- **랜딩 5의 ?v= bump** — 랜딩은 메인이 아니라 PLATE 의존 안 함
+  (.section 클래스 사용). 변경 없으니 그대로 둠.
+- **Marquee 작은 mono 라벨 정리** — 사용자 옵션에 없었음. 브랜드
+  정체성으로 보존.
+- **Contact 한자 키 / Stats 키 정리** — 정보 카테고리 라벨, 카피라이팅
+  변경 비용 대비 가치 없음.
+- **Hero 韓·醫·規林 / About 韓 모노그램 정리** — 사용자 옵션에 없었고
+  one-shot 대표 ornament라 LUXE 정체성 핵심.
+
+### 알려진 위험
+
+- SW `CACHE_NAME` bump로 모든 기존 사용자가 다음 방문 시 한 번 전체
+  precache 재다운로드. 6개 파일 ~115KB 추가 (enhance 2개 포함). 무시할 수준.
+- 메인 hero h1 clip-path 애니메이션은 Cormorant Garamond 로드에 의존.
+  font-display: swap에서 swap 전 발화 — 의도된 동작 (README 명시).
+- 데스크톱 cursor follower는 viewport ≥1100px + `hover: hover`에서만
+  작동. 모바일/터치는 base state. CLAUDE.md 2026-03-30 prefers-reduced-motion
+  Windows 케이스 동일하게 적용.
+
 ## 2026-05-16: Vercel 자동배포 복구 (CLI 전환) + 외부 검토 #2 안전 항목 4건
 
 ### Context

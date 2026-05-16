@@ -1,15 +1,17 @@
 // Service Worker for 규림한의원 청주점
 // Bump CACHE_NAME whenever the precached payload should be invalidated.
-const CACHE_NAME = 'kyurim-v20260506b';
+const CACHE_NAME = 'kyurim-v20260516i';
 const OFFLINE_URL = '/offline.html';
 
 // Static assets to cache on install. HTML is handled with a network-first
 // strategy so content updates are not trapped behind an old service worker.
 const PRECACHE_ASSETS = [
-    '/summer-luxe.css?v=20260504b',
+    '/summer-luxe.css?v=20260516i',
     '/style.min.css?v=20260425c',
     '/spring.min.css?v=20260425c',
     '/summer-luxe-events.css?v=20260504h',
+    '/summer-luxe-enhance.css?v=20260516h',
+    '/summer-luxe-enhance.js?v=20260516h',
     '/script.min.js?v=20260506b',
     '/offline.html'
 ];
