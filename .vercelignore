@@ -1,0 +1,14 @@
+node_modules
+.git
+assets_original_backup
+kyurim-webpage
+kyurim-webpage.zip
+CLAUDE.md
+add_disclaimers.py
+convert-to-picture.js
+optimize-images.js
+optimize-images.sh
+*-spring-backup.html
+*.backup.html
+script-spring-backup.js
+events/**/*-spring-backup.html
